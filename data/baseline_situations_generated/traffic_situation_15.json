@@ -1,0 +1,86 @@
+{
+    "title": "CR-SO, CR-SO",
+    "input_file_name": "baseline_situation_15_2_ts.json",
+    "common_vector": 10.0,
+    "lat_lon_0": [
+        58.763449,
+        10.490654
+    ],
+    "own_ship": {
+        "static": {
+            "length": 122,
+            "width": 20,
+            "height": 8,
+            "speed_max": 17,
+            "mmsi": 257847600,
+            "name": "BASTO VI",
+            "ship_type": "Passenger/Ro-Ro Cargo Ship"
+        },
+        "start_pose": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0,
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "speed": 10.0,
+            "course": 0.0
+        },
+        "waypoints": [
+            {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            {
+                "latitude": 58.791157,
+                "longitude": 10.490654
+            }
+        ]
+    },
+    "target_ship": [
+        {
+            "static": {
+                "length": 122,
+                "width": 20,
+                "height": 8,
+                "speed_max": 17,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
+                "ship_type": "Passenger/Ro-Ro Cargo Ship"
+            },
+            "id": 1,
+            "start_pose": {
+                "speed": 15.0,
+                "position": {
+                    "north": 552.6792318882533,
+                    "east": -6317.152527132703,
+                    "latitude": 58.768411,
+                    "longitude": 10.381491
+                },
+                "course": 53.4
+            }
+        },
+        {
+            "static": {
+                "length": 178,
+                "width": 30,
+                "height": 30,
+                "speed_max": 21,
+                "mmsi": 219945000,
+                "name": "BASTO VI",
+                "ship_type": "Passenger/Ro-Ro Cargo Ship"
+            },
+            "id": 2,
+            "start_pose": {
+                "speed": 16.0,
+                "position": {
+                    "north": -874.1560405910731,
+                    "east": -4957.585260513154,
+                    "latitude": 58.755601,
+                    "longitude": 10.404985
+                },
+                "course": 42.0
+            }
+        }
+    ]
+}

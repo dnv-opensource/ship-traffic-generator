@@ -1,0 +1,28 @@
+{
+  "title": "HO, HO",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 10.0,
+      "course": 0.0
+    }
+  },
+  "encounter": [
+    {
+      "desired_encounter_type": "head-on",
+      "beta": -1.0,
+      "relative_speed": 0.9,
+      "vector_time": 11.0
+    },
+    {
+      "desired_encounter_type": "head-on",
+      "beta": 4.0,
+      "relative_speed": 1.1,
+      "vector_time": 14.0
+    }
+  ]
+}

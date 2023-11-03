@@ -1,0 +1,12 @@
+{
+  "static":{
+    "length": 178,
+    "width": 30,
+    "height": 30,
+    "speed_max": 21,
+    "mmsi": 219945000,
+    "name": "BASTO VI",
+    "ship_type": "Passenger/Ro-Ro Cargo Ship"
+  }
+}
+

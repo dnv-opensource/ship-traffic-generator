@@ -1,0 +1,19 @@
+{
+  "classification": {
+    "theta13_criteria": 67.5,
+    "theta14_criteria": 5.0,
+    "theta15_criteria": 5.0,
+    "theta15": [112.5, 247.5]
+  },
+  "relative_speed": {
+    "overtaking_stand_on": [1.5, 2],
+    "overtaking_give_way": [0.25, 0.75],
+    "head_on": [0.5, 1.5],
+    "crossing_give_way": [0.5, 1.5],
+    "crossing_stand_on": [0.5, 1.5]
+  },
+  "vector_range": [10.0, 30.0],
+  "max_meeting_distance": 0.0,
+  "evolve_time": 120,
+  "lat_lon_0": [58.763449, 10.490654]
+}

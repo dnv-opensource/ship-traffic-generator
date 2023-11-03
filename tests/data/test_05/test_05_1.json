@@ -1,0 +1,20 @@
+{
+  "title": "CR-GW",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 8.0,
+      "course": 0.0
+    }
+  },
+  "num_situations": 6,
+  "encounter": [
+    {
+      "desired_encounter_type": "crossing-give-way"
+    }
+  ]
+}

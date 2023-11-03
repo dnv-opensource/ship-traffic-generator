@@ -1,0 +1,28 @@
+{
+  "title": "CR-SO, OT-GW",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 10.0,
+      "course": 0.0
+    }
+  },
+  "encounter": [
+    {
+      "desired_encounter_type": "crossing-stand-on",
+      "beta": -105.0,
+      "relative_speed": 1.2,
+      "vector_time": 13.0
+    },
+    {
+      "desired_encounter_type": "overtaking-give-way",
+      "beta": 30.0,
+      "relative_speed": 0.8,
+      "vector_time": 10.0
+    }
+  ]
+}

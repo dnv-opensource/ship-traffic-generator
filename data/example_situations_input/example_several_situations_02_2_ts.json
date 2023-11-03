@@ -1,0 +1,21 @@
+{
+  "title": "OT_GW, CR_GW",
+  "common_vector": 10.0,
+  "own_ship": {
+    "speed": 7.0,
+    "course": 0.0,
+    "position": {
+      "north": 0.0,
+      "east": 0.0
+    }
+  },
+  "num_situations": 4,
+  "encounter": [
+    {
+      "desired_encounter_type": "overtaking-give-way"
+    },
+    {
+      "desired_encounter_type": "crossing-give-way"
+    }
+  ]
+}

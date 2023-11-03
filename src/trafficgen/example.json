@@ -1,0 +1,51 @@
+{
+    "name": "Example Scenario",
+    "description": "An example scenario with an own ship and a target ship.",
+    "start_time": null,
+    "own_ship": {
+        "static": {
+            "length": 230.0,
+            "width": 30.0,
+            "height": 15.0,
+            "mmsi": 123456789,
+            "name": "RMS Titanic",
+            "ship_type": "Fishing",
+            "saftey_contour": 100.0
+        },
+        "start_pose": {
+            "position": {
+                "latitude": 51.2123,
+                "longitude": 11.2313
+            },
+            "speed": 12.3,
+            "course": 284.2,
+            "heading": 283.1,
+            "nav_status": "Under way using engine"
+        },
+        "waypoints": null
+    },
+    "target_ships": [
+        {
+            "static": {
+                "length": 200.0,
+                "width": 25.0,
+                "height": 10.0,
+                "mmsi": 987654321,
+                "name": "HMS Belfast",
+                "ship_type": "Military ops"
+            },
+            "start_pose": {
+                "position": {
+                    "latitude": 51.5007,
+                    "longitude": -0.1246
+                },
+                "speed": 10.0,
+                "course": 270.0,
+                "heading": 270.0,
+                "nav_status": "Under way using engine"
+            },
+            "waypoints": null
+        }
+    ],
+    "environment": null
+}

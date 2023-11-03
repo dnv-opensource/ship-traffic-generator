@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "trafficgen"
+version = "0.1.0"
+description = "Automatic generation of ship traffic situations from a set of predefined situations"
+authors = ["Tom Arne Pedersen <Tom.Arne.Pedersen@dnv.com>"]
+license = "License stuff here" # FIXME
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+click = "^8.1"
+click-log = "^0.4.0"
+numpy = "^1.25.2"
+matplotlib = "^3.7.2"
+basemap = "^1.3.8"
+basemap-data-hires = "^1.3.2"
+global-land-mask = "^1.0.0"
+folium = "^0.14.0"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.287" # linter
+tox = "^4.11.1"
+pytest = "^7.4.1"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.5"
+sphinx-rtd-theme = "^1.3.0"
+sphinx-autoapi = "^3.0.0"
+
+# Add command line interface here like:
+[tool.poetry.scripts]
+trafficgen = "trafficgen.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

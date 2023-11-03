@@ -1,0 +1,34 @@
+{
+  "title": "CR_GW, CR_GW, CR_GW",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 10.0,
+      "course": 0.0
+    }
+  },
+  "encounter": [
+    {
+      "desired_encounter_type": "crossing-give-way",
+      "beta": 15.0,
+      "relative_speed": 1.5,
+      "vector_time": 14.0
+    },
+    {
+      "desired_encounter_type": "crossing-give-way",
+      "beta": 35.0,
+      "relative_speed": 1.4,
+      "vector_time": 17.0
+    },
+    {
+      "desired_encounter_type": "crossing-give-way",
+      "beta": 102.0,
+      "relative_speed": 1.2,
+      "vector_time": 12.0
+    }
+  ]
+}

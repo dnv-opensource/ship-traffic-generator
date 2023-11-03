@@ -1,0 +1,25 @@
+{
+  "title": "CR-GW, OT-GW, HO",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 8.0,
+      "course": 270.0
+    }
+  },
+  "encounter": [
+    {
+      "desired_encounter_type": "crossing-give-way"
+    },
+    {
+      "desired_encounter_type": "overtaking-give-way"
+    },
+    {
+      "desired_encounter_type": "head-on"
+    }
+  ]
+}

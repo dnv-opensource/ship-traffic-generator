@@ -1,0 +1,21 @@
+{
+  "title": "CR-SO",
+  "common_vector": 10.0,
+  "own_ship": {
+    "start_pose": {
+      "position": {
+        "north": 0.0,
+        "east": 0.0
+      },
+      "speed": 11.0,
+      "course": 45.0
+    }
+  },
+  "encounter": [
+    {
+      "desired_encounter_type": "crossing-stand-on",
+      "relative_speed": 1.4,
+      "vector_time": 20.0
+    }
+  ]
+}
