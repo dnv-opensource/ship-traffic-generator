@@ -48,7 +48,7 @@ jobs:
       - name: Build documentation
         run: |
           cd docs
-          sphinx-apidoc -o . ../src/trafficgen
+          # sphinx-apidoc -o . ../src/trafficgen
           make html
 
       - name: Clone and cleanup gh-pages branch
@@ -84,7 +84,7 @@ jobs:
           # _gh-pages/branch-* paths, and not including
           # _gh-pages itself.
           find _gh-pages/ -mindepth 1 ! -path '_gh-pages/branch*' -delete
-          rsync -a docs/_build/html/ _gh-pages/
+          rsync -a docs/build/html/ _gh-pages/
 
       # Copy documentation to _gh-pages/branch/$brname  (if push happened on any other branch)
       # ('/' gets replaced by '--')
@@ -98,7 +98,7 @@ jobs:
           brname="${brname##refs/heads/}"
           brdir=${brname//\//--}   # replace '/' with '--'
           rm -rf   _gh-pages/branch/${brdir}
-          rsync -a docs/_build/html/ _gh-pages/branch/${brdir}
+          rsync -a docs/build/html/ _gh-pages/branch/${brdir}
 
       # Add .nojekyll file
       - name: Add .nojekyll file
