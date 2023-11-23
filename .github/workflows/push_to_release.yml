@@ -1,0 +1,18 @@
+name: Push to release
+run-name: Push to release by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - release
+
+concurrency:
+  group: push-${{ github.ref }}-1
+  cancel-in-progress: true
+
+jobs:
+  requirements_files:
+    uses: ./.github/workflows/_requirements_files.yml
+  build_and_publish_documentation:
+    needs: requirements_files
+    uses: ./.github/workflows/_build_and_publish_documentation.yml
