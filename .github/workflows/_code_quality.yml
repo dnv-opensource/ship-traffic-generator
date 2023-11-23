@@ -3,6 +3,34 @@ name: Code Quality
 on: workflow_call
 
 jobs:
+  requirements:
+    name: Create requirements files from poetry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip' # cache pip dependencies
+      - name: Create requirements files from poetry.lock file
+        run: |
+          pip install poetry
+          poetry lock
+          poetry export -o requirements.txt --without-hashes --format requirements.txt
+          poetry export -o requirements-dev.txt --without-hashes --format requirements.txt -- with dev
+          poetry export -o requirements-doc.txt --without-hashes --format requirements.txt -- with doc
+      - name: Upload requirements files as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: requirements
+          path: |
+            requirements.txt
+            requirements-dev.txt
+            requirements-doc.txt
+      - name: Delete poetry.lock file
+        run: |
+          rm -f poetry.lock
+
   black:
     name: black
     runs-on: ubuntu-latest
@@ -24,14 +52,12 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip' # cache pip dependencies
+      - uses: actions/download-artifact@v3
+        with:
+          name: requirements
       - name: Install dependencies
         run: |
-          pip install poetry
-          poetry lock
-          poetry export -o poetry.lock.txt --without-hashes --format requirements.txt
-          pip install -r poetry.lock.txt
-          rm -f poetry.lock
-          rm -f poetry.lock.txt
+          pip install -r requirements.txt
       - name: Install ruff
         run: pip install ruff==0.1.6
       - name: Run ruff
@@ -46,14 +72,12 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip' # cache pip dependencies
+      - uses: actions/download-artifact@v3
+        with:
+          name: requirements
       - name: Install dependencies
         run: |
-          pip install poetry
-          poetry lock
-          poetry export -o poetry.lock.txt --without-hashes --format requirements.txt
-          pip install -r poetry.lock.txt
-          rm -f poetry.lock
-          rm -f poetry.lock.txt
+          pip install -r requirements.txt
           pip install pytest
       - name: Install pyright
         run: pip install pyright==1.1.336
