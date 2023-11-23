@@ -1,4 +1,4 @@
-'''
+"""
 The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems. It includes
 models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.
 The library also contains guidance, navigation, and control (GNC) blocks for real-time simulation.
@@ -8,7 +8,7 @@ T. I. Fossen (2021). Handbook of Marine Craft Hydrodynamics and Motion Control. 
 Wiley. ISBN-13: 978-1119575054
 
 Parts of the library have been re-implemented in Python and are found below.
-'''
+"""
 import numpy as np
 
 
@@ -41,19 +41,19 @@ def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
 
     """
     # WGS-84 parameters
-    a_radius = 6378137             # Semi-major axis
-    f_factor = 1/298.257223563     # Flattening
-    e_eccentricity = np.sqrt(2*f_factor - f_factor**2)   # Earth eccentricity
+    a_radius = 6378137  # Semi-major axis
+    f_factor = 1 / 298.257223563  # Flattening
+    e_eccentricity = np.sqrt(2 * f_factor - f_factor**2)  # Earth eccentricity
 
-    r_n = a_radius / np.sqrt(1 - e_eccentricity**2 * np.sin(lat_0)**2)
-    r_m = r_n * ((1 - e_eccentricity**2) / (1 - e_eccentricity**2 * np.sin(lat_0)**2))
+    r_n = a_radius / np.sqrt(1 - e_eccentricity**2 * np.sin(lat_0) ** 2)
+    r_m = r_n * ((1 - e_eccentricity**2) / (1 - e_eccentricity**2 * np.sin(lat_0) ** 2))
 
-    d_lat = x_n/(r_m + height_ref)          # delta latitude dmu = mu - mu0
-    d_lon = y_n/((r_n + height_ref)*np.cos(lat_0))   # delta longitude dl = l - l0
+    d_lat = x_n / (r_m + height_ref)  # delta latitude dmu = mu - mu0
+    d_lon = y_n / ((r_n + height_ref) * np.cos(lat_0))  # delta longitude dl = l - l0
 
     lat = ssa(lat_0 + d_lat)
     lon = ssa(lon_0 + d_lon)
-    height = height_ref-z_n
+    height = height_ref - z_n
 
     return lat, lon, height
 
@@ -85,15 +85,15 @@ def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
     """
 
     # WGS-84 parameters
-    a_radius = 6378137            # Semi-major axis (equitorial radius)
-    f_factor = 1/298.257223563    # Flattening
-    e_eccentricity = np.sqrt(2*f_factor - f_factor**2)  # Earth eccentricity
+    a_radius = 6378137  # Semi-major axis (equitorial radius)
+    f_factor = 1 / 298.257223563  # Flattening
+    e_eccentricity = np.sqrt(2 * f_factor - f_factor**2)  # Earth eccentricity
 
     d_lon = lon - lon_0
     d_lat = lat - lat_0
 
-    r_n = a_radius / np.sqrt(1 - e_eccentricity**2 * np.sin(lat_0)**2)
-    r_m = r_n * ((1 - e_eccentricity**2) / (1 - e_eccentricity**2 * np.sin(lat_0)**2))
+    r_n = a_radius / np.sqrt(1 - e_eccentricity**2 * np.sin(lat_0) ** 2)
+    r_m = r_n * ((1 - e_eccentricity**2) / (1 - e_eccentricity**2 * np.sin(lat_0) ** 2))
 
     x_n = d_lat * (r_m + height_ref)
     y_n = d_lon * ((r_n + height_ref) * np.cos(lat_0))

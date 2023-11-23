@@ -17,11 +17,11 @@ def read_situation_files(situation_folder):
         situations: List of desired traffic situations
     """
     situations = []
-    for file_name in [file for file in os.listdir(situation_folder) if file.endswith('.json')]:
+    for file_name in [file for file in os.listdir(situation_folder) if file.endswith(".json")]:
         file_path = os.path.join(situation_folder, file_name)
         with open(file_path, encoding="utf-8") as json_file:
             situation = json.load(json_file)
-            situation['input_file_name'] = file_name
+            situation["input_file_name"] = file_name
             situations.append(situation)
     return situations
 
@@ -51,7 +51,7 @@ def read_target_ship_files(target_ship_folder):
         target_ships: List of different target ships
     """
     target_ships = []
-    for file_name in [file for file in os.listdir(target_ship_folder) if file.endswith('.json')]:
+    for file_name in [file for file in os.listdir(target_ship_folder) if file.endswith(".json")]:
         file_path = os.path.join(target_ship_folder, file_name)
         with open(file_path, encoding="utf-8") as json_file:
             target_ships.append(json.load(json_file))

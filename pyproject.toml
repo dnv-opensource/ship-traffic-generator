@@ -21,9 +21,14 @@ folium = "^0.14.0"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.0.287" # linter
+black[jupyter] = "^23.11"
+ruff = "^0.1.6" # linter
+pyright = "^1.1.336"
 tox = "^4.11.1"
 pytest = "^7.4.1"
+pytest-cov = "^4.1"
+pytest-randomly = "^3.15"
+sourcery = "^1.14"
 
 [tool.poetry.group.docs]
 optional = true
@@ -40,3 +45,119 @@ trafficgen = "trafficgen.cli:main"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+addopts = "--strict-markers"
+xfail_strict = true
+pythonpath = ["src"]
+
+[tool.black]
+line-length = 105
+target-version = ["py39", "py310"]
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".venv",
+    ".tox",
+    "build",
+    "dist",
+    "__pycache__",
+    "./docs/conf.py",
+]
+src = ["src"]
+ignore = [
+    "E501",  # Line length too long
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D105",  # Missing docstring in magic method
+    "D107",  # Missing docstring in __init__
+    "D202",  # No blank lines allowed after function docstring
+    "D203",  # 1 blank line required before class docstring
+    "D205",  # 1 blank line required between summary line and description
+    "D212",  # Multi-line docstring summary should start at the first line
+    "D213",  # Multi-line docstring summary should start at the second line
+    # "N802",  # Function name should be lowercase  (uncomment if you want to allow Uppercase function names)
+    # "N803",  # Argument name should be lowercase  (uncomment if you want to allow Uppercase argument names)
+    "N806",  # Variable in function should be lowercase  (uncomment if you want to allow Uppercase variable names in functions)
+    # "N815",  # Variable in class scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in class scope)
+    # "N816",  # Variable in global scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in global scope)
+    ]
+line-length = 105
+# Activate the following rules step by step to (step by step..) improve code quality
+select = [
+    "E",
+    # "D",
+    # "F",
+    # "N",
+    # "W",
+    # "I",
+    # "B",
+]
+target-version = "py39"
+
+[tool.ruff.pep8-naming]
+ignore-names = [
+    "test_*",
+    "setUp",
+    "tearDown",
+]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["I001"]
+"./tests/*" = ["D"]
+
+[tool.pyright]
+exclude = [
+    ".git",
+    ".venv",
+    ".tox",
+    "build",
+    "dist",
+    "**/__pycache__",
+    "./docs/conf.py",
+    "./venv",
+]
+extraPaths = ["./src"]
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = true
+# Activate the following rules step by step to (step by step..) improve code quality
+# reportMissingParameterType = "error"
+# reportUnknownParameterType = "warning"
+# reportUnknownMemberType = "warning"
+# reportMissingTypeArgument = "error"
+# reportPropertyTypeMismatch = "error"
+# reportFunctionMemberAccess = "warning"
+# reportPrivateUsage = "warning"
+# reportTypeCommentUsage = "warning"
+# reportIncompatibleMethodOverride = "warning"
+# reportIncompatibleVariableOverride = "error"
+# reportInconsistentConstructor = "error"
+# reportOverlappingOverload = "warning"
+# reportUninitializedInstanceVariable = "warning"
+# reportCallInDefaultInitializer = "warning"
+# reportUnnecessaryIsInstance = "information"
+# reportUnnecessaryCast = "warning"
+# reportUnnecessaryComparison = "warning"
+# reportUnnecessaryContains = "warning"
+# reportUnusedCallResult = "warning"
+# reportUnusedExpression = "warning"
+# reportMatchNotExhaustive = "warning"
+# reportShadowedImports = "warning"
+# reportUntypedFunctionDecorator = "warning"
+# reportUntypedBaseClass = "error"
+# reportUntypedNamedTuple = "warning"
+
+# Activate the following rules only locally and temporary, i.e. for a QA session.
+# (For server side CI they are considered too strict.)
+# reportConstantRedefinition = "warning"
+# reportUnnecessaryTypeIgnoreComment = "information"
+# reportImportCycles = "warning"
+# reportImplicitStringConcatenation = "warning"
