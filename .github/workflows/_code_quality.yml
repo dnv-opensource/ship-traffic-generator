@@ -25,7 +25,9 @@ jobs:
           python-version: '3.11'
           cache: 'pip' # cache pip dependencies
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install poetry
+          poetry install  --no-root
       - name: Install ruff
         run: pip install ruff==0.1.6
       - name: Run ruff
@@ -43,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install
+          poetry install  --no-root
           pip install pytest
       - name: Install pyright
         run: pip install pyright==1.1.336
