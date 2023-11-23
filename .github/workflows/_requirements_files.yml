@@ -15,6 +15,7 @@ jobs:
       - name: Create requirements files from poetry.lock file
         run: |
           pip install poetry
+          pip install poetry-plugin-export
           poetry lock
           poetry export -o requirements.txt --without-hashes --format requirements.txt
           poetry export -o requirements-dev.txt --without-hashes --format requirements.txt --with dev
