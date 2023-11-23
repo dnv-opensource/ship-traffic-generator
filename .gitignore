@@ -24,6 +24,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -101,5 +102,13 @@ ENV/
 # mypy
 .mypy_cache/
 
-# IDE settings
-.vscode/
+# PyCharm
+.idea
+
+# VS Code Settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
