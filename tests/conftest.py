@@ -88,7 +88,9 @@ def target_ships_folder(proj_data_folder):
 @pytest.fixture(scope="session")
 def settings_file(data_folder):
     """Path to test data folder"""
-    return str(Path(__file__).parent.parent / "src" / "trafficgen" / "settings" / "encounter_settings.json")  # noqa: E501
+    return str(
+        Path(__file__).parent.parent / "src" / "trafficgen" / "settings" / "encounter_settings.json"
+    )  # noqa: E501
 
 
 @pytest.fixture(scope="session")

@@ -15,7 +15,7 @@ def m_pr_min_2_knot(speed_in_m_pr_min):
     """
 
     knot_2_m_pr_sec = 0.5144
-    return speed_in_m_pr_min/(knot_2_m_pr_sec * 60)
+    return speed_in_m_pr_min / (knot_2_m_pr_sec * 60)
 
 
 def knot_2_m_pr_min(speed_in_knot):
@@ -44,7 +44,7 @@ def m2nm(length_in_m):
         length_in_nm: Length given in nautical miles
     """
 
-    m_2_nm = 1/1852
+    m_2_nm = 1 / 1852
     return m_2_nm * length_in_m
 
 
@@ -140,6 +140,6 @@ def calculate_position_at_certain_time(position, speed, course, delta_time):
 
     """
 
-    north = position['north'] + knot_2_m_pr_min(speed) * delta_time * np.cos(deg_2_rad(course))
-    east = position['east'] + knot_2_m_pr_min(speed) * delta_time * np.sin(deg_2_rad(course))
-    return {'north': north, 'east': east}
+    north = position["north"] + knot_2_m_pr_min(speed) * delta_time * np.cos(deg_2_rad(course))
+    east = position["east"] + knot_2_m_pr_min(speed) * delta_time * np.sin(deg_2_rad(course))
+    return {"north": north, "east": east}
