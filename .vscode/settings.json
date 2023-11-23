@@ -26,6 +26,7 @@
     "python.analysis.inlayHints.variableTypes": false,
     "python.analysis.inlayHints.functionReturnTypes": false,
     "python.analysis.inlayHints.pytestParameters": true,
+    "python.terminal.executeInFileDir": true,
     "python.analysis.packageIndexDepths": [
         {
             "name": "pandas",
@@ -43,5 +44,4 @@
             "includeAllSymbols": true,
         },
     ],
-    "python.terminal.executeInFileDir": true,
 }

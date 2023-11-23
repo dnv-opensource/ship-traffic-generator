@@ -18,41 +18,60 @@
             "cwd": "${fileDirname}", // working dir = dir where current file is
             "program": "${file}",
             "console": "integratedTerminal",
-            "justMyCode": false,
             "autoReload": {
                 "enable": true
             },
-            "envFile": "${workspaceFolder}/.env" // specify where mvx is
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env", // specify where .env file is
         },
         {
             "name": "Python: Current File, cwd = workspace root folder, envFile",
             "type": "python",
             "request": "launch",
-            "cwd": "${workspaceFolder}", // working dir = workspace (mvx) dir
+            "cwd": "${workspaceFolder}", // working dir = project root folder
             "program": "${file}",
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": true
             },
             "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env" // specify where mvx is
+            "envFile": "${workspaceFolder}/.env", // specify where .env file is
         },
         {
-            "name": "mypackage test_cli",
+            "name": "trafficgen cli, cwd = tests, envFile",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}\\tests",
-            "program": "${workspaceFolder}\\src\\mypackage\\cli\\mypackage.py",
-            "args": [
-                "test_config_file",
-                "--run",
-                "-v",
-            ],
+            "program": "${workspaceFolder}\\src\\trafficgen\\cli.py",
+            // "args": [
+            //     "test_config_file",
+            //     "--run",
+            //     "-v",
+            // ],
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": true
             },
             "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env", // specify where .env file is
+        },
+        {
+            "name": "trafficgen cli, cwd = file dir, envFile",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${fileDirname}", // working dir = dir where current file is
+            "program": "${workspaceFolder}\\src\\trafficgen\\cli.py",
+            // "args": [
+            //     "test_config_file",
+            //     "--run",
+            //     "-v",
+            // ],
+            "console": "integratedTerminal",
+            "autoReload": {
+                "enable": true
+            },
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env", // specify where .env file is
         },
     ]
 }
