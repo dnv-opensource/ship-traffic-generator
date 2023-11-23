@@ -27,7 +27,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install  --no-root
+          poetry lock
+          poetry export -o poetry.lock.txt --without-hashes --format requirements.txt
+          pip install -r poetry.lock.txt
+          rm -f poetry.lock
+          rm -f poetry.lock.txt
       - name: Install ruff
         run: pip install ruff==0.1.6
       - name: Run ruff
@@ -50,6 +54,7 @@ jobs:
           pip install -r poetry.lock.txt
           rm -f poetry.lock
           rm -f poetry.lock.txt
+          pip install pytest
       - name: Install pyright
         run: pip install pyright==1.1.336
       - name: Run pyright
