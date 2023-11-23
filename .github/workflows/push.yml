@@ -23,3 +23,7 @@ jobs:
   build_package:
     needs: requirements
     uses: ./.github/workflows/_build_package.yml
+  build_and_publish_documentation:
+    needs:
+      - build_package
+    uses: ./.github/workflows/_build_and_publish_documentation.yml
