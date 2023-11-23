@@ -48,8 +48,8 @@ jobs:
           poetry lock
           poetry export -o poetry.lock.txt --without-hashes --format requirements.txt
           pip install -r poetry.lock.txt
-          del poetry.lock
-          del poetry.lock.txt
+          rm -f poetry.lock
+          rm -f poetry.lock.txt
       - name: Install pyright
         run: pip install pyright==1.1.336
       - name: Run pyright
