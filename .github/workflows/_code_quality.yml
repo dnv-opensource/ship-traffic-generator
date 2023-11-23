@@ -44,7 +44,8 @@ jobs:
           cache: 'pip' # cache pip dependencies
       - name: Install dependencies
         run: |
-          pip install poetry
+          pip install pipx
+          pipx install poetry
           poetry install  --no-root
           pip install pytest
       - name: Install pyright
