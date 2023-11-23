@@ -17,8 +17,8 @@ jobs:
           pip install poetry
           poetry lock
           poetry export -o requirements.txt --without-hashes --format requirements.txt
-          poetry export -o requirements-dev.txt --without-hashes --format requirements.txt -- with dev
-          poetry export -o requirements-doc.txt --without-hashes --format requirements.txt -- with doc
+          poetry export -o requirements-dev.txt --without-hashes --format requirements.txt --with dev
+          poetry export -o requirements-doc.txt --without-hashes --format requirements.txt --with doc
       - name: Upload requirements files as artifact
         uses: actions/upload-artifact@v3
         with:
