@@ -48,7 +48,6 @@ jobs:
       - name: Build documentation
         run: |
           cd docs
-          # sphinx-apidoc -o . ../src/trafficgen
           sphinx-apidoc -f -e -M -o . ../src/trafficgen
           make html
 
