@@ -49,6 +49,7 @@ jobs:
         run: |
           cd docs
           # sphinx-apidoc -o . ../src/trafficgen
+          sphinx-apidoc -f -e -M -o . ../src/trafficgen
           make html
 
       - name: Clone and cleanup gh-pages branch
