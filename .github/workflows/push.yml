@@ -12,7 +12,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  code_quality:
-    uses: ./.github/workflows/_code_quality.yml
-  test:
-    uses: ./.github/workflows/_test.yml
+  requirements:
+    uses: ./.github/workflows/_requirements.yml
+  # code_quality:
+  #   needs: requirements
+  #   uses: ./.github/workflows/_code_quality.yml
+  # test:
+  #   needs: requirements
+  #   uses: ./.github/workflows/_test.yml
+  build_package:
+    needs: requirements
+    uses: ./.github/workflows/_build_package.yml
