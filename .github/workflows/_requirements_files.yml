@@ -22,7 +22,7 @@ jobs:
       - name: Upload requirements files as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: requirements
+          name: requirements-files
           path: |
             poetry.lock
             requirements.txt
