@@ -88,7 +88,6 @@ ignore = [
     # "N816",  # Variable in global scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in global scope)
     ]
 line-length = 105
-# Activate the following rules step by step to (step by step..) improve code quality
 select = [
     "E",
     "D",
@@ -96,7 +95,7 @@ select = [
     "N",
     "W",
     "I",
-    # "B",
+    "B",
 ]
 target-version = "py39"
 
