@@ -78,7 +78,9 @@ def generate_encounter(
             own_ship["start_pose"]["course"],
             vector_time,
         )
-        own_ship_vector_length = knot_2_m_pr_min(own_ship["start_pose"]["speed"]) * vector_time
+        # @TODO: @TomArne: this variable is declared and assigned to but nowhere used.  Delete?
+        #        Claas, 2023-11-24
+        # own_ship_vector_length = knot_2_m_pr_min(own_ship["start_pose"]["speed"]) * vector_time
 
         # Target ship
         target_ship["id"] = target_ship_id
@@ -317,9 +319,7 @@ def find_start_position_target_ship(
             start_position_found = 1
         elif desired_encounter_type.lower() == colreg_state2 and np.abs(
             beta1 - desired_beta % 360
-        ) < deg_2_rad(
-            0.1
-        ):  # noqa: E127
+        ) < deg_2_rad(0.1):  # noqa: E127
             start_position_target_ship = {"north": n_32, "east": e_32}
             start_position_found = 1
         else:
