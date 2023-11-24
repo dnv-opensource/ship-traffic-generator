@@ -1,14 +1,15 @@
-#!/usr/bin/env python
-
 """Tests for `trafficgen` package."""
 
-import json
-import os
+from pathlib import Path
+from typing import List
 
 import pytest
 from click.testing import CliRunner
 
 from trafficgen import cli
+from trafficgen.read_files import read_situation_files
+from trafficgen.ship_traffic_generator import generate_traffic_situations
+from trafficgen.types import Situation
 
 
 @pytest.fixture
@@ -20,7 +21,7 @@ def response():
     return None
 
 
-def test_content(response):
+def test_content(response: None):
     """Sample pytest test function with the pytest fixture as an argument."""
     assert response is None
 
@@ -39,7 +40,11 @@ def test_basic_cli():
 
 
 def test_gen_situations_cli(
-    situations_folder, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """Test generating traffic situations using the cli"""
     runner = CliRunner()
@@ -48,15 +53,15 @@ def test_gen_situations_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder,
+            str(situations_folder),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
     assert result.exit_code == 0
@@ -65,8 +70,28 @@ def test_gen_situations_cli(
     assert "Writing traffic situations to files" in result.output
 
 
+def test_gen_situations(
+    situations_folder: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+):
+    """Test generating traffic situations."""
+    situations: List[Situation] = generate_traffic_situations(
+        situation_folder=situations_folder,
+        own_ship_file=own_ship_file,
+        target_ship_folder=target_ships_folder,
+        settings_file=settings_file,
+    )
+    assert len(situations) == 55
+
+
 def test_gen_situations_1_ts_full_spec_cli(
-    situations_folder_test_01, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_01: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Test generation of one traffic situation using full specification,
@@ -79,37 +104,36 @@ def test_gen_situations_1_ts_full_spec_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_01,
+            str(situations_folder_test_01),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships = 0
-    # TODO enumerate functionality not used, replace by for loop
-    # for situation in situations:
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if number_of_target_ships != 1:
-            print("test")
-            break
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 5
-    assert number_of_target_ships == 1
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 5
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) == 1
 
 
 def test_gen_situations_1_ts_partly_spec_cli(
-    situations_folder_test_02, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_02: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Test generation of one traffic situation using partly specification,
@@ -122,35 +146,36 @@ def test_gen_situations_1_ts_partly_spec_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_02,
+            str(situations_folder_test_02),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships = 0
-    # TODO: enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if number_of_target_ships != 1:
-            break
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 2
-    assert number_of_target_ships == 1
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 2
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) == 1
 
 
 def test_gen_situations_1_ts_minimum_spec_cli(
-    situations_folder_test_03, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_03: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Test generation of one traffic situation using minimum specification,
@@ -163,35 +188,36 @@ def test_gen_situations_1_ts_minimum_spec_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_03,
+            str(situations_folder_test_03),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships = -1
-    # TODO enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if number_of_target_ships != 1:
-            break
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 2
-    assert number_of_target_ships == 1
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 2
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) == 1
 
 
 def test_gen_situations_2_ts_one_to_many_situations_cli(
-    situations_folder_test_04, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_04: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Testing situation generation where one file is used to give 5 situations
@@ -203,35 +229,36 @@ def test_gen_situations_2_ts_one_to_many_situations_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_04,
+            str(situations_folder_test_04),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships = -1
-    # TODO enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if number_of_target_ships != 2:
-            break
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 5
-    assert number_of_target_ships == 2
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 5
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) == 2
 
 
 def test_gen_situations_one_to_many_situations_cli(
-    situations_folder_test_05, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_05: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Testing situation generation where three files are used to give
@@ -243,40 +270,36 @@ def test_gen_situations_one_to_many_situations_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_05,
+            str(situations_folder_test_05),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships_ok = -1
-    # TODO enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if (
-            number_of_target_ships == 1 or number_of_target_ships == 2 or number_of_target_ships == 3
-        ):  # noqa: E501
-            number_of_target_ships_ok = 1
-        else:
-            number_of_target_ships_ok = 0
-            break
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 10
-    assert number_of_target_ships_ok == 1
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 10
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) in {1, 2, 3}
 
 
 def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
-    situations_folder_test_06, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_06: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Testing situation were the target ship has a higher speed than own ship,
@@ -289,40 +312,36 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_06,
+            str(situations_folder_test_06),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_situations = len(situations)
-    number_of_target_ships_ok = -1
-    # TODO enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if (
-            number_of_target_ships == 1 or number_of_target_ships == 2 or number_of_target_ships == 3
-        ):  # noqa: E501
-            number_of_target_ships_ok = 1
-            break
-        else:
-            number_of_target_ships_ok = 0
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_situations == 3
-    assert number_of_target_ships_ok == 0
+
+    situations: List[Situation] = read_situation_files(output_folder)
+    assert len(situations) == 3
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) == 0
 
 
 def test_gen_situations_baseline_cli(
-    situations_folder_test_08, own_ship_file, target_ships_folder, settings_file, output_folder
+    situations_folder_test_08: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
 ):
     """
     Testing situation were desired beta does not match desired encounter
@@ -335,53 +354,25 @@ def test_gen_situations_baseline_cli(
         [
             "gen-situation",
             "-s",
-            situations_folder_test_08,
+            str(situations_folder_test_08),
             "-os",
-            own_ship_file,
+            str(own_ship_file),
             "-t",
-            target_ships_folder,
+            str(target_ships_folder),
             "-c",
-            settings_file,
+            str(settings_file),
             "-o",
-            output_folder,
+            str(output_folder),
         ],
     )
 
-    situations = read_situation_files(output_folder)
-    number_of_target_ships_ok = -1
-    # TODO enumerate functionality not used, replace by for loop
-    for _, situation in enumerate(situations):
-        number_of_target_ships = len(situation["target_ship"])
-        if (
-            number_of_target_ships == 1 or number_of_target_ships == 2 or number_of_target_ships == 3
-        ):  # noqa: E501
-            number_of_target_ships_ok = 1
-            break
-        else:
-            number_of_target_ships_ok = 0
-
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
-    assert number_of_target_ships_ok == 1
 
+    situations: List[Situation] = read_situation_files(output_folder)
+    # assert len(situations) == 5
 
-def read_situation_files(situation_folder):
-    """
-    Reads situation files.
-
-    Params:
-        situation_folder: Path to the folder where situation files are found
-
-    Returns:
-        situations: List of desired traffic situations
-    """
-    situations = []
-    for file_name in [
-        file for file in os.listdir(situation_folder) if file.endswith(".json")
-    ]:  # noqa: E501
-        file_path = os.path.join(situation_folder, file_name)
-        with open(file_path, encoding="utf-8") as json_file:
-            situation = json.load(json_file)
-            situation["file_name"] = file_name
-            situations.append(situation)
-    return situations
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ship is not None
+        assert len(situation.target_ship) in {1, 2, 3}
