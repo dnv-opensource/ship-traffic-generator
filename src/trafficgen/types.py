@@ -1,7 +1,7 @@
 """Domain specific data types used in trafficgen."""
 
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -47,9 +47,9 @@ class StaticShipData(BaseModel):
 class Ship(BaseModel):
     """Data type for a ship."""
 
-    static: Optional[StaticShipData]
-    start_pose: Optional[Pose]
-    waypoints: Optional[List[Position]]
+    static: Union[StaticShipData, None] = None
+    start_pose: Union[Pose, None] = None
+    waypoints: Union[List[Position], None] = None
 
 
 class TargetShip(Ship):
