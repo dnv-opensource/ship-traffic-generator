@@ -92,7 +92,7 @@ line-length = 105
 select = [
     "E",
     "D",
-    # "F",
+    "F",
     # "N",
     # "W",
     # "I",
