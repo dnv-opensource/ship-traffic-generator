@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Root level fixtures for `trafficgen`"""
-import pytest
 from pathlib import Path
+
+import pytest
 
 
 @pytest.fixture
