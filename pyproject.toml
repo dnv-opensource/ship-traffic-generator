@@ -95,7 +95,7 @@ select = [
     "F",
     "N",
     "W",
-    # "I",
+    "I",
     # "B",
 ]
 target-version = "py39"
