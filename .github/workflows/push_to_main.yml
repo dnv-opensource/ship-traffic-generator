@@ -1,11 +1,10 @@
-name: Push to custom branches
-run-name: Push to ${{ github.ref }} by @${{ github.actor }}
+name: Push to main
+run-name: Push to main by @${{ github.actor }}
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
-      - release
 
 concurrency:
   group: push-${{ github.ref }}-1
@@ -20,3 +19,11 @@ jobs:
   test:
     needs: requirements_files
     uses: ./.github/workflows/_test.yml
+  build_package:
+    needs:
+      - code_quality
+      - test
+    uses: ./.github/workflows/_build_package.yml
+  build_and_publish_documentation:
+    needs: build_package
+    uses: ./.github/workflows/_build_and_publish_documentation.yml
