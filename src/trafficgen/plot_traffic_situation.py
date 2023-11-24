@@ -1,23 +1,17 @@
-"""
-This module includes functions to prepare and plot traffic situations
-"""
+"""Functions to prepare and plot traffic situations."""
 import math
 
-from matplotlib.patches import Circle
-from folium import Map, Polygon
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+from folium import Map, Polygon
+from matplotlib.patches import Circle
 
-from . import knot_2_m_pr_min
-from . import m2nm
-from . import flat2llh
-from . import deg_2_rad
-from . import rad_2_deg
+from . import deg_2_rad, flat2llh, knot_2_m_pr_min, m2nm, rad_2_deg
 
 
 def calculate_vector_arrow(position, direction, vector_length, lat_lon_0):
     """
-    Calculates the arrow with length vector pointing in the direction of ship course
+    Calculate the arrow with length vector pointing in the direction of ship course.
 
     Params:
         position: {north}, {east} position of the ship [m]
@@ -25,7 +19,8 @@ def calculate_vector_arrow(position, direction, vector_length, lat_lon_0):
         vector_length: length of vector
         lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
 
-    Returns:
+    Returns
+    -------
         arrow_points: Polygon points to draw the arrow
     """
     north_start = position["north"]
@@ -63,7 +58,7 @@ def calculate_vector_arrow(position, direction, vector_length, lat_lon_0):
 
 def calculate_ship_outline(position, course, lat_lon_0, ship_length=100, ship_width=15):
     """
-    Calculates the outline of the ship pointing in the direction of ship course
+    Calculate the outline of the ship pointing in the direction of ship course.
 
     Params:
         position: {north}, {east} position of the ship [m]
@@ -72,7 +67,8 @@ def calculate_ship_outline(position, course, lat_lon_0, ship_length=100, ship_wi
         ship_length: Ship length. If not given, ship length is set to 100
         ship_width: Ship width. If not given, ship width is set to 15
 
-    Returns:
+    Returns
+    -------
         ship_outline_points: Polygon points to draw the ship
     """
     north_start = position["north"]
@@ -155,7 +151,7 @@ def calculate_ship_outline(position, course, lat_lon_0, ship_length=100, ship_wi
 
 def plot_specific_traffic_situation(traffic_situations, situation_number):
     """
-    Plots a specific situation in map
+    Plot a specific situation in map.
 
     Params:
         traffic_situations: Generated traffic situations
@@ -192,7 +188,7 @@ def plot_specific_traffic_situation(traffic_situations, situation_number):
 
 def add_ship_to_map(ship, vector_time, lat_lon_0, map_plot=None, color="black"):
     """
-    Adds the ship to the map
+    Add the ship to the map.
 
     Params:
         ship: Ship information
@@ -202,6 +198,7 @@ def add_ship_to_map(ship, vector_time, lat_lon_0, map_plot=None, color="black"):
         color: Color of the ship. If not set, color is 'black'
 
     Returns
+    -------
         m: Updated instance of Map.
     """
     if map_plot is None:
@@ -233,7 +230,7 @@ def add_ship_to_map(ship, vector_time, lat_lon_0, map_plot=None, color="black"):
 
 def plot_traffic_situations(traffic_situations, col, row):
     """
-    Plots the traffic situations in one more figures
+    Plot the traffic situations in one more figures.
 
     Params:
         traffic_situations: Traffic situations to be plotted
@@ -297,13 +294,14 @@ def plot_traffic_situations(traffic_situations, col, row):
 
 def find_max_value_for_plot(ship, max_value):
     """
-    Finds the maximum deviation from the Reference point in north and east direction
+    Find the maximum deviation from the Reference point in north and east direction.
 
     Params:
         ship: Ship information
         max_value: maximum deviation in north, east direction
 
-    Returns:
+    Returns
+    -------
         max_value: updated maximum deviation in north, east direction
     """
     max_value = np.max(
@@ -318,7 +316,7 @@ def find_max_value_for_plot(ship, max_value):
 
 def add_ship_to_plot(ship, vector_time, axes=None, color="black"):
     """
-    Adds the ship to the plot
+    Add the ship to the plot.
 
     Params:
         ship: Ship information

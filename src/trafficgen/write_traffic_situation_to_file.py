@@ -1,13 +1,13 @@
-"""This module cleans traffic situations data before writing it to json-file."""
+"""Functions to clean traffic situations data before writing it to a json file."""
 
 import json
-from pathlib import Path
 import os
+from pathlib import Path
 
 
 def write_traffic_situations_to_json_file(traffic_situations, write_folder):
     """
-    Write traffic situations to json file
+    Write traffic situations to json file.
 
     Params:
         traffic_situations: Traffic situations to be written to file
@@ -25,12 +25,13 @@ def write_traffic_situations_to_json_file(traffic_situations, write_folder):
 
 def clean_traffic_situation_data(traffic_situation):
     """
-    Clean traffic situation data to json file
+    Clean traffic situation data to json file.
 
     Params:
         traffic_situation: Traffic situation to be cleaned
 
-    Returns:
+    Returns
+    -------
         traffic_situation: Cleaned traffic situation
     """
 

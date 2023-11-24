@@ -1,6 +1,4 @@
-"""
-This module is used to read the files needed to build one or more traffic situations
-"""
+"""Functions to read the files needed to build one or more traffic situations."""
 
 import json
 import os
@@ -8,12 +6,13 @@ import os
 
 def read_situation_files(situation_folder):
     """
-    Reads traffic situation files.
+    Read traffic situation files.
 
     Params:
         situation_folder: Path to the folder where situation files are found
 
-    Returns:
+    Returns
+    -------
         situations: List of desired traffic situations
     """
     situations = []
@@ -28,12 +27,13 @@ def read_situation_files(situation_folder):
 
 def read_own_ship_file(own_ship_file):
     """
-    Reads the own ship file.
+    Read own ship file.
 
     Params:
         own_ship_file: Path to the own_ship_file file
 
-    Returns:
+    Returns
+    -------
         own_ship information
     """
     with open(own_ship_file, encoding="utf-8") as user_file:
@@ -42,12 +42,13 @@ def read_own_ship_file(own_ship_file):
 
 def read_target_ship_files(target_ship_folder):
     """
-    Reads target ship files.
+    Read target ship files.
 
     Params:
         target_ship_folder: Path to the folder where target ships are found
 
-    Returns:
+    Returns
+    -------
         target_ships: List of different target ships
     """
     target_ships = []
@@ -60,12 +61,13 @@ def read_target_ship_files(target_ship_folder):
 
 def read_encounter_setting_file(settings_file):
     """
-    Reads the encounter setting file.
+    Read encounter settings file.
 
     Params:
         settings_file: Path to the encounter setting file
 
-    Returns:
+    Returns
+    -------
         Encounter settings
     """
     with open(settings_file, encoding="utf-8") as user_file:

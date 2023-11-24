@@ -31,6 +31,10 @@ output_folder = join(default_data_path, "test_output/")
 @click.group()
 @click_log.simple_verbosity_option(logger)
 def main(args=None):
+    """Entry point for console script as configured in pyproject.toml.
+
+    Runs the command line interface and parses arguments and options entered on the console.
+    """
     return 0
 
 
@@ -112,9 +116,11 @@ def gen_situation(
     visualize_situation,
     output,
 ):
-    """Console script for trafficgen. Example: \n
+    r"""Console script for trafficgen.
+    Example: \n
     trafficgen gen-situation -s ./data/example_situations_input
-    -o ./data/test_output_1"""
+    -o ./data/test_output_1.
+    """
     click.echo("Generating traffic situations")
     generated_traffic_situations = generate_traffic_situations(
         situation_folder=situations,
