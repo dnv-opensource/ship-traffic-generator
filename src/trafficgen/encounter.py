@@ -319,7 +319,9 @@ def find_start_position_target_ship(
             start_position_found = 1
         elif desired_encounter_type.lower() == colreg_state2 and np.abs(
             beta1 - desired_beta % 360
-        ) < deg_2_rad(0.1):  # noqa: E127
+        ) < deg_2_rad(
+            0.1
+        ):  # noqa: E127
             start_position_target_ship = {"north": n_32, "east": e_32}
             start_position_found = 1
         else:
