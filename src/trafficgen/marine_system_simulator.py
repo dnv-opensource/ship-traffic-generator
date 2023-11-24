@@ -10,10 +10,19 @@ Wiley. ISBN-13: 978-1119575054
 
 Parts of the library have been re-implemented in Python and are found below.
 """
+from typing import Tuple
+
 import numpy as np
 
 
-def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
+def flat2llh(
+    x_n: float,
+    y_n: float,
+    lat_0: float,
+    lon_0: float,
+    z_n: float = 0.0,
+    height_ref: float = 0.0,
+) -> Tuple[float, float, float]:
     """
     Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
     NED coordinates (xn,yn,zn).
@@ -63,7 +72,14 @@ def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
     return lat, lon, height
 
 
-def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
+def llh2flat(
+    lat: float,
+    lon: float,
+    lat_0: float,
+    lon_0: float,
+    height: float = 0.0,
+    height_ref: float = 0.0,
+) -> Tuple[float, float, float]:
     """
     Compute (north, east) for a flat Earth coordinate system from longitude
     lon (rad) and latitude lat (rad).
@@ -111,7 +127,7 @@ def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
     return x_n, y_n, z_n
 
 
-def ssa(angle):
+def ssa(angle: float) -> float:
     """
     Return the "smallest signed angle" (SSA) or the smallest difference between two angles.
 
