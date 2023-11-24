@@ -1,6 +1,6 @@
 """Domain specific data types used in trafficgen."""
 
-from enum import StrEnum
+from enum import Enum
 from typing import List
 
 from pydantic import BaseModel
@@ -23,7 +23,7 @@ class Pose(BaseModel):
     position: Position = Position()
 
 
-class ShipType(StrEnum):
+class ShipType(Enum):
     """Enumeration of ship types."""
 
     PASSENGER_RORO = "Passenger/Ro-Ro Cargo Ship"
@@ -58,7 +58,7 @@ class TargetShip(Ship):
     id: int | None = None
 
 
-class EncounterType(StrEnum):
+class EncounterType(Enum):
     """Enumeration of encounter types."""
 
     OVERTAKING_STAND_ON = "overtaking-stand-on"

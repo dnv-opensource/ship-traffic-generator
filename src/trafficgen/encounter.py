@@ -343,7 +343,7 @@ def find_start_position_target_ship(
         position_target_ship=Position(north=n_31, east=e_31),
         heading_target_ship=target_ship_course_1,
     )
-    colreg_state1 = determine_colreg(
+    colreg_state1: EncounterType = determine_colreg(
         alpha1, beta1, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
     target_ship_course_2 = calculate_ship_course(
@@ -356,17 +356,13 @@ def find_start_position_target_ship(
         position_target_ship=Position(north=n_32, east=e_32),
         heading_target_ship=target_ship_course_2,
     )
-    colreg_state2 = determine_colreg(
+    colreg_state2: EncounterType = determine_colreg(
         alpha2, beta2, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
-    if desired_encounter_type.lower() == colreg_state1 and np.abs(
-        beta1 - desired_beta % 360
-    ) < deg_2_rad(0.1):
+    if desired_encounter_type is colreg_state1 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(0.1):
         start_position_target_ship = Position(north=n_31, east=e_31)
         start_position_found = True
-    elif desired_encounter_type.lower() == colreg_state2 and np.abs(
-        beta1 - desired_beta % 360
-    ) < deg_2_rad(
+    elif desired_encounter_type is colreg_state2 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(
         0.1
     ):  # noqa: E127
         start_position_target_ship = Position(north=n_32, east=e_32)
