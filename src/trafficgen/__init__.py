@@ -1,14 +1,14 @@
 """Top-level package for Traffic Generator."""
 
-from .util_methods import knot_2_m_pr_min
-from .util_methods import m_pr_min_2_knot
-from .util_methods import m2nm
-from .util_methods import nm_2_m
-from .util_methods import deg_2_rad
-from .util_methods import rad_2_deg
-from .util_methods import convert_angle_minus_180_to_180_to_0_to_360
-from .util_methods import convert_angle_0_to_360_to_minus_180_to_180
-from .util_methods import calculate_position_at_certain_time
+from .utils import knot_2_m_pr_min
+from .utils import m_pr_min_2_knot
+from .utils import m2nm
+from .utils import nm_2_m
+from .utils import deg_2_rad
+from .utils import rad_2_deg
+from .utils import convert_angle_minus_180_to_180_to_0_to_360
+from .utils import convert_angle_0_to_360_to_minus_180_to_180
+from .utils import calculate_position_at_certain_time
 
 from .marine_system_simulator import flat2llh
 from .marine_system_simulator import llh2flat
