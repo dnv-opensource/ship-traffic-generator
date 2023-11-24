@@ -1,6 +1,6 @@
 """Functions to prepare and plot traffic situations."""
 import math
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -196,7 +196,7 @@ def plot_specific_traffic_situation(
         "black",
     )
 
-    target_ships: List[TargetShip] | None = situation.target_ship
+    target_ships: Union[List[TargetShip], None] = situation.target_ship
     assert target_ships is not None
     for target_ship in target_ships:
         map_plot = add_ship_to_map(

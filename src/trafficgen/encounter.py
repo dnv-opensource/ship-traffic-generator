@@ -5,7 +5,7 @@ crossing give-way and stand-on.
 """
 
 import random
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 
@@ -75,8 +75,8 @@ def generate_encounter(
 
         # resetting vector_time, beta and relative_speed to default values before
         # new search for situation is done
-        vector_time: float | None = vector_time_default
-        beta: float | None = beta_default
+        vector_time: Union[float, None] = vector_time_default
+        beta: Union[float, None] = beta_default
 
         if vector_time is None:
             vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])

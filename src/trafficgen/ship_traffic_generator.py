@@ -1,9 +1,9 @@
 """Functions to generate traffic situations."""
 
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
-from trafficgen.types import EncounterSettings, Ship, Situation, TargetShip
+from trafficgen.types import Encounter, EncounterSettings, Ship, Situation, TargetShip
 
 from . import (
     generate_encounter,
@@ -66,11 +66,12 @@ def generate_traffic_situations(
             traffic_situation.own_ship = own_ship
             traffic_situation.target_ship = []
             for k in range(len(desired_traffic_situation.encounter)):
-                desired_encounter_type = desired_traffic_situation.encounter[k].desired_encounter_type
+                encounter: Encounter = desired_traffic_situation.encounter[k]
+                desired_encounter_type = encounter.desired_encounter_type
                 settings = encounter_settings
-                beta: float | None = desired_traffic_situation.encounter[k].beta
-                relative_speed: float | None = desired_traffic_situation.encounter[k].relative_speed
-                vector_time: float | None = desired_traffic_situation.encounter[k].vector_time
+                beta: Union[float, None] = encounter.beta
+                relative_speed: Union[float, None] = encounter.relative_speed
+                vector_time: Union[float, None] = encounter.vector_time
                 target_ship_id = k + 1
                 target_ship, encounter_found = generate_encounter(
                     desired_encounter_type,

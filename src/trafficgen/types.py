@@ -1,7 +1,7 @@
 """Domain specific data types used in trafficgen."""
 
 from enum import Enum
-from typing import List, Optional, Union
+from typing import List, Union
 
 from pydantic import BaseModel
 
@@ -55,7 +55,7 @@ class Ship(BaseModel):
 class TargetShip(Ship):
     """Data type for a target ship."""
 
-    id: int | None = None
+    id: Union[int, None] = None
 
 
 class EncounterType(Enum):
@@ -73,22 +73,22 @@ class Encounter(BaseModel):
     """Data type for an encounter."""
 
     desired_encounter_type: EncounterType
-    beta: float | None = None
-    relative_speed: float | None = None
-    vector_time: float | None = None
+    beta: Union[float, None] = None
+    relative_speed: Union[float, None] = None
+    vector_time: Union[float, None] = None
 
 
 class Situation(BaseModel):
     """Data type for a traffic situation."""
 
     title: str
-    input_file_name: str | None = None
-    common_vector: float | None = None
-    lat_lon_0: List[float] | None = None
-    own_ship: Ship | None = None
-    num_situations: int | None = None
-    encounter: List[Encounter] | None = None
-    target_ship: List[TargetShip] | None = None
+    input_file_name: Union[str, None] = None
+    common_vector: Union[float, None] = None
+    lat_lon_0: Union[List[float], None] = None
+    own_ship: Union[Ship, None] = None
+    num_situations: Union[int, None] = None
+    encounter: Union[List[Encounter], None] = None
+    target_ship: Union[List[TargetShip], None] = None
 
 
 class EncounterClassification(BaseModel):
