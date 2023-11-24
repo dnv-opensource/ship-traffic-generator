@@ -21,7 +21,7 @@ folium = "^0.14.0"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black[jupyter] = "^23.11"
+black = { version = "^23.11", extras = ["jupyter"] }
 ruff = "^0.1.6" # linter
 pyright = "^1.1.336"
 tox = "^4.11.1"
