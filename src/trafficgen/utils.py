@@ -1,4 +1,4 @@
-"""This module includes utillities methods that is used by several other functions."""
+"""Utility functions that are used by several other functions."""
 
 import numpy as np
 
@@ -10,7 +10,8 @@ def m_pr_min_2_knot(speed_in_m_pr_min):
     Params:
         speed_in_m_pr_min: Ship speed in meters pr second
 
-    Returns:
+    Returns
+    -------
         speed_in_knot: Ship speed given in knots
     """
 
@@ -25,7 +26,8 @@ def knot_2_m_pr_min(speed_in_knot):
     Params:
         speed_in_knot: Ship speed given in knots
 
-    Returns:
+    Returns
+    -------
         speed_in_m_pr_min: Ship speed in meters pr minutes
     """
 
@@ -40,7 +42,8 @@ def m2nm(length_in_m):
     Params:
         length_in_m: Length given in meters
 
-    Returns:
+    Returns
+    -------
         length_in_nm: Length given in nautical miles
     """
 
@@ -55,7 +58,8 @@ def nm_2_m(val):
     Params:
         length_in_nm: Length given in nautical miles
 
-    Returns:
+    Returns
+    -------
         length_in_m: Length given in meters
     """
 
@@ -70,7 +74,8 @@ def deg_2_rad(angle_in_degrees):
     Params:
         angle_in_degrees: Angle given in degrees
 
-    Returns:
+    Returns
+    -------
         angle given in radians: Angle given in radians
     """
 
@@ -84,7 +89,8 @@ def rad_2_deg(angle_in_radians):
     Params:
         angle_in_degrees: Angle given in degrees
 
-    Returns:
+    Returns
+    -------
         angle given in radians: Angle given in radians
 
     """
@@ -95,12 +101,13 @@ def rad_2_deg(angle_in_radians):
 def convert_angle_minus_180_to_180_to_0_to_360(angle_180):
     """
     Convert an angle given in the region -180 to 180 degrees to an
-    angle given in the region 0 to 360 degrees
+    angle given in the region 0 to 360 degrees.
 
     Params:
         angle_180: Angle given in the region -180 to 180 degrees
 
-    Returns:
+    Returns
+    -------
         angle_360: Angle given in the region 0 to 360 degrees
 
     """
@@ -111,12 +118,13 @@ def convert_angle_minus_180_to_180_to_0_to_360(angle_180):
 def convert_angle_0_to_360_to_minus_180_to_180(angle_360):
     """
     Convert an angle given in the region 0 to 360 degrees to an
-    angle given in the region -180 to 180 degrees
+    angle given in the region -180 to 180 degrees.
 
     Params:
         angle_360: Angle given in the region 0 to 360 degrees
 
-    Returns:
+    Returns
+    -------
         angle_180: Angle given in the region -180 to 180 degrees
 
     """
@@ -126,7 +134,7 @@ def convert_angle_0_to_360_to_minus_180_to_180(angle_360):
 
 def calculate_position_at_certain_time(position, speed, course, delta_time):
     """
-    Calculates the position of the ship at a given time based on initial position
+    Calculate the position of the ship at a given time based on initial position
     and delta time, and constand speed and course.
 
     Params:
@@ -135,7 +143,8 @@ def calculate_position_at_certain_time(position, speed, course, delta_time):
         course: Ship course [deg]
         delta_time: Delta time from now to the time new position is being calculated [minutes]
 
-    Returns:
+    Returns
+    -------
         position{north, east}: Dict, north and east position given in meters
 
     """

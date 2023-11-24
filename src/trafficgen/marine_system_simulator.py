@@ -1,6 +1,7 @@
 """
-The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems. It includes
-models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.
+The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems.
+
+It includes models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.
 The library also contains guidance, navigation, and control (GNC) blocks for real-time simulation.
 The algorithms are described in:
 
@@ -14,6 +15,9 @@ import numpy as np
 
 def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
     """
+    Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
+    NED coordinates (xn,yn,zn).
+
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
 
@@ -34,7 +38,8 @@ def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
         h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
         of the ellipsoid
 
-    Returns:
+    Returns
+    -------
         lat: Latitude [rad]
         lon: Longitude [rad]
         h: Height [m]
@@ -60,6 +65,9 @@ def flat2llh(x_n, y_n, lat_0, lon_0, z_n=0.0, height_ref=0.0):
 
 def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
     """
+    Compute (north, east) for a flat Earth coordinate system from longitude
+    lon (rad) and latitude lat (rad).
+
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
 
@@ -78,7 +86,8 @@ def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
         h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
         the surface of the ellipsoid
 
-    Returns:
+    Returns
+    -------
         x_n: Ship position, north [m]
         y_n: Ship position, east [m]
         z_n: Ship position, down [m]
@@ -104,11 +113,13 @@ def llh2flat(lat, lon, lat_0, lon_0, height=0.0, height_ref=0.0):
 
 def ssa(angle):
     """
+    Return the "smallest signed angle" (SSA) or the smallest difference between two angles.
+
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
 
-    SSA is the "smallest signed angle" or the smallest difference between two
-    angles. Examples:
+    Examples
+    --------
     angle = ssa(angle) maps an angle in rad to the interval [-pi pi)
 
     Author:     Thor I. Fossen
@@ -117,7 +128,8 @@ def ssa(angle):
     Param:
         angle: angle given in radius
 
-    Returns:
+    Returns
+    -------
         smallest_angle: "smallest signed angle" or the smallest difference between two angles
     """
 

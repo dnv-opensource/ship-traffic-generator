@@ -54,7 +54,7 @@ pythonpath = ["src"]
 
 [tool.black]
 line-length = 105
-target-version = ["py39", "py310"]
+target-version = ["py39", "py310", "py311"]
 
 [tool.ruff]
 exclude = [
@@ -69,11 +69,11 @@ exclude = [
 src = ["src"]
 ignore = [
     "E501",  # Line length too long
-    "D100",  # Missing docstring in public module
-    "D101",  # Missing docstring in public class
-    "D102",  # Missing docstring in public method
-    "D103",  # Missing docstring in public function
-    "D104",  # Missing docstring in public package
+    # "D100",  # Missing docstring in public module
+    # "D101",  # Missing docstring in public class
+    # "D102",  # Missing docstring in public method
+    # "D103",  # Missing docstring in public function
+    # "D104",  # Missing docstring in public package
     "D105",  # Missing docstring in magic method
     "D107",  # Missing docstring in __init__
     "D202",  # No blank lines allowed after function docstring
@@ -88,15 +88,14 @@ ignore = [
     # "N816",  # Variable in global scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in global scope)
     ]
 line-length = 105
-# Activate the following rules step by step to (step by step..) improve code quality
 select = [
     "E",
-    # "D",
-    # "F",
-    # "N",
-    # "W",
-    # "I",
-    # "B",
+    "D",
+    "F",
+    "N",
+    "W",
+    "I",
+    "B",
 ]
 target-version = "py39"
 

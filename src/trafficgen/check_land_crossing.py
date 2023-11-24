@@ -1,9 +1,8 @@
-"""This module finds if the generated path is crossing land."""
+"""Module with helper functions to determine if a generated path is crossing land."""
 
 from global_land_mask import globe
-from . import flat2llh
-from . import deg_2_rad, rad_2_deg
-from . import calculate_position_at_certain_time
+
+from . import calculate_position_at_certain_time, deg_2_rad, flat2llh, rad_2_deg
 
 
 def path_crosses_land(position_1, speed, course, lat_lon_0, time_interval=50):
@@ -17,7 +16,8 @@ def path_crosses_land(position_1, speed, course, lat_lon_0, time_interval=50):
         lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree].
         time_interval: The time interval the vessel should travel without crossing land [minutes]
 
-    Returns:
+    Returns
+    -------
         is_on_land: True if parts of the path crosses land.
     """
 

@@ -1,22 +1,25 @@
 """
-This module generates encounters consisting of one own ship and one to many target ships.
+Functions to generate encounters consisting of one own ship and one to many target ships.
 The generated encounters may be of type head-on, overtaking give-way and stand-on and
 crossing give-way and stand-on.
 """
 
-import random
 import copy
+import random
+
 import numpy as np
 
-from . import convert_angle_minus_180_to_180_to_0_to_360
-from . import knot_2_m_pr_min
-from . import m_pr_min_2_knot
-from . import nm_2_m
-from . import deg_2_rad
-from . import rad_2_deg
-from . import calculate_position_at_certain_time
-from . import path_crosses_land
-from . import flat2llh
+from . import (
+    calculate_position_at_certain_time,
+    convert_angle_minus_180_to_180_to_0_to_360,
+    deg_2_rad,
+    flat2llh,
+    knot_2_m_pr_min,
+    m_pr_min_2_knot,
+    nm_2_m,
+    path_crosses_land,
+    rad_2_deg,
+)
 
 
 def generate_encounter(
@@ -30,7 +33,7 @@ def generate_encounter(
     settings,
 ):
     """
-    Generates an encounter.
+    Generate an encounter.
 
     Params:
         * desired_encounter_type: Desired encounter to be generated
@@ -43,7 +46,8 @@ def generate_encounter(
         * vector_time_default: User defined vector time. If not set, this is None.
         * settings: Encounter settings
 
-    Returns:
+    Returns
+    -------
         target_ship: target ship information, such as initial position, speed and course
         encounter_found: 0=encounter not found, 1=encounter found
     """
@@ -74,7 +78,9 @@ def generate_encounter(
             own_ship["start_pose"]["course"],
             vector_time,
         )
-        own_ship_vector_length = knot_2_m_pr_min(own_ship["start_pose"]["speed"]) * vector_time
+        # @TODO: @TomArne: this variable is declared and assigned to but nowhere used.  Delete?
+        #        Claas, 2023-11-24
+        # own_ship_vector_length = knot_2_m_pr_min(own_ship["start_pose"]["speed"]) * vector_time
 
         # Target ship
         target_ship["id"] = target_ship_id
@@ -158,7 +164,7 @@ def check_encounter_evolvement(
     settings,
 ):
     """
-    Checks encounter evolvement. The generated encounter should be the same type of
+    Check encounter evolvement. The generated encounter should be the same type of
     encounter (head-on, crossing, give-way) also some time before the encounter is started.
 
     Params:
@@ -167,7 +173,8 @@ def check_encounter_evolvement(
         * desired_encounter_type: Desired type of encounter to be generated
         * settings: Encounter settings
 
-    Returns:
+    Returns
+    -------
         * returns 0 if encounter not ok, 1 if encounter ok
     """
     theta13_criteria = settings["classification"]["theta13_criteria"]
@@ -206,7 +213,7 @@ def calculate_min_vector_length_target_ship(
     own_ship_position, own_ship_course, target_ship_position_future, desired_beta
 ):
     """
-    Calculates minimum vector length (target ship speed x vector). This will
+    Calculate minimum vector length (target ship speed x vector). This will
     ensure that ship speed is high enough to find proper situation.
 
     Params:
@@ -247,7 +254,8 @@ def find_start_position_target_ship(
         * desired_encounter_type: Desired type of encounter to be generated
         * settings: Encounter settings
 
-    Returns:
+    Returns
+    -------
         * start_position_target_ship: Dict, initial position of target ship {north, east} [m]
         * start_position_found: 0=position not found, 1=position found
     """
@@ -338,7 +346,8 @@ def assign_future_position_to_target_ship(own_ship_position_future, max_meeting_
         * max_meeting_distance: Maximum distance between own ship and target ship at
             a given time in the future [nm]
 
-    Returns:
+    Returns
+    -------
         future_position_target_ship: Dict, future position of target ship {north, east} [m]
     """
     random_angle = random.uniform(0, 1) * 2 * np.pi
@@ -351,7 +360,7 @@ def assign_future_position_to_target_ship(own_ship_position_future, max_meeting_
 
 def determine_colreg(alpha, beta, theta13_criteria, theta14_criteria, theta15_criteria, theta15):
     """
-    Determines the colreg type based on alpha, relative bearing between target ship and own
+    Determine the colreg type based on alpha, relative bearing between target ship and own
     ship seen from target ship, and beta, relative bearing between own ship and target ship
     seen from own ship.
 
@@ -365,7 +374,8 @@ def determine_colreg(alpha, beta, theta13_criteria, theta14_criteria, theta15_cr
         * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking
                    encounter
 
-    Returns:
+    Returns
+    -------
         * encounter classification
     """
     # Mapping
@@ -395,7 +405,7 @@ def calculate_relative_bearing(
     position_own_ship, heading_own_ship, position_target_ship, heading_target_ship
 ):
     """
-    Calculates relative bearing between own ship and target ship, both seen from
+    Calculate relative bearing between own ship and target ship, both seen from
     own ship and seen from target ship.
 
     Params:
@@ -404,7 +414,8 @@ def calculate_relative_bearing(
         * position_target_ship: Dict, own ship position {north, east} [m]
         * heading_target_ship: Target ship course [deg]
 
-    Returns:
+    Returns
+    -------
         * alpha: relative bearing between target ship and own ship seen from target ship [deg]
         * beta: relative bearing between own ship and target ship seen from own ship [deg]
     """
@@ -467,13 +478,14 @@ def calculate_relative_bearing(
 
 def calculate_ship_course(waypoint_0, waypoint_1):
     """
-    Calculates ship course between two waypoints
+    Calculate ship course between two waypoints.
 
     Params:
         * waypoint_0: Dict, waypoint {north, east} [m]
         * waypoint_1: Dict, waypoint {north, east} [m]
 
-    Returns:
+    Returns
+    -------
         course: Ship course [deg]
     """
     course = np.arctan2(
@@ -486,12 +498,13 @@ def calculate_ship_course(waypoint_0, waypoint_1):
 
 def assign_vector_time(setting_vector_time):
     """
-    Randomly (uniform) assigns vector time
+    Assign random (uniform) vector time.
 
     Params:
         * setting_vector_time: Minimum and maximum value for vector time
 
-    Returns:
+    Returns
+    -------
         vector_time: Vector time [min]
     """
     return setting_vector_time[0] + random.uniform(0, 1) * (
@@ -503,7 +516,7 @@ def assign_speed_to_target_ship(
     encounter_type, own_ship_speed, min_target_ship_speed, relative_speed_setting
 ):
     """
-    Randomly (uniform) assigns speed to target ship depending on type of encounter
+    Assign random (uniform) speed to target ship depending on type of encounter.
 
     Params:
         * encounter_type: Type of encounter
@@ -511,7 +524,8 @@ def assign_speed_to_target_ship(
         * min_target_ship_speed: Minimum target ship speed [knot]
         * relative_speed_setting: Relative speed setting dependent on encounter [-]
 
-    Returns:
+    Returns
+    -------
         speed_target_ship: Target ship speed [knot]
     """
     if encounter_type.lower() == "overtaking-stand-on":
@@ -541,14 +555,15 @@ def assign_speed_to_target_ship(
 
 def assign_beta(encounter_type, settings):
     """
-    Randomly (uniform) assigns relative bearing beta between own ship
-    and target ship depending on type of encounter
+    Assign random (uniform) relative bearing beta between own ship
+    and target ship depending on type of encounter.
 
     Params:
         * encounter_type: Type of encounter
         * settings: Encounter settings
 
-    Returns:
+    Returns
+    -------
         Relative bearing between own ship and target ship seen from own ship [deg]
     """
     theta13_crit = settings["classification"]["theta13_criteria"]
@@ -573,14 +588,15 @@ def assign_beta(encounter_type, settings):
 
 def update_position_data_target_ship(ship, lat_lon_0):
     """
-    Updating position data of the target ship to also include latitude and longitude
-    position of the target ship
+    Update position data of the target ship to also include latitude and longitude
+    position of the target ship.
 
     Params:
         * ship: Target ship data
         * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
 
-    Returns:
+    Returns
+    -------
         ship: Updated target ship data
     """
     lat_0 = lat_lon_0[0]
@@ -603,15 +619,16 @@ def update_position_data_target_ship(ship, lat_lon_0):
 
 def update_position_data_own_ship(ship, lat_lon_0, delta_time):
     """
-    Updating position data of the target ship to also include latitude and longitude
-    position of the target ship
+    Update position data of the target ship to also include latitude and longitude
+    position of the target ship.
 
     Params:
         * ship: Own ship data
         * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
         * delta_time: Delta time from now to the time new position is being calculated [minutes]
 
-    Returns:
+    Returns
+    -------
         ship: Updated own ship data
     """
     lat_0 = lat_lon_0[0]
@@ -649,12 +666,13 @@ def update_position_data_own_ship(ship, lat_lon_0, delta_time):
 
 def decide_target_ship(target_ships):
     """
-    Randomly picks a target ship from a dict of target ships
+    Randomly pick a target ship from a dict of target ships.
 
     Params:
         * target_ships: dict of target ships
 
-    Returns:
+    Returns
+    -------
         The target ship, info of type, size etc.
     """
     num_target_ships = len(target_ships)

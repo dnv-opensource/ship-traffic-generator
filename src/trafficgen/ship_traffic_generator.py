@@ -1,17 +1,20 @@
-"""This is the main module for generating traffic situations"""
+"""Functions to generate traffic situations."""
 
 import copy
 
-from . import generate_encounter
-from . import update_position_data_own_ship
-from . import read_situation_files
-from . import read_own_ship_file
-from . import read_target_ship_files
-from . import read_encounter_setting_file
+from . import (
+    generate_encounter,
+    read_encounter_setting_file,
+    read_own_ship_file,
+    read_situation_files,
+    read_target_ship_files,
+    update_position_data_own_ship,
+)
 
 
 def generate_traffic_situations(situation_folder, own_ship_file, target_ship_folder, settings_file):
     """
+    Generate a set of traffic situations using input files.
     This is the main function for generating a set of traffic situations using input files
     specifying number and type of encounter, type of target ships etc.
 
@@ -20,7 +23,8 @@ def generate_traffic_situations(situation_folder, own_ship_file, target_ship_fol
         * target_ship_folder: Path to where different type of target ships is found
         * settings_file: Path to settings file
 
-    Returns:
+    Returns
+    -------
         traffic_situations: List of generated traffic situations.
         One situation may consist of one or more encounters.
     """
@@ -80,14 +84,15 @@ def generate_traffic_situations(situation_folder, own_ship_file, target_ship_fol
 
 def find_value(parameters, parameter):
     """
-    Finds a key, value pair in a dict. If the key is there,
+    Find a key, value pair in a dict. If the key is there,
     the value is returned. If not, None is returned.
 
     Params:
         * parameters: Dict of parameters
         * parameter: Parameter key to look for in parameters
 
-    Returns:
+    Returns
+    -------
         value: value of the key parameter
     """
     return parameters[parameter] if parameter in parameters else None

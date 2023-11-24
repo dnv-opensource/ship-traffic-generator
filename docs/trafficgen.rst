@@ -63,7 +63,7 @@ trafficgen.ship\_traffic\_generator module
 trafficgen.util\_methods module
 -------------------------------
 
-.. automodule:: trafficgen.util_methods
+.. automodule:: trafficgen.utils
    :members:
    :undoc-members:
    :show-inheritance:
