@@ -21,7 +21,8 @@ def write_traffic_situations_to_json_file(situations: List[Situation], write_fol
         output_file_path: Path = write_folder / f"traffic_situation_{file_number:02d}.json"
         data: str = situation.model_dump_json(
             indent=4,
-            exclude_defaults=True,
+            exclude_unset=True,
+            exclude_defaults=False,
             exclude_none=True,
         )
         with open(output_file_path, "w", encoding="utf-8") as outfile:
