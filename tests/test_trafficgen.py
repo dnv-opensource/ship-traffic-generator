@@ -34,7 +34,7 @@ def test_basic_cli():
     assert "Usage:" in result.output
     help_result = runner.invoke(cli.main, ["--help"])
     assert help_result.exit_code == 0
-    assert "--help" in help_result.output and "Show this message and exit" in help_result.output  # noqa: E501
+    assert "--help" in help_result.output and "Show this message and exit" in help_result.output
 
 
 def test_gen_situations_cli(
