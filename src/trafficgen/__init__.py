@@ -17,7 +17,6 @@ from .marine_system_simulator import ssa
 from .check_land_crossing import path_crosses_land
 
 from .write_traffic_situation_to_file import write_traffic_situations_to_json_file
-from .write_traffic_situation_to_file import clean_traffic_situation_data
 
 from .encounter import generate_encounter
 from .encounter import check_encounter_evolvement
@@ -39,10 +38,9 @@ from .plot_traffic_situation import plot_specific_traffic_situation
 from .read_files import read_situation_files
 from .read_files import read_own_ship_file
 from .read_files import read_target_ship_files
-from .read_files import read_encounter_setting_file
+from .read_files import read_encounter_settings_file
 
 from .ship_traffic_generator import generate_traffic_situations
-from .ship_traffic_generator import find_value
 
 
 __all__ = [
@@ -60,7 +58,6 @@ __all__ = [
     "ssa",
     "path_crosses_land",
     "write_traffic_situations_to_json_file",
-    "clean_traffic_situation_data",
     "generate_encounter",
     "check_encounter_evolvement",
     "find_start_position_target_ship",
@@ -75,11 +72,10 @@ __all__ = [
     "update_position_data_own_ship",
     "update_position_data_target_ship",
     "decide_target_ship",
-    "find_value",
     "read_situation_files",
     "read_own_ship_file",
     "read_target_ship_files",
-    "read_encounter_setting_file",
+    "read_encounter_settings_file",
     "plot_traffic_situations",
     "plot_specific_traffic_situation",
 ]

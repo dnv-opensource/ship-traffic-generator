@@ -21,10 +21,10 @@ import os
 import sys
 
 try:
-    import tomli as tomli
+    import tomli as tomli  # pyright: ignore
 except ImportError:
     # for Python >= 3.11
-    import tomllib as tomli
+    import tomllib as tomli  # pyright: ignore
 
 with open("../pyproject.toml", "rb") as f:
     toml = tomli.load(f)

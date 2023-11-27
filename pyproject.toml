@@ -16,6 +16,7 @@ basemap = "^1.3.8"
 basemap-data-hires = "^1.3.2"
 global-land-mask = "^1.0.0"
 folium = "^0.14.0"
+pydantic = "^2.5"
 
 [tool.poetry.group.dev]
 optional = true
@@ -128,7 +129,7 @@ extraPaths = ["./src"]
 typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 # Activate the following rules step by step to (step by step..) improve code quality
-# reportMissingParameterType = "error"
+reportMissingParameterType = "error"
 # reportUnknownParameterType = "warning"
 # reportUnknownMemberType = "warning"
 # reportMissingTypeArgument = "error"
