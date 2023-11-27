@@ -20,7 +20,7 @@ from . import (
 )
 
 logger = logging.getLogger(__name__)
-click_log.basic_config(logger)
+_ = click_log.basic_config(logger)
 
 # if you change the below defaults, then remember to change the description of
 # the default values in below @click.option descriptions,

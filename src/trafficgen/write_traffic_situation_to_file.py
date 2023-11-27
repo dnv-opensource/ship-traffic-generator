@@ -26,4 +26,4 @@ def write_traffic_situations_to_json_file(situations: List[Situation], write_fol
             exclude_none=True,
         )
         with open(output_file_path, "w", encoding="utf-8") as outfile:
-            outfile.write(data)
+            _ = outfile.write(data)
