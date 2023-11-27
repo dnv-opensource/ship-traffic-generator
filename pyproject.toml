@@ -152,7 +152,7 @@ reportUnusedExpression = "warning"
 reportMatchNotExhaustive = "warning"
 reportShadowedImports = "warning"
 reportUntypedFunctionDecorator = "warning"
-# reportUntypedBaseClass = "error"
+reportUntypedBaseClass = "error"
 # reportUntypedNamedTuple = "warning"
 
 # Activate the following rules only locally and temporary, i.e. for a QA session.
