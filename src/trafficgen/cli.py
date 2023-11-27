@@ -1,4 +1,5 @@
 # pyright: reportMissingParameterType=false
+# pyright: reportUnknownParameterType=false
 """CLI for trafficgen package."""
 
 import contextlib
