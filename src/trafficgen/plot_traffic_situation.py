@@ -328,7 +328,7 @@ def plot_traffic_situations(
 
         _ = plt.xlim(-max_value, max_value)
         _ = plt.ylim(-max_value, max_value)
-        plt.subplots_adjust(wspace=0.4, hspace=0.4)
+        _ = plt.subplots_adjust(wspace=0.4, hspace=0.4)
 
     plt.show()
 
