@@ -1,3 +1,5 @@
+# The matplotlib package is unfortunately not fully typed. Hence the following pyright exemption.
+# pyright: reportUnknownMemberType=false
 """Functions to prepare and plot traffic situations."""
 import math
 from typing import List, Optional, Tuple, Union
