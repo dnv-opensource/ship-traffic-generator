@@ -151,7 +151,7 @@ reportUnusedCallResult = "warning"
 reportUnusedExpression = "warning"
 reportMatchNotExhaustive = "warning"
 reportShadowedImports = "warning"
-# reportUntypedFunctionDecorator = "warning"
+reportUntypedFunctionDecorator = "warning"
 # reportUntypedBaseClass = "error"
 # reportUntypedNamedTuple = "warning"
 
