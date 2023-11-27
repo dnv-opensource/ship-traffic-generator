@@ -1,5 +1,7 @@
 # pyright: reportMissingParameterType=false
 # pyright: reportUnknownParameterType=false
+# The click package is unfortunately not typed. Hence the following pyright exemption.
+# pyright: reportUnknownMemberType=false
 """CLI for trafficgen package."""
 
 import contextlib
