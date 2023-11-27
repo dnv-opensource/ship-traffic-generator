@@ -425,10 +425,6 @@ def determine_colreg(
     -------
         * encounter classification
     """
-    # @TODO: @TomArne: Make sure the definition of the return values in the docstring is correct
-    #        and matches the definition used in function calculate_relative_bearing().
-    #        See also @TODO comment in function calculate_relative_bearing().
-
     # Mapping
     alpha0360: float = alpha if alpha >= 0.0 else alpha + 360.0
     beta0180: float = beta if (beta >= 0.0) & (beta <= 180.0) else beta - 360.0
@@ -469,14 +465,9 @@ def calculate_relative_bearing(
         * heading_target_ship: Target ship course [deg]
 
     Returns
-    -------
-        * alpha: relative bearing between target ship and own ship seen from target ship [deg]
         * beta: relative bearing between own ship and target ship seen from own ship [deg]
+        * alpha: relative bearing between target ship and own ship seen from target ship [deg]
     """
-    # @TODO: @TomArne: The explanation of the return values in the docstring does not match
-    #        the tuple of values returned.  Either the comments for alpha and beta are flipped,
-    #        or alpha and beta as return values are flipped.
-
     heading_own_ship = np.deg2rad(heading_own_ship)
     heading_target_ship = np.deg2rad(heading_target_ship)
 
