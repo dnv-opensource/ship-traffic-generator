@@ -465,6 +465,7 @@ def calculate_relative_bearing(
         * heading_target_ship: Target ship course [deg]
 
     Returns
+    -------
         * beta: relative bearing between own ship and target ship seen from own ship [deg]
         * alpha: relative bearing between target ship and own ship seen from target ship [deg]
     """
