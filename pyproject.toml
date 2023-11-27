@@ -131,7 +131,7 @@ useLibraryCodeForTypes = true
 # Activate the following rules step by step to (step by step..) improve code quality
 reportMissingParameterType = "error"
 reportUnknownParameterType = "warning"
-# reportUnknownMemberType = "warning"
+reportUnknownMemberType = "warning"
 # reportMissingTypeArgument = "error"
 # reportPropertyTypeMismatch = "error"
 # reportFunctionMemberAccess = "warning"
