@@ -141,7 +141,7 @@ def generate_encounter(
                 settings,
             )
 
-            if position_found == 1:
+            if position_found:
                 target_ship.start_pose.position = start_position_target_ship
                 target_ship.start_pose.course = calculate_ship_course(
                     target_ship.start_pose.position, target_ship_position_future
@@ -362,9 +362,7 @@ def find_start_position_target_ship(
     if desired_encounter_type is colreg_state1 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(0.1):
         start_position_target_ship = Position(north=n_31, east=e_31)
         start_position_found = True
-    elif desired_encounter_type is colreg_state2 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(
-        0.1
-    ):  # noqa: E127
+    elif desired_encounter_type is colreg_state2 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(0.1):
         start_position_target_ship = Position(north=n_32, east=e_32)
         start_position_found = True
 

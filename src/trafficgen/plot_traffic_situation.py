@@ -1,3 +1,5 @@
+# The matplotlib package is unfortunately not fully typed. Hence the following pyright exemption.
+# pyright: reportUnknownMemberType=false
 """Functions to prepare and plot traffic situations."""
 import math
 from typing import List, Optional, Tuple, Union
@@ -235,7 +237,7 @@ def add_ship_to_map(
 
     assert ship.start_pose is not None
     vector_length = vector_time * knot_2_m_pr_min(ship.start_pose.speed)
-    map_plot.add_child(
+    _ = map_plot.add_child(
         Polygon(
             calculate_vector_arrow(
                 ship.start_pose.position, ship.start_pose.course, vector_length, lat_lon_0
@@ -245,7 +247,7 @@ def add_ship_to_map(
             color=color,
         )
     )
-    map_plot.add_child(
+    _ = map_plot.add_child(
         Polygon(
             calculate_ship_outline(ship.start_pose.position, ship.start_pose.course, lat_lon_0),
             fill=True,
@@ -292,11 +294,11 @@ def plot_traffic_situations(
             max_value = find_max_value_for_plot(target_ship, max_value)
 
     plot_number: int = 1
-    plt.figure(plot_number)
+    _ = plt.figure(plot_number)
     for i, situation in enumerate(traffic_situations):
         if math.floor(i / num_subplots_pr_plot) + 1 > plot_number:
             plot_number += 1
-            plt.figure(plot_number)
+            _ = plt.figure(plot_number)
 
         axes: plt.Axes = plt.subplot(
             max_rows,
@@ -305,7 +307,7 @@ def plot_traffic_situations(
             xlabel="[nm]",
             ylabel="[nm]",
         )
-        axes.set_title(situation.title)
+        _ = axes.set_title(situation.title)
         assert situation.own_ship is not None
         assert situation.common_vector is not None
         axes = add_ship_to_plot(
@@ -324,9 +326,9 @@ def plot_traffic_situations(
             )
         axes.set_aspect("equal")
 
-        plt.xlim(-max_value, max_value)
-        plt.ylim(-max_value, max_value)
-        plt.subplots_adjust(wspace=0.4, hspace=0.4)
+        _ = plt.xlim(-max_value, max_value)
+        _ = plt.ylim(-max_value, max_value)
+        _ = plt.subplots_adjust(wspace=0.4, hspace=0.4)
 
     plt.show()
 
@@ -384,7 +386,7 @@ def add_ship_to_plot(
 
     vector_length = m2nm(vector_time * knot_2_m_pr_min(speed))
 
-    axes.arrow(
+    _ = axes.arrow(
         pos_0_east,
         pos_0_north,
         vector_length * np.sin(deg_2_rad(course)),
@@ -401,6 +403,6 @@ def add_ship_to_plot(
         radius=vector_time / 100.0,  # type: ignore
         color=color,
     )
-    axes.add_patch(circle)
+    _ = axes.add_patch(circle)
 
     return axes
