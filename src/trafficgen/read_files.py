@@ -20,7 +20,7 @@ def read_situation_files(situation_folder: Path) -> List[Situation]:
         situations: List of desired traffic situations
     """
     situations: List[Situation] = []
-    for file_name in [file for file in os.listdir(situation_folder) if file.endswith(".json")]:
+    for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
         file_path = os.path.join(situation_folder, file_name)
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
