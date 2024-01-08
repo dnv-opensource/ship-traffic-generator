@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen package &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">trafficgen package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trafficgen.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen">
+<span id="trafficgen-package"></span><h1>trafficgen package<a class="headerlink" href="#module-trafficgen" title="Link to this heading"></a></h1>
+<p>Top-level package for Traffic Generator.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.assign_beta">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">assign_beta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encounter_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#assign_beta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.assign_beta" title="Link to this definition"></a></dt>
+<dd><p>Assign random (uniform) relative bearing beta between own ship
+and target ship depending on type of encounter.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>encounter_type: Type of encounter</p></li>
+<li><p>settings: Encounter settings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Relative bearing between own ship and target ship seen from own ship [deg]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.assign_future_position_to_target_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">assign_future_position_to_target_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own_ship_position_future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_meeting_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#assign_future_position_to_target_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.assign_future_position_to_target_ship" title="Link to this definition"></a></dt>
+<dd><p>Randomly assign future position of target ship. If drawing a circle with radius
+max_meeting_distance around future position of own ship, future position of
+target ship shall be somewhere inside this circle.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>own_ship_position_future: Dict, own ship position at a given time in the</dt><dd><p>future, {north, east}</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>max_meeting_distance: Maximum distance between own ship and target ship at</dt><dd><p>a given time in the future [nm]</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>future_position_target_ship</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Future position of target ship {north, east} [m]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.assign_speed_to_target_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">assign_speed_to_target_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encounter_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_ship_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_target_ship_speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_speed_setting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed" title="trafficgen.types.EncounterRelativeSpeed"><span class="pre">EncounterRelativeSpeed</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/encounter.html#assign_speed_to_target_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.assign_speed_to_target_ship" title="Link to this definition"></a></dt>
+<dd><p>Assign random (uniform) speed to target ship depending on type of encounter.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>encounter_type: Type of encounter</p></li>
+<li><p>own_ship_speed: Own ship speed [knot]</p></li>
+<li><p>min_target_ship_speed: Minimum target ship speed [knot]</p></li>
+<li><p>relative_speed_setting: Relative speed setting dependent on encounter [-]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_ship_speed</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Target ship speed [knot]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.assign_vector_time">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">assign_vector_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector_time_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/encounter.html#assign_vector_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.assign_vector_time" title="Link to this definition"></a></dt>
+<dd><p>Assign random (uniform) vector time.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>vector_range: Minimum and maximum value for vector time</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector_time</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vector time [min]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.calculate_position_at_certain_time">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">calculate_position_at_certain_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">course</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#calculate_position_at_certain_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.calculate_position_at_certain_time" title="Link to this definition"></a></dt>
+<dd><p>Calculate the position of the ship at a given time based on initial position
+and delta time, and constand speed and course.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>position: Initial ship position [m]
+speed: Ship speed [knot]
+course: Ship course [deg]
+delta_time: Delta time from now to the time new position is being calculated [minutes]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>position{north, east}</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict, north and east position given in meters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.calculate_relative_bearing">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">calculate_relative_bearing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position_own_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">heading_own_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_target_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">heading_target_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#calculate_relative_bearing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.calculate_relative_bearing" title="Link to this definition"></a></dt>
+<dd><p>Calculate relative bearing between own ship and target ship, both seen from
+own ship and seen from target ship.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>position_own_ship: Dict, own ship position {north, east} [m]</p></li>
+<li><p>heading_own_ship: Own ship course [deg]</p></li>
+<li><p>position_target_ship: Dict, own ship position {north, east} [m]</p></li>
+<li><p>heading_target_ship: Target ship course [deg]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>* beta</strong> (<em>relative bearing between own ship and target ship seen from own ship [deg]</em>)</p></li>
+<li><p><strong>* alpha</strong> (<em>relative bearing between target ship and own ship seen from target ship [deg]</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.calculate_ship_course">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">calculate_ship_course</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">waypoint_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoint_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#calculate_ship_course"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.calculate_ship_course" title="Link to this definition"></a></dt>
+<dd><p>Calculate ship course between two waypoints.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>waypoint_0: Dict, waypoint {north, east} [m]</p></li>
+<li><p>waypoint_1: Dict, waypoint {north, east} [m]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>course</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ship course [deg]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.check_encounter_evolvement">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">check_encounter_evolvement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_ship_position_future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship_position_future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_encounter_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#check_encounter_evolvement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.check_encounter_evolvement" title="Link to this definition"></a></dt>
+<dd><p>Check encounter evolvement. The generated encounter should be the same type of
+encounter (head-on, crossing, give-way) also some time before the encounter is started.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>own_ship: Own ship information such as initial position, speed and course</p></li>
+<li><p>target_ship: Target ship information such as initial position, speed and course</p></li>
+<li><p>desired_encounter_type: Desired type of encounter to be generated</p></li>
+<li><p>settings: Encounter settings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>* returns True if encounter ok, False if encounter not ok</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.convert_angle_0_to_360_to_minus_180_to_180">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">convert_angle_0_to_360_to_minus_180_to_180</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_360</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#convert_angle_0_to_360_to_minus_180_to_180"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.convert_angle_0_to_360_to_minus_180_to_180" title="Link to this definition"></a></dt>
+<dd><p>Convert an angle given in the region 0 to 360 degrees to an
+angle given in the region -180 to 180 degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_360: Angle given in the region 0 to 360 degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle_180</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in the region -180 to 180 degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.convert_angle_minus_180_to_180_to_0_to_360">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">convert_angle_minus_180_to_180_to_0_to_360</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_180</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#convert_angle_minus_180_to_180_to_0_to_360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.convert_angle_minus_180_to_180_to_0_to_360" title="Link to this definition"></a></dt>
+<dd><p>Convert an angle given in the region -180 to 180 degrees to an
+angle given in the region 0 to 360 degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_180: Angle given in the region -180 to 180 degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle_360</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in the region 0 to 360 degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.decide_target_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">decide_target_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ships</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#decide_target_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.decide_target_ship" title="Link to this definition"></a></dt>
+<dd><p>Randomly pick a target ship from a list of target ships.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>target_ships: list of target ships</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The target ship, info of type, size etc.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.deg_2_rad">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">deg_2_rad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_in_degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#deg_2_rad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.deg_2_rad" title="Link to this definition"></a></dt>
+<dd><p>Convert angle given in degrees to angle give in radians.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_in_degrees: Angle given in degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle given in radians</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in radians</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.determine_colreg">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">determine_colreg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta13_criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta14_criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta15_criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta15</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#determine_colreg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.determine_colreg" title="Link to this definition"></a></dt>
+<dd><p>Determine the colreg type based on alpha, relative bearing between target ship and own
+ship seen from target ship, and beta, relative bearing between own ship and target ship
+seen from own ship.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>alpha: relative bearing between target ship and own ship seen from target ship</p></li>
+<li><p>beta: relative bearing between own ship and target ship seen from own ship</p></li>
+<li><p>theta13_criteria: Tolerance for “coming up with” relative bearing</p></li>
+<li><p>theta14_criteria: Tolerance for “reciprocal or nearly reciprocal courses”,
+“when in any doubt… assume… [head-on]”</p></li>
+<li><p>theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter</p></li>
+<li><dl class="simple">
+<dt>theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking</dt><dd><p>encounter</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>* encounter classification</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.find_start_position_target_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">find_start_position_target_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own_ship_position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_ship_course</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship_position_future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship_vector_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_encounter_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/encounter.html#find_start_position_target_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.find_start_position_target_ship" title="Link to this definition"></a></dt>
+<dd><p>Find start position of target ship using desired beta and vector length.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>own_ship_position: Own ship initial position, speed and course</p></li>
+<li><p>own_ship_course: Own ship initial course</p></li>
+<li><p>target_ship_position_future: Target ship future position</p></li>
+<li><p>target_ship_vector_length: vector length (target ship speed x vector)</p></li>
+<li><p>desired_beta: Desired bearing between own ship and target ship seen from own ship</p></li>
+<li><p>desired_encounter_type: Desired type of encounter to be generated</p></li>
+<li><p>settings: Encounter settings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>* start_position_target_ship</strong> (<em>Dict, initial position of target ship {north, east} [m]</em>)</p></li>
+<li><p><strong>* start_position_found</strong> (<em>0=position not found, 1=position found</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.flat2llh">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">flat2llh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#flat2llh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.flat2llh" title="Link to this definition"></a></dt>
+<dd><p>Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
+NED coordinates (xn,yn,zn).</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p>The method computes longitude lon (rad), latitude lat (rad) and height h (m) for the
+NED coordinates (xn,yn,zn) using a flat Earth coordinate system defined by the WGS-84
+ellipsoid. The flat Earth coordinate origin is located  at (lon_0, lat_0) with reference
+height h_ref in meters above the surface of the ellipsoid. Both height and h_ref
+are positive upwards, while zn is positive downwards (NED).
+Author:    Thor I. Fossen
+Date:      20 July 2018
+Revisions: 2023-02-04 updates the formulas for latitude and longitude</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>xn: Ship position, north [m]
+yn: Ship position, east [m]
+zn=0.0: Ship position, down [m]
+lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
+of the ellipsoid</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>lat</strong> (<em>Latitude [rad]</em>)</p></li>
+<li><p><strong>lon</strong> (<em>Longitude [rad]</em>)</p></li>
+<li><p><strong>h</strong> (<em>Height [m]</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.generate_encounter">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">generate_encounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_encounter_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ships</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_speed_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_time_default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#generate_encounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.generate_encounter" title="Link to this definition"></a></dt>
+<dd><p>Generate an encounter.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>desired_encounter_type: Desired encounter to be generated</p></li>
+<li><p>own_ship: Dict, information about own ship that will encounter a target ship</p></li>
+<li><p>target_ships: List of target ships that may be used in an encounter</p></li>
+<li><p>target_ship_id: ID which should be used on target ship</p></li>
+<li><p>beta_default: User defined beta. If not set, this is None.</p></li>
+<li><dl class="simple">
+<dt>relative_speed_default: User defined relative speed between own ship and</dt><dd><p>target ship. If not set, this is None.</p>
+</dd>
+</dl>
+</li>
+<li><p>vector_time_default: User defined vector time. If not set, this is None.</p></li>
+<li><p>settings: Encounter settings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>target_ship</strong> (<em>target ship information, such as initial position, speed and course</em>)</p></li>
+<li><p><strong>encounter_found</strong> (<em>True=encounter found, False=encounter not found</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.generate_traffic_situations">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">generate_traffic_situations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">situation_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">own_ship_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_ship_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/ship_traffic_generator.html#generate_traffic_situations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.generate_traffic_situations" title="Link to this definition"></a></dt>
+<dd><p>Generate a set of traffic situations using input files.
+This is the main function for generating a set of traffic situations using input files
+specifying number and type of encounter, type of target ships etc.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>situation_folder: Path to situation folder, files describing the desired situations</p></li>
+<li><p>target_ship_folder: Path to where different type of target ships is found</p></li>
+<li><p>settings_file: Path to settings file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>traffic_situations</strong> (<em>List of generated traffic situations.</em>)</p></li>
+<li><p><em>One situation may consist of one or more encounters.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.knot_2_m_pr_min">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">knot_2_m_pr_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed_in_knot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#knot_2_m_pr_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.knot_2_m_pr_min" title="Link to this definition"></a></dt>
+<dd><p>Convert ship speed in knot to meters pr minutes.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>speed_in_knot: Ship speed given in knots</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>speed_in_m_pr_min</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ship speed in meters pr minutes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.llh2flat">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">llh2flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#llh2flat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.llh2flat" title="Link to this definition"></a></dt>
+<dd><p>Compute (north, east) for a flat Earth coordinate system from longitude
+lon (rad) and latitude lat (rad).</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p>The method computes (north, east) for a flat Earth coordinate system from longitude
+lon (rad) and latitude lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate
+origin is located  at (lon_0, lat_0).
+Author:    Thor I. Fossen
+Date:      20 July 2018
+Revisions: 2023-02-04 updates the formulas for latitude and longitude</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>lat: Ship position in latitude [rad]
+lon: Ship position in longitude [rad]
+h=0.0: Ship height in meters above the surface of the ellipsoid
+lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
+the surface of the ellipsoid</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>x_n</strong> (<em>Ship position, north [m]</em>)</p></li>
+<li><p><strong>y_n</strong> (<em>Ship position, east [m]</em>)</p></li>
+<li><p><strong>z_n</strong> (<em>Ship position, down [m]</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.m2nm">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">m2nm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_in_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#m2nm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.m2nm" title="Link to this definition"></a></dt>
+<dd><p>Convert length given in meters to length given in nautical miles.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>length_in_m: Length given in meters</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length_in_nm</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Length given in nautical miles</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.m_pr_min_2_knot">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">m_pr_min_2_knot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed_in_m_pr_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#m_pr_min_2_knot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.m_pr_min_2_knot" title="Link to this definition"></a></dt>
+<dd><p>Convert ship speed in meters pr minutes to knot.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>speed_in_m_pr_min: Ship speed in meters pr second</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>speed_in_knot</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ship speed given in knots</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.nm_2_m">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">nm_2_m</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_in_nm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#nm_2_m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.nm_2_m" title="Link to this definition"></a></dt>
+<dd><p>Convert length given in nautical miles to length given in meters.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>length_in_nm: Length given in nautical miles</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length_in_m</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Length given in meters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.path_crosses_land">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">path_crosses_land</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">course</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/trafficgen/check_land_crossing.html#path_crosses_land"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.path_crosses_land" title="Link to this definition"></a></dt>
+<dd><p>Find if path is crossing land.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>position_1: Ship position in (north, east) [m].
+speed: Ship speed [knots].
+course: Ship course [degree].
+lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree].
+time_interval: The time interval the vessel should travel without crossing land [minutes]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>is_on_land</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if parts of the path crosses land.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.plot_specific_traffic_situation">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">plot_specific_traffic_situation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traffic_situations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">situation_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/plot_traffic_situation.html#plot_specific_traffic_situation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.plot_specific_traffic_situation" title="Link to this definition"></a></dt>
+<dd><p>Plot a specific situation in map.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>traffic_situations: Generated traffic situations
+situation_number: The specific situation to be plotted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.plot_traffic_situations">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">plot_traffic_situations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traffic_situations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/plot_traffic_situation.html#plot_traffic_situations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.plot_traffic_situations" title="Link to this definition"></a></dt>
+<dd><p>Plot the traffic situations in one more figures.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>traffic_situations: Traffic situations to be plotted
+col: Number of columns in each figure
+row: Number of rows in each figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.rad_2_deg">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">rad_2_deg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_in_radians</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#rad_2_deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.rad_2_deg" title="Link to this definition"></a></dt>
+<dd><p>Convert angle given in radians to angle give in degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_in_degrees: Angle given in degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle given in radians</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in radians</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_encounter_settings_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">read_encounter_settings_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_encounter_settings_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_encounter_settings_file" title="Link to this definition"></a></dt>
+<dd><p>Read encounter settings file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>settings_file: Path to the encounter setting file</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Encounter settings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_own_ship_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">read_own_ship_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own_ship_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_own_ship_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_own_ship_file" title="Link to this definition"></a></dt>
+<dd><p>Read own ship file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>own_ship_file: Path to the own_ship_file file</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>own_ship information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_situation_files">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">read_situation_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">situation_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_situation_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_situation_files" title="Link to this definition"></a></dt>
+<dd><p>Read traffic situation files.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>situation_folder: Path to the folder where situation files are found</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>situations</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of desired traffic situations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_target_ship_files">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">read_target_ship_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ship_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_target_ship_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_target_ship_files" title="Link to this definition"></a></dt>
+<dd><p>Read target ship files.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>target_ship_folder: Path to the folder where target ships are found</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_ships</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of different target ships</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.ssa">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">ssa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#ssa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.ssa" title="Link to this definition"></a></dt>
+<dd><p>Return the “smallest signed angle” (SSA) or the smallest difference between two angles.</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p class="rubric">Examples</p>
+<p>angle = ssa(angle) maps an angle in rad to the interval [-pi pi)</p>
+<p>Author:     Thor I. Fossen
+Date:       2018-09-21</p>
+<dl class="simple">
+<dt>Param:</dt><dd><p>angle: angle given in radius</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smallest_angle</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>“smallest signed angle” or the smallest difference between two angles</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.update_position_data_own_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">update_position_data_own_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#update_position_data_own_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.update_position_data_own_ship" title="Link to this definition"></a></dt>
+<dd><p>Update position data of the target ship to also include latitude and longitude
+position of the target ship.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>ship: Own ship data</p></li>
+<li><p>lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</p></li>
+<li><p>delta_time: Delta time from now to the time new position is being calculated [minutes]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ship</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated own ship data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.update_position_data_target_ship">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">update_position_data_target_ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ship</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a></span></span><a class="reference internal" href="_modules/trafficgen/encounter.html#update_position_data_target_ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.update_position_data_target_ship" title="Link to this definition"></a></dt>
+<dd><p>Update position data of the target ship to also include latitude and longitude
+position of the target ship.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><ul class="simple">
+<li><p>target_ship: Target ship data</p></li>
+<li><p>lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ship</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated target ship data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.write_traffic_situations_to_json_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.</span></span><span class="sig-name descname"><span class="pre">write_traffic_situations_to_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">situations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/write_traffic_situation_to_file.html#write_traffic_situations_to_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.write_traffic_situations_to_json_file" title="Link to this definition"></a></dt>
+<dd><p>Write traffic situations to json file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>traffic_situations: Traffic situations to be written to file
+write_folder: Folder where the json files is to be written</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.check_land_crossing.html">trafficgen.check_land_crossing module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.check_land_crossing.html#trafficgen.check_land_crossing.path_crosses_land"><code class="docutils literal notranslate"><span class="pre">path_crosses_land()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.cli.html">trafficgen.cli module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.encounter.html">trafficgen.encounter module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.assign_beta"><code class="docutils literal notranslate"><span class="pre">assign_beta()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.assign_future_position_to_target_ship"><code class="docutils literal notranslate"><span class="pre">assign_future_position_to_target_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.assign_speed_to_target_ship"><code class="docutils literal notranslate"><span class="pre">assign_speed_to_target_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.assign_vector_time"><code class="docutils literal notranslate"><span class="pre">assign_vector_time()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.calculate_min_vector_length_target_ship"><code class="docutils literal notranslate"><span class="pre">calculate_min_vector_length_target_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.calculate_relative_bearing"><code class="docutils literal notranslate"><span class="pre">calculate_relative_bearing()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.calculate_ship_course"><code class="docutils literal notranslate"><span class="pre">calculate_ship_course()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.check_encounter_evolvement"><code class="docutils literal notranslate"><span class="pre">check_encounter_evolvement()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.decide_target_ship"><code class="docutils literal notranslate"><span class="pre">decide_target_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.determine_colreg"><code class="docutils literal notranslate"><span class="pre">determine_colreg()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.find_start_position_target_ship"><code class="docutils literal notranslate"><span class="pre">find_start_position_target_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.generate_encounter"><code class="docutils literal notranslate"><span class="pre">generate_encounter()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.update_position_data_own_ship"><code class="docutils literal notranslate"><span class="pre">update_position_data_own_ship()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.encounter.html#trafficgen.encounter.update_position_data_target_ship"><code class="docutils literal notranslate"><span class="pre">update_position_data_target_ship()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.marine_system_simulator.html">trafficgen.marine_system_simulator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.marine_system_simulator.html#trafficgen.marine_system_simulator.flat2llh"><code class="docutils literal notranslate"><span class="pre">flat2llh()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.marine_system_simulator.html#trafficgen.marine_system_simulator.llh2flat"><code class="docutils literal notranslate"><span class="pre">llh2flat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.marine_system_simulator.html#trafficgen.marine_system_simulator.ssa"><code class="docutils literal notranslate"><span class="pre">ssa()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.plot_traffic_situation.html">trafficgen.plot_traffic_situation module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.add_ship_to_map"><code class="docutils literal notranslate"><span class="pre">add_ship_to_map()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.add_ship_to_plot"><code class="docutils literal notranslate"><span class="pre">add_ship_to_plot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.calculate_ship_outline"><code class="docutils literal notranslate"><span class="pre">calculate_ship_outline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.calculate_vector_arrow"><code class="docutils literal notranslate"><span class="pre">calculate_vector_arrow()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.find_max_value_for_plot"><code class="docutils literal notranslate"><span class="pre">find_max_value_for_plot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.plot_specific_traffic_situation"><code class="docutils literal notranslate"><span class="pre">plot_specific_traffic_situation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situation.plot_traffic_situations"><code class="docutils literal notranslate"><span class="pre">plot_traffic_situations()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.read_files.html">trafficgen.read_files module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.read_files.html#trafficgen.read_files.read_encounter_settings_file"><code class="docutils literal notranslate"><span class="pre">read_encounter_settings_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.read_files.html#trafficgen.read_files.read_own_ship_file"><code class="docutils literal notranslate"><span class="pre">read_own_ship_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.read_files.html#trafficgen.read_files.read_situation_files"><code class="docutils literal notranslate"><span class="pre">read_situation_files()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.read_files.html#trafficgen.read_files.read_target_ship_files"><code class="docutils literal notranslate"><span class="pre">read_target_ship_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.ship_traffic_generator.html">trafficgen.ship_traffic_generator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.ship_traffic_generator.html#trafficgen.ship_traffic_generator.generate_traffic_situations"><code class="docutils literal notranslate"><span class="pre">generate_traffic_situations()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.types.html">trafficgen.types module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter"><code class="docutils literal notranslate"><span class="pre">Encounter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.beta"><code class="docutils literal notranslate"><span class="pre">Encounter.beta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.desired_encounter_type"><code class="docutils literal notranslate"><span class="pre">Encounter.desired_encounter_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.model_config"><code class="docutils literal notranslate"><span class="pre">Encounter.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.model_fields"><code class="docutils literal notranslate"><span class="pre">Encounter.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.relative_speed"><code class="docutils literal notranslate"><span class="pre">Encounter.relative_speed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Encounter.vector_time"><code class="docutils literal notranslate"><span class="pre">Encounter.vector_time</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification"><code class="docutils literal notranslate"><span class="pre">EncounterClassification</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.model_config"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.model_fields"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.theta13_criteria"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.theta13_criteria</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.theta14_criteria"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.theta14_criteria</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.theta15"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.theta15</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterClassification.theta15_criteria"><code class="docutils literal notranslate"><span class="pre">EncounterClassification.theta15_criteria</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.crossing_give_way"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.crossing_give_way</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.crossing_stand_on"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.crossing_stand_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.head_on"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.head_on</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.model_config"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.model_fields"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.overtaking_give_way"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.overtaking_give_way</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.overtaking_stand_on"><code class="docutils literal notranslate"><span class="pre">EncounterRelativeSpeed.overtaking_stand_on</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings"><code class="docutils literal notranslate"><span class="pre">EncounterSettings</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.classification"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.classification</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.evolve_time"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.evolve_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.lat_lon_0"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.lat_lon_0</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.max_meeting_distance"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.max_meeting_distance</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.model_config"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.model_fields"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.relative_speed"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.relative_speed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings.vector_range"><code class="docutils literal notranslate"><span class="pre">EncounterSettings.vector_range</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType"><code class="docutils literal notranslate"><span class="pre">EncounterType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.CROSSING_GIVE_WAY"><code class="docutils literal notranslate"><span class="pre">EncounterType.CROSSING_GIVE_WAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.CROSSING_STAND_ON"><code class="docutils literal notranslate"><span class="pre">EncounterType.CROSSING_STAND_ON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.HEAD_ON"><code class="docutils literal notranslate"><span class="pre">EncounterType.HEAD_ON</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.NO_RISK_COLLISION"><code class="docutils literal notranslate"><span class="pre">EncounterType.NO_RISK_COLLISION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.OVERTAKING_GIVE_WAY"><code class="docutils literal notranslate"><span class="pre">EncounterType.OVERTAKING_GIVE_WAY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterType.OVERTAKING_STAND_ON"><code class="docutils literal notranslate"><span class="pre">EncounterType.OVERTAKING_STAND_ON</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose"><code class="docutils literal notranslate"><span class="pre">Pose</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose.course"><code class="docutils literal notranslate"><span class="pre">Pose.course</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose.model_config"><code class="docutils literal notranslate"><span class="pre">Pose.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose.model_fields"><code class="docutils literal notranslate"><span class="pre">Pose.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose.position"><code class="docutils literal notranslate"><span class="pre">Pose.position</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Pose.speed"><code class="docutils literal notranslate"><span class="pre">Pose.speed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position"><code class="docutils literal notranslate"><span class="pre">Position</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.east"><code class="docutils literal notranslate"><span class="pre">Position.east</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.latitude"><code class="docutils literal notranslate"><span class="pre">Position.latitude</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.longitude"><code class="docutils literal notranslate"><span class="pre">Position.longitude</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.model_config"><code class="docutils literal notranslate"><span class="pre">Position.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.model_fields"><code class="docutils literal notranslate"><span class="pre">Position.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position.north"><code class="docutils literal notranslate"><span class="pre">Position.north</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship"><code class="docutils literal notranslate"><span class="pre">Ship</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship.model_config"><code class="docutils literal notranslate"><span class="pre">Ship.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship.model_fields"><code class="docutils literal notranslate"><span class="pre">Ship.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship.start_pose"><code class="docutils literal notranslate"><span class="pre">Ship.start_pose</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship.static"><code class="docutils literal notranslate"><span class="pre">Ship.static</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship.waypoints"><code class="docutils literal notranslate"><span class="pre">Ship.waypoints</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.ShipType"><code class="docutils literal notranslate"><span class="pre">ShipType</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.ShipType.FISHING"><code class="docutils literal notranslate"><span class="pre">ShipType.FISHING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.ShipType.GENERAL_CARGO"><code class="docutils literal notranslate"><span class="pre">ShipType.GENERAL_CARGO</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.ShipType.MILITARY"><code class="docutils literal notranslate"><span class="pre">ShipType.MILITARY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.ShipType.PASSENGER_RORO"><code class="docutils literal notranslate"><span class="pre">ShipType.PASSENGER_RORO</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation"><code class="docutils literal notranslate"><span class="pre">Situation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.common_vector"><code class="docutils literal notranslate"><span class="pre">Situation.common_vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.encounter"><code class="docutils literal notranslate"><span class="pre">Situation.encounter</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.input_file_name"><code class="docutils literal notranslate"><span class="pre">Situation.input_file_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.lat_lon_0"><code class="docutils literal notranslate"><span class="pre">Situation.lat_lon_0</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.model_config"><code class="docutils literal notranslate"><span class="pre">Situation.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.model_fields"><code class="docutils literal notranslate"><span class="pre">Situation.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.num_situations"><code class="docutils literal notranslate"><span class="pre">Situation.num_situations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.own_ship"><code class="docutils literal notranslate"><span class="pre">Situation.own_ship</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.target_ship"><code class="docutils literal notranslate"><span class="pre">Situation.target_ship</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation.title"><code class="docutils literal notranslate"><span class="pre">Situation.title</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData"><code class="docutils literal notranslate"><span class="pre">StaticShipData</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.height"><code class="docutils literal notranslate"><span class="pre">StaticShipData.height</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.length"><code class="docutils literal notranslate"><span class="pre">StaticShipData.length</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.mmsi"><code class="docutils literal notranslate"><span class="pre">StaticShipData.mmsi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.model_config"><code class="docutils literal notranslate"><span class="pre">StaticShipData.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.model_fields"><code class="docutils literal notranslate"><span class="pre">StaticShipData.model_fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.name"><code class="docutils literal notranslate"><span class="pre">StaticShipData.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.ship_type"><code class="docutils literal notranslate"><span class="pre">StaticShipData.ship_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.speed_max"><code class="docutils literal notranslate"><span class="pre">StaticShipData.speed_max</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.StaticShipData.width"><code class="docutils literal notranslate"><span class="pre">StaticShipData.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip"><code class="docutils literal notranslate"><span class="pre">TargetShip</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip.id"><code class="docutils literal notranslate"><span class="pre">TargetShip.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip.model_config"><code class="docutils literal notranslate"><span class="pre">TargetShip.model_config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip.model_fields"><code class="docutils literal notranslate"><span class="pre">TargetShip.model_fields</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.utils.html">trafficgen.utils module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.calculate_position_at_certain_time"><code class="docutils literal notranslate"><span class="pre">calculate_position_at_certain_time()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.convert_angle_0_to_360_to_minus_180_to_180"><code class="docutils literal notranslate"><span class="pre">convert_angle_0_to_360_to_minus_180_to_180()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.convert_angle_minus_180_to_180_to_0_to_360"><code class="docutils literal notranslate"><span class="pre">convert_angle_minus_180_to_180_to_0_to_360()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.deg_2_rad"><code class="docutils literal notranslate"><span class="pre">deg_2_rad()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.knot_2_m_pr_min"><code class="docutils literal notranslate"><span class="pre">knot_2_m_pr_min()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.m2nm"><code class="docutils literal notranslate"><span class="pre">m2nm()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.m_pr_min_2_knot"><code class="docutils literal notranslate"><span class="pre">m_pr_min_2_knot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.nm_2_m"><code class="docutils literal notranslate"><span class="pre">nm_2_m()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.utils.html#trafficgen.utils.rad_2_deg"><code class="docutils literal notranslate"><span class="pre">rad_2_deg()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trafficgen.write_traffic_situation_to_file.html">trafficgen.write_traffic_situation_to_file module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trafficgen.write_traffic_situation_to_file.html#trafficgen.write_traffic_situation_to_file.write_traffic_situations_to_json_file"><code class="docutils literal notranslate"><span class="pre">write_traffic_situations_to_json_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

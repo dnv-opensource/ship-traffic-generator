@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.utils &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Utility functions that are used by several other functions.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">trafficgen.types</span> <span class="kn">import</span> <span class="n">Position</span>
+
+
+<div class="viewcode-block" id="m_pr_min_2_knot">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.m_pr_min_2_knot">[docs]</a>
+<span class="k">def</span> <span class="nf">m_pr_min_2_knot</span><span class="p">(</span><span class="n">speed_in_m_pr_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert ship speed in meters pr minutes to knot.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        speed_in_m_pr_min: Ship speed in meters pr second</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        speed_in_knot: Ship speed given in knots</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">knot_2_m_pr_sec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5144</span>
+    <span class="k">return</span> <span class="n">speed_in_m_pr_min</span> <span class="o">/</span> <span class="p">(</span><span class="n">knot_2_m_pr_sec</span> <span class="o">*</span> <span class="mf">60.0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="knot_2_m_pr_min">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.knot_2_m_pr_min">[docs]</a>
+<span class="k">def</span> <span class="nf">knot_2_m_pr_min</span><span class="p">(</span><span class="n">speed_in_knot</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert ship speed in knot to meters pr minutes.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        speed_in_knot: Ship speed given in knots</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        speed_in_m_pr_min: Ship speed in meters pr minutes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">knot_2_m_pr_sec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5144</span>
+    <span class="k">return</span> <span class="n">speed_in_knot</span> <span class="o">*</span> <span class="n">knot_2_m_pr_sec</span> <span class="o">*</span> <span class="mf">60.0</span></div>
+
+
+
+<div class="viewcode-block" id="m2nm">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.m2nm">[docs]</a>
+<span class="k">def</span> <span class="nf">m2nm</span><span class="p">(</span><span class="n">length_in_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert length given in meters to length given in nautical miles.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        length_in_m: Length given in meters</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        length_in_nm: Length given in nautical miles</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m_2_nm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">1852.0</span>
+    <span class="k">return</span> <span class="n">m_2_nm</span> <span class="o">*</span> <span class="n">length_in_m</span></div>
+
+
+
+<div class="viewcode-block" id="nm_2_m">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.nm_2_m">[docs]</a>
+<span class="k">def</span> <span class="nf">nm_2_m</span><span class="p">(</span><span class="n">length_in_nm</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert length given in nautical miles to length given in meters.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        length_in_nm: Length given in nautical miles</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        length_in_m: Length given in meters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nm_2_m_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1852.0</span>
+    <span class="k">return</span> <span class="n">length_in_nm</span> <span class="o">*</span> <span class="n">nm_2_m_factor</span></div>
+
+
+
+<div class="viewcode-block" id="deg_2_rad">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.deg_2_rad">[docs]</a>
+<span class="k">def</span> <span class="nf">deg_2_rad</span><span class="p">(</span><span class="n">angle_in_degrees</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert angle given in degrees to angle give in radians.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        angle_in_degrees: Angle given in degrees</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        angle given in radians: Angle given in radians</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">angle_in_degrees</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span></div>
+
+
+
+<div class="viewcode-block" id="rad_2_deg">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.rad_2_deg">[docs]</a>
+<span class="k">def</span> <span class="nf">rad_2_deg</span><span class="p">(</span><span class="n">angle_in_radians</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert angle given in radians to angle give in degrees.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        angle_in_degrees: Angle given in degrees</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        angle given in radians: Angle given in radians</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">angle_in_radians</span> <span class="o">*</span> <span class="mf">180.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span></div>
+
+
+
+<div class="viewcode-block" id="convert_angle_minus_180_to_180_to_0_to_360">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.convert_angle_minus_180_to_180_to_0_to_360">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_angle_minus_180_to_180_to_0_to_360</span><span class="p">(</span><span class="n">angle_180</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert an angle given in the region -180 to 180 degrees to an</span>
+<span class="sd">    angle given in the region 0 to 360 degrees.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        angle_180: Angle given in the region -180 to 180 degrees</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        angle_360: Angle given in the region 0 to 360 degrees</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">angle_180</span> <span class="k">if</span> <span class="n">angle_180</span> <span class="o">&gt;=</span> <span class="mf">0.0</span> <span class="k">else</span> <span class="n">angle_180</span> <span class="o">+</span> <span class="mf">360.0</span></div>
+
+
+
+<div class="viewcode-block" id="convert_angle_0_to_360_to_minus_180_to_180">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.convert_angle_0_to_360_to_minus_180_to_180">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_angle_0_to_360_to_minus_180_to_180</span><span class="p">(</span><span class="n">angle_360</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert an angle given in the region 0 to 360 degrees to an</span>
+<span class="sd">    angle given in the region -180 to 180 degrees.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        angle_360: Angle given in the region 0 to 360 degrees</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        angle_180: Angle given in the region -180 to 180 degrees</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">angle_360</span> <span class="k">if</span> <span class="p">(</span><span class="n">angle_360</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">angle_360</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">)</span> <span class="k">else</span> <span class="n">angle_360</span> <span class="o">-</span> <span class="mf">360.0</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_position_at_certain_time">
+<a class="viewcode-back" href="../../trafficgen.utils.html#trafficgen.calculate_position_at_certain_time">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_position_at_certain_time</span><span class="p">(</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">course</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">delta_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Position</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the position of the ship at a given time based on initial position</span>
+<span class="sd">    and delta time, and constand speed and course.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        position: Initial ship position [m]</span>
+<span class="sd">        speed: Ship speed [knot]</span>
+<span class="sd">        course: Ship course [deg]</span>
+<span class="sd">        delta_time: Delta time from now to the time new position is being calculated [minutes]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        position{north, east}: Dict, north and east position given in meters</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">north</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">north</span> <span class="o">+</span> <span class="n">knot_2_m_pr_min</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span>
+    <span class="n">east</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">east</span> <span class="o">+</span> <span class="n">knot_2_m_pr_min</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span> <span class="o">*</span> <span class="n">delta_time</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span>
+    <span class="n">position_future</span><span class="p">:</span> <span class="n">Position</span> <span class="o">=</span> <span class="n">Position</span><span class="p">(</span>
+        <span class="n">north</span><span class="o">=</span><span class="n">north</span><span class="p">,</span>
+        <span class="n">east</span><span class="o">=</span><span class="n">east</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">position_future</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

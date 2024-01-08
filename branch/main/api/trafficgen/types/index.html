@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.types &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="trafficgen.utils" href="../utils/index.html" />
+    <link rel="prev" title="trafficgen.ship_traffic_generator" href="../ship_traffic_generator/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../history.html">History</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../check_land_crossing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.check_land_crossing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cli/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.cli</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../encounter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.encounter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marine_system_simulator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.marine_system_simulator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plot_traffic_situation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.plot_traffic_situation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../read_files/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.read_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ship_traffic_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.ship_traffic_generator</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.types</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.utils</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../write_traffic_situation_to_file/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.write_traffic_situation_to_file</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.types</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/api/trafficgen/types/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.types">
+<span id="trafficgen-types"></span><h1><a class="reference internal" href="../../../trafficgen.types.html#module-trafficgen.types" title="trafficgen.types"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.types</span></code></a><a class="headerlink" href="#module-trafficgen.types" title="Link to this heading"></a></h1>
+<p>Domain specific data types used in trafficgen.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Position</span></code></a></p></td>
+<td><p>Data type for a ship's position with attributes north, east in [m].</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Pose" title="trafficgen.types.Pose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pose</span></code></a></p></td>
+<td><p>Data type for a (ship) pose.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.ShipType" title="trafficgen.types.ShipType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShipType</span></code></a></p></td>
+<td><p>Enumeration of ship types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.StaticShipData" title="trafficgen.types.StaticShipData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StaticShipData</span></code></a></p></td>
+<td><p>Data type for static ship data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ship</span></code></a></p></td>
+<td><p>Data type for a ship.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TargetShip</span></code></a></p></td>
+<td><p>Data type for a target ship.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncounterType</span></code></a></p></td>
+<td><p>Enumeration of encounter types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Encounter" title="trafficgen.types.Encounter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Encounter</span></code></a></p></td>
+<td><p>Data type for an encounter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Situation</span></code></a></p></td>
+<td><p>Data type for a traffic situation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterClassification" title="trafficgen.types.EncounterClassification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncounterClassification</span></code></a></p></td>
+<td><p>Data type for the encounter classification.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed" title="trafficgen.types.EncounterRelativeSpeed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncounterRelativeSpeed</span></code></a></p></td>
+<td><p>Data type for relative speed between two ships in an encounter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EncounterSettings</span></code></a></p></td>
+<td><p>Data type for encounter settings.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Position">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#Position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Position" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for a ship’s position with attributes north, east in [m].</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Position.north">
+<span class="sig-name descname"><span class="pre">north</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Position.north" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Position.east">
+<span class="sig-name descname"><span class="pre">east</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Position.east" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Position.latitude">
+<span class="sig-name descname"><span class="pre">latitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Position.latitude" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Position.longitude">
+<span class="sig-name descname"><span class="pre">longitude</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Position.longitude" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Pose">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Pose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#Pose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Pose" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for a (ship) pose.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Pose.speed">
+<span class="sig-name descname"><span class="pre">speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Pose.speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Pose.course">
+<span class="sig-name descname"><span class="pre">course</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#trafficgen.types.Pose.course" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Pose.position">
+<span class="sig-name descname"><span class="pre">position</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></em><a class="headerlink" href="#trafficgen.types.Pose.position" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.ShipType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">ShipType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#ShipType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.ShipType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration of ship types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.ShipType.PASSENGER_RORO">
+<span class="sig-name descname"><span class="pre">PASSENGER_RORO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Passenger/Ro-Ro</span> <span class="pre">Cargo</span> <span class="pre">Ship'</span></em><a class="headerlink" href="#trafficgen.types.ShipType.PASSENGER_RORO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.ShipType.GENERAL_CARGO">
+<span class="sig-name descname"><span class="pre">GENERAL_CARGO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'General</span> <span class="pre">Cargo</span> <span class="pre">Ship'</span></em><a class="headerlink" href="#trafficgen.types.ShipType.GENERAL_CARGO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.ShipType.FISHING">
+<span class="sig-name descname"><span class="pre">FISHING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Fishing'</span></em><a class="headerlink" href="#trafficgen.types.ShipType.FISHING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.ShipType.MILITARY">
+<span class="sig-name descname"><span class="pre">MILITARY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Military</span> <span class="pre">ops'</span></em><a class="headerlink" href="#trafficgen.types.ShipType.MILITARY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">StaticShipData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#StaticShipData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.StaticShipData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for static ship data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.length">
+<span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.width">
+<span class="sig-name descname"><span class="pre">width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.width" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.height">
+<span class="sig-name descname"><span class="pre">height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.height" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.speed_max">
+<span class="sig-name descname"><span class="pre">speed_max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.speed_max" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.mmsi">
+<span class="sig-name descname"><span class="pre">mmsi</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.mmsi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#trafficgen.types.StaticShipData.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.StaticShipData.ship_type">
+<span class="sig-name descname"><span class="pre">ship_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.ShipType" title="trafficgen.types.ShipType"><span class="pre">ShipType</span></a></em><a class="headerlink" href="#trafficgen.types.StaticShipData.ship_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Ship">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Ship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#Ship"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Ship" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for a ship.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Ship.static">
+<span class="sig-name descname"><span class="pre">static</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.StaticShipData" title="trafficgen.types.StaticShipData"><span class="pre">StaticShipData</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Ship.static" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Ship.start_pose">
+<span class="sig-name descname"><span class="pre">start_pose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Pose" title="trafficgen.types.Pose"><span class="pre">Pose</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Ship.start_pose" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Ship.waypoints">
+<span class="sig-name descname"><span class="pre">waypoints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Ship.waypoints" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.TargetShip">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">TargetShip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#TargetShip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.TargetShip" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ship</span></code></a></p>
+<p>Data type for a target ship.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.TargetShip.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.TargetShip.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#EncounterType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enumeration of encounter types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.OVERTAKING_STAND_ON">
+<span class="sig-name descname"><span class="pre">OVERTAKING_STAND_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'overtaking-stand-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.OVERTAKING_STAND_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.OVERTAKING_GIVE_WAY">
+<span class="sig-name descname"><span class="pre">OVERTAKING_GIVE_WAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'overtaking-give-way'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.OVERTAKING_GIVE_WAY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.HEAD_ON">
+<span class="sig-name descname"><span class="pre">HEAD_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'head-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.HEAD_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.CROSSING_GIVE_WAY">
+<span class="sig-name descname"><span class="pre">CROSSING_GIVE_WAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crossing-give-way'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.CROSSING_GIVE_WAY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.CROSSING_STAND_ON">
+<span class="sig-name descname"><span class="pre">CROSSING_STAND_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crossing-stand-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.CROSSING_STAND_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.NO_RISK_COLLISION">
+<span class="sig-name descname"><span class="pre">NO_RISK_COLLISION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'noRiskCollision'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.NO_RISK_COLLISION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Encounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#Encounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Encounter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for an encounter.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.desired_encounter_type">
+<span class="sig-name descname"><span class="pre">desired_encounter_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></em><a class="headerlink" href="#trafficgen.types.Encounter.desired_encounter_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.beta">
+<span class="sig-name descname"><span class="pre">beta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.beta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.relative_speed">
+<span class="sig-name descname"><span class="pre">relative_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.relative_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.vector_time">
+<span class="sig-name descname"><span class="pre">vector_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.vector_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Situation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Situation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#Situation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Situation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for a traffic situation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#trafficgen.types.Situation.title" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.input_file_name">
+<span class="sig-name descname"><span class="pre">input_file_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.input_file_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.common_vector">
+<span class="sig-name descname"><span class="pre">common_vector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.common_vector" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.lat_lon_0">
+<span class="sig-name descname"><span class="pre">lat_lon_0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.lat_lon_0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.own_ship">
+<span class="sig-name descname"><span class="pre">own_ship</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.own_ship" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.num_situations">
+<span class="sig-name descname"><span class="pre">num_situations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.num_situations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.encounter">
+<span class="sig-name descname"><span class="pre">encounter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Encounter" title="trafficgen.types.Encounter"><span class="pre">Encounter</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.encounter" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Situation.target_ship">
+<span class="sig-name descname"><span class="pre">target_ship</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Situation.target_ship" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#EncounterClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterClassification" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for the encounter classification.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta13_criteria">
+<span class="sig-name descname"><span class="pre">theta13_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta13_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta14_criteria">
+<span class="sig-name descname"><span class="pre">theta14_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta14_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta15_criteria">
+<span class="sig-name descname"><span class="pre">theta15_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta15_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta15">
+<span class="sig-name descname"><span class="pre">theta15</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta15" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterRelativeSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#EncounterRelativeSpeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for relative speed between two ships in an encounter.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.overtaking_stand_on">
+<span class="sig-name descname"><span class="pre">overtaking_stand_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.overtaking_stand_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.overtaking_give_way">
+<span class="sig-name descname"><span class="pre">overtaking_give_way</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.overtaking_give_way" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.head_on">
+<span class="sig-name descname"><span class="pre">head_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.head_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.crossing_give_way">
+<span class="sig-name descname"><span class="pre">crossing_give_way</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.crossing_give_way" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.crossing_stand_on">
+<span class="sig-name descname"><span class="pre">crossing_stand_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.crossing_stand_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/types.html#EncounterSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterSettings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
+<p>Data type for encounter settings.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.classification">
+<span class="sig-name descname"><span class="pre">classification</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterClassification" title="trafficgen.types.EncounterClassification"><span class="pre">EncounterClassification</span></a></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.classification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.relative_speed">
+<span class="sig-name descname"><span class="pre">relative_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed" title="trafficgen.types.EncounterRelativeSpeed"><span class="pre">EncounterRelativeSpeed</span></a></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.relative_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.vector_range">
+<span class="sig-name descname"><span class="pre">vector_range</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.vector_range" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.max_meeting_distance">
+<span class="sig-name descname"><span class="pre">max_meeting_distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.max_meeting_distance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.evolve_time">
+<span class="sig-name descname"><span class="pre">evolve_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.evolve_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.lat_lon_0">
+<span class="sig-name descname"><span class="pre">lat_lon_0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.lat_lon_0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../ship_traffic_generator/index.html" class="btn btn-neutral float-left" title="trafficgen.ship_traffic_generator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../utils/index.html" class="btn btn-neutral float-right" title="trafficgen.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,412 @@
+:py:mod:`trafficgen.types`
+==========================
+
+.. py:module:: trafficgen.types
+
+.. autoapi-nested-parse::
+
+   Domain specific data types used in trafficgen.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.types.Position
+   trafficgen.types.Pose
+   trafficgen.types.ShipType
+   trafficgen.types.StaticShipData
+   trafficgen.types.Ship
+   trafficgen.types.TargetShip
+   trafficgen.types.EncounterType
+   trafficgen.types.Encounter
+   trafficgen.types.Situation
+   trafficgen.types.EncounterClassification
+   trafficgen.types.EncounterRelativeSpeed
+   trafficgen.types.EncounterSettings
+
+
+
+
+.. py:class:: Position(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for a ship's position with attributes north, east in [m].
+
+   .. py:attribute:: north
+      :type: float
+      :value: 0.0
+
+      
+
+   .. py:attribute:: east
+      :type: float
+      :value: 0.0
+
+      
+
+   .. py:attribute:: latitude
+      :type: float
+      :value: 0.0
+
+      
+
+   .. py:attribute:: longitude
+      :type: float
+      :value: 0.0
+
+      
+
+
+.. py:class:: Pose(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for a (ship) pose.
+
+   .. py:attribute:: speed
+      :type: float
+      :value: 0.0
+
+      
+
+   .. py:attribute:: course
+      :type: float
+      :value: 0.0
+
+      
+
+   .. py:attribute:: position
+      :type: Position
+
+      
+
+
+.. py:class:: ShipType(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration of ship types.
+
+   .. py:attribute:: PASSENGER_RORO
+      :value: 'Passenger/Ro-Ro Cargo Ship'
+
+      
+
+   .. py:attribute:: GENERAL_CARGO
+      :value: 'General Cargo Ship'
+
+      
+
+   .. py:attribute:: FISHING
+      :value: 'Fishing'
+
+      
+
+   .. py:attribute:: MILITARY
+      :value: 'Military ops'
+
+      
+
+
+.. py:class:: StaticShipData(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for static ship data.
+
+   .. py:attribute:: length
+      :type: float
+
+      
+
+   .. py:attribute:: width
+      :type: float
+
+      
+
+   .. py:attribute:: height
+      :type: float
+
+      
+
+   .. py:attribute:: speed_max
+      :type: float
+
+      
+
+   .. py:attribute:: mmsi
+      :type: int
+
+      
+
+   .. py:attribute:: name
+      :type: str
+
+      
+
+   .. py:attribute:: ship_type
+      :type: ShipType
+
+      
+
+
+.. py:class:: Ship(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for a ship.
+
+   .. py:attribute:: static
+      :type: Union[StaticShipData, None]
+
+      
+
+   .. py:attribute:: start_pose
+      :type: Union[Pose, None]
+
+      
+
+   .. py:attribute:: waypoints
+      :type: Union[List[Position], None]
+
+      
+
+
+.. py:class:: TargetShip(**data: Any)
+
+
+   Bases: :py:obj:`Ship`
+
+   Data type for a target ship.
+
+   .. py:attribute:: id
+      :type: Union[int, None]
+
+      
+
+
+.. py:class:: EncounterType(*args, **kwds)
+
+
+   Bases: :py:obj:`enum.Enum`
+
+   Enumeration of encounter types.
+
+   .. py:attribute:: OVERTAKING_STAND_ON
+      :value: 'overtaking-stand-on'
+
+      
+
+   .. py:attribute:: OVERTAKING_GIVE_WAY
+      :value: 'overtaking-give-way'
+
+      
+
+   .. py:attribute:: HEAD_ON
+      :value: 'head-on'
+
+      
+
+   .. py:attribute:: CROSSING_GIVE_WAY
+      :value: 'crossing-give-way'
+
+      
+
+   .. py:attribute:: CROSSING_STAND_ON
+      :value: 'crossing-stand-on'
+
+      
+
+   .. py:attribute:: NO_RISK_COLLISION
+      :value: 'noRiskCollision'
+
+      
+
+
+.. py:class:: Encounter(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for an encounter.
+
+   .. py:attribute:: desired_encounter_type
+      :type: EncounterType
+
+      
+
+   .. py:attribute:: beta
+      :type: Union[float, None]
+
+      
+
+   .. py:attribute:: relative_speed
+      :type: Union[float, None]
+
+      
+
+   .. py:attribute:: vector_time
+      :type: Union[float, None]
+
+      
+
+
+.. py:class:: Situation(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for a traffic situation.
+
+   .. py:attribute:: title
+      :type: str
+
+      
+
+   .. py:attribute:: input_file_name
+      :type: Union[str, None]
+
+      
+
+   .. py:attribute:: common_vector
+      :type: Union[float, None]
+
+      
+
+   .. py:attribute:: lat_lon_0
+      :type: Union[List[float], None]
+
+      
+
+   .. py:attribute:: own_ship
+      :type: Union[Ship, None]
+
+      
+
+   .. py:attribute:: num_situations
+      :type: Union[int, None]
+
+      
+
+   .. py:attribute:: encounter
+      :type: Union[List[Encounter], None]
+
+      
+
+   .. py:attribute:: target_ship
+      :type: Union[List[TargetShip], None]
+
+      
+
+
+.. py:class:: EncounterClassification(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for the encounter classification.
+
+   .. py:attribute:: theta13_criteria
+      :type: float
+
+      
+
+   .. py:attribute:: theta14_criteria
+      :type: float
+
+      
+
+   .. py:attribute:: theta15_criteria
+      :type: float
+
+      
+
+   .. py:attribute:: theta15
+      :type: List[float]
+
+      
+
+
+.. py:class:: EncounterRelativeSpeed(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for relative speed between two ships in an encounter.
+
+   .. py:attribute:: overtaking_stand_on
+      :type: List[float]
+
+      
+
+   .. py:attribute:: overtaking_give_way
+      :type: List[float]
+
+      
+
+   .. py:attribute:: head_on
+      :type: List[float]
+
+      
+
+   .. py:attribute:: crossing_give_way
+      :type: List[float]
+
+      
+
+   .. py:attribute:: crossing_stand_on
+      :type: List[float]
+
+      
+
+
+.. py:class:: EncounterSettings(**data: Any)
+
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+   Data type for encounter settings.
+
+   .. py:attribute:: classification
+      :type: EncounterClassification
+
+      
+
+   .. py:attribute:: relative_speed
+      :type: EncounterRelativeSpeed
+
+      
+
+   .. py:attribute:: vector_range
+      :type: List[float]
+
+      
+
+   .. py:attribute:: max_meeting_distance
+      :type: float
+
+      
+
+   .. py:attribute:: evolve_time
+      :type: float
+
+      
+
+   .. py:attribute:: lat_lon_0
+      :type: List[float]
+
+      
+
+

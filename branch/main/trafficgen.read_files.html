@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.read_files module &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">trafficgen.read_files module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trafficgen.read_files.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.read_files">
+<span id="trafficgen-read-files-module"></span><h1>trafficgen.read_files module<a class="headerlink" href="#module-trafficgen.read_files" title="Link to this heading"></a></h1>
+<p>Functions to read the files needed to build one or more traffic situations.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_files.read_encounter_settings_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.read_files.</span></span><span class="sig-name descname"><span class="pre">read_encounter_settings_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.EncounterSettings" title="trafficgen.types.EncounterSettings"><span class="pre">EncounterSettings</span></a></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_encounter_settings_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_files.read_encounter_settings_file" title="Link to this definition"></a></dt>
+<dd><p>Read encounter settings file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>settings_file: Path to the encounter setting file</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Encounter settings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_files.read_own_ship_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.read_files.</span></span><span class="sig-name descname"><span class="pre">read_own_ship_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">own_ship_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Ship" title="trafficgen.types.Ship"><span class="pre">Ship</span></a></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_own_ship_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_files.read_own_ship_file" title="Link to this definition"></a></dt>
+<dd><p>Read own ship file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>own_ship_file: Path to the own_ship_file file</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>own_ship information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_files.read_situation_files">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.read_files.</span></span><span class="sig-name descname"><span class="pre">read_situation_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">situation_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">Situation</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_situation_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_files.read_situation_files" title="Link to this definition"></a></dt>
+<dd><p>Read traffic situation files.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>situation_folder: Path to the folder where situation files are found</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>situations</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of desired traffic situations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.read_files.read_target_ship_files">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.read_files.</span></span><span class="sig-name descname"><span class="pre">read_target_ship_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_ship_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="trafficgen.types.html#trafficgen.types.TargetShip" title="trafficgen.types.TargetShip"><span class="pre">TargetShip</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/read_files.html#read_target_ship_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.read_files.read_target_ship_files" title="Link to this definition"></a></dt>
+<dd><p>Read target ship files.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>target_ship_folder: Path to the folder where target ships are found</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>target_ships</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of different target ships</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

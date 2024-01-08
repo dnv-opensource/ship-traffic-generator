@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.write_traffic_situation_to_file &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="trafficgen.utils" href="../utils/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../history.html">History</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../check_land_crossing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.check_land_crossing</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cli/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.cli</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../encounter/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.encounter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../marine_system_simulator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.marine_system_simulator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plot_traffic_situation/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.plot_traffic_situation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../read_files/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.read_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../ship_traffic_generator/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.ship_traffic_generator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../types/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.types</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.utils</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.write_traffic_situation_to_file</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.write_traffic_situation_to_file</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/api/trafficgen/write_traffic_situation_to_file/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.write_traffic_situation_to_file">
+<span id="trafficgen-write-traffic-situation-to-file"></span><h1><a class="reference internal" href="../../../trafficgen.write_traffic_situation_to_file.html#module-trafficgen.write_traffic_situation_to_file" title="trafficgen.write_traffic_situation_to_file"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trafficgen.write_traffic_situation_to_file</span></code></a><a class="headerlink" href="#module-trafficgen.write_traffic_situation_to_file" title="Link to this heading"></a></h1>
+<p>Functions to clean traffic situations data before writing it to a json file.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../../trafficgen.write_traffic_situation_to_file.html#trafficgen.write_traffic_situation_to_file.write_traffic_situations_to_json_file" title="trafficgen.write_traffic_situation_to_file.write_traffic_situations_to_json_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_traffic_situations_to_json_file</span></code></a>(situations, ...)</p></td>
+<td><p>Write traffic situations to json file.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.write_traffic_situation_to_file.write_traffic_situations_to_json_file">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.write_traffic_situation_to_file.</span></span><span class="sig-name descname"><span class="pre">write_traffic_situations_to_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">situations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../trafficgen.types.html#trafficgen.types.Situation" title="trafficgen.types.Situation"><span class="pre">trafficgen.types.Situation</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trafficgen/write_traffic_situation_to_file.html#write_traffic_situations_to_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.write_traffic_situation_to_file.write_traffic_situations_to_json_file" title="Link to this definition"></a></dt>
+<dd><p>Write traffic situations to json file.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>traffic_situations: Traffic situations to be written to file
+write_folder: Folder where the json files is to be written</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../utils/index.html" class="btn btn-neutral float-left" title="trafficgen.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

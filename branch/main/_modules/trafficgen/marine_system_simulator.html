@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.marine_system_simulator &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.marine_system_simulator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.marine_system_simulator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems.</span>
+
+<span class="sd">It includes models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.</span>
+<span class="sd">The library also contains guidance, navigation, and control (GNC) blocks for real-time simulation.</span>
+<span class="sd">The algorithms are described in:</span>
+
+<span class="sd">T. I. Fossen (2021). Handbook of Marine Craft Hydrodynamics and Motion Control. 2nd. Edition,</span>
+<span class="sd">Wiley. ISBN-13: 978-1119575054</span>
+
+<span class="sd">Parts of the library have been re-implemented in Python and are found below.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="flat2llh">
+<a class="viewcode-back" href="../../trafficgen.marine_system_simulator.html#trafficgen.flat2llh">[docs]</a>
+<span class="k">def</span> <span class="nf">flat2llh</span><span class="p">(</span>
+    <span class="n">x_n</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">y_n</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lat_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lon_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">z_n</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">height_ref</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute longitude lon (rad), latitude lat (rad) and height h (m) for the</span>
+<span class="sd">    NED coordinates (xn,yn,zn).</span>
+
+<span class="sd">    Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink</span>
+<span class="sd">    library for marine systems.</span>
+
+<span class="sd">    The method computes longitude lon (rad), latitude lat (rad) and height h (m) for the</span>
+<span class="sd">    NED coordinates (xn,yn,zn) using a flat Earth coordinate system defined by the WGS-84</span>
+<span class="sd">    ellipsoid. The flat Earth coordinate origin is located  at (lon_0, lat_0) with reference</span>
+<span class="sd">    height h_ref in meters above the surface of the ellipsoid. Both height and h_ref</span>
+<span class="sd">    are positive upwards, while zn is positive downwards (NED).</span>
+<span class="sd">    Author:    Thor I. Fossen</span>
+<span class="sd">    Date:      20 July 2018</span>
+<span class="sd">    Revisions: 2023-02-04 updates the formulas for latitude and longitude</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        xn: Ship position, north [m]</span>
+<span class="sd">        yn: Ship position, east [m]</span>
+<span class="sd">        zn=0.0: Ship position, down [m]</span>
+<span class="sd">        lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)</span>
+<span class="sd">        h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface</span>
+<span class="sd">        of the ellipsoid</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        lat: Latitude [rad]</span>
+<span class="sd">        lon: Longitude [rad]</span>
+<span class="sd">        h: Height [m]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># WGS-84 parameters</span>
+    <span class="n">a_radius</span> <span class="o">=</span> <span class="mi">6378137</span>  <span class="c1"># Semi-major axis</span>
+    <span class="n">f_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">298.257223563</span>  <span class="c1"># Flattening</span>
+    <span class="n">e_eccentricity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f_factor</span> <span class="o">-</span> <span class="n">f_factor</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Earth eccentricity</span>
+
+    <span class="n">r_n</span> <span class="o">=</span> <span class="n">a_radius</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">r_m</span> <span class="o">=</span> <span class="n">r_n</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">d_lat</span> <span class="o">=</span> <span class="n">x_n</span> <span class="o">/</span> <span class="p">(</span><span class="n">r_m</span> <span class="o">+</span> <span class="n">height_ref</span><span class="p">)</span>  <span class="c1"># delta latitude dmu = mu - mu0</span>
+    <span class="n">d_lon</span> <span class="o">=</span> <span class="n">y_n</span> <span class="o">/</span> <span class="p">((</span><span class="n">r_n</span> <span class="o">+</span> <span class="n">height_ref</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_0</span><span class="p">))</span>  <span class="c1"># delta longitude dl = l - l0</span>
+
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">ssa</span><span class="p">(</span><span class="n">lat_0</span> <span class="o">+</span> <span class="n">d_lat</span><span class="p">)</span>
+    <span class="n">lon</span> <span class="o">=</span> <span class="n">ssa</span><span class="p">(</span><span class="n">lon_0</span> <span class="o">+</span> <span class="n">d_lon</span><span class="p">)</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">height_ref</span> <span class="o">-</span> <span class="n">z_n</span>
+
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">height</span></div>
+
+
+
+<div class="viewcode-block" id="llh2flat">
+<a class="viewcode-back" href="../../trafficgen.marine_system_simulator.html#trafficgen.llh2flat">[docs]</a>
+<span class="k">def</span> <span class="nf">llh2flat</span><span class="p">(</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lat_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lon_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">height_ref</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute (north, east) for a flat Earth coordinate system from longitude</span>
+<span class="sd">    lon (rad) and latitude lat (rad).</span>
+
+<span class="sd">    Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink</span>
+<span class="sd">    library for marine systems.</span>
+
+<span class="sd">    The method computes (north, east) for a flat Earth coordinate system from longitude</span>
+<span class="sd">    lon (rad) and latitude lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate</span>
+<span class="sd">    origin is located  at (lon_0, lat_0).</span>
+<span class="sd">    Author:    Thor I. Fossen</span>
+<span class="sd">    Date:      20 July 2018</span>
+<span class="sd">    Revisions: 2023-02-04 updates the formulas for latitude and longitude</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        lat: Ship position in latitude [rad]</span>
+<span class="sd">        lon: Ship position in longitude [rad]</span>
+<span class="sd">        h=0.0: Ship height in meters above the surface of the ellipsoid</span>
+<span class="sd">        lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)</span>
+<span class="sd">        h_ref=0.0: Flat earth coordinate with reference h_ref in meters above</span>
+<span class="sd">        the surface of the ellipsoid</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        x_n: Ship position, north [m]</span>
+<span class="sd">        y_n: Ship position, east [m]</span>
+<span class="sd">        z_n: Ship position, down [m]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># WGS-84 parameters</span>
+    <span class="n">a_radius</span> <span class="o">=</span> <span class="mi">6378137</span>  <span class="c1"># Semi-major axis (equitorial radius)</span>
+    <span class="n">f_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mf">298.257223563</span>  <span class="c1"># Flattening</span>
+    <span class="n">e_eccentricity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f_factor</span> <span class="o">-</span> <span class="n">f_factor</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Earth eccentricity</span>
+
+    <span class="n">d_lon</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">-</span> <span class="n">lon_0</span>
+    <span class="n">d_lat</span> <span class="o">=</span> <span class="n">lat</span> <span class="o">-</span> <span class="n">lat_0</span>
+
+    <span class="n">r_n</span> <span class="o">=</span> <span class="n">a_radius</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">r_m</span> <span class="o">=</span> <span class="n">r_n</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">e_eccentricity</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">x_n</span> <span class="o">=</span> <span class="n">d_lat</span> <span class="o">*</span> <span class="p">(</span><span class="n">r_m</span> <span class="o">+</span> <span class="n">height_ref</span><span class="p">)</span>
+    <span class="n">y_n</span> <span class="o">=</span> <span class="n">d_lon</span> <span class="o">*</span> <span class="p">((</span><span class="n">r_n</span> <span class="o">+</span> <span class="n">height_ref</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_0</span><span class="p">))</span>
+    <span class="n">z_n</span> <span class="o">=</span> <span class="n">height_ref</span> <span class="o">-</span> <span class="n">height</span>
+
+    <span class="k">return</span> <span class="n">x_n</span><span class="p">,</span> <span class="n">y_n</span><span class="p">,</span> <span class="n">z_n</span></div>
+
+
+
+<div class="viewcode-block" id="ssa">
+<a class="viewcode-back" href="../../trafficgen.marine_system_simulator.html#trafficgen.ssa">[docs]</a>
+<span class="k">def</span> <span class="nf">ssa</span><span class="p">(</span><span class="n">angle</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the &quot;smallest signed angle&quot; (SSA) or the smallest difference between two angles.</span>
+
+<span class="sd">    Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink</span>
+<span class="sd">    library for marine systems.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    angle = ssa(angle) maps an angle in rad to the interval [-pi pi)</span>
+
+<span class="sd">    Author:     Thor I. Fossen</span>
+<span class="sd">    Date:       2018-09-21</span>
+
+<span class="sd">    Param:</span>
+<span class="sd">        angle: angle given in radius</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        smallest_angle: &quot;smallest signed angle&quot; or the smallest difference between two angles</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

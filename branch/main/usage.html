@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Input files" href="input_files.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#situations">Situations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#baseline-situations">Baseline situations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting">Plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-all-generated-traffic-situations">Plotting all generated traffic situations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#individual-plots-with-map-background">Individual plots with map background</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<p>To use Traffic Generator in a project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">trafficgen</span>
+</pre></div>
+</div>
+<p>To use Traffic Generator as a command line tool for generating traffic situations, write:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trafficgen</span> <span class="n">gen</span><span class="o">-</span><span class="n">situation</span>
+</pre></div>
+</div>
+<p>The command line tool takes different input options:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">situations</span> <span class="n">PATH</span>          <span class="n">Folders</span> <span class="k">with</span> <span class="n">situations</span> <span class="p">(</span><span class="n">default</span><span class="o">=./</span><span class="n">baseline_situations_input</span><span class="o">/</span><span class="p">)</span>
+<span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">targets</span> <span class="n">PATH</span>             <span class="n">Folder</span> <span class="k">with</span> <span class="n">target</span> <span class="n">configurations</span> <span class="p">(</span><span class="n">default</span><span class="o">=./</span><span class="n">target_ships</span><span class="o">/</span><span class="p">)</span>
+<span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">settings</span> <span class="n">PATH</span>            <span class="n">Path</span> <span class="n">to</span> <span class="n">settings</span> <span class="n">file</span> <span class="p">(</span><span class="n">default</span><span class="o">=./</span><span class="n">settings</span><span class="o">/</span><span class="n">encounter_settings</span><span class="o">.</span><span class="n">json</span><span class="p">)</span>
+<span class="o">--</span><span class="n">visualize</span>                    <span class="n">Plot</span> <span class="n">visualization</span>
+<span class="o">--</span><span class="n">col</span> <span class="n">INTEGER</span>                  <span class="n">Number</span> <span class="n">of</span> <span class="n">columns</span> <span class="k">for</span> <span class="n">plot</span><span class="p">,</span> <span class="n">may</span> <span class="n">be</span> <span class="n">used</span> <span class="k">with</span> <span class="n">visualize</span> <span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="o">--</span><span class="n">row</span> <span class="n">INTEGER</span>                  <span class="n">Number</span> <span class="n">of</span> <span class="n">rows</span> <span class="k">for</span> <span class="n">plot</span><span class="p">,</span> <span class="n">may</span> <span class="n">be</span> <span class="n">used</span> <span class="k">with</span> <span class="n">visualize</span> <span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="o">--</span><span class="n">visualize</span><span class="o">-</span><span class="n">situation</span> <span class="n">INTEGER</span>  <span class="n">Plot</span> <span class="n">individual</span> <span class="n">traffic</span> <span class="n">situation</span><span class="p">,</span> <span class="n">specify</span> <span class="n">INTEGER</span> <span class="n">value</span>
+<span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">PATH</span>              <span class="n">Output</span> <span class="n">folder</span> <span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="o">--</span><span class="n">help</span>                         <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trafficgen</span> <span class="n">gen</span><span class="o">-</span><span class="n">situation</span> <span class="o">-</span><span class="n">s</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">example_situations_input</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">test_output_1</span>
+</pre></div>
+</div>
+<section id="situations">
+<h2>Situations<a class="headerlink" href="#situations" title="Link to this heading"></a></h2>
+<p>When generating situations without specifying where the desired situations (<code class="docutils literal notranslate"><span class="pre">--situation</span></code>) are found, the
+default path, which is <code class="docutils literal notranslate"><span class="pre">default=./baseline_situations_input/</span></code>, will be used.</p>
+</section>
+<section id="baseline-situations">
+<h2>Baseline situations<a class="headerlink" href="#baseline-situations" title="Link to this heading"></a></h2>
+<p>The baseline situations are a set of generic traffic situations covering head-on, overtaking stand-on/give-way
+and crossing stand-on/give-way encounters. To cover the combination of encounters for 1, 2 and 3 target ships,
+there are in total 55 baseline situations. The input files for generating these situations are found in
+<code class="docutils literal notranslate"><span class="pre">./baseline_situations_input/</span></code></p>
+</section>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Link to this heading"></a></h2>
+<section id="plotting-all-generated-traffic-situations">
+<h3>Plotting all generated traffic situations<a class="headerlink" href="#plotting-all-generated-traffic-situations" title="Link to this heading"></a></h3>
+<p>All the generated situations are displayed if using <code class="docutils literal notranslate"><span class="pre">--visualize</span></code>. This will pop up one or more plot windows,
+which show all the traffic situations. The number of colums and rows for the plots (per figure) can be specified by
+using <code class="docutils literal notranslate"><span class="pre">--col</span></code> and <code class="docutils literal notranslate"><span class="pre">--row</span></code>, respectively.</p>
+</section>
+<section id="individual-plots-with-map-background">
+<h3>Individual plots with map background<a class="headerlink" href="#individual-plots-with-map-background" title="Link to this heading"></a></h3>
+<p>A specific encounter is visualized by using <code class="docutils literal notranslate"><span class="pre">--visualize-situation</span> <span class="pre">INTEGER</span></code>, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trafficgen</span> <span class="n">gen</span><span class="o">-</span><span class="n">situation</span> <span class="o">-</span><span class="n">s</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">example_situations_input</span> <span class="o">-</span><span class="n">o</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">test_output_1</span> <span class="o">--</span><span class="n">visualize</span><span class="o">-</span><span class="n">situation</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This will open a browser window/tab with an OpenStreetMap background and the traffic situation
+radar plot as an overlay.
+Note that the integer needs to be within the range of the number of generated situations,
+for example 1 - 12 if you generated 12 situations.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="input_files.html" class="btn btn-neutral float-right" title="Input files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

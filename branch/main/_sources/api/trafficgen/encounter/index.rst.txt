@@ -1,0 +1,239 @@
+:py:mod:`trafficgen.encounter`
+==============================
+
+.. py:module:: trafficgen.encounter
+
+.. autoapi-nested-parse::
+
+   Functions to generate encounters consisting of one own ship and one to many target ships.
+   The generated encounters may be of type head-on, overtaking give-way and stand-on and
+   crossing give-way and stand-on.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.encounter.generate_encounter
+   trafficgen.encounter.check_encounter_evolvement
+   trafficgen.encounter.calculate_min_vector_length_target_ship
+   trafficgen.encounter.find_start_position_target_ship
+   trafficgen.encounter.assign_future_position_to_target_ship
+   trafficgen.encounter.determine_colreg
+   trafficgen.encounter.calculate_relative_bearing
+   trafficgen.encounter.calculate_ship_course
+   trafficgen.encounter.assign_vector_time
+   trafficgen.encounter.assign_speed_to_target_ship
+   trafficgen.encounter.assign_beta
+   trafficgen.encounter.update_position_data_target_ship
+   trafficgen.encounter.update_position_data_own_ship
+   trafficgen.encounter.decide_target_ship
+
+
+
+.. py:function:: generate_encounter(desired_encounter_type: trafficgen.types.EncounterType, own_ship: trafficgen.types.Ship, target_ships: List[trafficgen.types.TargetShip], target_ship_id: int, beta_default: Optional[float], relative_speed_default: Optional[float], vector_time_default: Optional[float], settings: trafficgen.types.EncounterSettings) -> Tuple[trafficgen.types.TargetShip, bool]
+
+   Generate an encounter.
+
+   Params:
+       * desired_encounter_type: Desired encounter to be generated
+       * own_ship: Dict, information about own ship that will encounter a target ship
+       * target_ships: List of target ships that may be used in an encounter
+       * target_ship_id: ID which should be used on target ship
+       * beta_default: User defined beta. If not set, this is None.
+       * relative_speed_default: User defined relative speed between own ship and
+                                 target ship. If not set, this is None.
+       * vector_time_default: User defined vector time. If not set, this is None.
+       * settings: Encounter settings
+
+   :returns: * **target_ship** (*target ship information, such as initial position, speed and course*)
+             * **encounter_found** (*True=encounter found, False=encounter not found*)
+
+
+.. py:function:: check_encounter_evolvement(own_ship: trafficgen.types.Ship, own_ship_position_future: trafficgen.types.Position, target_ship: trafficgen.types.TargetShip, target_ship_position_future: trafficgen.types.Position, desired_encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings) -> bool
+
+   Check encounter evolvement. The generated encounter should be the same type of
+   encounter (head-on, crossing, give-way) also some time before the encounter is started.
+
+   Params:
+       * own_ship: Own ship information such as initial position, speed and course
+       * target_ship: Target ship information such as initial position, speed and course
+       * desired_encounter_type: Desired type of encounter to be generated
+       * settings: Encounter settings
+
+   :rtype: \* returns True if encounter ok, False if encounter not ok
+
+
+.. py:function:: calculate_min_vector_length_target_ship(own_ship_position: trafficgen.types.Position, own_ship_course: float, target_ship_position_future: trafficgen.types.Position, desired_beta: float) -> float
+
+   Calculate minimum vector length (target ship speed x vector). This will
+   ensure that ship speed is high enough to find proper situation.
+
+   Params:
+       * own_ship_position: Own ship initial position, speed and course
+       * own_ship_course: Own ship initial course
+       * target_ship_position_future: Target ship future position
+       * desired_beta: Desired relative bearing between
+
+   Returns: min_vector_length: Minimum vector length (target ship speed x vector)
+
+
+.. py:function:: find_start_position_target_ship(own_ship_position: trafficgen.types.Position, own_ship_course: float, target_ship_position_future: trafficgen.types.Position, target_ship_vector_length: float, desired_beta: float, desired_encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings)
+
+   Find start position of target ship using desired beta and vector length.
+
+   Params:
+       * own_ship_position: Own ship initial position, speed and course
+       * own_ship_course: Own ship initial course
+       * target_ship_position_future: Target ship future position
+       * target_ship_vector_length: vector length (target ship speed x vector)
+       * desired_beta: Desired bearing between own ship and target ship seen from own ship
+       * desired_encounter_type: Desired type of encounter to be generated
+       * settings: Encounter settings
+
+   :returns: * **\* start_position_target_ship** (*Dict, initial position of target ship {north, east} [m]*)
+             * **\* start_position_found** (*0=position not found, 1=position found*)
+
+
+.. py:function:: assign_future_position_to_target_ship(own_ship_position_future: trafficgen.types.Position, max_meeting_distance: float) -> trafficgen.types.Position
+
+   Randomly assign future position of target ship. If drawing a circle with radius
+   max_meeting_distance around future position of own ship, future position of
+   target ship shall be somewhere inside this circle.
+
+   Params:
+       * own_ship_position_future: Dict, own ship position at a given time in the
+           future, {north, east}
+       * max_meeting_distance: Maximum distance between own ship and target ship at
+           a given time in the future [nm]
+
+   :returns: **future_position_target_ship**
+   :rtype: Future position of target ship {north, east} [m]
+
+
+.. py:function:: determine_colreg(alpha: float, beta: float, theta13_criteria: float, theta14_criteria: float, theta15_criteria: float, theta15: List[float]) -> trafficgen.types.EncounterType
+
+   Determine the colreg type based on alpha, relative bearing between target ship and own
+   ship seen from target ship, and beta, relative bearing between own ship and target ship
+   seen from own ship.
+
+   Params:
+       * alpha: relative bearing between target ship and own ship seen from target ship
+       * beta: relative bearing between own ship and target ship seen from own ship
+       * theta13_criteria: Tolerance for "coming up with" relative bearing
+       * theta14_criteria: Tolerance for "reciprocal or nearly reciprocal courses",
+         "when in any doubt... assume... [head-on]"
+       * theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter
+       * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking
+                  encounter
+
+   :rtype: \* encounter classification
+
+
+.. py:function:: calculate_relative_bearing(position_own_ship: trafficgen.types.Position, heading_own_ship: float, position_target_ship: trafficgen.types.Position, heading_target_ship: float) -> Tuple[float, float]
+
+   Calculate relative bearing between own ship and target ship, both seen from
+   own ship and seen from target ship.
+
+   Params:
+       * position_own_ship: Dict, own ship position {north, east} [m]
+       * heading_own_ship: Own ship course [deg]
+       * position_target_ship: Dict, own ship position {north, east} [m]
+       * heading_target_ship: Target ship course [deg]
+
+   :returns: * **\* beta** (*relative bearing between own ship and target ship seen from own ship [deg]*)
+             * **\* alpha** (*relative bearing between target ship and own ship seen from target ship [deg]*)
+
+
+.. py:function:: calculate_ship_course(waypoint_0: trafficgen.types.Position, waypoint_1: trafficgen.types.Position) -> float
+
+   Calculate ship course between two waypoints.
+
+   Params:
+       * waypoint_0: Dict, waypoint {north, east} [m]
+       * waypoint_1: Dict, waypoint {north, east} [m]
+
+   :returns: **course**
+   :rtype: Ship course [deg]
+
+
+.. py:function:: assign_vector_time(vector_time_range: List[float])
+
+   Assign random (uniform) vector time.
+
+   Params:
+       * vector_range: Minimum and maximum value for vector time
+
+   :returns: **vector_time**
+   :rtype: Vector time [min]
+
+
+.. py:function:: assign_speed_to_target_ship(encounter_type: trafficgen.types.EncounterType, own_ship_speed: float, min_target_ship_speed: float, relative_speed_setting: trafficgen.types.EncounterRelativeSpeed)
+
+   Assign random (uniform) speed to target ship depending on type of encounter.
+
+   Params:
+       * encounter_type: Type of encounter
+       * own_ship_speed: Own ship speed [knot]
+       * min_target_ship_speed: Minimum target ship speed [knot]
+       * relative_speed_setting: Relative speed setting dependent on encounter [-]
+
+   :returns: **target_ship_speed**
+   :rtype: Target ship speed [knot]
+
+
+.. py:function:: assign_beta(encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings) -> float
+
+   Assign random (uniform) relative bearing beta between own ship
+   and target ship depending on type of encounter.
+
+   Params:
+       * encounter_type: Type of encounter
+       * settings: Encounter settings
+
+   :rtype: Relative bearing between own ship and target ship seen from own ship [deg]
+
+
+.. py:function:: update_position_data_target_ship(target_ship: trafficgen.types.TargetShip, lat_lon_0: List[float]) -> trafficgen.types.TargetShip
+
+   Update position data of the target ship to also include latitude and longitude
+   position of the target ship.
+
+   Params:
+       * target_ship: Target ship data
+       * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+
+   :returns: **ship**
+   :rtype: Updated target ship data
+
+
+.. py:function:: update_position_data_own_ship(ship: trafficgen.types.Ship, lat_lon_0: List[float], delta_time: float) -> trafficgen.types.Ship
+
+   Update position data of the target ship to also include latitude and longitude
+   position of the target ship.
+
+   Params:
+       * ship: Own ship data
+       * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+       * delta_time: Delta time from now to the time new position is being calculated [minutes]
+
+   :returns: **ship**
+   :rtype: Updated own ship data
+
+
+.. py:function:: decide_target_ship(target_ships: List[trafficgen.types.TargetShip]) -> trafficgen.types.TargetShip
+
+   Randomly pick a target ship from a list of target ships.
+
+   Params:
+       * target_ships: list of target ships
+
+   :rtype: The target ship, info of type, size etc.
+
+

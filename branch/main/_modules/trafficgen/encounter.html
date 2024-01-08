@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.encounter &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.encounter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.encounter</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions to generate encounters consisting of one own ship and one to many target ships.</span>
+<span class="sd">The generated encounters may be of type head-on, overtaking give-way and stand-on and</span>
+<span class="sd">crossing give-way and stand-on.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">trafficgen.types</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">EncounterRelativeSpeed</span><span class="p">,</span>
+    <span class="n">EncounterSettings</span><span class="p">,</span>
+    <span class="n">EncounterType</span><span class="p">,</span>
+    <span class="n">Pose</span><span class="p">,</span>
+    <span class="n">Position</span><span class="p">,</span>
+    <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">TargetShip</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_position_at_certain_time</span><span class="p">,</span>
+    <span class="n">convert_angle_minus_180_to_180_to_0_to_360</span><span class="p">,</span>
+    <span class="n">deg_2_rad</span><span class="p">,</span>
+    <span class="n">flat2llh</span><span class="p">,</span>
+    <span class="n">knot_2_m_pr_min</span><span class="p">,</span>
+    <span class="n">m_pr_min_2_knot</span><span class="p">,</span>
+    <span class="n">nm_2_m</span><span class="p">,</span>
+    <span class="n">path_crosses_land</span><span class="p">,</span>
+    <span class="n">rad_2_deg</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="generate_encounter">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.generate_encounter">[docs]</a>
+<span class="k">def</span> <span class="nf">generate_encounter</span><span class="p">(</span>
+    <span class="n">desired_encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span><span class="p">,</span>
+    <span class="n">own_ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">target_ships</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TargetShip</span><span class="p">],</span>
+    <span class="n">target_ship_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">beta_default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">relative_speed_default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">vector_time_default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">settings</span><span class="p">:</span> <span class="n">EncounterSettings</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">TargetShip</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate an encounter.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * desired_encounter_type: Desired encounter to be generated</span>
+<span class="sd">        * own_ship: Dict, information about own ship that will encounter a target ship</span>
+<span class="sd">        * target_ships: List of target ships that may be used in an encounter</span>
+<span class="sd">        * target_ship_id: ID which should be used on target ship</span>
+<span class="sd">        * beta_default: User defined beta. If not set, this is None.</span>
+<span class="sd">        * relative_speed_default: User defined relative speed between own ship and</span>
+<span class="sd">                                  target ship. If not set, this is None.</span>
+<span class="sd">        * vector_time_default: User defined vector time. If not set, this is None.</span>
+<span class="sd">        * settings: Encounter settings</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        target_ship: target ship information, such as initial position, speed and course</span>
+<span class="sd">        encounter_found: True=encounter found, False=encounter not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">encounter_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">outer_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">target_ship</span> <span class="o">=</span> <span class="n">decide_target_ship</span><span class="p">(</span><span class="n">target_ships</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">static</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="c1"># Searching for encounter. Two loops used. Only vector time is locked in the</span>
+    <span class="c1"># first loop. In the second loop, beta and speed are assigned.</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">encounter_found</span> <span class="ow">and</span> <span class="n">outer_counter</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">outer_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">inner_counter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># resetting vector_time, beta and relative_speed to default values before</span>
+        <span class="c1"># new search for situation is done</span>
+        <span class="n">vector_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector_time_default</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta_default</span>
+
+        <span class="k">if</span> <span class="n">vector_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vector_time</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">beta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="n">assign_beta</span><span class="p">(</span><span class="n">desired_encounter_type</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+
+        <span class="c1"># Own ship</span>
+        <span class="k">assert</span> <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">own_ship_position_future</span> <span class="o">=</span> <span class="n">calculate_position_at_certain_time</span><span class="p">(</span>
+            <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+            <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span>
+            <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span>
+            <span class="n">vector_time</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># @TODO: @TomArne: this variable is declared and assigned to but nowhere used.  Delete?</span>
+        <span class="c1">#        Claas, 2023-11-24</span>
+        <span class="c1"># own_ship_vector_length = knot_2_m_pr_min(own_ship.start_pose.speed) * vector_time</span>
+
+        <span class="c1"># Target ship</span>
+        <span class="n">target_ship</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">target_ship_id</span>
+        <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="o">=</span> <span class="n">Pose</span><span class="p">()</span>  <span class="c1"># reset start_pose of target_ship (if one existed)</span>
+
+        <span class="n">target_ship_position_future</span> <span class="o">=</span> <span class="n">assign_future_position_to_target_ship</span><span class="p">(</span>
+            <span class="n">own_ship_position_future</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">max_meeting_distance</span>
+        <span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">encounter_found</span> <span class="ow">and</span> <span class="n">inner_counter</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">inner_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_default</span>
+            <span class="k">if</span> <span class="n">relative_speed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">min_target_ship_speed</span> <span class="o">=</span> <span class="n">m_pr_min_2_knot</span><span class="p">(</span>
+                    <span class="n">calculate_min_vector_length_target_ship</span><span class="p">(</span>
+                        <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                        <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span>
+                        <span class="n">target_ship_position_future</span><span class="p">,</span>
+                        <span class="n">beta</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="o">/</span> <span class="n">vector_time</span>
+                <span class="p">)</span>
+
+                <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">assign_speed_to_target_ship</span><span class="p">(</span>
+                    <span class="n">desired_encounter_type</span><span class="p">,</span>
+                    <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span>
+                    <span class="n">min_target_ship_speed</span><span class="p">,</span>
+                    <span class="n">settings</span><span class="o">.</span><span class="n">relative_speed</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">relative_speed</span> <span class="o">*</span> <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span>
+
+            <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
+                <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">static</span><span class="o">.</span><span class="n">speed_max</span>
+            <span class="p">)</span>
+
+            <span class="n">target_ship_vector_length</span> <span class="o">=</span> <span class="n">knot_2_m_pr_min</span><span class="p">(</span><span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span> <span class="o">*</span> <span class="n">vector_time</span>
+            <span class="n">start_position_target_ship</span><span class="p">,</span> <span class="n">position_found</span> <span class="o">=</span> <span class="n">find_start_position_target_ship</span><span class="p">(</span>
+                <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span>
+                <span class="n">target_ship_position_future</span><span class="p">,</span>
+                <span class="n">target_ship_vector_length</span><span class="p">,</span>
+                <span class="n">beta</span><span class="p">,</span>
+                <span class="n">desired_encounter_type</span><span class="p">,</span>
+                <span class="n">settings</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">position_found</span><span class="p">:</span>
+                <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">start_position_target_ship</span>
+                <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span> <span class="o">=</span> <span class="n">calculate_ship_course</span><span class="p">(</span>
+                    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">target_ship_position_future</span>
+                <span class="p">)</span>
+                <span class="n">encounter_ok</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">check_encounter_evolvement</span><span class="p">(</span>
+                    <span class="n">own_ship</span><span class="p">,</span>
+                    <span class="n">own_ship_position_future</span><span class="p">,</span>
+                    <span class="n">target_ship</span><span class="p">,</span>
+                    <span class="n">target_ship_position_future</span><span class="p">,</span>
+                    <span class="n">desired_encounter_type</span><span class="p">,</span>
+                    <span class="n">settings</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Check if trajectory passes land</span>
+                <span class="n">trajectory_on_land</span> <span class="o">=</span> <span class="n">path_crosses_land</span><span class="p">(</span>
+                    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+                    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span>
+                    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span>
+                    <span class="n">settings</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">encounter_found</span> <span class="o">=</span> <span class="n">encounter_ok</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">trajectory_on_land</span>
+
+    <span class="k">if</span> <span class="n">encounter_found</span><span class="p">:</span>
+        <span class="n">target_ship</span> <span class="o">=</span> <span class="n">update_position_data_target_ship</span><span class="p">(</span><span class="n">target_ship</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_ship</span><span class="p">,</span> <span class="n">encounter_found</span></div>
+
+
+
+<div class="viewcode-block" id="check_encounter_evolvement">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.check_encounter_evolvement">[docs]</a>
+<span class="k">def</span> <span class="nf">check_encounter_evolvement</span><span class="p">(</span>
+    <span class="n">own_ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">own_ship_position_future</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">target_ship</span><span class="p">:</span> <span class="n">TargetShip</span><span class="p">,</span>
+    <span class="n">target_ship_position_future</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">desired_encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span><span class="p">,</span>
+    <span class="n">settings</span><span class="p">:</span> <span class="n">EncounterSettings</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check encounter evolvement. The generated encounter should be the same type of</span>
+<span class="sd">    encounter (head-on, crossing, give-way) also some time before the encounter is started.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship: Own ship information such as initial position, speed and course</span>
+<span class="sd">        * target_ship: Target ship information such as initial position, speed and course</span>
+<span class="sd">        * desired_encounter_type: Desired type of encounter to be generated</span>
+<span class="sd">        * settings: Encounter settings</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * returns True if encounter ok, False if encounter not ok</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">theta13_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta13_criteria</span>
+    <span class="n">theta14_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta14_criteria</span>
+    <span class="n">theta15_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15_criteria</span>
+    <span class="n">theta15</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span>
+
+    <span class="k">assert</span> <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">own_ship_speed</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span>
+    <span class="n">own_ship_course</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span>
+    <span class="n">target_ship_speed</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span>
+    <span class="n">target_ship_course</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span>
+    <span class="n">evolve_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">evolve_time</span>
+
+    <span class="c1"># Calculating position back in time to ensure that the encounter do not change from one type</span>
+    <span class="c1"># to another before the encounter is started</span>
+    <span class="n">encounter_preposition_target_ship</span> <span class="o">=</span> <span class="n">calculate_position_at_certain_time</span><span class="p">(</span>
+        <span class="n">target_ship_position_future</span><span class="p">,</span>
+        <span class="n">target_ship_speed</span><span class="p">,</span>
+        <span class="n">target_ship_course</span><span class="p">,</span>
+        <span class="o">-</span><span class="n">evolve_time</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">encounter_preposition_own_ship</span> <span class="o">=</span> <span class="n">calculate_position_at_certain_time</span><span class="p">(</span>
+        <span class="n">own_ship_position_future</span><span class="p">,</span>
+        <span class="n">own_ship_speed</span><span class="p">,</span>
+        <span class="n">own_ship_course</span><span class="p">,</span>
+        <span class="o">-</span><span class="n">evolve_time</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">pre_beta</span><span class="p">,</span> <span class="n">pre_alpha</span> <span class="o">=</span> <span class="n">calculate_relative_bearing</span><span class="p">(</span>
+        <span class="n">encounter_preposition_own_ship</span><span class="p">,</span>
+        <span class="n">own_ship_course</span><span class="p">,</span>
+        <span class="n">encounter_preposition_target_ship</span><span class="p">,</span>
+        <span class="n">target_ship_course</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">pre_colreg_state</span> <span class="o">=</span> <span class="n">determine_colreg</span><span class="p">(</span>
+        <span class="n">pre_alpha</span><span class="p">,</span> <span class="n">pre_beta</span><span class="p">,</span> <span class="n">theta13_criteria</span><span class="p">,</span> <span class="n">theta14_criteria</span><span class="p">,</span> <span class="n">theta15_criteria</span><span class="p">,</span> <span class="n">theta15</span>
+    <span class="p">)</span>
+
+    <span class="n">encounter_ok</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">pre_colreg_state</span> <span class="o">==</span> <span class="n">desired_encounter_type</span>
+
+    <span class="k">return</span> <span class="n">encounter_ok</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_min_vector_length_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.calculate_min_vector_length_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_min_vector_length_target_ship</span><span class="p">(</span>
+    <span class="n">own_ship_position</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">own_ship_course</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">target_ship_position_future</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">desired_beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate minimum vector length (target ship speed x vector). This will</span>
+<span class="sd">    ensure that ship speed is high enough to find proper situation.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_position: Own ship initial position, speed and course</span>
+<span class="sd">        * own_ship_course: Own ship initial course</span>
+<span class="sd">        * target_ship_position_future: Target ship future position</span>
+<span class="sd">        * desired_beta: Desired relative bearing between</span>
+
+<span class="sd">    Returns: min_vector_length: Minimum vector length (target ship speed x vector)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">psi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">own_ship_course</span> <span class="o">+</span> <span class="n">desired_beta</span><span class="p">)</span>
+
+    <span class="n">p_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">own_ship_position</span><span class="o">.</span><span class="n">north</span><span class="p">,</span> <span class="n">own_ship_position</span><span class="o">.</span><span class="n">east</span><span class="p">])</span>
+    <span class="n">p_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">own_ship_position</span><span class="o">.</span><span class="n">north</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">),</span> <span class="n">own_ship_position</span><span class="o">.</span><span class="n">east</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)])</span>
+    <span class="n">p_3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">target_ship_position_future</span><span class="o">.</span><span class="n">north</span><span class="p">,</span> <span class="n">target_ship_position_future</span><span class="o">.</span><span class="n">east</span><span class="p">])</span>
+
+    <span class="n">min_vector_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">p_2</span> <span class="o">-</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_3</span> <span class="o">-</span> <span class="n">p_1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">p_2</span> <span class="o">-</span> <span class="n">p_1</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">min_vector_length</span></div>
+
+
+
+<div class="viewcode-block" id="find_start_position_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.find_start_position_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">find_start_position_target_ship</span><span class="p">(</span>
+    <span class="n">own_ship_position</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">own_ship_course</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">target_ship_position_future</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">target_ship_vector_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">desired_beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">desired_encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span><span class="p">,</span>
+    <span class="n">settings</span><span class="p">:</span> <span class="n">EncounterSettings</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find start position of target ship using desired beta and vector length.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_position: Own ship initial position, speed and course</span>
+<span class="sd">        * own_ship_course: Own ship initial course</span>
+<span class="sd">        * target_ship_position_future: Target ship future position</span>
+<span class="sd">        * target_ship_vector_length: vector length (target ship speed x vector)</span>
+<span class="sd">        * desired_beta: Desired bearing between own ship and target ship seen from own ship</span>
+<span class="sd">        * desired_encounter_type: Desired type of encounter to be generated</span>
+<span class="sd">        * settings: Encounter settings</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * start_position_target_ship: Dict, initial position of target ship {north, east} [m]</span>
+<span class="sd">        * start_position_found: 0=position not found, 1=position found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">theta13_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta13_criteria</span>
+    <span class="n">theta14_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta14_criteria</span>
+    <span class="n">theta15_criteria</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15_criteria</span>
+    <span class="n">theta15</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span>
+
+    <span class="n">n_1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship_position</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">e_1</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship_position</span><span class="o">.</span><span class="n">east</span>
+    <span class="n">n_2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">target_ship_position_future</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">e_2</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">target_ship_position_future</span><span class="o">.</span><span class="n">east</span>
+    <span class="n">v_r</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">target_ship_vector_length</span>
+    <span class="n">psi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">own_ship_course</span> <span class="o">+</span> <span class="n">desired_beta</span><span class="p">)</span>
+
+    <span class="n">n_4</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">n_1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+    <span class="n">e_4</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">e_1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+
+    <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">e_2</span> <span class="o">*</span> <span class="n">e_4</span>
+        <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_2</span> <span class="o">*</span> <span class="n">n_4</span>
+        <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">e_1</span> <span class="o">*</span> <span class="n">e_2</span>
+        <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_1</span> <span class="o">*</span> <span class="n">n_2</span>
+        <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">e_1</span> <span class="o">*</span> <span class="p">(</span><span class="n">e_4</span> <span class="o">-</span> <span class="n">e_1</span><span class="p">)</span>
+        <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_1</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_4</span> <span class="o">-</span> <span class="n">n_1</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span><span class="n">e_4</span> <span class="o">-</span> <span class="n">e_1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_4</span> <span class="o">-</span> <span class="n">n_1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">e_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n_2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">e_1</span> <span class="o">*</span> <span class="n">e_2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_1</span> <span class="o">*</span> <span class="n">n_2</span> <span class="o">-</span> <span class="n">v_r</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">e_1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n_1</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c1"># Assign conservative fallback values to return variables</span>
+    <span class="n">start_position_found</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">start_position_target_ship</span> <span class="o">=</span> <span class="n">target_ship_position_future</span><span class="o">.</span><span class="n">model_copy</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="c1"># Do not run calculation of target ship start position. Return fallback values.</span>
+        <span class="k">return</span> <span class="n">start_position_target_ship</span><span class="p">,</span> <span class="n">start_position_found</span>
+
+    <span class="c1"># Calculation of target ship start position</span>
+    <span class="n">s_1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">s_2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+
+    <span class="n">e_31</span> <span class="o">=</span> <span class="n">e_1</span> <span class="o">+</span> <span class="n">s_1</span> <span class="o">*</span> <span class="p">(</span><span class="n">e_4</span> <span class="o">-</span> <span class="n">e_1</span><span class="p">)</span>
+    <span class="n">n_31</span> <span class="o">=</span> <span class="n">n_1</span> <span class="o">+</span> <span class="n">s_1</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_4</span> <span class="o">-</span> <span class="n">n_1</span><span class="p">)</span>
+    <span class="n">e_32</span> <span class="o">=</span> <span class="n">e_1</span> <span class="o">+</span> <span class="n">s_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">e_4</span> <span class="o">-</span> <span class="n">e_1</span><span class="p">)</span>
+    <span class="n">n_32</span> <span class="o">=</span> <span class="n">n_1</span> <span class="o">+</span> <span class="n">s_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_4</span> <span class="o">-</span> <span class="n">n_1</span><span class="p">)</span>
+
+    <span class="n">target_ship_course_1</span> <span class="o">=</span> <span class="n">calculate_ship_course</span><span class="p">(</span>
+        <span class="n">waypoint_0</span><span class="o">=</span><span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_31</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_31</span><span class="p">),</span>
+        <span class="n">waypoint_1</span><span class="o">=</span><span class="n">target_ship_position_future</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">beta1</span><span class="p">,</span> <span class="n">alpha1</span> <span class="o">=</span> <span class="n">calculate_relative_bearing</span><span class="p">(</span>
+        <span class="n">position_own_ship</span><span class="o">=</span><span class="n">own_ship_position</span><span class="p">,</span>
+        <span class="n">heading_own_ship</span><span class="o">=</span><span class="n">own_ship_course</span><span class="p">,</span>
+        <span class="n">position_target_ship</span><span class="o">=</span><span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_31</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_31</span><span class="p">),</span>
+        <span class="n">heading_target_ship</span><span class="o">=</span><span class="n">target_ship_course_1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">colreg_state1</span><span class="p">:</span> <span class="n">EncounterType</span> <span class="o">=</span> <span class="n">determine_colreg</span><span class="p">(</span>
+        <span class="n">alpha1</span><span class="p">,</span> <span class="n">beta1</span><span class="p">,</span> <span class="n">theta13_criteria</span><span class="p">,</span> <span class="n">theta14_criteria</span><span class="p">,</span> <span class="n">theta15_criteria</span><span class="p">,</span> <span class="n">theta15</span>
+    <span class="p">)</span>
+    <span class="n">target_ship_course_2</span> <span class="o">=</span> <span class="n">calculate_ship_course</span><span class="p">(</span>
+        <span class="n">waypoint_0</span><span class="o">=</span><span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_32</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_32</span><span class="p">),</span>
+        <span class="n">waypoint_1</span><span class="o">=</span><span class="n">target_ship_position_future</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">beta2</span><span class="p">,</span> <span class="n">alpha2</span> <span class="o">=</span> <span class="n">calculate_relative_bearing</span><span class="p">(</span>
+        <span class="n">position_own_ship</span><span class="o">=</span><span class="n">own_ship_position</span><span class="p">,</span>
+        <span class="n">heading_own_ship</span><span class="o">=</span><span class="n">own_ship_course</span><span class="p">,</span>
+        <span class="n">position_target_ship</span><span class="o">=</span><span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_32</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_32</span><span class="p">),</span>
+        <span class="n">heading_target_ship</span><span class="o">=</span><span class="n">target_ship_course_2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">colreg_state2</span><span class="p">:</span> <span class="n">EncounterType</span> <span class="o">=</span> <span class="n">determine_colreg</span><span class="p">(</span>
+        <span class="n">alpha2</span><span class="p">,</span> <span class="n">beta2</span><span class="p">,</span> <span class="n">theta13_criteria</span><span class="p">,</span> <span class="n">theta14_criteria</span><span class="p">,</span> <span class="n">theta15_criteria</span><span class="p">,</span> <span class="n">theta15</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">desired_encounter_type</span> <span class="ow">is</span> <span class="n">colreg_state1</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">beta1</span> <span class="o">-</span> <span class="n">desired_beta</span> <span class="o">%</span> <span class="mi">360</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="n">start_position_target_ship</span> <span class="o">=</span> <span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_31</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_31</span><span class="p">)</span>
+        <span class="n">start_position_found</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">desired_encounter_type</span> <span class="ow">is</span> <span class="n">colreg_state2</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">beta1</span> <span class="o">-</span> <span class="n">desired_beta</span> <span class="o">%</span> <span class="mi">360</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="n">start_position_target_ship</span> <span class="o">=</span> <span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">n_32</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">e_32</span><span class="p">)</span>
+        <span class="n">start_position_found</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">start_position_target_ship</span><span class="p">,</span> <span class="n">start_position_found</span></div>
+
+
+
+<div class="viewcode-block" id="assign_future_position_to_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.assign_future_position_to_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">assign_future_position_to_target_ship</span><span class="p">(</span>
+    <span class="n">own_ship_position_future</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">max_meeting_distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Position</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Randomly assign future position of target ship. If drawing a circle with radius</span>
+<span class="sd">    max_meeting_distance around future position of own ship, future position of</span>
+<span class="sd">    target ship shall be somewhere inside this circle.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_position_future: Dict, own ship position at a given time in the</span>
+<span class="sd">            future, {north, east}</span>
+<span class="sd">        * max_meeting_distance: Maximum distance between own ship and target ship at</span>
+<span class="sd">            a given time in the future [nm]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        future_position_target_ship: Future position of target ship {north, east} [m]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random_angle</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="n">random_distance</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nm_2_m</span><span class="p">(</span><span class="n">max_meeting_distance</span><span class="p">)</span>
+
+    <span class="n">north</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship_position_future</span><span class="o">.</span><span class="n">north</span> <span class="o">+</span> <span class="n">random_distance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">random_angle</span><span class="p">))</span>
+    <span class="n">east</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">own_ship_position_future</span><span class="o">.</span><span class="n">east</span> <span class="o">+</span> <span class="n">random_distance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">random_angle</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Position</span><span class="p">(</span><span class="n">north</span><span class="o">=</span><span class="n">north</span><span class="p">,</span> <span class="n">east</span><span class="o">=</span><span class="n">east</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="determine_colreg">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.determine_colreg">[docs]</a>
+<span class="k">def</span> <span class="nf">determine_colreg</span><span class="p">(</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">theta13_criteria</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">theta14_criteria</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">theta15_criteria</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">theta15</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EncounterType</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the colreg type based on alpha, relative bearing between target ship and own</span>
+<span class="sd">    ship seen from target ship, and beta, relative bearing between own ship and target ship</span>
+<span class="sd">    seen from own ship.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * alpha: relative bearing between target ship and own ship seen from target ship</span>
+<span class="sd">        * beta: relative bearing between own ship and target ship seen from own ship</span>
+<span class="sd">        * theta13_criteria: Tolerance for &quot;coming up with&quot; relative bearing</span>
+<span class="sd">        * theta14_criteria: Tolerance for &quot;reciprocal or nearly reciprocal courses&quot;,</span>
+<span class="sd">          &quot;when in any doubt... assume... [head-on]&quot;</span>
+<span class="sd">        * theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter</span>
+<span class="sd">        * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking</span>
+<span class="sd">                   encounter</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * encounter classification</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Mapping</span>
+    <span class="n">alpha0360</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">alpha</span> <span class="k">if</span> <span class="n">alpha</span> <span class="o">&gt;=</span> <span class="mf">0.0</span> <span class="k">else</span> <span class="n">alpha</span> <span class="o">+</span> <span class="mf">360.0</span>
+    <span class="n">beta0180</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">beta</span> <span class="k">if</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&lt;=</span> <span class="mf">180.0</span><span class="p">)</span> <span class="k">else</span> <span class="n">beta</span> <span class="o">-</span> <span class="mf">360.0</span>
+
+    <span class="c1"># Find appropriate rule set</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&gt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&lt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="n">theta13_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_STAND_ON</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">alpha0360</span> <span class="o">&gt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">alpha0360</span> <span class="o">&lt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">beta0180</span><span class="p">)</span> <span class="o">-</span> <span class="n">theta13_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_GIVE_WAY</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">beta0180</span><span class="p">)</span> <span class="o">-</span> <span class="n">theta14_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="n">theta14_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">HEAD_ON</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">beta</span> <span class="o">&lt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">theta15_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_GIVE_WAY</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">alpha0360</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">alpha0360</span> <span class="o">&lt;</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">beta0180</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">beta0180</span> <span class="o">-</span> <span class="n">theta15_criteria</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_STAND_ON</span>
+    <span class="k">return</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">NO_RISK_COLLISION</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_relative_bearing">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.calculate_relative_bearing">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_relative_bearing</span><span class="p">(</span>
+    <span class="n">position_own_ship</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">heading_own_ship</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">position_target_ship</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">heading_target_ship</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate relative bearing between own ship and target ship, both seen from</span>
+<span class="sd">    own ship and seen from target ship.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * position_own_ship: Dict, own ship position {north, east} [m]</span>
+<span class="sd">        * heading_own_ship: Own ship course [deg]</span>
+<span class="sd">        * position_target_ship: Dict, own ship position {north, east} [m]</span>
+<span class="sd">        * heading_target_ship: Target ship course [deg]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * beta: relative bearing between own ship and target ship seen from own ship [deg]</span>
+<span class="sd">        * alpha: relative bearing between target ship and own ship seen from target ship [deg]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">heading_own_ship</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">heading_own_ship</span><span class="p">)</span>
+    <span class="n">heading_target_ship</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">heading_target_ship</span><span class="p">)</span>
+
+    <span class="c1"># POSE combination of relative bearing and contact angle</span>
+    <span class="n">n_own_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">position_own_ship</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">e_own_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">position_own_ship</span><span class="o">.</span><span class="n">east</span>
+    <span class="n">n_target_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">position_target_ship</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">e_target_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">position_target_ship</span><span class="o">.</span><span class="n">east</span>
+
+    <span class="c1"># Absolute bearing of target ship relative to own ship</span>
+    <span class="n">bng_own_ship_target_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">if</span> <span class="n">e_own_ship</span> <span class="o">==</span> <span class="n">e_target_ship</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n_own_ship</span> <span class="o">&lt;=</span> <span class="n">n_target_ship</span><span class="p">:</span>
+            <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">e_own_ship</span> <span class="o">&lt;</span> <span class="n">e_target_ship</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n_own_ship</span> <span class="o">&lt;=</span> <span class="n">n_target_ship</span><span class="p">:</span>
+                <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">n_target_ship</span> <span class="o">-</span> <span class="n">n_own_ship</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e_target_ship</span> <span class="o">-</span> <span class="n">e_own_ship</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">n_target_ship</span> <span class="o">-</span> <span class="n">n_own_ship</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e_target_ship</span> <span class="o">-</span> <span class="n">e_own_ship</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">n_own_ship</span> <span class="o">&lt;=</span> <span class="n">n_target_ship</span><span class="p">:</span>
+                <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">n_target_ship</span> <span class="o">-</span> <span class="n">n_own_ship</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e_target_ship</span> <span class="o">-</span> <span class="n">e_own_ship</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bng_own_ship_target_ship</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span>
+                    <span class="nb">abs</span><span class="p">(</span><span class="n">n_target_ship</span> <span class="o">-</span> <span class="n">n_own_ship</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">e_target_ship</span> <span class="o">-</span> <span class="n">e_own_ship</span><span class="p">)</span>
+                <span class="p">)</span>
+
+    <span class="c1"># Bearing of own ship from the perspective of the contact</span>
+    <span class="n">bng_target_ship_own_ship</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">bng_own_ship_target_ship</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="c1"># Relative bearing of contact ship relative to own ship</span>
+    <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">bng_own_ship_target_ship</span> <span class="o">-</span> <span class="n">heading_own_ship</span>
+    <span class="k">while</span> <span class="n">beta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">while</span> <span class="n">beta</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="c1"># Relative bearing of own ship relative to target ship</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">bng_target_ship_own_ship</span> <span class="o">-</span> <span class="n">heading_target_ship</span>
+    <span class="k">while</span> <span class="n">alpha</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">while</span> <span class="n">alpha</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">beta</span><span class="p">,</span> <span class="n">alpha</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_ship_course">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.calculate_ship_course">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_ship_course</span><span class="p">(</span><span class="n">waypoint_0</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span> <span class="n">waypoint_1</span><span class="p">:</span> <span class="n">Position</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate ship course between two waypoints.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * waypoint_0: Dict, waypoint {north, east} [m]</span>
+<span class="sd">        * waypoint_1: Dict, waypoint {north, east} [m]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        course: Ship course [deg]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">course</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">waypoint_1</span><span class="o">.</span><span class="n">east</span> <span class="o">-</span> <span class="n">waypoint_0</span><span class="o">.</span><span class="n">east</span><span class="p">,</span> <span class="n">waypoint_1</span><span class="o">.</span><span class="n">north</span> <span class="o">-</span> <span class="n">waypoint_0</span><span class="o">.</span><span class="n">north</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">course</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">course</span> <span class="o">=</span> <span class="n">course</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">course</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="assign_vector_time">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.assign_vector_time">[docs]</a>
+<span class="k">def</span> <span class="nf">assign_vector_time</span><span class="p">(</span><span class="n">vector_time_range</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign random (uniform) vector time.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * vector_range: Minimum and maximum value for vector time</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        vector_time: Vector time [min]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vector_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">vector_time_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">vector_time_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">vector_time_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">vector_time</span></div>
+
+
+
+<div class="viewcode-block" id="assign_speed_to_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.assign_speed_to_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">assign_speed_to_target_ship</span><span class="p">(</span>
+    <span class="n">encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span><span class="p">,</span>
+    <span class="n">own_ship_speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">min_target_ship_speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">relative_speed_setting</span><span class="p">:</span> <span class="n">EncounterRelativeSpeed</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign random (uniform) speed to target ship depending on type of encounter.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * encounter_type: Type of encounter</span>
+<span class="sd">        * own_ship_speed: Own ship speed [knot]</span>
+<span class="sd">        * min_target_ship_speed: Minimum target ship speed [knot]</span>
+<span class="sd">        * relative_speed_setting: Relative speed setting dependent on encounter [-]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        target_ship_speed: Target ship speed [knot]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_STAND_ON</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_setting</span><span class="o">.</span><span class="n">overtaking_stand_on</span>
+    <span class="k">elif</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_GIVE_WAY</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_setting</span><span class="o">.</span><span class="n">overtaking_give_way</span>
+    <span class="k">elif</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">HEAD_ON</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_setting</span><span class="o">.</span><span class="n">head_on</span>
+    <span class="k">elif</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_GIVE_WAY</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_setting</span><span class="o">.</span><span class="n">crossing_give_way</span>
+    <span class="k">elif</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_STAND_ON</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="n">relative_speed_setting</span><span class="o">.</span><span class="n">crossing_stand_on</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">relative_speed</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+
+    <span class="c1"># Check that minimum target ship speed is in the relative speed range</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">min_target_ship_speed</span> <span class="o">/</span> <span class="n">own_ship_speed</span> <span class="o">&gt;</span> <span class="n">relative_speed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="ow">and</span> <span class="n">min_target_ship_speed</span> <span class="o">/</span> <span class="n">own_ship_speed</span> <span class="o">&lt;</span> <span class="n">relative_speed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="n">relative_speed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_target_ship_speed</span> <span class="o">/</span> <span class="n">own_ship_speed</span>
+
+    <span class="n">target_ship_speed</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">relative_speed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">relative_speed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">relative_speed</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span> <span class="o">*</span> <span class="n">own_ship_speed</span>
+
+    <span class="k">return</span> <span class="n">target_ship_speed</span></div>
+
+
+
+<div class="viewcode-block" id="assign_beta">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.assign_beta">[docs]</a>
+<span class="k">def</span> <span class="nf">assign_beta</span><span class="p">(</span><span class="n">encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span><span class="p">,</span> <span class="n">settings</span><span class="p">:</span> <span class="n">EncounterSettings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign random (uniform) relative bearing beta between own ship</span>
+<span class="sd">    and target ship depending on type of encounter.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * encounter_type: Type of encounter</span>
+<span class="sd">        * settings: Encounter settings</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        Relative bearing between own ship and target ship seen from own ship [deg]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">theta13_crit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta13_criteria</span>
+    <span class="n">theta14_crit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta14_criteria</span>
+    <span class="n">theta15_crit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15_criteria</span>
+    <span class="n">theta15</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span>
+
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_STAND_ON</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">OVERTAKING_GIVE_WAY</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">theta13_crit</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta13_crit</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">theta13_crit</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">HEAD_ON</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">theta14_crit</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta14_crit</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">theta14_crit</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_GIVE_WAY</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">encounter_type</span> <span class="ow">is</span> <span class="n">EncounterType</span><span class="o">.</span><span class="n">CROSSING_STAND_ON</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">convert_angle_minus_180_to_180_to_0_to_360</span><span class="p">(</span>
+            <span class="o">-</span><span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta15_crit</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.0</span></div>
+
+
+
+<div class="viewcode-block" id="update_position_data_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.update_position_data_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">update_position_data_target_ship</span><span class="p">(</span>
+    <span class="n">target_ship</span><span class="p">:</span> <span class="n">TargetShip</span><span class="p">,</span>
+    <span class="n">lat_lon_0</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TargetShip</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update position data of the target ship to also include latitude and longitude</span>
+<span class="sd">    position of the target ship.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * target_ship: Target ship data</span>
+<span class="sd">        * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        ship: Updated target ship data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">lat_0</span> <span class="o">=</span> <span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lon_0</span> <span class="o">=</span> <span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">north</span><span class="p">,</span>
+        <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">east</span><span class="p">,</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_0</span><span class="p">),</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lon_0</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">target_ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_ship</span></div>
+
+
+
+<div class="viewcode-block" id="update_position_data_own_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.update_position_data_own_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">update_position_data_own_ship</span><span class="p">(</span>
+    <span class="n">ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">lat_lon_0</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">delta_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Ship</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update position data of the target ship to also include latitude and longitude</span>
+<span class="sd">    position of the target ship.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * ship: Own ship data</span>
+<span class="sd">        * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</span>
+<span class="sd">        * delta_time: Delta time from now to the time new position is being calculated [minutes]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        ship: Updated own ship data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">lat_0</span> <span class="o">=</span> <span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">lon_0</span> <span class="o">=</span> <span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">ship_position_future</span> <span class="o">=</span> <span class="n">calculate_position_at_certain_time</span><span class="p">(</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span>
+        <span class="n">delta_time</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">north</span><span class="p">,</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">east</span><span class="p">,</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_0</span><span class="p">),</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lon_0</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">lat_future</span><span class="p">,</span> <span class="n">lon_future</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">ship_position_future</span><span class="o">.</span><span class="n">north</span><span class="p">,</span>
+        <span class="n">ship_position_future</span><span class="o">.</span><span class="n">east</span><span class="p">,</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_0</span><span class="p">),</span>
+        <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lon_0</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">ship_position_future</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_future</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">ship_position_future</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_future</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">ship</span><span class="o">.</span><span class="n">waypoints</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(),</span>
+        <span class="n">ship_position_future</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ship</span></div>
+
+
+
+<div class="viewcode-block" id="decide_target_ship">
+<a class="viewcode-back" href="../../trafficgen.encounter.html#trafficgen.encounter.decide_target_ship">[docs]</a>
+<span class="k">def</span> <span class="nf">decide_target_ship</span><span class="p">(</span><span class="n">target_ships</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TargetShip</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">TargetShip</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Randomly pick a target ship from a list of target ships.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * target_ships: list of target ships</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        The target ship, info of type, size etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_target_ships</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_ships</span><span class="p">)</span>
+    <span class="n">target_ship_to_use</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_target_ships</span><span class="p">)</span>
+    <span class="n">target_ship</span><span class="p">:</span> <span class="n">TargetShip</span> <span class="o">=</span> <span class="n">target_ships</span><span class="p">[</span><span class="n">target_ship_to_use</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">target_ship</span><span class="o">.</span><span class="n">model_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

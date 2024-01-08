@@ -1,0 +1,39 @@
+:py:mod:`trafficgen.ship_traffic_generator`
+===========================================
+
+.. py:module:: trafficgen.ship_traffic_generator
+
+.. autoapi-nested-parse::
+
+   Functions to generate traffic situations.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.ship_traffic_generator.generate_traffic_situations
+
+
+
+.. py:function:: generate_traffic_situations(situation_folder: pathlib.Path, own_ship_file: pathlib.Path, target_ship_folder: pathlib.Path, settings_file: pathlib.Path) -> List[trafficgen.types.Situation]
+
+   Generate a set of traffic situations using input files.
+   This is the main function for generating a set of traffic situations using input files
+   specifying number and type of encounter, type of target ships etc.
+
+   Params:
+       * situation_folder: Path to situation folder, files describing the desired situations
+       * target_ship_folder: Path to where different type of target ships is found
+       * settings_file: Path to settings file
+
+   :returns: * **traffic_situations** (*List of generated traffic situations.*)
+             * *One situation may consist of one or more encounters.*
+
+

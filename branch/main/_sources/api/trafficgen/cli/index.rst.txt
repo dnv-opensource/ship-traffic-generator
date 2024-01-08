@@ -1,0 +1,93 @@
+:py:mod:`trafficgen.cli`
+========================
+
+.. py:module:: trafficgen.cli
+
+.. autoapi-nested-parse::
+
+   CLI for trafficgen package.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.cli.main
+   trafficgen.cli.gen_situation
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.cli.logger
+   trafficgen.cli._
+   trafficgen.cli.default_data_path
+   trafficgen.cli.situation_folder
+   trafficgen.cli.own_ship_file
+   trafficgen.cli.target_ship_folder
+   trafficgen.cli.settings_file
+   trafficgen.cli.output_folder
+
+
+.. py:data:: logger
+
+   
+
+.. py:data:: _
+
+   
+
+.. py:data:: default_data_path
+   :type: pathlib.Path
+
+   
+
+.. py:data:: situation_folder
+   :type: pathlib.Path
+
+   
+
+.. py:data:: own_ship_file
+   :type: pathlib.Path
+
+   
+
+.. py:data:: target_ship_folder
+   :type: pathlib.Path
+
+   
+
+.. py:data:: settings_file
+   :type: pathlib.Path
+
+   
+
+.. py:data:: output_folder
+   :type: pathlib.Path
+
+   
+
+.. py:function:: main(args=None)
+
+   Entry point for console script as configured in pyproject.toml.
+
+   Runs the command line interface and parses arguments and options entered on the console.
+
+
+.. py:function:: gen_situation(situations, own_ship, targets, settings, visualize, col, row, visualize_situation, output)
+
+   Console script for trafficgen.
+   Example: \n
+   trafficgen gen-situation -s ./data/example_situations_input
+   -o ./data/test_output_1.
+
+

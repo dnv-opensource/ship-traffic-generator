@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.marine_system_simulator module &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">trafficgen.marine_system_simulator module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trafficgen.marine_system_simulator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.marine_system_simulator">
+<span id="trafficgen-marine-system-simulator-module"></span><h1>trafficgen.marine_system_simulator module<a class="headerlink" href="#module-trafficgen.marine_system_simulator" title="Link to this heading"></a></h1>
+<p>The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems.</p>
+<p>It includes models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.
+The library also contains guidance, navigation, and control (GNC) blocks for real-time simulation.
+The algorithms are described in:</p>
+<p>T. I. Fossen (2021). Handbook of Marine Craft Hydrodynamics and Motion Control. 2nd. Edition,
+Wiley. ISBN-13: 978-1119575054</p>
+<p>Parts of the library have been re-implemented in Python and are found below.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.marine_system_simulator.flat2llh">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.marine_system_simulator.</span></span><span class="sig-name descname"><span class="pre">flat2llh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#flat2llh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.marine_system_simulator.flat2llh" title="Link to this definition"></a></dt>
+<dd><p>Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
+NED coordinates (xn,yn,zn).</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p>The method computes longitude lon (rad), latitude lat (rad) and height h (m) for the
+NED coordinates (xn,yn,zn) using a flat Earth coordinate system defined by the WGS-84
+ellipsoid. The flat Earth coordinate origin is located  at (lon_0, lat_0) with reference
+height h_ref in meters above the surface of the ellipsoid. Both height and h_ref
+are positive upwards, while zn is positive downwards (NED).
+Author:    Thor I. Fossen
+Date:      20 July 2018
+Revisions: 2023-02-04 updates the formulas for latitude and longitude</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>xn: Ship position, north [m]
+yn: Ship position, east [m]
+zn=0.0: Ship position, down [m]
+lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
+of the ellipsoid</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>lat</strong> (<em>Latitude [rad]</em>)</p></li>
+<li><p><strong>lon</strong> (<em>Longitude [rad]</em>)</p></li>
+<li><p><strong>h</strong> (<em>Height [m]</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.marine_system_simulator.llh2flat">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.marine_system_simulator.</span></span><span class="sig-name descname"><span class="pre">llh2flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon_0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_ref</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#llh2flat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.marine_system_simulator.llh2flat" title="Link to this definition"></a></dt>
+<dd><p>Compute (north, east) for a flat Earth coordinate system from longitude
+lon (rad) and latitude lat (rad).</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p>The method computes (north, east) for a flat Earth coordinate system from longitude
+lon (rad) and latitude lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate
+origin is located  at (lon_0, lat_0).
+Author:    Thor I. Fossen
+Date:      20 July 2018
+Revisions: 2023-02-04 updates the formulas for latitude and longitude</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>lat: Ship position in latitude [rad]
+lon: Ship position in longitude [rad]
+h=0.0: Ship height in meters above the surface of the ellipsoid
+lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
+the surface of the ellipsoid</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>x_n</strong> (<em>Ship position, north [m]</em>)</p></li>
+<li><p><strong>y_n</strong> (<em>Ship position, east [m]</em>)</p></li>
+<li><p><strong>z_n</strong> (<em>Ship position, down [m]</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.marine_system_simulator.ssa">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.marine_system_simulator.</span></span><span class="sig-name descname"><span class="pre">ssa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/marine_system_simulator.html#ssa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.marine_system_simulator.ssa" title="Link to this definition"></a></dt>
+<dd><p>Return the “smallest signed angle” (SSA) or the smallest difference between two angles.</p>
+<p>Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+library for marine systems.</p>
+<p class="rubric">Examples</p>
+<p>angle = ssa(angle) maps an angle in rad to the interval [-pi pi)</p>
+<p>Author:     Thor I. Fossen
+Date:       2018-09-21</p>
+<dl class="simple">
+<dt>Param:</dt><dd><p>angle: angle given in radius</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>smallest_angle</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>“smallest signed angle” or the smallest difference between two angles</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

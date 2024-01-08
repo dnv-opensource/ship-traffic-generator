@@ -1,0 +1,69 @@
+:py:mod:`trafficgen.read_files`
+===============================
+
+.. py:module:: trafficgen.read_files
+
+.. autoapi-nested-parse::
+
+   Functions to read the files needed to build one or more traffic situations.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.read_files.read_situation_files
+   trafficgen.read_files.read_own_ship_file
+   trafficgen.read_files.read_target_ship_files
+   trafficgen.read_files.read_encounter_settings_file
+
+
+
+.. py:function:: read_situation_files(situation_folder: pathlib.Path) -> List[trafficgen.types.Situation]
+
+   Read traffic situation files.
+
+   Params:
+       situation_folder: Path to the folder where situation files are found
+
+   :returns: **situations**
+   :rtype: List of desired traffic situations
+
+
+.. py:function:: read_own_ship_file(own_ship_file: pathlib.Path) -> trafficgen.types.Ship
+
+   Read own ship file.
+
+   Params:
+       own_ship_file: Path to the own_ship_file file
+
+   :rtype: own_ship information
+
+
+.. py:function:: read_target_ship_files(target_ship_folder: pathlib.Path) -> List[trafficgen.types.TargetShip]
+
+   Read target ship files.
+
+   Params:
+       target_ship_folder: Path to the folder where target ships are found
+
+   :returns: **target_ships**
+   :rtype: List of different target ships
+
+
+.. py:function:: read_encounter_settings_file(settings_file: pathlib.Path) -> trafficgen.types.EncounterSettings
+
+   Read encounter settings file.
+
+   Params:
+       settings_file: Path to the encounter setting file
+
+   :rtype: Encounter settings
+
+

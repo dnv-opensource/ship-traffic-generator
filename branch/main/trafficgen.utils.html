@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.utils module &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=01f34227"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">trafficgen.utils module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trafficgen.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.utils">
+<span id="trafficgen-utils-module"></span><h1>trafficgen.utils module<a class="headerlink" href="#module-trafficgen.utils" title="Link to this heading"></a></h1>
+<p>Utility functions that are used by several other functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.calculate_position_at_certain_time">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">calculate_position_at_certain_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">course</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="trafficgen.types.html#trafficgen.types.Position" title="trafficgen.types.Position"><span class="pre">Position</span></a></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#calculate_position_at_certain_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.calculate_position_at_certain_time" title="Link to this definition"></a></dt>
+<dd><p>Calculate the position of the ship at a given time based on initial position
+and delta time, and constand speed and course.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>position: Initial ship position [m]
+speed: Ship speed [knot]
+course: Ship course [deg]
+delta_time: Delta time from now to the time new position is being calculated [minutes]</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>position{north, east}</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict, north and east position given in meters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.convert_angle_0_to_360_to_minus_180_to_180">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">convert_angle_0_to_360_to_minus_180_to_180</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_360</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#convert_angle_0_to_360_to_minus_180_to_180"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.convert_angle_0_to_360_to_minus_180_to_180" title="Link to this definition"></a></dt>
+<dd><p>Convert an angle given in the region 0 to 360 degrees to an
+angle given in the region -180 to 180 degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_360: Angle given in the region 0 to 360 degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle_180</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in the region -180 to 180 degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.convert_angle_minus_180_to_180_to_0_to_360">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">convert_angle_minus_180_to_180_to_0_to_360</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_180</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#convert_angle_minus_180_to_180_to_0_to_360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.convert_angle_minus_180_to_180_to_0_to_360" title="Link to this definition"></a></dt>
+<dd><p>Convert an angle given in the region -180 to 180 degrees to an
+angle given in the region 0 to 360 degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_180: Angle given in the region -180 to 180 degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle_360</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in the region 0 to 360 degrees</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.deg_2_rad">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">deg_2_rad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_in_degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#deg_2_rad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.deg_2_rad" title="Link to this definition"></a></dt>
+<dd><p>Convert angle given in degrees to angle give in radians.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_in_degrees: Angle given in degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle given in radians</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in radians</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.knot_2_m_pr_min">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">knot_2_m_pr_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed_in_knot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#knot_2_m_pr_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.knot_2_m_pr_min" title="Link to this definition"></a></dt>
+<dd><p>Convert ship speed in knot to meters pr minutes.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>speed_in_knot: Ship speed given in knots</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>speed_in_m_pr_min</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ship speed in meters pr minutes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.m2nm">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">m2nm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_in_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#m2nm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.m2nm" title="Link to this definition"></a></dt>
+<dd><p>Convert length given in meters to length given in nautical miles.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>length_in_m: Length given in meters</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length_in_nm</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Length given in nautical miles</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.m_pr_min_2_knot">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">m_pr_min_2_knot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speed_in_m_pr_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#m_pr_min_2_knot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.m_pr_min_2_knot" title="Link to this definition"></a></dt>
+<dd><p>Convert ship speed in meters pr minutes to knot.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>speed_in_m_pr_min: Ship speed in meters pr second</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>speed_in_knot</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ship speed given in knots</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.nm_2_m">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">nm_2_m</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_in_nm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#nm_2_m"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.nm_2_m" title="Link to this definition"></a></dt>
+<dd><p>Convert length given in nautical miles to length given in meters.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>length_in_nm: Length given in nautical miles</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length_in_m</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Length given in meters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.utils.rad_2_deg">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.utils.</span></span><span class="sig-name descname"><span class="pre">rad_2_deg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle_in_radians</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/trafficgen/utils.html#rad_2_deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.utils.rad_2_deg" title="Link to this definition"></a></dt>
+<dd><p>Convert angle given in radians to angle give in degrees.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>angle_in_degrees: Angle given in degrees</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle given in radians</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Angle given in radians</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

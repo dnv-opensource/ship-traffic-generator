@@ -1,0 +1,39 @@
+:py:mod:`trafficgen.check_land_crossing`
+========================================
+
+.. py:module:: trafficgen.check_land_crossing
+
+.. autoapi-nested-parse::
+
+   Module with helper functions to determine if a generated path is crossing land.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.check_land_crossing.path_crosses_land
+
+
+
+.. py:function:: path_crosses_land(position_1: trafficgen.types.Position, speed: float, course: float, lat_lon_0: List[float], time_interval: float = 50.0) -> bool
+
+   Find if path is crossing land.
+
+   Params:
+       position_1: Ship position in (north, east) [m].
+       speed: Ship speed [knots].
+       course: Ship course [degree].
+       lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree].
+       time_interval: The time interval the vessel should travel without crossing land [minutes]
+
+   :returns: **is_on_land**
+   :rtype: True if parts of the path crosses land.
+
+

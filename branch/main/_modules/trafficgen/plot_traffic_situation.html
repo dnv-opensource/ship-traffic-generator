@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.plot_traffic_situation &mdash; Traffic Generator 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.plot_traffic_situation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.plot_traffic_situation</h1><div class="highlight"><pre>
+<span></span><span class="c1"># The matplotlib package is unfortunately not fully typed. Hence the following pyright exemption.</span>
+<span class="c1"># pyright: reportUnknownMemberType=false</span>
+<span class="sd">&quot;&quot;&quot;Functions to prepare and plot traffic situations.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">folium</span> <span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span>
+
+<span class="kn">from</span> <span class="nn">trafficgen.types</span> <span class="kn">import</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Ship</span><span class="p">,</span> <span class="n">Situation</span><span class="p">,</span> <span class="n">TargetShip</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">deg_2_rad</span><span class="p">,</span> <span class="n">flat2llh</span><span class="p">,</span> <span class="n">knot_2_m_pr_min</span><span class="p">,</span> <span class="n">m2nm</span><span class="p">,</span> <span class="n">rad_2_deg</span>
+
+
+<div class="viewcode-block" id="calculate_vector_arrow">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.calculate_vector_arrow">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_vector_arrow</span><span class="p">(</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">vector_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lat_lon_0</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the arrow with length vector pointing in the direction of ship course.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        position: {north}, {east} position of the ship [m]</span>
+<span class="sd">        direction: direction the arrow is pointing [deg]</span>
+<span class="sd">        vector_length: length of vector</span>
+<span class="sd">        lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        arrow_points: Polygon points to draw the arrow</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">north_start</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">east_start</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">east</span>
+
+    <span class="n">side_length</span> <span class="o">=</span> <span class="n">vector_length</span> <span class="o">/</span> <span class="mi">10</span>
+    <span class="n">sides_angle</span> <span class="o">=</span> <span class="mi">25</span>
+
+    <span class="n">north_end</span> <span class="o">=</span> <span class="n">north_start</span> <span class="o">+</span> <span class="n">vector_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span><span class="p">))</span>
+    <span class="n">east_end</span> <span class="o">=</span> <span class="n">east_start</span> <span class="o">+</span> <span class="n">vector_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span><span class="p">))</span>
+
+    <span class="n">north_arrow_side_1</span> <span class="o">=</span> <span class="n">north_end</span> <span class="o">+</span> <span class="n">side_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">180</span> <span class="o">-</span> <span class="n">sides_angle</span><span class="p">))</span>
+    <span class="n">east_arrow_side_1</span> <span class="o">=</span> <span class="n">east_end</span> <span class="o">+</span> <span class="n">side_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">180</span> <span class="o">-</span> <span class="n">sides_angle</span><span class="p">))</span>
+    <span class="n">north_arrow_side_2</span> <span class="o">=</span> <span class="n">north_end</span> <span class="o">+</span> <span class="n">side_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">180</span> <span class="o">+</span> <span class="n">sides_angle</span><span class="p">))</span>
+    <span class="n">east_arrow_side_2</span> <span class="o">=</span> <span class="n">east_end</span> <span class="o">+</span> <span class="n">side_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">direction</span> <span class="o">+</span> <span class="mi">180</span> <span class="o">+</span> <span class="n">sides_angle</span><span class="p">))</span>
+
+    <span class="n">lat_start</span><span class="p">,</span> <span class="n">lon_start</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_start</span><span class="p">,</span> <span class="n">east_start</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">lat_end</span><span class="p">,</span> <span class="n">lon_end</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span><span class="n">north_end</span><span class="p">,</span> <span class="n">east_end</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">lat_arrow_side_1</span><span class="p">,</span> <span class="n">lon_arrow_side_1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_arrow_side_1</span><span class="p">,</span> <span class="n">east_arrow_side_1</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">lat_arrow_side_2</span><span class="p">,</span> <span class="n">lon_arrow_side_2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_arrow_side_2</span><span class="p">,</span> <span class="n">east_arrow_side_2</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">point_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_start</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_start</span><span class="p">))</span>
+    <span class="n">point_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_end</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_end</span><span class="p">))</span>
+    <span class="n">point_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_arrow_side_1</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_arrow_side_1</span><span class="p">))</span>
+    <span class="n">point_4</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_arrow_side_2</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_arrow_side_2</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">point_1</span><span class="p">,</span> <span class="n">point_2</span><span class="p">,</span> <span class="n">point_3</span><span class="p">,</span> <span class="n">point_4</span><span class="p">,</span> <span class="n">point_2</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_ship_outline">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.calculate_ship_outline">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_ship_outline</span><span class="p">(</span>
+    <span class="n">position</span><span class="p">:</span> <span class="n">Position</span><span class="p">,</span>
+    <span class="n">course</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lat_lon_0</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">ship_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">ship_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">15.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the outline of the ship pointing in the direction of ship course.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        position: {north}, {east} position of the ship [m]</span>
+<span class="sd">        course: course of the ship [deg]</span>
+<span class="sd">        lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]</span>
+<span class="sd">        ship_length: Ship length. If not given, ship length is set to 100</span>
+<span class="sd">        ship_width: Ship width. If not given, ship width is set to 15</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        ship_outline_points: Polygon points to draw the ship</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">north_start</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">north</span>
+    <span class="n">east_start</span> <span class="o">=</span> <span class="n">position</span><span class="o">.</span><span class="n">east</span>
+
+    <span class="c1"># increase size for visualizing</span>
+    <span class="n">ship_length</span> <span class="o">*=</span> <span class="mi">10</span>
+    <span class="n">ship_width</span> <span class="o">*=</span> <span class="mi">10</span>
+
+    <span class="n">north_pos1</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">north_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">east_pos1</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">east_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">lat_pos1</span><span class="p">,</span> <span class="n">lon_pos1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_pos1</span><span class="p">,</span> <span class="n">east_pos1</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">north_pos2</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">north_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">ship_length</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">east_pos2</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">east_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">ship_length</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="n">lat_pos2</span><span class="p">,</span> <span class="n">lon_pos2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_pos2</span><span class="p">,</span> <span class="n">east_pos2</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">north_pos3</span> <span class="o">=</span> <span class="n">north_start</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">east_pos3</span> <span class="o">=</span> <span class="n">east_start</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">lat_pos3</span><span class="p">,</span> <span class="n">lon_pos3</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_pos3</span><span class="p">,</span> <span class="n">east_pos3</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">north_pos4</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">north_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">ship_length</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">east_pos4</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">east_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">ship_length</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">lat_pos4</span><span class="p">,</span> <span class="n">lon_pos4</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_pos4</span><span class="p">,</span> <span class="n">east_pos4</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">north_pos5</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">north_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">east_pos5</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">east_start</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">ship_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">lat_pos5</span><span class="p">,</span> <span class="n">lon_pos5</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flat2llh</span><span class="p">(</span>
+        <span class="n">north_pos5</span><span class="p">,</span> <span class="n">east_pos5</span><span class="p">,</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">point_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_pos1</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_pos1</span><span class="p">))</span>
+    <span class="n">point_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_pos2</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_pos2</span><span class="p">))</span>
+    <span class="n">point_3</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_pos3</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_pos3</span><span class="p">))</span>
+    <span class="n">point_4</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_pos4</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_pos4</span><span class="p">))</span>
+    <span class="n">point_5</span> <span class="o">=</span> <span class="p">(</span><span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lat_pos5</span><span class="p">),</span> <span class="n">rad_2_deg</span><span class="p">(</span><span class="n">lon_pos5</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">point_1</span><span class="p">,</span> <span class="n">point_2</span><span class="p">,</span> <span class="n">point_3</span><span class="p">,</span> <span class="n">point_4</span><span class="p">,</span> <span class="n">point_5</span><span class="p">,</span> <span class="n">point_1</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="plot_specific_traffic_situation">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.plot_specific_traffic_situation">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_specific_traffic_situation</span><span class="p">(</span>
+    <span class="n">traffic_situations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Situation</span><span class="p">],</span>
+    <span class="n">situation_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot a specific situation in map.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        traffic_situations: Generated traffic situations</span>
+<span class="sd">        situation_number: The specific situation to be plotted</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">num_situations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">traffic_situations</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">situation_number</span> <span class="o">&gt;</span> <span class="n">num_situations</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Situation_number specified higher than number of situations available, plotting last situation: </span><span class="si">{</span><span class="n">num_situations</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">situation_number</span> <span class="o">=</span> <span class="n">num_situations</span>
+
+    <span class="n">situation</span><span class="p">:</span> <span class="n">Situation</span> <span class="o">=</span> <span class="n">traffic_situations</span><span class="p">[</span><span class="n">situation_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">lat_lon_0</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">map_plot</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">situation</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">map_plot</span> <span class="o">=</span> <span class="n">add_ship_to_map</span><span class="p">(</span>
+        <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="p">,</span>
+        <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span><span class="p">,</span>
+        <span class="n">situation</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">,</span>
+        <span class="n">map_plot</span><span class="p">,</span>
+        <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">target_ships</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">TargetShip</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">situation</span><span class="o">.</span><span class="n">target_ship</span>
+    <span class="k">assert</span> <span class="n">target_ships</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">target_ship</span> <span class="ow">in</span> <span class="n">target_ships</span><span class="p">:</span>
+        <span class="n">map_plot</span> <span class="o">=</span> <span class="n">add_ship_to_map</span><span class="p">(</span>
+            <span class="n">target_ship</span><span class="p">,</span>
+            <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span><span class="p">,</span>
+            <span class="n">situation</span><span class="o">.</span><span class="n">lat_lon_0</span><span class="p">,</span>
+            <span class="n">map_plot</span><span class="p">,</span>
+            <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">map_plot</span><span class="o">.</span><span class="n">show_in_browser</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="add_ship_to_map">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.add_ship_to_map">[docs]</a>
+<span class="k">def</span> <span class="nf">add_ship_to_map</span><span class="p">(</span>
+    <span class="n">ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">vector_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">lat_lon_0</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+    <span class="n">map_plot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Map</span><span class="p">],</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Map</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add the ship to the map.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        ship: Ship information</span>
+<span class="sd">        vector_time: Vector time [min]</span>
+<span class="sd">        lat_lon_0=Reference point, latitudinal [degree] and longitudinal [degree]</span>
+<span class="sd">        map_plot: Instance of Map. If not set, instance is set to None</span>
+<span class="sd">        color: Color of the ship. If not set, color is &#39;black&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        m: Updated instance of Map.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">map_plot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">map_plot</span> <span class="o">=</span> <span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lat_lon_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">vector_length</span> <span class="o">=</span> <span class="n">vector_time</span> <span class="o">*</span> <span class="n">knot_2_m_pr_min</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">map_plot</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span>
+        <span class="n">Polygon</span><span class="p">(</span>
+            <span class="n">calculate_vector_arrow</span><span class="p">(</span>
+                <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span> <span class="n">vector_length</span><span class="p">,</span> <span class="n">lat_lon_0</span>
+            <span class="p">),</span>
+            <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">fill_opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">map_plot</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span>
+        <span class="n">Polygon</span><span class="p">(</span>
+            <span class="n">calculate_ship_outline</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span><span class="p">,</span> <span class="n">lat_lon_0</span><span class="p">),</span>
+            <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">fill_opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">map_plot</span></div>
+
+
+
+<div class="viewcode-block" id="plot_traffic_situations">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.plot_traffic_situations">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_traffic_situations</span><span class="p">(</span>
+    <span class="n">traffic_situations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Situation</span><span class="p">],</span>
+    <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the traffic situations in one more figures.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        traffic_situations: Traffic situations to be plotted</span>
+<span class="sd">        col: Number of columns in each figure</span>
+<span class="sd">        row: Number of rows in each figure</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_columns</span> <span class="o">=</span> <span class="n">col</span>
+    <span class="n">max_rows</span> <span class="o">=</span> <span class="n">row</span>
+    <span class="n">num_subplots_pr_plot</span> <span class="o">=</span> <span class="n">max_columns</span> <span class="o">*</span> <span class="n">max_rows</span>
+    <span class="n">small_size</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">bigger_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">small_size</span><span class="p">)</span>  <span class="c1"># fontsize of the axes title</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;axes&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">small_size</span><span class="p">)</span>  <span class="c1"># fontsize of the x and y labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;xtick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">small_size</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;ytick&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">small_size</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">bigger_size</span><span class="p">)</span>  <span class="c1"># fontsize of the figure title</span>
+
+    <span class="c1"># The axes should have the same x/y limits, thus find max value for</span>
+    <span class="c1"># north/east position to be used for plotting</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">situation</span> <span class="ow">in</span> <span class="n">traffic_situations</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">max_value</span> <span class="o">=</span> <span class="n">find_max_value_for_plot</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">target_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">target_ship</span> <span class="ow">in</span> <span class="n">situation</span><span class="o">.</span><span class="n">target_ship</span><span class="p">:</span>
+            <span class="n">max_value</span> <span class="o">=</span> <span class="n">find_max_value_for_plot</span><span class="p">(</span><span class="n">target_ship</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+
+    <span class="n">plot_number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">plot_number</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">situation</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">traffic_situations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">num_subplots_pr_plot</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">plot_number</span><span class="p">:</span>
+            <span class="n">plot_number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">plot_number</span><span class="p">)</span>
+
+        <span class="n">axes</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span>
+            <span class="n">max_rows</span><span class="p">,</span>
+            <span class="n">max_columns</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="n">plot_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_subplots_pr_plot</span><span class="p">),</span>
+            <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;[nm]&quot;</span><span class="p">,</span>
+            <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;[nm]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">add_ship_to_plot</span><span class="p">(</span>
+            <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="p">,</span>
+            <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span><span class="p">,</span>
+            <span class="n">axes</span><span class="p">,</span>
+            <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">target_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">target_ship</span> <span class="ow">in</span> <span class="n">situation</span><span class="o">.</span><span class="n">target_ship</span><span class="p">:</span>
+            <span class="n">axes</span> <span class="o">=</span> <span class="n">add_ship_to_plot</span><span class="p">(</span>
+                <span class="n">target_ship</span><span class="p">,</span>
+                <span class="n">situation</span><span class="o">.</span><span class="n">common_vector</span><span class="p">,</span>
+                <span class="n">axes</span><span class="p">,</span>
+                <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">axes</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="n">max_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">max_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="find_max_value_for_plot">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.find_max_value_for_plot">[docs]</a>
+<span class="k">def</span> <span class="nf">find_max_value_for_plot</span><span class="p">(</span>
+    <span class="n">ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">max_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the maximum deviation from the Reference point in north and east direction.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        ship: Ship information</span>
+<span class="sd">        max_value: maximum deviation in north, east direction</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        max_value: updated maximum deviation in north, east direction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">max_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">max_value</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">m2nm</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">north</span><span class="p">)),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">m2nm</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">east</span><span class="p">)),</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_value</span></div>
+
+
+
+<div class="viewcode-block" id="add_ship_to_plot">
+<a class="viewcode-back" href="../../trafficgen.plot_traffic_situation.html#trafficgen.add_ship_to_plot">[docs]</a>
+<span class="k">def</span> <span class="nf">add_ship_to_plot</span><span class="p">(</span>
+    <span class="n">ship</span><span class="p">:</span> <span class="n">Ship</span><span class="p">,</span>
+    <span class="n">vector_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">axes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">],</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add the ship to the plot.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        ship: Ship information</span>
+<span class="sd">        vector_time: Vector time [min]</span>
+<span class="sd">        axes: Instance of figure axis. If not set, instance is set to None</span>
+<span class="sd">        color: Color of the ship. If not set, color is &#39;black&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">pos_0_north</span> <span class="o">=</span> <span class="n">m2nm</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">north</span><span class="p">)</span>
+    <span class="n">pos_0_east</span> <span class="o">=</span> <span class="n">m2nm</span><span class="p">(</span><span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">east</span><span class="p">)</span>
+    <span class="n">course</span> <span class="o">=</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">course</span>
+    <span class="n">speed</span> <span class="o">=</span> <span class="n">ship</span><span class="o">.</span><span class="n">start_pose</span><span class="o">.</span><span class="n">speed</span>
+
+    <span class="n">vector_length</span> <span class="o">=</span> <span class="n">m2nm</span><span class="p">(</span><span class="n">vector_time</span> <span class="o">*</span> <span class="n">knot_2_m_pr_min</span><span class="p">(</span><span class="n">speed</span><span class="p">))</span>
+
+    <span class="n">_</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span>
+        <span class="n">pos_0_east</span><span class="p">,</span>
+        <span class="n">pos_0_north</span><span class="p">,</span>
+        <span class="n">vector_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">)),</span>
+        <span class="n">vector_length</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">deg_2_rad</span><span class="p">(</span><span class="n">course</span><span class="p">)),</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+        <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">head_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">pos_0_east</span><span class="p">,</span> <span class="n">pos_0_north</span><span class="p">),</span>
+        <span class="n">radius</span><span class="o">=</span><span class="n">vector_time</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">axes</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

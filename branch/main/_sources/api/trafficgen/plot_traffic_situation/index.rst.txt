@@ -1,0 +1,116 @@
+:py:mod:`trafficgen.plot_traffic_situation`
+===========================================
+
+.. py:module:: trafficgen.plot_traffic_situation
+
+.. autoapi-nested-parse::
+
+   Functions to prepare and plot traffic situations.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.plot_traffic_situation.calculate_vector_arrow
+   trafficgen.plot_traffic_situation.calculate_ship_outline
+   trafficgen.plot_traffic_situation.plot_specific_traffic_situation
+   trafficgen.plot_traffic_situation.add_ship_to_map
+   trafficgen.plot_traffic_situation.plot_traffic_situations
+   trafficgen.plot_traffic_situation.find_max_value_for_plot
+   trafficgen.plot_traffic_situation.add_ship_to_plot
+
+
+
+.. py:function:: calculate_vector_arrow(position: trafficgen.types.Position, direction: float, vector_length: float, lat_lon_0: List[float]) -> List[Tuple[float, float]]
+
+   Calculate the arrow with length vector pointing in the direction of ship course.
+
+   Params:
+       position: {north}, {east} position of the ship [m]
+       direction: direction the arrow is pointing [deg]
+       vector_length: length of vector
+       lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+
+   :returns: **arrow_points**
+   :rtype: Polygon points to draw the arrow
+
+
+.. py:function:: calculate_ship_outline(position: trafficgen.types.Position, course: float, lat_lon_0: List[float], ship_length: float = 100.0, ship_width: float = 15.0) -> List[Tuple[float, float]]
+
+   Calculate the outline of the ship pointing in the direction of ship course.
+
+   Params:
+       position: {north}, {east} position of the ship [m]
+       course: course of the ship [deg]
+       lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+       ship_length: Ship length. If not given, ship length is set to 100
+       ship_width: Ship width. If not given, ship width is set to 15
+
+   :returns: **ship_outline_points**
+   :rtype: Polygon points to draw the ship
+
+
+.. py:function:: plot_specific_traffic_situation(traffic_situations: List[trafficgen.types.Situation], situation_number: int)
+
+   Plot a specific situation in map.
+
+   Params:
+       traffic_situations: Generated traffic situations
+       situation_number: The specific situation to be plotted
+
+
+.. py:function:: add_ship_to_map(ship: trafficgen.types.Ship, vector_time: float, lat_lon_0: List[float], map_plot: Optional[folium.Map], color: str = 'black') -> folium.Map
+
+   Add the ship to the map.
+
+   Params:
+       ship: Ship information
+       vector_time: Vector time [min]
+       lat_lon_0=Reference point, latitudinal [degree] and longitudinal [degree]
+       map_plot: Instance of Map. If not set, instance is set to None
+       color: Color of the ship. If not set, color is 'black'
+
+   :returns: **m**
+   :rtype: Updated instance of Map.
+
+
+.. py:function:: plot_traffic_situations(traffic_situations: List[trafficgen.types.Situation], col: int, row: int)
+
+   Plot the traffic situations in one more figures.
+
+   Params:
+       traffic_situations: Traffic situations to be plotted
+       col: Number of columns in each figure
+       row: Number of rows in each figure
+
+
+.. py:function:: find_max_value_for_plot(ship: trafficgen.types.Ship, max_value: float) -> float
+
+   Find the maximum deviation from the Reference point in north and east direction.
+
+   Params:
+       ship: Ship information
+       max_value: maximum deviation in north, east direction
+
+   :returns: **max_value**
+   :rtype: updated maximum deviation in north, east direction
+
+
+.. py:function:: add_ship_to_plot(ship: trafficgen.types.Ship, vector_time: float, axes: Optional[matplotlib.pyplot.Axes], color: str = 'black')
+
+   Add the ship to the plot.
+
+   Params:
+       ship: Ship information
+       vector_time: Vector time [min]
+       axes: Instance of figure axis. If not set, instance is set to None
+       color: Color of the ship. If not set, color is 'black'
+
+

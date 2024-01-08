@@ -1,0 +1,529 @@
+:py:mod:`trafficgen`
+====================
+
+.. py:module:: trafficgen
+
+.. autoapi-nested-parse::
+
+   Top-level package for Traffic Generator.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   check_land_crossing/index.rst
+   cli/index.rst
+   encounter/index.rst
+   marine_system_simulator/index.rst
+   plot_traffic_situation/index.rst
+   read_files/index.rst
+   ship_traffic_generator/index.rst
+   types/index.rst
+   utils/index.rst
+   write_traffic_situation_to_file/index.rst
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   trafficgen.knot_2_m_pr_min
+   trafficgen.m_pr_min_2_knot
+   trafficgen.m2nm
+   trafficgen.nm_2_m
+   trafficgen.deg_2_rad
+   trafficgen.rad_2_deg
+   trafficgen.convert_angle_minus_180_to_180_to_0_to_360
+   trafficgen.convert_angle_0_to_360_to_minus_180_to_180
+   trafficgen.calculate_position_at_certain_time
+   trafficgen.flat2llh
+   trafficgen.llh2flat
+   trafficgen.ssa
+   trafficgen.path_crosses_land
+   trafficgen.write_traffic_situations_to_json_file
+   trafficgen.generate_encounter
+   trafficgen.check_encounter_evolvement
+   trafficgen.find_start_position_target_ship
+   trafficgen.assign_future_position_to_target_ship
+   trafficgen.determine_colreg
+   trafficgen.calculate_relative_bearing
+   trafficgen.calculate_ship_course
+   trafficgen.assign_vector_time
+   trafficgen.assign_speed_to_target_ship
+   trafficgen.assign_beta
+   trafficgen.update_position_data_target_ship
+   trafficgen.update_position_data_own_ship
+   trafficgen.decide_target_ship
+   trafficgen.plot_traffic_situations
+   trafficgen.plot_specific_traffic_situation
+   trafficgen.read_situation_files
+   trafficgen.read_own_ship_file
+   trafficgen.read_target_ship_files
+   trafficgen.read_encounter_settings_file
+
+
+
+.. py:function:: knot_2_m_pr_min(speed_in_knot: float) -> float
+
+   Convert ship speed in knot to meters pr minutes.
+
+   Params:
+       speed_in_knot: Ship speed given in knots
+
+   :returns: **speed_in_m_pr_min**
+   :rtype: Ship speed in meters pr minutes
+
+
+.. py:function:: m_pr_min_2_knot(speed_in_m_pr_min: float) -> float
+
+   Convert ship speed in meters pr minutes to knot.
+
+   Params:
+       speed_in_m_pr_min: Ship speed in meters pr second
+
+   :returns: **speed_in_knot**
+   :rtype: Ship speed given in knots
+
+
+.. py:function:: m2nm(length_in_m: float) -> float
+
+   Convert length given in meters to length given in nautical miles.
+
+   Params:
+       length_in_m: Length given in meters
+
+   :returns: **length_in_nm**
+   :rtype: Length given in nautical miles
+
+
+.. py:function:: nm_2_m(length_in_nm: float) -> float
+
+   Convert length given in nautical miles to length given in meters.
+
+   Params:
+       length_in_nm: Length given in nautical miles
+
+   :returns: **length_in_m**
+   :rtype: Length given in meters
+
+
+.. py:function:: deg_2_rad(angle_in_degrees: float) -> float
+
+   Convert angle given in degrees to angle give in radians.
+
+   Params:
+       angle_in_degrees: Angle given in degrees
+
+   :returns: **angle given in radians**
+   :rtype: Angle given in radians
+
+
+.. py:function:: rad_2_deg(angle_in_radians: float) -> float
+
+   Convert angle given in radians to angle give in degrees.
+
+   Params:
+       angle_in_degrees: Angle given in degrees
+
+   :returns: **angle given in radians**
+   :rtype: Angle given in radians
+
+
+.. py:function:: convert_angle_minus_180_to_180_to_0_to_360(angle_180: float) -> float
+
+   Convert an angle given in the region -180 to 180 degrees to an
+   angle given in the region 0 to 360 degrees.
+
+   Params:
+       angle_180: Angle given in the region -180 to 180 degrees
+
+   :returns: **angle_360**
+   :rtype: Angle given in the region 0 to 360 degrees
+
+
+.. py:function:: convert_angle_0_to_360_to_minus_180_to_180(angle_360: float) -> float
+
+   Convert an angle given in the region 0 to 360 degrees to an
+   angle given in the region -180 to 180 degrees.
+
+   Params:
+       angle_360: Angle given in the region 0 to 360 degrees
+
+   :returns: **angle_180**
+   :rtype: Angle given in the region -180 to 180 degrees
+
+
+.. py:function:: calculate_position_at_certain_time(position: trafficgen.types.Position, speed: float, course: float, delta_time: float) -> trafficgen.types.Position
+
+   Calculate the position of the ship at a given time based on initial position
+   and delta time, and constand speed and course.
+
+   Params:
+       position: Initial ship position [m]
+       speed: Ship speed [knot]
+       course: Ship course [deg]
+       delta_time: Delta time from now to the time new position is being calculated [minutes]
+
+   :returns: **position{north, east}**
+   :rtype: Dict, north and east position given in meters
+
+
+.. py:function:: flat2llh(x_n: float, y_n: float, lat_0: float, lon_0: float, z_n: float = 0.0, height_ref: float = 0.0) -> Tuple[float, float, float]
+
+   Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
+   NED coordinates (xn,yn,zn).
+
+   Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+   library for marine systems.
+
+   The method computes longitude lon (rad), latitude lat (rad) and height h (m) for the
+   NED coordinates (xn,yn,zn) using a flat Earth coordinate system defined by the WGS-84
+   ellipsoid. The flat Earth coordinate origin is located  at (lon_0, lat_0) with reference
+   height h_ref in meters above the surface of the ellipsoid. Both height and h_ref
+   are positive upwards, while zn is positive downwards (NED).
+   Author:    Thor I. Fossen
+   Date:      20 July 2018
+   Revisions: 2023-02-04 updates the formulas for latitude and longitude
+
+   Params:
+       xn: Ship position, north [m]
+       yn: Ship position, east [m]
+       zn=0.0: Ship position, down [m]
+       lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+       h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
+       of the ellipsoid
+
+   :returns: * **lat** (*Latitude [rad]*)
+             * **lon** (*Longitude [rad]*)
+             * **h** (*Height [m]*)
+
+
+.. py:function:: llh2flat(lat: float, lon: float, lat_0: float, lon_0: float, height: float = 0.0, height_ref: float = 0.0) -> Tuple[float, float, float]
+
+   Compute (north, east) for a flat Earth coordinate system from longitude
+   lon (rad) and latitude lat (rad).
+
+   Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+   library for marine systems.
+
+   The method computes (north, east) for a flat Earth coordinate system from longitude
+   lon (rad) and latitude lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate
+   origin is located  at (lon_0, lat_0).
+   Author:    Thor I. Fossen
+   Date:      20 July 2018
+   Revisions: 2023-02-04 updates the formulas for latitude and longitude
+
+   Params:
+       lat: Ship position in latitude [rad]
+       lon: Ship position in longitude [rad]
+       h=0.0: Ship height in meters above the surface of the ellipsoid
+       lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+       h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
+       the surface of the ellipsoid
+
+   :returns: * **x_n** (*Ship position, north [m]*)
+             * **y_n** (*Ship position, east [m]*)
+             * **z_n** (*Ship position, down [m]*)
+
+
+.. py:function:: ssa(angle: float) -> float
+
+   Return the "smallest signed angle" (SSA) or the smallest difference between two angles.
+
+   Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
+   library for marine systems.
+
+   .. rubric:: Examples
+
+   angle = ssa(angle) maps an angle in rad to the interval [-pi pi)
+
+   Author:     Thor I. Fossen
+   Date:       2018-09-21
+
+   Param:
+       angle: angle given in radius
+
+   :returns: **smallest_angle**
+   :rtype: "smallest signed angle" or the smallest difference between two angles
+
+
+.. py:function:: path_crosses_land(position_1: trafficgen.types.Position, speed: float, course: float, lat_lon_0: List[float], time_interval: float = 50.0) -> bool
+
+   Find if path is crossing land.
+
+   Params:
+       position_1: Ship position in (north, east) [m].
+       speed: Ship speed [knots].
+       course: Ship course [degree].
+       lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree].
+       time_interval: The time interval the vessel should travel without crossing land [minutes]
+
+   :returns: **is_on_land**
+   :rtype: True if parts of the path crosses land.
+
+
+.. py:function:: write_traffic_situations_to_json_file(situations: List[trafficgen.types.Situation], write_folder: pathlib.Path)
+
+   Write traffic situations to json file.
+
+   Params:
+       traffic_situations: Traffic situations to be written to file
+       write_folder: Folder where the json files is to be written
+
+
+.. py:function:: generate_encounter(desired_encounter_type: trafficgen.types.EncounterType, own_ship: trafficgen.types.Ship, target_ships: List[trafficgen.types.TargetShip], target_ship_id: int, beta_default: Optional[float], relative_speed_default: Optional[float], vector_time_default: Optional[float], settings: trafficgen.types.EncounterSettings) -> Tuple[trafficgen.types.TargetShip, bool]
+
+   Generate an encounter.
+
+   Params:
+       * desired_encounter_type: Desired encounter to be generated
+       * own_ship: Dict, information about own ship that will encounter a target ship
+       * target_ships: List of target ships that may be used in an encounter
+       * target_ship_id: ID which should be used on target ship
+       * beta_default: User defined beta. If not set, this is None.
+       * relative_speed_default: User defined relative speed between own ship and
+                                 target ship. If not set, this is None.
+       * vector_time_default: User defined vector time. If not set, this is None.
+       * settings: Encounter settings
+
+   :returns: * **target_ship** (*target ship information, such as initial position, speed and course*)
+             * **encounter_found** (*True=encounter found, False=encounter not found*)
+
+
+.. py:function:: check_encounter_evolvement(own_ship: trafficgen.types.Ship, own_ship_position_future: trafficgen.types.Position, target_ship: trafficgen.types.TargetShip, target_ship_position_future: trafficgen.types.Position, desired_encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings) -> bool
+
+   Check encounter evolvement. The generated encounter should be the same type of
+   encounter (head-on, crossing, give-way) also some time before the encounter is started.
+
+   Params:
+       * own_ship: Own ship information such as initial position, speed and course
+       * target_ship: Target ship information such as initial position, speed and course
+       * desired_encounter_type: Desired type of encounter to be generated
+       * settings: Encounter settings
+
+   :rtype: \* returns True if encounter ok, False if encounter not ok
+
+
+.. py:function:: find_start_position_target_ship(own_ship_position: trafficgen.types.Position, own_ship_course: float, target_ship_position_future: trafficgen.types.Position, target_ship_vector_length: float, desired_beta: float, desired_encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings)
+
+   Find start position of target ship using desired beta and vector length.
+
+   Params:
+       * own_ship_position: Own ship initial position, speed and course
+       * own_ship_course: Own ship initial course
+       * target_ship_position_future: Target ship future position
+       * target_ship_vector_length: vector length (target ship speed x vector)
+       * desired_beta: Desired bearing between own ship and target ship seen from own ship
+       * desired_encounter_type: Desired type of encounter to be generated
+       * settings: Encounter settings
+
+   :returns: * **\* start_position_target_ship** (*Dict, initial position of target ship {north, east} [m]*)
+             * **\* start_position_found** (*0=position not found, 1=position found*)
+
+
+.. py:function:: assign_future_position_to_target_ship(own_ship_position_future: trafficgen.types.Position, max_meeting_distance: float) -> trafficgen.types.Position
+
+   Randomly assign future position of target ship. If drawing a circle with radius
+   max_meeting_distance around future position of own ship, future position of
+   target ship shall be somewhere inside this circle.
+
+   Params:
+       * own_ship_position_future: Dict, own ship position at a given time in the
+           future, {north, east}
+       * max_meeting_distance: Maximum distance between own ship and target ship at
+           a given time in the future [nm]
+
+   :returns: **future_position_target_ship**
+   :rtype: Future position of target ship {north, east} [m]
+
+
+.. py:function:: determine_colreg(alpha: float, beta: float, theta13_criteria: float, theta14_criteria: float, theta15_criteria: float, theta15: List[float]) -> trafficgen.types.EncounterType
+
+   Determine the colreg type based on alpha, relative bearing between target ship and own
+   ship seen from target ship, and beta, relative bearing between own ship and target ship
+   seen from own ship.
+
+   Params:
+       * alpha: relative bearing between target ship and own ship seen from target ship
+       * beta: relative bearing between own ship and target ship seen from own ship
+       * theta13_criteria: Tolerance for "coming up with" relative bearing
+       * theta14_criteria: Tolerance for "reciprocal or nearly reciprocal courses",
+         "when in any doubt... assume... [head-on]"
+       * theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter
+       * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking
+                  encounter
+
+   :rtype: \* encounter classification
+
+
+.. py:function:: calculate_relative_bearing(position_own_ship: trafficgen.types.Position, heading_own_ship: float, position_target_ship: trafficgen.types.Position, heading_target_ship: float) -> Tuple[float, float]
+
+   Calculate relative bearing between own ship and target ship, both seen from
+   own ship and seen from target ship.
+
+   Params:
+       * position_own_ship: Dict, own ship position {north, east} [m]
+       * heading_own_ship: Own ship course [deg]
+       * position_target_ship: Dict, own ship position {north, east} [m]
+       * heading_target_ship: Target ship course [deg]
+
+   :returns: * **\* beta** (*relative bearing between own ship and target ship seen from own ship [deg]*)
+             * **\* alpha** (*relative bearing between target ship and own ship seen from target ship [deg]*)
+
+
+.. py:function:: calculate_ship_course(waypoint_0: trafficgen.types.Position, waypoint_1: trafficgen.types.Position) -> float
+
+   Calculate ship course between two waypoints.
+
+   Params:
+       * waypoint_0: Dict, waypoint {north, east} [m]
+       * waypoint_1: Dict, waypoint {north, east} [m]
+
+   :returns: **course**
+   :rtype: Ship course [deg]
+
+
+.. py:function:: assign_vector_time(vector_time_range: List[float])
+
+   Assign random (uniform) vector time.
+
+   Params:
+       * vector_range: Minimum and maximum value for vector time
+
+   :returns: **vector_time**
+   :rtype: Vector time [min]
+
+
+.. py:function:: assign_speed_to_target_ship(encounter_type: trafficgen.types.EncounterType, own_ship_speed: float, min_target_ship_speed: float, relative_speed_setting: trafficgen.types.EncounterRelativeSpeed)
+
+   Assign random (uniform) speed to target ship depending on type of encounter.
+
+   Params:
+       * encounter_type: Type of encounter
+       * own_ship_speed: Own ship speed [knot]
+       * min_target_ship_speed: Minimum target ship speed [knot]
+       * relative_speed_setting: Relative speed setting dependent on encounter [-]
+
+   :returns: **target_ship_speed**
+   :rtype: Target ship speed [knot]
+
+
+.. py:function:: assign_beta(encounter_type: trafficgen.types.EncounterType, settings: trafficgen.types.EncounterSettings) -> float
+
+   Assign random (uniform) relative bearing beta between own ship
+   and target ship depending on type of encounter.
+
+   Params:
+       * encounter_type: Type of encounter
+       * settings: Encounter settings
+
+   :rtype: Relative bearing between own ship and target ship seen from own ship [deg]
+
+
+.. py:function:: update_position_data_target_ship(target_ship: trafficgen.types.TargetShip, lat_lon_0: List[float]) -> trafficgen.types.TargetShip
+
+   Update position data of the target ship to also include latitude and longitude
+   position of the target ship.
+
+   Params:
+       * target_ship: Target ship data
+       * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+
+   :returns: **ship**
+   :rtype: Updated target ship data
+
+
+.. py:function:: update_position_data_own_ship(ship: trafficgen.types.Ship, lat_lon_0: List[float], delta_time: float) -> trafficgen.types.Ship
+
+   Update position data of the target ship to also include latitude and longitude
+   position of the target ship.
+
+   Params:
+       * ship: Own ship data
+       * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+       * delta_time: Delta time from now to the time new position is being calculated [minutes]
+
+   :returns: **ship**
+   :rtype: Updated own ship data
+
+
+.. py:function:: decide_target_ship(target_ships: List[trafficgen.types.TargetShip]) -> trafficgen.types.TargetShip
+
+   Randomly pick a target ship from a list of target ships.
+
+   Params:
+       * target_ships: list of target ships
+
+   :rtype: The target ship, info of type, size etc.
+
+
+.. py:function:: plot_traffic_situations(traffic_situations: List[trafficgen.types.Situation], col: int, row: int)
+
+   Plot the traffic situations in one more figures.
+
+   Params:
+       traffic_situations: Traffic situations to be plotted
+       col: Number of columns in each figure
+       row: Number of rows in each figure
+
+
+.. py:function:: plot_specific_traffic_situation(traffic_situations: List[trafficgen.types.Situation], situation_number: int)
+
+   Plot a specific situation in map.
+
+   Params:
+       traffic_situations: Generated traffic situations
+       situation_number: The specific situation to be plotted
+
+
+.. py:function:: read_situation_files(situation_folder: pathlib.Path) -> List[trafficgen.types.Situation]
+
+   Read traffic situation files.
+
+   Params:
+       situation_folder: Path to the folder where situation files are found
+
+   :returns: **situations**
+   :rtype: List of desired traffic situations
+
+
+.. py:function:: read_own_ship_file(own_ship_file: pathlib.Path) -> trafficgen.types.Ship
+
+   Read own ship file.
+
+   Params:
+       own_ship_file: Path to the own_ship_file file
+
+   :rtype: own_ship information
+
+
+.. py:function:: read_target_ship_files(target_ship_folder: pathlib.Path) -> List[trafficgen.types.TargetShip]
+
+   Read target ship files.
+
+   Params:
+       target_ship_folder: Path to the folder where target ships are found
+
+   :returns: **target_ships**
+   :rtype: List of different target ships
+
+
+.. py:function:: read_encounter_settings_file(settings_file: pathlib.Path) -> trafficgen.types.EncounterSettings
+
+   Read encounter settings file.
+
+   Params:
+       settings_file: Path to the encounter setting file
+
+   :rtype: Encounter settings
+
+
