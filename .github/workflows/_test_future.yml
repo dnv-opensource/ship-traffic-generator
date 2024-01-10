@@ -16,8 +16,8 @@ jobs:
           - runner: windows-latest
             toxenv: windows
         python:
-          - version: '3.12.0rc3'
-            toxenv: 'py312'
+          - version: '3.13.0a2'
+            toxenv: 'py313'
     steps:
       - uses: actions/checkout@v4
       - name: Install Python ${{ matrix.python.version }}
