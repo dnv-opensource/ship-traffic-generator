@@ -32,7 +32,6 @@ from .read_files import read_target_ship_files
 from .read_files import read_encounter_settings_file
 
 
-
 from .utils import knot_2_m_pr_min
 from .utils import m_pr_min_2_knot
 from .utils import m2nm
