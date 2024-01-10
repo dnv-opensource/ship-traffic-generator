@@ -1,14 +1,5 @@
 """Top-level package for Traffic Generator."""
-
-from .utils import knot_2_m_pr_min
-from .utils import m_pr_min_2_knot
-from .utils import m2nm
-from .utils import nm_2_m
-from .utils import deg_2_rad
-from .utils import rad_2_deg
-from .utils import convert_angle_minus_180_to_180_to_0_to_360
-from .utils import convert_angle_0_to_360_to_minus_180_to_180
-from .utils import calculate_position_at_certain_time
+from .ship_traffic_generator import generate_traffic_situations
 
 from .marine_system_simulator import flat2llh
 from .marine_system_simulator import llh2flat
@@ -40,7 +31,17 @@ from .read_files import read_own_ship_file
 from .read_files import read_target_ship_files
 from .read_files import read_encounter_settings_file
 
-from .ship_traffic_generator import generate_traffic_situations
+
+
+from .utils import knot_2_m_pr_min
+from .utils import m_pr_min_2_knot
+from .utils import m2nm
+from .utils import nm_2_m
+from .utils import deg_2_rad
+from .utils import rad_2_deg
+from .utils import convert_angle_minus_180_to_180_to_0_to_360
+from .utils import convert_angle_0_to_360_to_minus_180_to_180
+from .utils import calculate_position_at_certain_time
 
 
 __all__ = [

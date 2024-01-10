@@ -3,16 +3,17 @@
 from pathlib import Path
 from typing import List, Union
 
-from trafficgen.types import Encounter, EncounterSettings, Ship, Situation, TargetShip
-
-from . import (
+from trafficgen.encounter import (
     generate_encounter,
+    update_position_data_own_ship,
+)
+from trafficgen.read_files import (
     read_encounter_settings_file,
     read_own_ship_file,
     read_situation_files,
     read_target_ship_files,
-    update_position_data_own_ship,
 )
+from trafficgen.types import Encounter, EncounterSettings, Ship, Situation, TargetShip
 
 
 def generate_traffic_situations(
