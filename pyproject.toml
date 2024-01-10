@@ -22,13 +22,12 @@ pydantic = "^2.5"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black = { version = "^23.11", extras = ["jupyter"] }
-ruff = "^0.1.6" # linter
-pyright = "^1.1.336"
+black = { version = "^23.12", extras = ["jupyter"] }
+ruff = "^0.1.8" # linter
+pyright = "^1.1.338"
 tox = "^4.11.1"
 pytest = "^7.4.1"
 pytest-cov = "^4.1"
-pytest-randomly = "^3.15"
 sourcery = "^1.14"
 
 [tool.poetry.group.docs]
@@ -51,11 +50,10 @@ build-backend = "poetry.core.masonry.api"
 testpaths = "tests"
 addopts = "--strict-markers"
 xfail_strict = true
-pythonpath = ["src"]
 
 [tool.black]
 line-length = 105
-target-version = ["py39", "py310", "py311"]
+target-version = ["py39", "py310", "py311", "py312"]
 
 [tool.ruff]
 exclude = [

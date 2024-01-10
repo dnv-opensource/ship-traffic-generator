@@ -13,7 +13,7 @@ jobs:
           options: '--check --diff'
           src: '.'
           jupyter: true
-          version: '==23.11'
+          version: '==23.12'
 
   ruff:
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Install ruff
-        run: pip install ruff==0.1.6
+        run: pip install ruff==0.1.8
       - name: Run ruff
         run: ruff .
 
@@ -52,6 +52,6 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
       - name: Install pyright
-        run: pip install pyright==1.1.336
+        run: pip install pyright==1.1.338
       - name: Run pyright
         run: pyright .
