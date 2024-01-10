@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trafficgen"
-version = "0.1.0"
+version = "0.2.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 authors = ["Tom Arne Pedersen <Tom.Arne.Pedersen@dnv.com>"]
 license = "License stuff here" # FIXME
