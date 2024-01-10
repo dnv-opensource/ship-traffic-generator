@@ -50,7 +50,6 @@ build-backend = "poetry.core.masonry.api"
 testpaths = "tests"
 addopts = "--strict-markers"
 xfail_strict = true
-pythonpath = ["src"]
 
 [tool.black]
 line-length = 105
