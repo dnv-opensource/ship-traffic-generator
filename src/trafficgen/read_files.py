@@ -59,7 +59,7 @@ def read_target_ship_files(target_ship_folder: Path) -> List[TargetShip]:
         target_ships: List of different target ships
     """
     target_ships: List[TargetShip] = []
-    for file_name in [file for file in os.listdir(target_ship_folder) if file.endswith(".json")]:
+    for file_name in sorted([file for file in os.listdir(target_ship_folder) if file.endswith(".json")]):
         file_path = os.path.join(target_ship_folder, file_name)
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
