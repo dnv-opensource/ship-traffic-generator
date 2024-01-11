@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from trafficgen.types import Position
+from .types import Position
 
 
 def m_pr_min_2_knot(speed_in_m_pr_min: float) -> float:

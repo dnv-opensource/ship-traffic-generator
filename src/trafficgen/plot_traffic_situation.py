@@ -9,9 +9,9 @@ import numpy as np
 from folium import Map, Polygon
 from matplotlib.patches import Circle
 
-from trafficgen.types import Position, Ship, Situation, TargetShip
-
-from . import deg_2_rad, flat2llh, knot_2_m_pr_min, m2nm, rad_2_deg
+from .marine_system_simulator import flat2llh
+from .types import Position, Ship, Situation, TargetShip
+from .utils import deg_2_rad, knot_2_m_pr_min, m2nm, rad_2_deg
 
 
 def calculate_vector_arrow(

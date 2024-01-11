@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from typing import List
 
-from trafficgen.types import EncounterSettings, Ship, Situation, TargetShip
+from .types import EncounterSettings, Ship, Situation, TargetShip
 
 
 def read_situation_files(situation_folder: Path) -> List[Situation]:
