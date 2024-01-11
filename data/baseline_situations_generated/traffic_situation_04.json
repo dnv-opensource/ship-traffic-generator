@@ -1,0 +1,68 @@
+{
+    "title": "OT-GW",
+    "input_file_name": "baseline_situation_04_1_ts.json",
+    "common_vector": 10.0,
+    "lat_lon_0": [
+        58.763449,
+        10.490654
+    ],
+    "own_ship": {
+        "static": {
+            "length": 122.0,
+            "width": 20.0,
+            "height": 8.0,
+            "speed_max": 17.0,
+            "mmsi": 257847600,
+            "name": "BASTO VI",
+            "ship_type": "Passenger/Ro-Ro Cargo Ship"
+        },
+        "start_pose": {
+            "speed": 10.0,
+            "course": 0.0,
+            "position": {
+                "north": 0.0,
+                "east": 0.0,
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            }
+        },
+        "waypoints": [
+            {
+                "north": 0.0,
+                "east": 0.0,
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            {
+                "north": 18518.399999999998,
+                "east": 0.0,
+                "latitude": 58.929696,
+                "longitude": 10.490654
+            }
+        ]
+    },
+    "target_ship": [
+        {
+            "static": {
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speed_max": 17.0,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
+                "ship_type": "Passenger/Ro-Ro Cargo Ship"
+            },
+            "start_pose": {
+                "speed": 5.0,
+                "course": 343.8,
+                "position": {
+                    "north": 2245.9908880685816,
+                    "east": 601.8114446656365,
+                    "latitude": 58.783612,
+                    "longitude": 10.501054
+                }
+            },
+            "id": 1
+        }
+    ]
+}

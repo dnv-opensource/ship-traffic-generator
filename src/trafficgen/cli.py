@@ -1,36 +1,42 @@
+# pyright: reportMissingParameterType=false
+# pyright: reportUnknownParameterType=false
+# The click package is unfortunately not typed. Hence the following pyright exemption.
+# pyright: reportUnknownMemberType=false
 """CLI for trafficgen package."""
+
+import contextlib
 import logging
 import sys
-from os.path import join
 from pathlib import Path
 
 import click
 import click_log
 
-from . import (
-    generate_traffic_situations,
-    plot_specific_traffic_situation,
-    plot_traffic_situations,
-    write_traffic_situations_to_json_file,
-)
+from trafficgen.plot_traffic_situation import plot_specific_traffic_situation, plot_traffic_situations
+from trafficgen.ship_traffic_generator import generate_traffic_situations
+from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
 
 logger = logging.getLogger(__name__)
-click_log.basic_config(logger)
+_ = click_log.basic_config(logger)
 
 # if you change the below defaults, then remember to change the description of
 # the default values in below @click.option descriptions,
 # and docs/usage.rst
-default_data_path = Path(__file__).parent.parent.parent / "data"
-sit_folder = join(default_data_path, "baseline_situations_input/")
-own_ship_file = join(default_data_path, "own_ship/own_ship.json")
-target_ship_folder = join(default_data_path, "target_ships/")
-settings_file = Path(__file__).parent / "settings" / "encounter_settings.json"
-output_folder = join(default_data_path, "test_output/")
+default_data_path: Path = Path(__file__).parent.parent.parent / "data"
+situation_folder: Path = default_data_path / "baseline_situations_input"
+own_ship_file: Path = default_data_path / "own_ship/own_ship.json"
+target_ship_folder: Path = default_data_path / "target_ships"
+settings_file: Path = Path(__file__).parent / "settings" / "encounter_settings.json"
+output_folder: Path = default_data_path / "test_output"
 
 
 @click.group()
 @click_log.simple_verbosity_option(logger)
 def main(args=None):
+    """Entry point for console script as configured in pyproject.toml.
+
+    Runs the command line interface and parses arguments and options entered on the console.
+    """
     return 0
 
 
@@ -39,9 +45,9 @@ def main(args=None):
 @click.option(
     "-s",
     "--situations",
-    help="Folders with situations (default=./baseline_situations_input/)",
+    help="Path to folder with situations (default=./baseline_situations_input/)",
     type=click.Path(exists=True),
-    default=sit_folder,
+    default=situation_folder,
     show_default=True,
 )
 @click.option(
@@ -112,15 +118,17 @@ def gen_situation(
     visualize_situation,
     output,
 ):
-    """Console script for trafficgen. Example: \n
+    r"""Console script for trafficgen.
+    Example: \n
     trafficgen gen-situation -s ./data/example_situations_input
-    -o ./data/test_output_1"""
+    -o ./data/test_output_1.
+    """
     click.echo("Generating traffic situations")
     generated_traffic_situations = generate_traffic_situations(
-        situation_folder=situations,
-        own_ship_file=own_ship,
-        target_ship_folder=targets,
-        settings_file=settings,
+        situation_folder=Path(situations),
+        own_ship_file=Path(own_ship),
+        target_ship_folder=Path(targets),
+        settings_file=Path(settings),
     )
 
     if visualize:
@@ -131,20 +139,21 @@ def gen_situation(
     # so it can safely be ignored by users without generating an error msg,
     # and so that if a user specifies a value of zero or negative number,
     # the user will get an error message.
-    try:
+
+    # Ignore TypeError
+    # TypeError is thrown in case a value for a parameter is not defined.
+    # In such case, though, we safely ignore that parameter :)
+    with contextlib.suppress(TypeError):
         if visualize_situation > 0:
             click.echo("Plotting a specific traffic situation")
             plot_specific_traffic_situation(generated_traffic_situations, visualize_situation)
         else:
             click.echo(
                 "Invalid traffic situation number specified, not creating map plot. See --help for more info."
-            )  # noqa: E501
-    except TypeError:
-        pass  # do nothing, value not defined, so we safely ignore this parameter :)
-
+            )
     if output is not None:
         click.echo("Writing traffic situations to files")
-        write_traffic_situations_to_json_file(generated_traffic_situations, write_folder=output)
+        write_traffic_situations_to_json_file(generated_traffic_situations, write_folder=Path(output))
 
 
 main.add_command(gen_situation)

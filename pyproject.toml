@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trafficgen"
-version = "0.1.0"
+version = "0.2.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 authors = ["Tom Arne Pedersen <Tom.Arne.Pedersen@dnv.com>"]
 license = "License stuff here" # FIXME
@@ -16,18 +16,18 @@ basemap = "^1.3.8"
 basemap-data-hires = "^1.3.2"
 global-land-mask = "^1.0.0"
 folium = "^0.14.0"
+pydantic = "^2.5"
 
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black[jupyter] = "^23.11"
-ruff = "^0.1.6" # linter
-pyright = "^1.1.336"
+black = { version = "^23.12", extras = ["jupyter"] }
+ruff = "^0.1.8" # linter
+pyright = "^1.1.338"
 tox = "^4.11.1"
 pytest = "^7.4.1"
 pytest-cov = "^4.1"
-pytest-randomly = "^3.15"
 sourcery = "^1.14"
 
 [tool.poetry.group.docs]
@@ -36,7 +36,6 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 sphinx = "^7.2.5"
 sphinx-rtd-theme = "^1.3.0"
-sphinx-autoapi = "^3.0.0"
 
 # Add command line interface here like:
 [tool.poetry.scripts]
@@ -50,11 +49,10 @@ build-backend = "poetry.core.masonry.api"
 testpaths = "tests"
 addopts = "--strict-markers"
 xfail_strict = true
-pythonpath = ["src"]
 
 [tool.black]
 line-length = 105
-target-version = ["py39", "py310"]
+target-version = ["py39", "py310", "py311", "py312"]
 
 [tool.ruff]
 exclude = [
@@ -69,11 +67,11 @@ exclude = [
 src = ["src"]
 ignore = [
     "E501",  # Line length too long
-    "D100",  # Missing docstring in public module
-    "D101",  # Missing docstring in public class
-    "D102",  # Missing docstring in public method
-    "D103",  # Missing docstring in public function
-    "D104",  # Missing docstring in public package
+    # "D100",  # Missing docstring in public module
+    # "D101",  # Missing docstring in public class
+    # "D102",  # Missing docstring in public method
+    # "D103",  # Missing docstring in public function
+    # "D104",  # Missing docstring in public package
     "D105",  # Missing docstring in magic method
     "D107",  # Missing docstring in __init__
     "D202",  # No blank lines allowed after function docstring
@@ -88,15 +86,14 @@ ignore = [
     # "N816",  # Variable in global scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in global scope)
     ]
 line-length = 105
-# Activate the following rules step by step to (step by step..) improve code quality
 select = [
     "E",
-    # "D",
-    # "F",
-    # "N",
-    # "W",
-    # "I",
-    # "B",
+    "D",
+    "F",
+    "N",
+    "W",
+    "I",
+    "B",
 ]
 target-version = "py39"
 
@@ -129,31 +126,31 @@ extraPaths = ["./src"]
 typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
 # Activate the following rules step by step to (step by step..) improve code quality
-# reportMissingParameterType = "error"
-# reportUnknownParameterType = "warning"
-# reportUnknownMemberType = "warning"
-# reportMissingTypeArgument = "error"
-# reportPropertyTypeMismatch = "error"
-# reportFunctionMemberAccess = "warning"
-# reportPrivateUsage = "warning"
-# reportTypeCommentUsage = "warning"
-# reportIncompatibleMethodOverride = "warning"
-# reportIncompatibleVariableOverride = "error"
-# reportInconsistentConstructor = "error"
-# reportOverlappingOverload = "warning"
-# reportUninitializedInstanceVariable = "warning"
-# reportCallInDefaultInitializer = "warning"
-# reportUnnecessaryIsInstance = "information"
-# reportUnnecessaryCast = "warning"
-# reportUnnecessaryComparison = "warning"
-# reportUnnecessaryContains = "warning"
-# reportUnusedCallResult = "warning"
-# reportUnusedExpression = "warning"
-# reportMatchNotExhaustive = "warning"
-# reportShadowedImports = "warning"
-# reportUntypedFunctionDecorator = "warning"
-# reportUntypedBaseClass = "error"
-# reportUntypedNamedTuple = "warning"
+reportMissingParameterType = "error"
+reportUnknownParameterType = "warning"
+reportUnknownMemberType = "warning"
+reportMissingTypeArgument = "error"
+reportPropertyTypeMismatch = "error"
+reportFunctionMemberAccess = "warning"
+reportPrivateUsage = "warning"
+reportTypeCommentUsage = "warning"
+reportIncompatibleMethodOverride = "warning"
+reportIncompatibleVariableOverride = "error"
+reportInconsistentConstructor = "error"
+reportOverlappingOverload = "warning"
+reportUninitializedInstanceVariable = "warning"
+reportCallInDefaultInitializer = "warning"
+reportUnnecessaryIsInstance = "information"
+reportUnnecessaryCast = "warning"
+reportUnnecessaryComparison = "warning"
+reportUnnecessaryContains = "warning"
+reportUnusedCallResult = "warning"
+reportUnusedExpression = "warning"
+reportMatchNotExhaustive = "warning"
+reportShadowedImports = "warning"
+reportUntypedFunctionDecorator = "warning"
+reportUntypedBaseClass = "error"
+reportUntypedNamedTuple = "warning"
 
 # Activate the following rules only locally and temporary, i.e. for a QA session.
 # (For server side CI they are considered too strict.)

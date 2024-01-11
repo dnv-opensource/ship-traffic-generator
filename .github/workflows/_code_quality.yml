@@ -1,0 +1,57 @@
+name: Code Quality
+
+on: workflow_call
+
+jobs:
+  black:
+    name: black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: psf/black@stable
+        with:
+          options: '--check --diff'
+          src: '.'
+          jupyter: true
+          version: '==23.12'
+
+  ruff:
+    runs-on: ubuntu-latest
+    name: ruff
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip' # cache pip dependencies
+      - uses: actions/download-artifact@v3
+        with:
+          name: requirements-files
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Install ruff
+        run: pip install ruff==0.1.8
+      - name: Run ruff
+        run: ruff .
+
+  pyright:
+    runs-on: ubuntu-latest
+    name: pyright
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip' # cache pip dependencies
+      - uses: actions/download-artifact@v3
+        with:
+          name: requirements-files
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Install pyright
+        run: pip install pyright==1.1.338
+      - name: Run pyright
+        run: pyright .
