@@ -62,7 +62,7 @@ def generate_traffic_situations(
             own_ship = update_position_data_own_ship(
                 own_ship,
                 encounter_settings.lat_lon_0,
-                traffic_situation.common_vector,
+                encounter_settings.situation_length,
             )
             traffic_situation.own_ship = own_ship
             traffic_situation.target_ship = []

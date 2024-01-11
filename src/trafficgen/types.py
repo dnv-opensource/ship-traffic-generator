@@ -116,6 +116,7 @@ class EncounterSettings(BaseModel):
     classification: EncounterClassification
     relative_speed: EncounterRelativeSpeed
     vector_range: List[float]
+    situation_length: float
     max_meeting_distance: float
     evolve_time: float
     lat_lon_0: List[float]
