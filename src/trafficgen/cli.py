@@ -12,9 +12,9 @@ from pathlib import Path
 import click
 import click_log
 
-from trafficgen.plot_traffic_situation import plot_specific_traffic_situation, plot_traffic_situations
-from trafficgen.ship_traffic_generator import generate_traffic_situations
-from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
+from .plot_traffic_situation import plot_specific_traffic_situation, plot_traffic_situations
+from .ship_traffic_generator import generate_traffic_situations
+from .write_traffic_situation_to_file import write_traffic_situations_to_json_file
 
 logger = logging.getLogger(__name__)
 _ = click_log.basic_config(logger)

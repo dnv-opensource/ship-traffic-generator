@@ -9,9 +9,9 @@ from typing import List, Optional, Tuple, Union
 
 import numpy as np
 
-from trafficgen.check_land_crossing import path_crosses_land
-from trafficgen.marine_system_simulator import flat2llh
-from trafficgen.types import (
+from .check_land_crossing import path_crosses_land
+from .marine_system_simulator import flat2llh
+from .types import (
     EncounterRelativeSpeed,
     EncounterSettings,
     EncounterType,
@@ -20,7 +20,7 @@ from trafficgen.types import (
     Ship,
     TargetShip,
 )
-from trafficgen.utils import (
+from .utils import (
     calculate_position_at_certain_time,
     convert_angle_minus_180_to_180_to_0_to_360,
     deg_2_rad,

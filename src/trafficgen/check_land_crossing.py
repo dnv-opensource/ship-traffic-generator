@@ -4,9 +4,9 @@ from typing import List
 
 from global_land_mask import globe
 
-from trafficgen.marine_system_simulator import flat2llh
-from trafficgen.types import Position
-from trafficgen.utils import calculate_position_at_certain_time, deg_2_rad, rad_2_deg
+from .marine_system_simulator import flat2llh
+from .types import Position
+from .utils import calculate_position_at_certain_time, deg_2_rad, rad_2_deg
 
 
 def path_crosses_land(
