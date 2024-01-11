@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import List
 
-from .types import Situation
+from trafficgen.types import Situation
 
 
 def write_traffic_situations_to_json_file(situations: List[Situation], write_folder: Path):
