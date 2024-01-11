@@ -8,31 +8,35 @@
     ],
     "own_ship": {
         "static": {
-            "length": 122,
-            "width": 20,
-            "height": 8,
-            "speed_max": 17,
+            "length": 122.0,
+            "width": 20.0,
+            "height": 8.0,
+            "speed_max": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
             "ship_type": "Passenger/Ro-Ro Cargo Ship"
         },
         "start_pose": {
+            "speed": 10.0,
+            "course": 0.0,
             "position": {
                 "north": 0.0,
                 "east": 0.0,
                 "latitude": 58.763449,
                 "longitude": 10.490654
-            },
-            "speed": 10.0,
-            "course": 0.0
+            }
         },
         "waypoints": [
             {
+                "north": 0.0,
+                "east": 0.0,
                 "latitude": 58.763449,
                 "longitude": 10.490654
             },
             {
-                "latitude": 58.791157,
+                "north": 18518.399999999998,
+                "east": 0.0,
+                "latitude": 58.929696,
                 "longitude": 10.490654
             }
         ]
@@ -40,69 +44,69 @@
     "target_ship": [
         {
             "static": {
-                "length": 178,
-                "width": 30,
-                "height": 30,
-                "speed_max": 21,
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speed_max": 21.0,
                 "mmsi": 219945000,
                 "name": "BASTO VI",
                 "ship_type": "Passenger/Ro-Ro Cargo Ship"
             },
-            "id": 1,
             "start_pose": {
                 "speed": 7.0,
+                "course": 0.0,
                 "position": {
                     "north": 1574.0640000000008,
                     "east": 0.0,
                     "latitude": 58.77758,
                     "longitude": 10.490654
-                },
-                "course": 0.0
-            }
+                }
+            },
+            "id": 1
         },
         {
             "static": {
-                "length": 178,
-                "width": 30,
-                "height": 30,
-                "speed_max": 21,
-                "mmsi": 219945000,
-                "name": "BASTO VI",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speed_max": 17.0,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
                 "ship_type": "Passenger/Ro-Ro Cargo Ship"
             },
-            "id": 2,
             "start_pose": {
                 "speed": 4.0,
+                "course": 344.3,
                 "position": {
                     "north": 5694.2115077012695,
                     "east": 1004.0431226683609,
                     "latitude": 58.814568,
                     "longitude": 10.508004
-                },
-                "course": 344.3
-            }
+                }
+            },
+            "id": 2
         },
         {
             "static": {
-                "length": 122,
-                "width": 20,
-                "height": 8,
-                "speed_max": 17,
-                "mmsi": 257845600,
-                "name": "BASTO IV",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speed_max": 21.0,
+                "mmsi": 219945000,
+                "name": "BASTO VI",
                 "ship_type": "Passenger/Ro-Ro Cargo Ship"
             },
-            "id": 3,
             "start_pose": {
                 "speed": 17.0,
+                "course": 2.1,
                 "position": {
                     "north": -4314.169879882742,
                     "east": -377.44095701473725,
                     "latitude": 58.724719,
                     "longitude": 10.484132
-                },
-                "course": 2.1
-            }
+                }
+            },
+            "id": 3
         }
     ]
 }

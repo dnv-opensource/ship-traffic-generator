@@ -1,6 +1,6 @@
 {
-    "title": "CR_GW, CR_GW, OT_GW",
-    "input_file_name": "baseline_situation_38_3_ts.json",
+    "title": "HO, CR-SO",
+    "input_file_name": "baseline_situation_08_2_ts.json",
     "common_vector": 10.0,
     "lat_lon_0": [
         58.763449,
@@ -53,13 +53,13 @@
                 "ship_type": "General Cargo Ship"
             },
             "start_pose": {
-                "speed": 12.0,
-                "course": 196.5,
+                "speed": 15.0,
+                "course": 186.7,
                 "position": {
-                    "north": 13275.471144058321,
-                    "east": 2102.6280671962086,
-                    "latitude": 58.882628,
-                    "longitude": 10.526988
+                    "north": 11527.061395501772,
+                    "east": 806.0506544645511,
+                    "latitude": 58.866932,
+                    "longitude": 10.504583
                 }
             },
             "id": 1
@@ -75,38 +75,16 @@
                 "ship_type": "General Cargo Ship"
             },
             "start_pose": {
-                "speed": 14.0,
-                "course": 255.3,
+                "speed": 8.0,
+                "course": 96.7,
                 "position": {
-                    "north": 7106.376237123163,
-                    "east": 7106.376237123163,
-                    "latitude": 58.827246,
-                    "longitude": 10.613455
+                    "north": 4387.6765237696645,
+                    "east": -3187.833593649386,
+                    "latitude": 58.802839,
+                    "longitude": 10.435567
                 }
             },
             "id": 2
-        },
-        {
-            "static": {
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speed_max": 15.0,
-                "mmsi": 257083180,
-                "name": "CANOLE",
-                "ship_type": "General Cargo Ship"
-            },
-            "start_pose": {
-                "speed": 4.0,
-                "course": 321.2,
-                "position": {
-                    "north": 3822.825918424448,
-                    "east": 1391.3948450878563,
-                    "latitude": 58.797768,
-                    "longitude": 10.514698
-                }
-            },
-            "id": 3
         }
     ]
 }

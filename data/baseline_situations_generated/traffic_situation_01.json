@@ -1,6 +1,6 @@
 {
-    "title": "CR-GW, CR-SO",
-    "input_file_name": "baseline_situation_12_2_ts.json",
+    "title": "HO",
+    "input_file_name": "baseline_situation_01_1_ts.json",
     "common_vector": 10.0,
     "lat_lon_0": [
         58.763449,
@@ -44,47 +44,25 @@
     "target_ship": [
         {
             "static": {
-                "length": 50.0,
-                "width": 10.0,
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speed_max": 15.0,
-                "mmsi": 257083180,
-                "name": "CANOLE",
-                "ship_type": "General Cargo Ship"
-            },
-            "start_pose": {
-                "speed": 12.0,
-                "course": 261.1,
-                "position": {
-                    "north": 6952.345548148778,
-                    "east": 6952.345548148778,
-                    "latitude": 58.825863,
-                    "longitude": 10.610793
-                }
-            },
-            "id": 1
-        },
-        {
-            "static": {
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speed_max": 21.0,
-                "mmsi": 219945000,
-                "name": "BASTO VI",
+                "speed_max": 17.0,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
                 "ship_type": "Passenger/Ro-Ro Cargo Ship"
             },
             "start_pose": {
-                "speed": 13.0,
-                "course": 31.6,
+                "speed": 12.0,
+                "course": 183.7,
                 "position": {
-                    "north": -532.1285805190903,
-                    "east": -3359.7276312542886,
-                    "latitude": 58.758672,
-                    "longitude": 10.432597
+                    "north": 10173.748451861007,
+                    "east": 355.2751245544635,
+                    "latitude": 58.854783,
+                    "longitude": 10.496793
                 }
             },
-            "id": 2
+            "id": 1
         }
     ]
 }
