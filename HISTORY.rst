@@ -3,7 +3,7 @@ History
 =======
 
 
-0.2.0 (2024-01-10)
+0.2.0 (2024-01-11)
 ------------------
 
 Changed
@@ -14,6 +14,9 @@ Changed
 * activate-remaining-pyright-rules,
 * add-github-workflows-to-build-package-and-to-build-and-publish-documentation
 * sorting output from os.listdir
+* github workflow for release
+* removed cyclic import
+* length of encounter may be specified by user
 
 
 0.1.0 (2023-11-08)
