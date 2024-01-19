@@ -1,7 +1,7 @@
 {
     "title": "CR-GW",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -11,13 +11,13 @@
             "cog": 0.0
         }
     },
-    "num_situations": 5,
+    "numSituations": 5,
     "encounter": [
         {
-            "desired_encounter_type": "crossing-give-way"
+            "desiredEncounterType": "crossing-give-way"
         },
         {
-            "desired_encounter_type": "head-on"
+            "desiredEncounterType": "head-on"
         }
     ]
 }

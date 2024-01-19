@@ -1,7 +1,7 @@
 {
     "title": "OT-SO, OT-SO",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,16 +13,16 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "overtaking-stand-on",
+            "desiredEncounterType": "overtaking-stand-on",
             "beta": 160.0,
-            "relative_speed": 1.8,
-            "vector_time": 15.0
+            "relativeSpeed": 1.8,
+            "vectorTime": 15.0
         },
         {
-            "desired_encounter_type": "overtaking-stand-on",
+            "desiredEncounterType": "overtaking-stand-on",
             "beta": 170.0,
-            "relative_speed": 1.5,
-            "vector_time": 13.0
+            "relativeSpeed": 1.5,
+            "vectorTime": 13.0
         }
     ]
 }

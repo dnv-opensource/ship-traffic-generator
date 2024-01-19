@@ -1,7 +1,7 @@
 {
     "title": "HO, CR-GW, CR-GW",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,22 +13,22 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "head-on",
+            "desiredEncounterType": "head-on",
             "beta": 3.0,
-            "relative_speed": 1.5,
-            "vector_time": 20.0
+            "relativeSpeed": 1.5,
+            "vectorTime": 20.0
         },
         {
-            "desired_encounter_type": "crossing-give-way",
+            "desiredEncounterType": "crossing-give-way",
             "beta": 20.0,
-            "relative_speed": 1.4,
-            "vector_time": 17.0
+            "relativeSpeed": 1.4,
+            "vectorTime": 17.0
         },
         {
-            "desired_encounter_type": "crossing-give-way",
+            "desiredEncounterType": "crossing-give-way",
             "beta": 102.0,
-            "relative_speed": 1.2,
-            "vector_time": 13.0
+            "relativeSpeed": 1.2,
+            "vectorTime": 13.0
         }
     ]
 }

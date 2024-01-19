@@ -1,7 +1,7 @@
 {
     "title": "HO",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,10 +13,10 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "head-on",
+            "desiredEncounterType": "head-on",
             "beta": 2.0,
-            "relative_speed": 1.2,
-            "vector_time": 15.0
+            "relativeSpeed": 1.2,
+            "vectorTime": 15.0
         }
     ]
 }

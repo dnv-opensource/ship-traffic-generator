@@ -1,7 +1,7 @@
 {
     "title": "HO, CR-SO",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,16 +13,16 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "head-on",
+            "desiredEncounterType": "head-on",
             "beta": 4.0,
-            "relative_speed": 1.7,
-            "vector_time": 15.0
+            "relativeSpeed": 1.7,
+            "vectorTime": 15.0
         },
         {
-            "desired_encounter_type": "crossing-stand-on",
+            "desiredEncounterType": "crossing-stand-on",
             "beta": -36.0,
-            "relative_speed": 0.8,
-            "vector_time": 13.0
+            "relativeSpeed": 0.8,
+            "vectorTime": 13.0
         }
     ]
 }

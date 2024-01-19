@@ -1,7 +1,7 @@
 {
     "title": "OT-GW",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,10 +13,10 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "overtaking-give-way",
+            "desiredEncounterType": "overtaking-give-way",
             "beta": 15.0,
-            "relative_speed": 0.5,
-            "vector_time": 14.0
+            "relativeSpeed": 0.5,
+            "vectorTime": 14.0
         }
     ]
 }

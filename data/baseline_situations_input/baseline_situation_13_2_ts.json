@@ -1,7 +1,7 @@
 {
     "title": "CR-GW, OT-GW",
-    "common_vector": 10.0,
-    "own_ship": {
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,16 +13,16 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "crossing-give-way",
+            "desiredEncounterType": "crossing-give-way",
             "beta": 60.0,
-            "relative_speed": 1.5,
-            "vector_time": 18.0
+            "relativeSpeed": 1.5,
+            "vectorTime": 18.0
         },
         {
-            "desired_encounter_type": "overtaking-give-way",
+            "desiredEncounterType": "overtaking-give-way",
             "beta": 35.0,
-            "relative_speed": 0.7,
-            "vector_time": 15.0
+            "relativeSpeed": 0.7,
+            "vectorTime": 15.0
         }
     ]
 }

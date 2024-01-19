@@ -1,7 +1,7 @@
 {
-    "title": "OT_GW, OT_GW, OT_GW",
-    "common_vector": 10.0,
-    "own_ship": {
+    "title": "OT-GW, OT-GW, OT-GW",
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,22 +13,22 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "overtaking-give-way",
+            "desiredEncounterType": "overtaking-give-way",
             "beta": -15.0,
-            "relative_speed": 0.7,
-            "vector_time": 18.0
+            "relativeSpeed": 0.7,
+            "vectorTime": 18.0
         },
         {
-            "desired_encounter_type": "overtaking-give-way",
+            "desiredEncounterType": "overtaking-give-way",
             "beta": 15.0,
-            "relative_speed": 0.6,
-            "vector_time": 20.0
+            "relativeSpeed": 0.6,
+            "vectorTime": 20.0
         },
         {
-            "desired_encounter_type": "overtaking-give-way",
+            "desiredEncounterType": "overtaking-give-way",
             "beta": -25.0,
-            "relative_speed": 0.5,
-            "vector_time": 23.0
+            "relativeSpeed": 0.5,
+            "vectorTime": 23.0
         }
     ]
 }

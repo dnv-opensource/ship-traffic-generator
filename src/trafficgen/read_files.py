@@ -9,6 +9,15 @@ from uuid import UUID, uuid4
 from trafficgen.types import EncounterSettings, OwnShip, TargetShip, TrafficSituation
 
 
+def camel_to_snake(string: str):
+    """Convert a camel case string to snake case."""
+    return ''.join([f'_{c.lower()}' if c.isupper() else c for c in string]).lstrip('_')
+
+def replace_camel_case_with_snake_case(data):
+    """Replace camel case keys with snake case keys in a dictionary."""
+    return {camel_to_snake(key): value for key, value in data.items()}
+
+
 def read_situation_files(situation_folder: Path) -> List[TrafficSituation]:
     """
     Read traffic situation files.
@@ -26,6 +35,7 @@ def read_situation_files(situation_folder: Path) -> List[TrafficSituation]:
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
+        data = replace_camel_case_with_snake_case(data)
         situation: TrafficSituation = TrafficSituation(**data)
         situation.input_file_name = file_name
         situations.append(situation)

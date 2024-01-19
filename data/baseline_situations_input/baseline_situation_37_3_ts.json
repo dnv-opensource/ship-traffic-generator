@@ -1,7 +1,7 @@
 {
-    "title": "CR_GW, CR_GW, CR_SO",
-    "common_vector": 10.0,
-    "own_ship": {
+    "title": "CR-GW, CR-GW, CR-SO",
+    "commonVector": 10.0,
+    "ownShip": {
         "initial": {
             "position": {
                 "north": 0.0,
@@ -13,22 +13,22 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "crossing-give-way",
+            "desiredEncounterType": "crossing-give-way",
             "beta": 85.0,
-            "relative_speed": 1.6,
-            "vector_time": 16.0
+            "relativeSpeed": 1.6,
+            "vectorTime": 16.0
         },
         {
-            "desired_encounter_type": "crossing-give-way",
+            "desiredEncounterType": "crossing-give-way",
             "beta": 45.0,
-            "relative_speed": 1.2,
-            "vector_time": 18.0
+            "relativeSpeed": 1.2,
+            "vectorTime": 18.0
         },
         {
-            "desired_encounter_type": "crossing-stand-on",
+            "desiredEncounterType": "crossing-stand-on",
             "beta": -105.0,
-            "relative_speed": 1.4,
-            "vector_time": 15.0
+            "relativeSpeed": 1.4,
+            "vectorTime": 15.0
         }
     ]
 }

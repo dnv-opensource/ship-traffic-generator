@@ -1,8 +1,8 @@
 {
     "title": "OT-SO",
-    "common_vector": 10.0,
-    "own_ship": {
-        "start_pose": {
+    "commonVector": 10.0,
+    "ownShip": {
+        "startPose": {
             "position": {
                 "north": 0.0,
                 "east": 0.0
@@ -13,7 +13,7 @@
     },
     "encounter": [
         {
-            "desired_encounter_type": "overtaking-stand-on",
+            "desiredEncounterType": "overtaking-stand-on",
             "beta": -12.0
         }
     ]
