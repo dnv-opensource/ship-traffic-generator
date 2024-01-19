@@ -1,34 +1,34 @@
 {
-  "title": "CR_GW, OT-GW, OT_GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-give-way",
-      "beta": 25.0,
-      "relative_speed": 1.2,
-      "vector_time": 18.0
+    "title": "CR_GW, OT-GW, OT_GW",
+    "common_vector": 10.0,
+    "own_ship": {
+        "initial": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0
+            },
+            "sog": 10.0,
+            "cog": 0.0
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "beta": 15.0,
-      "relative_speed": 0.5,
-      "vector_time": 20.0
-    },
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "beta": -25.0,
-      "relative_speed": 0.7,
-      "vector_time": 25.0
-    }
-  ]
+    "encounter": [
+        {
+            "desired_encounter_type": "crossing-give-way",
+            "beta": 25.0,
+            "relative_speed": 1.2,
+            "vector_time": 18.0
+        },
+        {
+            "desired_encounter_type": "overtaking-give-way",
+            "beta": 15.0,
+            "relative_speed": 0.5,
+            "vector_time": 20.0
+        },
+        {
+            "desired_encounter_type": "overtaking-give-way",
+            "beta": -25.0,
+            "relative_speed": 0.7,
+            "vector_time": 25.0
+        }
+    ]
 }

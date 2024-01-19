@@ -3,10 +3,10 @@
 from pathlib import Path
 from typing import List
 
-from trafficgen.types import Situation
+from trafficgen.types import TrafficSituation
 
 
-def write_traffic_situations_to_json_file(situations: List[Situation], write_folder: Path):
+def write_traffic_situations_to_json_file(situations: List[TrafficSituation], write_folder: Path):
     """
     Write traffic situations to json file.
 
@@ -20,10 +20,11 @@ def write_traffic_situations_to_json_file(situations: List[Situation], write_fol
         file_number: int = i + 1
         output_file_path: Path = write_folder / f"traffic_situation_{file_number:02d}.json"
         data: str = situation.model_dump_json(
+            by_alias=True,
             indent=4,
             exclude_unset=True,
             exclude_defaults=False,
-            exclude_none=True,
+            exclude_none=True
         )
         with open(output_file_path, "w", encoding="utf-8") as outfile:
             _ = outfile.write(data)

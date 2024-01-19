@@ -2,9 +2,16 @@
 
 from enum import Enum
 from typing import List, Union
+from uuid import UUID, uuid4
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
+
+def to_camel(string: str) -> str:
+    """Return a camel case formated string from snake case string."""
+
+    words = string.split('_')
+    return words[0] + ''.join(word.capitalize() for word in words[1:])
 
 class Position(BaseModel):
     """Data type for a ship's position with attributes north, east in [m]."""
@@ -15,47 +22,86 @@ class Position(BaseModel):
     longitude: float = 0.0
 
 
-class Pose(BaseModel):
-    """Data type for a (ship) pose."""
+class Initial(BaseModel):
+    """Data type for a (ship) initial data."""
 
-    speed: float = 0.0
-    course: float = 0.0
     position: Position = Position()
+    sog: float = 0.0
+    cog: float = 0.0
+    heading: float = 0.0
 
 
-class ShipType(Enum):
+class Waypoint(BaseModel):
+    """Data type for a (ship) waypoint."""
+
+    position: Position = Position()
+    sog: float = 0.0
+    heading: float = 0.0
+
+
+class GeneralShipType(str, Enum):
     """Enumeration of ship types."""
 
-    PASSENGER_RORO = "Passenger/Ro-Ro Cargo Ship"
-    GENERAL_CARGO = "General Cargo Ship"
+    WING_IN_GROUND = "Wing in ground"
     FISHING = "Fishing"
-    MILITARY = "Military ops"
+    TOWING = "Towing"
+    DREDGING_OR_UNDERWATER_OPS = "Dredging or underwater ops"
+    DIVING_OPS = "Diving ops"
+    MILITARY_OPS = "Military ops"
+    SAILING = "Sailing"
+    PLEASURE_CRAFT = "Pleasure Craft"
+    HIGH_SPEED_CRAFT = "High speed craft"
+    PILOT_VESSEL = "Pilot Vessel"
+    SEARCH_AND_RESCUE_VESSEL = "Search and Rescue vessel"
+    TUG = "Tug"
+    PORT_TENDER = "Port Tender"
+    ANTI_POLLUTION = "Anti-pollution"
+    LAW_ENFORCEMENT = "Law Enforcement"
+    MEDICAL_TRANSPORT = "Medical Transport"
+    NONCOMBATANT_SHIP = "Noncombatant ship"
+    PASSENGER = "Passenger/Ro-Ro Cargo Ship"
+    CARGO = "Cargo"
+    TANKER = "Tanker"
+    OTHER_TYPE = "Other Type"
 
 
-class StaticShipData(BaseModel):
-    """Data type for static ship data."""
 
+class ShipStatic(BaseModel):
+    """Static ship data that will not change during the scenario."""
+
+    id: UUID
     length: float
     width: float
     height: float
     speed_max: float
     mmsi: int
     name: str
-    ship_type: ShipType
+    ship_type: GeneralShipType
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
 
 
 class Ship(BaseModel):
     """Data type for a ship."""
 
-    static: Union[StaticShipData, None] = None
-    start_pose: Union[Pose, None] = None
-    waypoints: Union[List[Position], None] = None
+    static: Union[ShipStatic, None] = None
+    initial: Union[Initial, None] = None
+    waypoints: Union[List[Waypoint], None] = None
 
+
+class OwnShip(Ship):
+    """Data type for own ship."""
+
+    pass
 
 class TargetShip(Ship):
     """Data type for a target ship."""
 
-    id: Union[int, None] = None
+    pass
 
 
 class EncounterType(Enum):
@@ -77,8 +123,13 @@ class Encounter(BaseModel):
     relative_speed: Union[float, None] = None
     vector_time: Union[float, None] = None
 
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
 
-class Situation(BaseModel):
+        alias_generator = to_camel
+        populate_by_name = True
+
+class TrafficSituation(BaseModel):
     """Data type for a traffic situation."""
 
     title: str
@@ -90,6 +141,11 @@ class Situation(BaseModel):
     encounter: Union[List[Encounter], None] = None
     target_ship: Union[List[TargetShip], None] = None
 
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
 
 class EncounterClassification(BaseModel):
     """Data type for the encounter classification."""
@@ -98,6 +154,12 @@ class EncounterClassification(BaseModel):
     theta14_criteria: float
     theta15_criteria: float
     theta15: List[float]
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
 
 
 class EncounterRelativeSpeed(BaseModel):
@@ -109,6 +171,11 @@ class EncounterRelativeSpeed(BaseModel):
     crossing_give_way: List[float]
     crossing_stand_on: List[float]
 
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
 
 class EncounterSettings(BaseModel):
     """Data type for encounter settings."""
@@ -120,3 +187,9 @@ class EncounterSettings(BaseModel):
     max_meeting_distance: float
     evolve_time: float
     lat_lon_0: List[float]
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True

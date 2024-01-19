@@ -5,6 +5,7 @@ crossing give-way and stand-on.
 """
 
 import random
+from operator import pos
 from typing import List, Optional, Tuple, Union
 
 import numpy as np
@@ -15,10 +16,11 @@ from trafficgen.types import (
     EncounterRelativeSpeed,
     EncounterSettings,
     EncounterType,
-    Pose,
+    Initial,
+    OwnShip,
     Position,
-    Ship,
     TargetShip,
+    Waypoint,
 )
 from trafficgen.utils import (
     calculate_position_at_certain_time,
@@ -33,11 +35,11 @@ from trafficgen.utils import (
 
 def generate_encounter(
     desired_encounter_type: EncounterType,
-    own_ship: Ship,
+    own_ship: OwnShip,
     target_ships: List[TargetShip],
     target_ship_id: int,
     beta_default: Optional[float],
-    relative_speed_default: Optional[float],
+    relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
     settings: EncounterSettings,
 ) -> Tuple[TargetShip, bool]:
@@ -50,14 +52,14 @@ def generate_encounter(
         * target_ships: List of target ships that may be used in an encounter
         * target_ship_id: ID which should be used on target ship
         * beta_default: User defined beta. If not set, this is None.
-        * relative_speed_default: User defined relative speed between own ship and
+        * relative_sog_default: User defined relative sog between own ship and
                                   target ship. If not set, this is None.
         * vector_time_default: User defined vector time. If not set, this is None.
         * settings: Encounter settings
 
     Returns
     -------
-        target_ship: target ship information, such as initial position, speed and course
+        target_ship: target ship information, such as initial position, sog and cog
         encounter_found: True=encounter found, False=encounter not found
     """
     encounter_found: bool = False
@@ -67,12 +69,12 @@ def generate_encounter(
     assert target_ship.static is not None
 
     # Searching for encounter. Two loops used. Only vector time is locked in the
-    # first loop. In the second loop, beta and speed are assigned.
+    # first loop. In the second loop, beta and sog are assigned.
     while not encounter_found and outer_counter < 5:
         outer_counter += 1
         inner_counter: int = 0
 
-        # resetting vector_time, beta and relative_speed to default values before
+        # resetting vector_time, beta and relative_sog to default values before
         # new search for situation is done
         vector_time: Union[float, None] = vector_time_default
         beta: Union[float, None] = beta_default
@@ -83,20 +85,16 @@ def generate_encounter(
             beta = assign_beta(desired_encounter_type, settings)
 
         # Own ship
-        assert own_ship.start_pose is not None
+        assert own_ship.initial is not None
         own_ship_position_future = calculate_position_at_certain_time(
-            own_ship.start_pose.position,
-            own_ship.start_pose.speed,
-            own_ship.start_pose.course,
+            own_ship.initial.position,
+            own_ship.initial.sog,
+            own_ship.initial.cog,
             vector_time,
         )
-        # @TODO: @TomArne: this variable is declared and assigned to but nowhere used.  Delete?
-        #        Claas, 2023-11-24
-        # own_ship_vector_length = knot_2_m_pr_min(own_ship.start_pose.speed) * vector_time
 
         # Target ship
-        target_ship.id = target_ship_id
-        target_ship.start_pose = Pose()  # reset start_pose of target_ship (if one existed)
+        target_ship.initial = Initial()  # reset initial of target_ship (if one existed)
 
         target_ship_position_future = assign_future_position_to_target_ship(
             own_ship_position_future, settings.max_meeting_distance
@@ -104,35 +102,35 @@ def generate_encounter(
 
         while not encounter_found and inner_counter < 5:
             inner_counter += 1
-            relative_speed = relative_speed_default
-            if relative_speed is None:
-                min_target_ship_speed = m_pr_min_2_knot(
+            relative_sog = relative_sog_default
+            if relative_sog is None:
+                min_target_ship_sog = m_pr_min_2_knot(
                     calculate_min_vector_length_target_ship(
-                        own_ship.start_pose.position,
-                        own_ship.start_pose.course,
+                        own_ship.initial.position,
+                        own_ship.initial.cog,
                         target_ship_position_future,
                         beta,
                     )
                     / vector_time
                 )
 
-                target_ship.start_pose.speed = assign_speed_to_target_ship(
+                target_ship.initial.sog = assign_sog_to_target_ship(
                     desired_encounter_type,
-                    own_ship.start_pose.speed,
-                    min_target_ship_speed,
+                    own_ship.initial.sog,
+                    min_target_ship_sog,
                     settings.relative_speed,
                 )
             else:
-                target_ship.start_pose.speed = relative_speed * own_ship.start_pose.speed
+                target_ship.initial.sog = relative_sog * own_ship.initial.sog
 
-            target_ship.start_pose.speed = np.minimum(
-                target_ship.start_pose.speed, target_ship.static.speed_max
+            target_ship.initial.sog = np.minimum(
+                target_ship.initial.sog, target_ship.static.speed_max
             )
 
-            target_ship_vector_length = knot_2_m_pr_min(target_ship.start_pose.speed) * vector_time
+            target_ship_vector_length = knot_2_m_pr_min(target_ship.initial.sog) * vector_time
             start_position_target_ship, position_found = find_start_position_target_ship(
-                own_ship.start_pose.position,
-                own_ship.start_pose.course,
+                own_ship.initial.position,
+                own_ship.initial.cog,
                 target_ship_position_future,
                 target_ship_vector_length,
                 beta,
@@ -141,9 +139,9 @@ def generate_encounter(
             )
 
             if position_found:
-                target_ship.start_pose.position = start_position_target_ship
-                target_ship.start_pose.course = calculate_ship_course(
-                    target_ship.start_pose.position, target_ship_position_future
+                target_ship.initial.position = start_position_target_ship
+                target_ship.initial.cog = calculate_ship_cog(
+                    target_ship.initial.position, target_ship_position_future
                 )
                 encounter_ok: bool = check_encounter_evolvement(
                     own_ship,
@@ -156,9 +154,9 @@ def generate_encounter(
 
                 # Check if trajectory passes land
                 trajectory_on_land = path_crosses_land(
-                    target_ship.start_pose.position,
-                    target_ship.start_pose.speed,
-                    target_ship.start_pose.course,
+                    target_ship.initial.position,
+                    target_ship.initial.sog,
+                    target_ship.initial.cog,
                     settings.lat_lon_0,
                 )
 
@@ -170,7 +168,7 @@ def generate_encounter(
 
 
 def check_encounter_evolvement(
-    own_ship: Ship,
+    own_ship: OwnShip,
     own_ship_position_future: Position,
     target_ship: TargetShip,
     target_ship_position_future: Position,
@@ -182,8 +180,8 @@ def check_encounter_evolvement(
     encounter (head-on, crossing, give-way) also some time before the encounter is started.
 
     Params:
-        * own_ship: Own ship information such as initial position, speed and course
-        * target_ship: Target ship information such as initial position, speed and course
+        * own_ship: Own ship information such as initial position, sog and cog
+        * target_ship: Target ship information such as initial position, sog and cog
         * desired_encounter_type: Desired type of encounter to be generated
         * settings: Encounter settings
 
@@ -196,34 +194,34 @@ def check_encounter_evolvement(
     theta15_criteria: float = settings.classification.theta15_criteria
     theta15: List[float] = settings.classification.theta15
 
-    assert own_ship.start_pose is not None
-    assert target_ship.start_pose is not None
+    assert own_ship.initial is not None
+    assert target_ship.initial is not None
 
-    own_ship_speed: float = own_ship.start_pose.speed
-    own_ship_course: float = own_ship.start_pose.course
-    target_ship_speed: float = target_ship.start_pose.speed
-    target_ship_course: float = target_ship.start_pose.course
+    own_ship_sog: float = own_ship.initial.sog
+    own_ship_cog: float = own_ship.initial.cog
+    target_ship_sog: float = target_ship.initial.sog
+    target_ship_cog: float = target_ship.initial.cog
     evolve_time: float = settings.evolve_time
 
     # Calculating position back in time to ensure that the encounter do not change from one type
     # to another before the encounter is started
     encounter_preposition_target_ship = calculate_position_at_certain_time(
         target_ship_position_future,
-        target_ship_speed,
-        target_ship_course,
+        target_ship_sog,
+        target_ship_cog,
         -evolve_time,
     )
     encounter_preposition_own_ship = calculate_position_at_certain_time(
         own_ship_position_future,
-        own_ship_speed,
-        own_ship_course,
+        own_ship_sog,
+        own_ship_cog,
         -evolve_time,
     )
     pre_beta, pre_alpha = calculate_relative_bearing(
         encounter_preposition_own_ship,
-        own_ship_course,
+        own_ship_cog,
         encounter_preposition_target_ship,
-        target_ship_course,
+        target_ship_cog,
     )
     pre_colreg_state = determine_colreg(
         pre_alpha, pre_beta, theta13_criteria, theta14_criteria, theta15_criteria, theta15
@@ -236,23 +234,23 @@ def check_encounter_evolvement(
 
 def calculate_min_vector_length_target_ship(
     own_ship_position: Position,
-    own_ship_course: float,
+    own_ship_cog: float,
     target_ship_position_future: Position,
     desired_beta: float,
 ) -> float:
     """
-    Calculate minimum vector length (target ship speed x vector). This will
-    ensure that ship speed is high enough to find proper situation.
+    Calculate minimum vector length (target ship sog x vector). This will
+    ensure that ship sog is high enough to find proper situation.
 
     Params:
-        * own_ship_position: Own ship initial position, speed and course
-        * own_ship_course: Own ship initial course
+        * own_ship_position: Own ship initial position, sog and cog
+        * own_ship_cog: Own ship initial cog
         * target_ship_position_future: Target ship future position
         * desired_beta: Desired relative bearing between
 
-    Returns: min_vector_length: Minimum vector length (target ship speed x vector)
+    Returns: min_vector_length: Minimum vector length (target ship sog x vector)
     """
-    psi: float = np.deg2rad(own_ship_course + desired_beta)
+    psi: float = np.deg2rad(own_ship_cog + desired_beta)
 
     p_1 = np.array([own_ship_position.north, own_ship_position.east])
     p_2 = np.array([own_ship_position.north + np.cos(psi), own_ship_position.east + np.sin(psi)])
@@ -265,7 +263,7 @@ def calculate_min_vector_length_target_ship(
 
 def find_start_position_target_ship(
     own_ship_position: Position,
-    own_ship_course: float,
+    own_ship_cog: float,
     target_ship_position_future: Position,
     target_ship_vector_length: float,
     desired_beta: float,
@@ -276,10 +274,10 @@ def find_start_position_target_ship(
     Find start position of target ship using desired beta and vector length.
 
     Params:
-        * own_ship_position: Own ship initial position, speed and course
-        * own_ship_course: Own ship initial course
+        * own_ship_position: Own ship initial position, sog and cog
+        * own_ship_cog: Own ship initial cog
         * target_ship_position_future: Target ship future position
-        * target_ship_vector_length: vector length (target ship speed x vector)
+        * target_ship_vector_length: vector length (target ship sog x vector)
         * desired_beta: Desired bearing between own ship and target ship seen from own ship
         * desired_encounter_type: Desired type of encounter to be generated
         * settings: Encounter settings
@@ -299,7 +297,7 @@ def find_start_position_target_ship(
     n_2: float = target_ship_position_future.north
     e_2: float = target_ship_position_future.east
     v_r: float = target_ship_vector_length
-    psi: float = np.deg2rad(own_ship_course + desired_beta)
+    psi: float = np.deg2rad(own_ship_cog + desired_beta)
 
     n_4: float = n_1 + np.cos(psi)
     e_4: float = e_1 + np.sin(psi)
@@ -332,28 +330,28 @@ def find_start_position_target_ship(
     e_32 = e_1 + s_2 * (e_4 - e_1)
     n_32 = n_1 + s_2 * (n_4 - n_1)
 
-    target_ship_course_1 = calculate_ship_course(
-        waypoint_0=Position(north=n_31, east=e_31),
-        waypoint_1=target_ship_position_future,
+    target_ship_cog_1 = calculate_ship_cog(
+        pos_0=Position(north=n_31, east=e_31),
+        pos_1=target_ship_position_future,
     )
     beta1, alpha1 = calculate_relative_bearing(
         position_own_ship=own_ship_position,
-        heading_own_ship=own_ship_course,
+        heading_own_ship=own_ship_cog,
         position_target_ship=Position(north=n_31, east=e_31),
-        heading_target_ship=target_ship_course_1,
+        heading_target_ship=target_ship_cog_1,
     )
     colreg_state1: EncounterType = determine_colreg(
         alpha1, beta1, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
-    target_ship_course_2 = calculate_ship_course(
-        waypoint_0=Position(north=n_32, east=e_32),
-        waypoint_1=target_ship_position_future,
+    target_ship_cog_2 = calculate_ship_cog(
+        pos_0=Position(north=n_32, east=e_32),
+        pos_1=target_ship_position_future,
     )
     beta2, alpha2 = calculate_relative_bearing(
         position_own_ship=own_ship_position,
-        heading_own_ship=own_ship_course,
+        heading_own_ship=own_ship_cog,
         position_target_ship=Position(north=n_32, east=e_32),
-        heading_target_ship=target_ship_course_2,
+        heading_target_ship=target_ship_cog_2,
     )
     colreg_state2: EncounterType = determine_colreg(
         alpha2, beta2, theta13_criteria, theta14_criteria, theta15_criteria, theta15
@@ -412,7 +410,7 @@ def determine_colreg(
         * alpha: relative bearing between target ship and own ship seen from target ship
         * beta: relative bearing between own ship and target ship seen from own ship
         * theta13_criteria: Tolerance for "coming up with" relative bearing
-        * theta14_criteria: Tolerance for "reciprocal or nearly reciprocal courses",
+        * theta14_criteria: Tolerance for "reciprocal or nearly reciprocal cogs",
           "when in any doubt... assume... [head-on]"
         * theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter
         * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking
@@ -457,9 +455,9 @@ def calculate_relative_bearing(
 
     Params:
         * position_own_ship: Dict, own ship position {north, east} [m]
-        * heading_own_ship: Own ship course [deg]
+        * heading_own_ship: Own ship cog [deg]
         * position_target_ship: Dict, own ship position {north, east} [m]
-        * heading_target_ship: Target ship course [deg]
+        * heading_target_ship: Target ship cog [deg]
 
     Returns
     -------
@@ -508,16 +506,16 @@ def calculate_relative_bearing(
     # Relative bearing of contact ship relative to own ship
     beta: float = bng_own_ship_target_ship - heading_own_ship
     while beta < 0:
-        beta = beta + 2 * np.pi
+        beta += 2 * np.pi
     while beta >= 2 * np.pi:
-        beta = beta - 2 * np.pi
+        beta -= 2 * np.pi
 
     # Relative bearing of own ship relative to target ship
     alpha: float = bng_target_ship_own_ship - heading_target_ship
     while alpha < -np.pi:
-        alpha = alpha + 2 * np.pi
+        alpha += 2 * np.pi
     while alpha >= np.pi:
-        alpha = alpha - 2 * np.pi
+        alpha -= 2 * np.pi
 
     beta = np.rad2deg(beta)
     alpha = np.rad2deg(alpha)
@@ -525,9 +523,9 @@ def calculate_relative_bearing(
     return beta, alpha
 
 
-def calculate_ship_course(waypoint_0: Position, waypoint_1: Position) -> float:
+def calculate_ship_cog(pos_0: Position, pos_1: Position) -> float:
     """
-    Calculate ship course between two waypoints.
+    Calculate ship cog between two waypoints.
 
     Params:
         * waypoint_0: Dict, waypoint {north, east} [m]
@@ -535,12 +533,13 @@ def calculate_ship_course(waypoint_0: Position, waypoint_1: Position) -> float:
 
     Returns
     -------
-        course: Ship course [deg]
+        cog: Ship cog [deg]
     """
-    course: float = np.arctan2(waypoint_1.east - waypoint_0.east, waypoint_1.north - waypoint_0.north)
-    if course < 0.0:
-        course = course + 2 * np.pi
-    return round(np.rad2deg(course), 1)
+    cog: float = np.arctan2(pos_1.east - pos_0.east,
+                            pos_1.north - pos_0.north)
+    if cog < 0.0:
+        cog += 2 * np.pi
+    return round(np.rad2deg(cog), 1)
 
 
 def assign_vector_time(vector_time_range: List[float]):
@@ -560,50 +559,50 @@ def assign_vector_time(vector_time_range: List[float]):
     return vector_time
 
 
-def assign_speed_to_target_ship(
+def assign_sog_to_target_ship(
     encounter_type: EncounterType,
-    own_ship_speed: float,
-    min_target_ship_speed: float,
-    relative_speed_setting: EncounterRelativeSpeed,
+    own_ship_sog: float,
+    min_target_ship_sog: float,
+    relative_sog_setting: EncounterRelativeSpeed,
 ):
     """
-    Assign random (uniform) speed to target ship depending on type of encounter.
+    Assign random (uniform) sog to target ship depending on type of encounter.
 
     Params:
         * encounter_type: Type of encounter
-        * own_ship_speed: Own ship speed [knot]
-        * min_target_ship_speed: Minimum target ship speed [knot]
-        * relative_speed_setting: Relative speed setting dependent on encounter [-]
+        * own_ship_sog: Own ship sog [knot]
+        * min_target_ship_sog: Minimum target ship sog [knot]
+        * relative_sog_setting: Relative sog setting dependent on encounter [-]
 
     Returns
     -------
-        target_ship_speed: Target ship speed [knot]
+        target_ship_sog: Target ship sog [knot]
     """
     if encounter_type is EncounterType.OVERTAKING_STAND_ON:
-        relative_speed = relative_speed_setting.overtaking_stand_on
+        relative_sog = relative_sog_setting.overtaking_stand_on
     elif encounter_type is EncounterType.OVERTAKING_GIVE_WAY:
-        relative_speed = relative_speed_setting.overtaking_give_way
+        relative_sog = relative_sog_setting.overtaking_give_way
     elif encounter_type is EncounterType.HEAD_ON:
-        relative_speed = relative_speed_setting.head_on
+        relative_sog = relative_sog_setting.head_on
     elif encounter_type is EncounterType.CROSSING_GIVE_WAY:
-        relative_speed = relative_speed_setting.crossing_give_way
+        relative_sog = relative_sog_setting.crossing_give_way
     elif encounter_type is EncounterType.CROSSING_STAND_ON:
-        relative_speed = relative_speed_setting.crossing_stand_on
+        relative_sog = relative_sog_setting.crossing_stand_on
     else:
-        relative_speed = [0.0, 0.0]
+        relative_sog = [0.0, 0.0]
 
-    # Check that minimum target ship speed is in the relative speed range
+    # Check that minimum target ship sog is in the relative sog range
     if (
-        min_target_ship_speed / own_ship_speed > relative_speed[0]
-        and min_target_ship_speed / own_ship_speed < relative_speed[1]
+        min_target_ship_sog / own_ship_sog > relative_sog[0]
+        and min_target_ship_sog / own_ship_sog < relative_sog[1]
     ):
-        relative_speed[0] = min_target_ship_speed / own_ship_speed
+        relative_sog[0] = min_target_ship_sog / own_ship_sog
 
-    target_ship_speed: float = (
-        relative_speed[0] + random.uniform(0, 1) * (relative_speed[1] - relative_speed[0])
-    ) * own_ship_speed
+    target_ship_sog: float = (
+        relative_sog[0] + random.uniform(0, 1) * (relative_sog[1] - relative_sog[0])
+    ) * own_ship_sog
 
-    return target_ship_speed
+    return target_ship_sog
 
 
 def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> float:
@@ -655,27 +654,27 @@ def update_position_data_target_ship(
     -------
         ship: Updated target ship data
     """
-    assert target_ship.start_pose is not None
+    assert target_ship.initial is not None
 
     lat_0 = lat_lon_0[0]
     lon_0 = lat_lon_0[1]
 
     lat, lon, _ = flat2llh(
-        target_ship.start_pose.position.north,
-        target_ship.start_pose.position.east,
+        target_ship.initial.position.north,
+        target_ship.initial.position.east,
         deg_2_rad(lat_0),
         deg_2_rad(lon_0),
     )
-    target_ship.start_pose.position.latitude = round(rad_2_deg(lat), 6)
-    target_ship.start_pose.position.longitude = round(rad_2_deg(lon), 6)
+    target_ship.initial.position.latitude = round(rad_2_deg(lat), 6)
+    target_ship.initial.position.longitude = round(rad_2_deg(lon), 6)
     return target_ship
 
 
 def update_position_data_own_ship(
-    ship: Ship,
+    ship: OwnShip,
     lat_lon_0: List[float],
     delta_time: float,
-) -> Ship:
+) -> OwnShip:
     """
     Update position data of the target ship to also include latitude and longitude
     position of the target ship.
@@ -689,25 +688,25 @@ def update_position_data_own_ship(
     -------
         ship: Updated own ship data
     """
-    assert ship.start_pose is not None
+    assert ship.initial is not None
 
     lat_0 = lat_lon_0[0]
     lon_0 = lat_lon_0[1]
 
     ship_position_future = calculate_position_at_certain_time(
-        ship.start_pose.position,
-        ship.start_pose.speed,
-        ship.start_pose.course,
+        ship.initial.position,
+        ship.initial.sog,
+        ship.initial.cog,
         delta_time,
     )
     lat, lon, _ = flat2llh(
-        ship.start_pose.position.north,
-        ship.start_pose.position.east,
+        ship.initial.position.north,
+        ship.initial.position.east,
         deg_2_rad(lat_0),
         deg_2_rad(lon_0),
     )
-    ship.start_pose.position.latitude = round(rad_2_deg(lat), 6)
-    ship.start_pose.position.longitude = round(rad_2_deg(lon), 6)
+    ship.initial.position.latitude = round(rad_2_deg(lat), 6)
+    ship.initial.position.longitude = round(rad_2_deg(lon), 6)
 
     lat_future, lon_future, _ = flat2llh(
         ship_position_future.north,
@@ -718,9 +717,10 @@ def update_position_data_own_ship(
     ship_position_future.latitude = round(rad_2_deg(lat_future), 6)
     ship_position_future.longitude = round(rad_2_deg(lon_future), 6)
 
+
     ship.waypoints = [
-        ship.start_pose.position.model_copy(),
-        ship_position_future,
+        Waypoint(position=ship.initial.position.model_copy()),
+        Waypoint(position=ship_position_future),
     ]
 
     return ship

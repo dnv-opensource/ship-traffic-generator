@@ -13,7 +13,7 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_files,
 )
-from trafficgen.types import Encounter, EncounterSettings, Ship, Situation, TargetShip
+from trafficgen.types import Encounter, EncounterSettings, OwnShip, TargetShip, TrafficSituation
 
 
 def generate_traffic_situations(
@@ -21,7 +21,7 @@ def generate_traffic_situations(
     own_ship_file: Path,
     target_ship_folder: Path,
     settings_file: Path,
-) -> List[Situation]:
+) -> List[TrafficSituation]:
     """
     Generate a set of traffic situations using input files.
     This is the main function for generating a set of traffic situations using input files
@@ -38,11 +38,11 @@ def generate_traffic_situations(
         One situation may consist of one or more encounters.
     """
 
-    desired_traffic_situations: List[Situation] = read_situation_files(situation_folder)
-    own_ship: Ship = read_own_ship_file(own_ship_file)
+    desired_traffic_situations: List[TrafficSituation] = read_situation_files(situation_folder)
+    own_ship: OwnShip = read_own_ship_file(own_ship_file)
     target_ships: List[TargetShip] = read_target_ship_files(target_ship_folder)
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    traffic_situations: List[Situation] = []
+    traffic_situations: List[TrafficSituation] = []
 
     for desired_traffic_situation in desired_traffic_situations:
         num_situations: int = desired_traffic_situation.num_situations or 1
@@ -51,14 +51,14 @@ def generate_traffic_situations(
         assert desired_traffic_situation.encounter is not None
 
         for _ in range(num_situations):
-            traffic_situation: Situation = Situation(
+            traffic_situation: TrafficSituation = TrafficSituation(
                 title=desired_traffic_situation.title,
                 input_file_name=desired_traffic_situation.input_file_name,
                 common_vector=desired_traffic_situation.common_vector,
                 lat_lon_0=encounter_settings.lat_lon_0,
             )
             assert traffic_situation.common_vector is not None
-            own_ship.start_pose = desired_traffic_situation.own_ship.start_pose
+            own_ship.initial = desired_traffic_situation.own_ship.initial
             own_ship = update_position_data_own_ship(
                 own_ship,
                 encounter_settings.lat_lon_0,

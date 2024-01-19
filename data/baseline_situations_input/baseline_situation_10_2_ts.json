@@ -1,28 +1,28 @@
 {
-  "title": "HO, OT-SO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "head-on",
-      "beta": 0.0,
-      "relative_speed": 1.0,
-      "vector_time": 17.0
+    "title": "HO, OT-SO",
+    "common_vector": 10.0,
+    "own_ship": {
+        "initial": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0
+            },
+            "sog": 10.0,
+            "cog": 0.0
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-stand-on",
-      "beta": 176.0,
-      "relative_speed": 1.9,
-      "vector_time": 15.0
-    }
-  ]
+    "encounter": [
+        {
+            "desired_encounter_type": "head-on",
+            "beta": 0.0,
+            "relative_speed": 1.0,
+            "vector_time": 17.0
+        },
+        {
+            "desired_encounter_type": "overtaking-stand-on",
+            "beta": 176.0,
+            "relative_speed": 1.9,
+            "vector_time": 15.0
+        }
+    ]
 }

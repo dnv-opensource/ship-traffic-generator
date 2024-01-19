@@ -10,7 +10,7 @@ from folium import Map, Polygon
 from matplotlib.patches import Circle
 
 from trafficgen.marine_system_simulator import flat2llh
-from trafficgen.types import Position, Ship, Situation, TargetShip
+from trafficgen.types import Position, Ship, TargetShip, TrafficSituation
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_min, m2nm, rad_2_deg
 
 
@@ -166,7 +166,7 @@ def calculate_ship_outline(
 
 
 def plot_specific_traffic_situation(
-    traffic_situations: List[Situation],
+    traffic_situations: List[TrafficSituation],
     situation_number: int,
 ):
     """
@@ -184,7 +184,7 @@ def plot_specific_traffic_situation(
         )
         situation_number = num_situations
 
-    situation: Situation = traffic_situations[situation_number - 1]
+    situation: TrafficSituation = traffic_situations[situation_number - 1]
     assert situation.lat_lon_0 is not None
     assert situation.own_ship is not None
     assert situation.common_vector is not None
@@ -235,12 +235,12 @@ def add_ship_to_map(
     if map_plot is None:
         map_plot = Map(location=(lat_lon_0[0], lat_lon_0[1]), zoom_start=10)
 
-    assert ship.start_pose is not None
-    vector_length = vector_time * knot_2_m_pr_min(ship.start_pose.speed)
+    assert ship.initial is not None
+    vector_length = vector_time * knot_2_m_pr_min(ship.initial.sog)
     _ = map_plot.add_child(
         Polygon(
             calculate_vector_arrow(
-                ship.start_pose.position, ship.start_pose.course, vector_length, lat_lon_0
+                ship.initial.position, ship.initial.cog, vector_length, lat_lon_0
             ),
             fill=True,
             fill_opacity=1,
@@ -249,7 +249,7 @@ def add_ship_to_map(
     )
     _ = map_plot.add_child(
         Polygon(
-            calculate_ship_outline(ship.start_pose.position, ship.start_pose.course, lat_lon_0),
+            calculate_ship_outline(ship.initial.position, ship.initial.cog, lat_lon_0),
             fill=True,
             fill_opacity=1,
             color=color,
@@ -259,7 +259,7 @@ def add_ship_to_map(
 
 
 def plot_traffic_situations(
-    traffic_situations: List[Situation],
+    traffic_situations: List[TrafficSituation],
     col: int,
     row: int,
 ):
@@ -348,12 +348,12 @@ def find_max_value_for_plot(
     -------
         max_value: updated maximum deviation in north, east direction
     """
-    assert ship.start_pose is not None
+    assert ship.initial is not None
     max_value = np.max(
         [
             max_value,
-            np.abs(m2nm(ship.start_pose.position.north)),
-            np.abs(m2nm(ship.start_pose.position.east)),
+            np.abs(m2nm(ship.initial.position.north)),
+            np.abs(m2nm(ship.initial.position.east)),
         ]
     )
     return max_value
@@ -378,11 +378,11 @@ def add_ship_to_plot(
         axes = plt.gca()
     assert isinstance(axes, plt.Axes)
 
-    assert ship.start_pose is not None
-    pos_0_north = m2nm(ship.start_pose.position.north)
-    pos_0_east = m2nm(ship.start_pose.position.east)
-    course = ship.start_pose.course
-    speed = ship.start_pose.speed
+    assert ship.initial is not None
+    pos_0_north = m2nm(ship.initial.position.north)
+    pos_0_east = m2nm(ship.initial.position.east)
+    course = ship.initial.cog
+    speed = ship.initial.sog
 
     vector_length = m2nm(vector_time * knot_2_m_pr_min(speed))
 

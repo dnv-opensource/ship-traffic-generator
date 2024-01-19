@@ -9,7 +9,7 @@ from click.testing import CliRunner
 from trafficgen import cli
 from trafficgen.read_files import read_situation_files
 from trafficgen.ship_traffic_generator import generate_traffic_situations
-from trafficgen.types import Situation
+from trafficgen.types import TrafficSituation
 
 
 @pytest.fixture
@@ -75,7 +75,7 @@ def test_gen_situations(
     settings_file: Path,
 ):
     """Test generating traffic situations."""
-    situations: List[Situation] = generate_traffic_situations(
+    situations: List[TrafficSituation] = generate_traffic_situations(
         situation_folder=situations_folder,
         own_ship_file=own_ship_file,
         target_ship_folder=target_ships_folder,
@@ -117,7 +117,7 @@ def test_gen_situations_1_ts_full_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -162,7 +162,7 @@ def test_gen_situations_1_ts_partly_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -216,7 +216,7 @@ def test_gen_situations_1_ts_minimum_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -258,7 +258,7 @@ def test_gen_situations_2_ts_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -300,7 +300,7 @@ def test_gen_situations_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 10
 
     # sourcery skip: no-loop-in-tests
@@ -343,7 +343,7 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     assert len(situations) == 3
 
     # sourcery skip: no-loop-in-tests
@@ -386,7 +386,7 @@ def test_gen_situations_baseline_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_situation_files(output_folder)
     # assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests

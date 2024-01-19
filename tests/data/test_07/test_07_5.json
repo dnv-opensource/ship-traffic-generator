@@ -1,20 +1,20 @@
 {
-  "title": "CR-SO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 11.0,
-      "course": 45.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": 15.0
-    }
-  ]
+    "title": "CR-SO",
+    "common_vector": 10.0,
+    "own_ship": {
+        "initial": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0
+            },
+            "sog": 11.0,
+            "cog": 45.0
+        }
+    },
+    "encounter": [
+        {
+            "desired_encounter_type": "crossing-stand-on",
+            "beta": 15.0
+        }
+    ]
 }

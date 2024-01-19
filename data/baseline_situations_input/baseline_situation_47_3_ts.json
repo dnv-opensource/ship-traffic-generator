@@ -1,34 +1,34 @@
 {
-  "title": "CR_SO, CR_SO, OT_SO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": -20.0,
-      "relative_speed": 1.8,
-      "vector_time": 18.0
+    "title": "CR_SO, CR_SO, OT_SO",
+    "common_vector": 10.0,
+    "own_ship": {
+        "initial": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0
+            },
+            "sog": 10.0,
+            "cog": 0.0
+        }
     },
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": -50.0,
-      "relative_speed": 1.4,
-      "vector_time": 16.0
-    },
-    {
-      "desired_encounter_type": "overtaking-stand-on",
-      "beta": -165.0,
-      "relative_speed": 1.9,
-      "vector_time": 22.0
-    }
-  ]
+    "encounter": [
+        {
+            "desired_encounter_type": "crossing-stand-on",
+            "beta": -20.0,
+            "relative_speed": 1.8,
+            "vector_time": 18.0
+        },
+        {
+            "desired_encounter_type": "crossing-stand-on",
+            "beta": -50.0,
+            "relative_speed": 1.4,
+            "vector_time": 16.0
+        },
+        {
+            "desired_encounter_type": "overtaking-stand-on",
+            "beta": -165.0,
+            "relative_speed": 1.9,
+            "vector_time": 22.0
+        }
+    ]
 }

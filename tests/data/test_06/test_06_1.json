@@ -1,27 +1,27 @@
 {
-  "title": "OT-GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 8.0,
-      "course": 0.0
-    }
-  },
-  "num_situations": 2,
-  "encounter": [
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "relative_speed": 1.1,
-      "vector_time": 20.0
+    "title": "OT-GW",
+    "common_vector": 10.0,
+    "own_ship": {
+        "initial": {
+            "position": {
+                "north": 0.0,
+                "east": 0.0
+            },
+            "sog": 8.0,
+            "cog": 0.0
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "relative_speed": 1.5,
-      "vector_time": 15.0
-    }
-  ]
+    "num_situations": 2,
+    "encounter": [
+        {
+            "desired_encounter_type": "overtaking-give-way",
+            "relative_speed": 1.1,
+            "vector_time": 20.0
+        },
+        {
+            "desired_encounter_type": "overtaking-give-way",
+            "relative_speed": 1.5,
+            "vector_time": 15.0
+        }
+    ]
 }

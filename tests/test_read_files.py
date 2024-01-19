@@ -9,7 +9,14 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_files,
 )
-from trafficgen.types import EncounterSettings, EncounterType, Ship, ShipType, Situation, TargetShip
+from trafficgen.types import (
+    EncounterSettings,
+    EncounterType,
+    GeneralShipType,
+    Ship,
+    TargetShip,
+    TrafficSituation,
+)
 
 
 def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
@@ -17,7 +24,7 @@ def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
     Test reading traffic situations with full specification,
     meaning all parameters are specified.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_01)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_01)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -37,7 +44,7 @@ def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path):
     Test reading traffic situations using partly specification,
     meaning some of the parameters are specified.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_02)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_02)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -55,7 +62,7 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
     Test reading traffic situations using using minimum specification,
     meaning only type of situation is specified.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_03)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_03)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -74,7 +81,7 @@ def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: 
     """
     Test reading a traffic situation file num_situations=5 and 2 encounter specifications.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_04)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_04)
     assert len(situations) == 1
 
     # sourcery skip: no-loop-in-tests
@@ -95,7 +102,7 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path)
     """
     Test reading three traffic situation files 1, 2 and 3 encounter specifications.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_05)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_05)
     assert len(situations) == 3
 
     # sourcery skip: no-loop-in-tests
@@ -119,7 +126,7 @@ def test_read_situations_with_different_encounter_types(situations_folder_test_0
     """
     Test reading 5 traffic situation files with different encounter types.
     """
-    situations: List[Situation] = read_situation_files(situations_folder_test_07)
+    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_07)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -152,9 +159,9 @@ def test_read_own_ship(own_ship_file: Path):
     """
     own_ship: Ship = read_own_ship_file(own_ship_file)
     assert own_ship.static is not None
-    assert own_ship.start_pose is None
+    assert own_ship.initial is None
     assert own_ship.waypoints is None
-    assert own_ship.static.ship_type is ShipType.PASSENGER_RORO
+    assert own_ship.static.ship_type is GeneralShipType.PASSENGER
 
 
 def test_read_target_ships(target_ships_folder: Path):
@@ -165,16 +172,16 @@ def test_read_target_ships(target_ships_folder: Path):
     assert len(target_ships) == 3
 
     # sourcery skip: no-loop-in-tests
-    ship_types_found: Set[ShipType] = set()
+    ship_types_found: Set[GeneralShipType] = set()
     for target_ship in target_ships:
         assert target_ship.static is not None
         ship_types_found.add(target_ship.static.ship_type)
-        assert target_ship.start_pose is None
+        assert target_ship.initial is None
         assert target_ship.waypoints is None
 
     assert ship_types_found == {
-        ShipType.PASSENGER_RORO,
-        ShipType.GENERAL_CARGO,
+        GeneralShipType.PASSENGER,
+        GeneralShipType.CARGO,
     }
 
 
