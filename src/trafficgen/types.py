@@ -2,16 +2,17 @@
 
 from enum import Enum
 from typing import List, Union
-from uuid import UUID, uuid4
+from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 def to_camel(string: str) -> str:
     """Return a camel case formated string from snake case string."""
 
-    words = string.split('_')
-    return words[0] + ''.join(word.capitalize() for word in words[1:])
+    words = string.split("_")
+    return words[0] + "".join(word.capitalize() for word in words[1:])
+
 
 class Position(BaseModel):
     """Data type for a ship's position with attributes north, east in [m]."""
@@ -65,7 +66,6 @@ class GeneralShipType(str, Enum):
     OTHER_TYPE = "Other Type"
 
 
-
 class ShipStatic(BaseModel):
     """Static ship data that will not change during the scenario."""
 
@@ -98,6 +98,7 @@ class OwnShip(Ship):
 
     pass
 
+
 class TargetShip(Ship):
     """Data type for a target ship."""
 
@@ -129,6 +130,7 @@ class Encounter(BaseModel):
         alias_generator = to_camel
         populate_by_name = True
 
+
 class TrafficSituation(BaseModel):
     """Data type for a traffic situation."""
 
@@ -146,6 +148,7 @@ class TrafficSituation(BaseModel):
 
         alias_generator = to_camel
         populate_by_name = True
+
 
 class EncounterClassification(BaseModel):
     """Data type for the encounter classification."""
@@ -176,6 +179,7 @@ class EncounterRelativeSpeed(BaseModel):
 
         alias_generator = to_camel
         populate_by_name = True
+
 
 class EncounterSettings(BaseModel):
     """Data type for encounter settings."""

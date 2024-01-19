@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 from typing import List
-from uuid import UUID, uuid1, uuid4
+from uuid import UUID, uuid4
 
 from trafficgen.types import EncounterSettings, OwnShip, TargetShip, TrafficSituation
 
@@ -46,9 +46,9 @@ def read_own_ship_file(own_ship_file: Path) -> OwnShip:
     with open(own_ship_file, encoding="utf-8") as f:
         data = json.load(f)
 
-    if 'static' in data and 'id' not in data['static']:
+    if "static" in data and "id" not in data["static"]:
         ship_id: UUID = uuid4()
-        data['static'].update({'id':ship_id})
+        data["static"].update({"id": ship_id})
 
     ship: OwnShip = OwnShip(**data)
     return ship
@@ -71,9 +71,9 @@ def read_target_ship_files(target_ship_folder: Path) -> List[TargetShip]:
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
-        if 'static' in data and 'id' not in data['static']:
+        if "static" in data and "id" not in data["static"]:
             ship_id: UUID = uuid4()
-            data['static'].update({'id':ship_id})
+            data["static"].update({"id": ship_id})
         target_ship: TargetShip = TargetShip(**data)
         target_ships.append(target_ship)
     return target_ships

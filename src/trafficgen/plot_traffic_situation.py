@@ -239,9 +239,7 @@ def add_ship_to_map(
     vector_length = vector_time * knot_2_m_pr_min(ship.initial.sog)
     _ = map_plot.add_child(
         Polygon(
-            calculate_vector_arrow(
-                ship.initial.position, ship.initial.cog, vector_length, lat_lon_0
-            ),
+            calculate_vector_arrow(ship.initial.position, ship.initial.cog, vector_length, lat_lon_0),
             fill=True,
             fill_opacity=1,
             color=color,

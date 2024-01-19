@@ -5,7 +5,6 @@ crossing give-way and stand-on.
 """
 
 import random
-from operator import pos
 from typing import List, Optional, Tuple, Union
 
 import numpy as np
@@ -123,9 +122,7 @@ def generate_encounter(
             else:
                 target_ship.initial.sog = relative_sog * own_ship.initial.sog
 
-            target_ship.initial.sog = np.minimum(
-                target_ship.initial.sog, target_ship.static.speed_max
-            )
+            target_ship.initial.sog = np.minimum(target_ship.initial.sog, target_ship.static.speed_max)
 
             target_ship_vector_length = knot_2_m_pr_min(target_ship.initial.sog) * vector_time
             start_position_target_ship, position_found = find_start_position_target_ship(
@@ -535,8 +532,7 @@ def calculate_ship_cog(pos_0: Position, pos_1: Position) -> float:
     -------
         cog: Ship cog [deg]
     """
-    cog: float = np.arctan2(pos_1.east - pos_0.east,
-                            pos_1.north - pos_0.north)
+    cog: float = np.arctan2(pos_1.east - pos_0.east, pos_1.north - pos_0.north)
     if cog < 0.0:
         cog += 2 * np.pi
     return round(np.rad2deg(cog), 1)
@@ -716,7 +712,6 @@ def update_position_data_own_ship(
     )
     ship_position_future.latitude = round(rad_2_deg(lat_future), 6)
     ship_position_future.longitude = round(rad_2_deg(lon_future), 6)
-
 
     ship.waypoints = [
         Waypoint(position=ship.initial.position.model_copy()),
