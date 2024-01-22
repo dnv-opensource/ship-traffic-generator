@@ -13,7 +13,7 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_files,
 )
-from trafficgen.types import Encounter, EncounterSettings, OwnShip, TargetShip, TrafficSituation
+from trafficgen.types import EncounterSettings, OwnShip, TargetShip, TrafficSituation
 
 
 def generate_traffic_situations(
