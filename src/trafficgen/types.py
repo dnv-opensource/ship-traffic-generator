@@ -162,7 +162,7 @@ class TrafficSituation(BaseModel):
     title: str
     input_file_name: Union[str, None] = None
     common_vector: Union[float, None] = None
-    lat_lon_0: Union[List[float], None] = None
+    lat_lon0: Union[List[float], None] = None
     own_ship: Union[Ship, None] = None
     num_situations: Union[int, None] = None
     encounter: Union[List[Encounter], None] = None
@@ -215,7 +215,7 @@ class EncounterSettings(BaseModel):
     situation_length: float
     max_meeting_distance: float
     evolve_time: float
-    lat_lon_0: List[float]
+    lat_lon0: List[float]
 
     class Config:
         """For converting parameters written to file from snake to camel case."""

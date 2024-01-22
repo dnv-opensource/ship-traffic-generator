@@ -36,7 +36,6 @@ def generate_encounter(
     desired_encounter_type: EncounterType,
     own_ship: OwnShip,
     target_ships: List[TargetShip],
-    target_ship_id: int,
     beta_default: Optional[float],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
@@ -49,7 +48,6 @@ def generate_encounter(
         * desired_encounter_type: Desired encounter to be generated
         * own_ship: Dict, information about own ship that will encounter a target ship
         * target_ships: List of target ships that may be used in an encounter
-        * target_ship_id: ID which should be used on target ship
         * beta_default: User defined beta. If not set, this is None.
         * relative_sog_default: User defined relative sog between own ship and
                                   target ship. If not set, this is None.
@@ -154,13 +152,13 @@ def generate_encounter(
                     target_ship.initial.position,
                     target_ship.initial.sog,
                     target_ship.initial.cog,
-                    settings.lat_lon_0,
+                    settings.lat_lon0,
                 )
 
                 encounter_found = encounter_ok and not trajectory_on_land
 
     if encounter_found:
-        target_ship = update_position_data_target_ship(target_ship, settings.lat_lon_0)
+        target_ship = update_position_data_target_ship(target_ship, settings.lat_lon0)
     return target_ship, encounter_found
 
 
@@ -636,7 +634,7 @@ def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> f
 
 def update_position_data_target_ship(
     target_ship: TargetShip,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
 ) -> TargetShip:
     """
     Update position data of the target ship to also include latitude and longitude
@@ -644,7 +642,7 @@ def update_position_data_target_ship(
 
     Params:
         * target_ship: Target ship data
-        * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+        * lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
 
     Returns
     -------
@@ -652,8 +650,8 @@ def update_position_data_target_ship(
     """
     assert target_ship.initial is not None
 
-    lat_0 = lat_lon_0[0]
-    lon_0 = lat_lon_0[1]
+    lat_0 = lat_lon0[0]
+    lon_0 = lat_lon0[1]
 
     lat, lon, _ = flat2llh(
         target_ship.initial.position.north,
@@ -668,7 +666,7 @@ def update_position_data_target_ship(
 
 def update_position_data_own_ship(
     ship: OwnShip,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
     delta_time: float,
 ) -> OwnShip:
     """
@@ -677,7 +675,7 @@ def update_position_data_own_ship(
 
     Params:
         * ship: Own ship data
-        * lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+        * lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
         * delta_time: Delta time from now to the time new position is being calculated [minutes]
 
     Returns
@@ -686,8 +684,8 @@ def update_position_data_own_ship(
     """
     assert ship.initial is not None
 
-    lat_0 = lat_lon_0[0]
-    lon_0 = lat_lon_0[1]
+    lat_0 = lat_lon0[0]
+    lon_0 = lat_lon0[1]
 
     ship_position_future = calculate_position_at_certain_time(
         ship.initial.position,

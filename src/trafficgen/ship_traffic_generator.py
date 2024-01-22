@@ -55,30 +55,27 @@ def generate_traffic_situations(
                 title=desired_traffic_situation.title,
                 input_file_name=desired_traffic_situation.input_file_name,
                 common_vector=desired_traffic_situation.common_vector,
-                lat_lon_0=encounter_settings.lat_lon_0,
+                lat_lon0=encounter_settings.lat_lon0,
             )
             assert traffic_situation.common_vector is not None
             own_ship.initial = desired_traffic_situation.own_ship.initial
             own_ship = update_position_data_own_ship(
                 own_ship,
-                encounter_settings.lat_lon_0,
+                encounter_settings.lat_lon0,
                 encounter_settings.situation_length,
             )
             traffic_situation.own_ship = own_ship
             traffic_situation.target_ship = []
-            for k in range(len(desired_traffic_situation.encounter)):
-                encounter: Encounter = desired_traffic_situation.encounter[k]
+            for encounter in desired_traffic_situation.encounter:
                 desired_encounter_type = encounter.desired_encounter_type
                 settings = encounter_settings
                 beta: Union[float, None] = encounter.beta
                 relative_speed: Union[float, None] = encounter.relative_speed
                 vector_time: Union[float, None] = encounter.vector_time
-                target_ship_id = k + 1
                 target_ship, encounter_found = generate_encounter(
                     desired_encounter_type,
                     own_ship.model_copy(deep=True),
                     target_ships,
-                    target_ship_id,
                     beta,
                     relative_speed,
                     vector_time,

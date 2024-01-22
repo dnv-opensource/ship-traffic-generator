@@ -122,7 +122,7 @@ def test_gen_situations_1_ts_full_spec_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         # @TODO: See comment in test_gen_situations_1_ts_partly_spec_cli().
         #        Same behaviour and reason for below change here.
@@ -167,7 +167,7 @@ def test_gen_situations_1_ts_partly_spec_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         # @TODO: @TomArne: As again the tests on GitHub failed here,
         #        I have for now adapted the assertion to not test for
@@ -221,7 +221,7 @@ def test_gen_situations_1_ts_minimum_spec_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         assert len(situation.target_ship) == 1
 
@@ -263,7 +263,7 @@ def test_gen_situations_2_ts_one_to_many_situations_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         assert len(situation.target_ship) == 2
 
@@ -305,7 +305,7 @@ def test_gen_situations_one_to_many_situations_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         assert len(situation.target_ship) in {1, 2, 3}
 
@@ -348,7 +348,7 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         assert len(situation.target_ship) == 0
 
@@ -391,6 +391,6 @@ def test_gen_situations_baseline_cli(
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
+        assert situation.lat_lon0 is not None
         assert situation.target_ship is not None
         assert len(situation.target_ship) in {1, 2, 3}

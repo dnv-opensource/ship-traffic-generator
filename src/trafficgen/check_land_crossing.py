@@ -13,7 +13,7 @@ def path_crosses_land(
     position_1: Position,
     speed: float,
     course: float,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
     time_interval: float = 50.0,
 ) -> bool:
     """
@@ -23,7 +23,7 @@ def path_crosses_land(
         position_1: Ship position in (north, east) [m].
         speed: Ship speed [knots].
         course: Ship course [degree].
-        lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree].
+        lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree].
         time_interval: The time interval the vessel should travel without crossing land [minutes]
 
     Returns
@@ -33,8 +33,8 @@ def path_crosses_land(
 
     north_1 = position_1.north
     east_1 = position_1.east
-    lat_0 = lat_lon_0[0]
-    lon_0 = lat_lon_0[1]
+    lat_0 = lat_lon0[0]
+    lon_0 = lat_lon0[1]
 
     num_checks = 10
     for i in range(int(time_interval / num_checks)):

@@ -195,5 +195,5 @@ def test_read_encounter_settings_file(settings_file: Path):
     assert settings.vector_range is not None
     assert settings.max_meeting_distance == 0.0
     assert settings.evolve_time == 120.0
-    assert settings.lat_lon_0 is not None
-    assert len(settings.lat_lon_0) == 2
+    assert settings.lat_lon0 is not None
+    assert len(settings.lat_lon0) == 2

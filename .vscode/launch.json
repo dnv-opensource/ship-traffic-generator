@@ -13,9 +13,7 @@
                 "debug-test"
             ],
             "console": "integratedTerminal",
-            "env": {
-                "PYTEST_ADDOPTS": "--no-cov"
-            },
+            "env": {},
             "autoReload": {
                 "enable": true
             },

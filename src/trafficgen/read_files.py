@@ -110,7 +110,6 @@ def camel_to_snake(string: str) -> str:
 
 def convert_keys_to_snake_case(data: Dict[str, Any]) -> Dict[str, Any]:
     """Convert keys in a nested dictionary from camel case to snake case."""
-
     converted_dict = {}
     for key, value in data.items():
         converted_key = camel_to_snake(key)
@@ -129,6 +128,8 @@ def convert_list_of_dict_to_snake_case(data: List[Dict[str, Any]]) -> List[Dict[
 
     converted_list: List[Dict[str, Any]] = []
     for item in data:
+        if not isinstance(item, dict):
+            return data
         converted_item = convert_keys_to_snake_case(item)
         converted_list.append(converted_item)
     return converted_list

@@ -18,7 +18,7 @@ def calculate_vector_arrow(
     position: Position,
     direction: float,
     vector_length: float,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
 ) -> List[Tuple[float, float]]:
     """
     Calculate the arrow with length vector pointing in the direction of ship course.
@@ -27,7 +27,7 @@ def calculate_vector_arrow(
         position: {north}, {east} position of the ship [m]
         direction: direction the arrow is pointing [deg]
         vector_length: length of vector
-        lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+        lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
 
     Returns
     -------
@@ -48,14 +48,14 @@ def calculate_vector_arrow(
     east_arrow_side_2 = east_end + side_length * np.sin(deg_2_rad(direction + 180 + sides_angle))
 
     lat_start, lon_start, _ = flat2llh(
-        north_start, east_start, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_start, east_start, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
-    lat_end, lon_end, _ = flat2llh(north_end, east_end, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1]))
+    lat_end, lon_end, _ = flat2llh(north_end, east_end, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1]))
     lat_arrow_side_1, lon_arrow_side_1, _ = flat2llh(
-        north_arrow_side_1, east_arrow_side_1, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_arrow_side_1, east_arrow_side_1, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
     lat_arrow_side_2, lon_arrow_side_2, _ = flat2llh(
-        north_arrow_side_2, east_arrow_side_2, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_arrow_side_2, east_arrow_side_2, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     point_1 = (rad_2_deg(lat_start), rad_2_deg(lon_start))
@@ -69,7 +69,7 @@ def calculate_vector_arrow(
 def calculate_ship_outline(
     position: Position,
     course: float,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
     ship_length: float = 100.0,
     ship_width: float = 15.0,
 ) -> List[Tuple[float, float]]:
@@ -79,7 +79,7 @@ def calculate_ship_outline(
     Params:
         position: {north}, {east} position of the ship [m]
         course: course of the ship [deg]
-        lat_lon_0: Reference point, latitudinal [degree] and longitudinal [degree]
+        lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
         ship_length: Ship length. If not given, ship length is set to 100
         ship_width: Ship width. If not given, ship width is set to 15
 
@@ -105,7 +105,7 @@ def calculate_ship_outline(
         + np.cos(deg_2_rad(course)) * ship_width / 2
     )
     lat_pos1, lon_pos1, _ = flat2llh(
-        north_pos1, east_pos1, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_pos1, east_pos1, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     north_pos2 = (
@@ -119,13 +119,13 @@ def calculate_ship_outline(
         + np.cos(deg_2_rad(course)) * ship_width / 2
     )
     lat_pos2, lon_pos2, _ = flat2llh(
-        north_pos2, east_pos2, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_pos2, east_pos2, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     north_pos3 = north_start + np.cos(deg_2_rad(course)) * (ship_length / 2)
     east_pos3 = east_start + np.sin(deg_2_rad(course)) * (ship_length / 2)
     lat_pos3, lon_pos3, _ = flat2llh(
-        north_pos3, east_pos3, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_pos3, east_pos3, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     north_pos4 = (
@@ -139,7 +139,7 @@ def calculate_ship_outline(
         + np.cos(deg_2_rad(course)) * (-ship_width / 2)
     )
     lat_pos4, lon_pos4, _ = flat2llh(
-        north_pos4, east_pos4, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_pos4, east_pos4, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     north_pos5 = (
@@ -153,7 +153,7 @@ def calculate_ship_outline(
         + np.cos(deg_2_rad(course)) * (-ship_width / 2)
     )
     lat_pos5, lon_pos5, _ = flat2llh(
-        north_pos5, east_pos5, deg_2_rad(lat_lon_0[0]), deg_2_rad(lat_lon_0[1])
+        north_pos5, east_pos5, deg_2_rad(lat_lon0[0]), deg_2_rad(lat_lon0[1])
     )
 
     point_1 = (rad_2_deg(lat_pos1), rad_2_deg(lon_pos1))
@@ -185,15 +185,15 @@ def plot_specific_traffic_situation(
         situation_number = num_situations
 
     situation: TrafficSituation = traffic_situations[situation_number - 1]
-    assert situation.lat_lon_0 is not None
+    assert situation.lat_lon0 is not None
     assert situation.own_ship is not None
     assert situation.common_vector is not None
 
-    map_plot = Map(location=(situation.lat_lon_0[0], situation.lat_lon_0[1]), zoom_start=10)
+    map_plot = Map(location=(situation.lat_lon0[0], situation.lat_lon0[1]), zoom_start=10)
     map_plot = add_ship_to_map(
         situation.own_ship,
         situation.common_vector,
-        situation.lat_lon_0,
+        situation.lat_lon0,
         map_plot,
         "black",
     )
@@ -204,7 +204,7 @@ def plot_specific_traffic_situation(
         map_plot = add_ship_to_map(
             target_ship,
             situation.common_vector,
-            situation.lat_lon_0,
+            situation.lat_lon0,
             map_plot,
             "red",
         )
@@ -214,7 +214,7 @@ def plot_specific_traffic_situation(
 def add_ship_to_map(
     ship: Ship,
     vector_time: float,
-    lat_lon_0: List[float],
+    lat_lon0: List[float],
     map_plot: Optional[Map],
     color: str = "black",
 ) -> Map:
@@ -224,7 +224,7 @@ def add_ship_to_map(
     Params:
         ship: Ship information
         vector_time: Vector time [min]
-        lat_lon_0=Reference point, latitudinal [degree] and longitudinal [degree]
+        lat_lon0=Reference point, latitudinal [degree] and longitudinal [degree]
         map_plot: Instance of Map. If not set, instance is set to None
         color: Color of the ship. If not set, color is 'black'
 
@@ -233,13 +233,13 @@ def add_ship_to_map(
         m: Updated instance of Map.
     """
     if map_plot is None:
-        map_plot = Map(location=(lat_lon_0[0], lat_lon_0[1]), zoom_start=10)
+        map_plot = Map(location=(lat_lon0[0], lat_lon0[1]), zoom_start=10)
 
     assert ship.initial is not None
     vector_length = vector_time * knot_2_m_pr_min(ship.initial.sog)
     _ = map_plot.add_child(
         Polygon(
-            calculate_vector_arrow(ship.initial.position, ship.initial.cog, vector_length, lat_lon_0),
+            calculate_vector_arrow(ship.initial.position, ship.initial.cog, vector_length, lat_lon0),
             fill=True,
             fill_opacity=1,
             color=color,
@@ -247,7 +247,7 @@ def add_ship_to_map(
     )
     _ = map_plot.add_child(
         Polygon(
-            calculate_ship_outline(ship.initial.position, ship.initial.cog, lat_lon_0),
+            calculate_ship_outline(ship.initial.position, ship.initial.cog, lat_lon0),
             fill=True,
             fill_opacity=1,
             color=color,
