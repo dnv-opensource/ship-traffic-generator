@@ -2,22 +2,38 @@
 
 import json
 import os
+import re
 from pathlib import Path
-from typing import List
+from typing import Any, Dict, List, Union
 from uuid import UUID, uuid4
 
-from trafficgen.types import EncounterSettings, OwnShip, TargetShip, TrafficSituation
+from trafficgen.types import EncounterSettings, OwnShip, Ship, TargetShip, TrafficSituation
 
 
-def camel_to_snake(string: str):
+def camel_to_snake(string: str) -> str:
     """Convert a camel case string to snake case."""
     return ''.join([f'_{c.lower()}' if c.isupper() else c for c in string]).lstrip('_')
 
-def replace_camel_case_with_snake_case(data):
-    """Replace camel case keys with snake case keys in a dictionary."""
-    return {camel_to_snake(key): value for key, value in data.items()}
-
-
+def convert_keys_to_snake_case(data: Union[Dict[str, Any], List[Union[Dict[str, Any], List[Any]]]]) -> Union[Dict[str, Any], List[Union[Dict[str, Any], List[Any]]]]:
+    """Convert keys in a nested dictionary from camel case to snake case."""
+    if isinstance(data, dict):
+        converted_dict = {}
+        for key, value in data.items():
+            converted_key = camel_to_snake(key)
+            if isinstance(value, (dict, list)):
+                converted_value = convert_keys_to_snake_case(value)
+            else:
+                converted_value = value
+            converted_dict[converted_key] = converted_value
+        return converted_dict
+    elif isinstance(data, list):
+        converted_list = []
+        for item in data:
+            converted_item = convert_keys_to_snake_case(item)
+            converted_list.append(converted_item)
+        return converted_list
+    else:
+        return data
 def read_situation_files(situation_folder: Path) -> List[TrafficSituation]:
     """
     Read traffic situation files.
@@ -35,7 +51,7 @@ def read_situation_files(situation_folder: Path) -> List[TrafficSituation]:
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
-        data = replace_camel_case_with_snake_case(data)
+        data = convert_keys_to_snake_case(data)
         situation: TrafficSituation = TrafficSituation(**data)
         situation.input_file_name = file_name
         situations.append(situation)
