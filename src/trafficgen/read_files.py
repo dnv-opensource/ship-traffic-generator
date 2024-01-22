@@ -2,38 +2,13 @@
 
 import json
 import os
-import re
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 from uuid import UUID, uuid4
 
-from trafficgen.types import EncounterSettings, OwnShip, Ship, TargetShip, TrafficSituation
+from trafficgen.types import AISNavStatus, EncounterSettings, OwnShip, TargetShip, TrafficSituation
 
 
-def camel_to_snake(string: str) -> str:
-    """Convert a camel case string to snake case."""
-    return ''.join([f'_{c.lower()}' if c.isupper() else c for c in string]).lstrip('_')
-
-def convert_keys_to_snake_case(data: Union[Dict[str, Any], List[Union[Dict[str, Any], List[Any]]]]) -> Union[Dict[str, Any], List[Union[Dict[str, Any], List[Any]]]]:
-    """Convert keys in a nested dictionary from camel case to snake case."""
-    if isinstance(data, dict):
-        converted_dict = {}
-        for key, value in data.items():
-            converted_key = camel_to_snake(key)
-            if isinstance(value, (dict, list)):
-                converted_value = convert_keys_to_snake_case(value)
-            else:
-                converted_value = value
-            converted_dict[converted_key] = converted_value
-        return converted_dict
-    elif isinstance(data, list):
-        converted_list = []
-        for item in data:
-            converted_item = convert_keys_to_snake_case(item)
-            converted_list.append(converted_item)
-        return converted_list
-    else:
-        return data
 def read_situation_files(situation_folder: Path) -> List[TrafficSituation]:
     """
     Read traffic situation files.
@@ -71,10 +46,13 @@ def read_own_ship_file(own_ship_file: Path) -> OwnShip:
     """
     with open(own_ship_file, encoding="utf-8") as f:
         data = json.load(f)
+    data = convert_keys_to_snake_case(data)
 
     if "static" in data and "id" not in data["static"]:
         ship_id: UUID = uuid4()
         data["static"].update({"id": ship_id})
+    if "initial" in data and "nav_status" not in data["initial"]:
+        data["initial"].update({"nav_status": AISNavStatus.UNDER_WAY_USING_ENGINE})
 
     ship: OwnShip = OwnShip(**data)
     return ship
@@ -96,10 +74,13 @@ def read_target_ship_files(target_ship_folder: Path) -> List[TargetShip]:
         file_path = os.path.join(target_ship_folder, file_name)
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
+        data = convert_keys_to_snake_case(data)
 
         if "static" in data and "id" not in data["static"]:
             ship_id: UUID = uuid4()
             data["static"].update({"id": ship_id})
+        if "initial" in data and "nav_status" not in data["initial"]:
+            data["initial"].update({"nav_status": AISNavStatus.UNDER_WAY_USING_ENGINE})
         target_ship: TargetShip = TargetShip(**data)
         target_ships.append(target_ship)
     return target_ships
@@ -120,3 +101,34 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
         data = json.load(f)
     encounter_settings: EncounterSettings = EncounterSettings(**data)
     return encounter_settings
+
+
+def camel_to_snake(string: str) -> str:
+    """Convert a camel case string to snake case."""
+    return "".join([f"_{c.lower()}" if c.isupper() else c for c in string]).lstrip("_")
+
+
+def convert_keys_to_snake_case(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert keys in a nested dictionary from camel case to snake case."""
+
+    converted_dict = {}
+    for key, value in data.items():
+        converted_key = camel_to_snake(key)
+        if isinstance(value, dict):
+            converted_value = convert_keys_to_snake_case(value)
+        elif isinstance(value, list):
+            converted_value = convert_list_of_dict_to_snake_case(value)
+        else:
+            converted_value = value
+        converted_dict[converted_key] = converted_value
+    return converted_dict
+
+
+def convert_list_of_dict_to_snake_case(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Loops through a list of dics to convert keys from camel case to snake case."""
+
+    converted_list: List[Dict[str, Any]] = []
+    for item in data:
+        converted_item = convert_keys_to_snake_case(item)
+        converted_list.append(converted_item)
+    return converted_list

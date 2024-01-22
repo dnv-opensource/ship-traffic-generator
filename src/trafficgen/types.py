@@ -66,6 +66,31 @@ class GeneralShipType(str, Enum):
     OTHER_TYPE = "Other Type"
 
 
+class AISNavStatus(str, Enum):
+    """Enumeration of AIS navigation status types."""
+
+    UNDER_WAY_USING_ENGINE = "Under way using engine"
+    AT_ANCHOR = "At anchor"
+    NOT_UNDER_COMMAND = "Not under command"
+    RESTRICTED_MANOEUVERABILITY = "Restricted manoeuverability"
+    CONSTRAINED_BY_HER_DRAUGHT = "Constrained by her draught"
+    MOORED = "Moored"
+    AGROUND = "Aground"
+    ENGAGED_IN_FISHING = "Engaged in fishing"
+    UNDER_WAY_SAILING = "Under way sailing"
+    RESERVED_FOR_FUTURE_AMENDMENT_OF_NAVIGATIONAL_STATUS_FOR_HSC = (
+        "Reserved for future amendment of navigational status for HSC"
+    )
+    RESERVED_FOR_FUTURE_AMENDMENT_OF_NAVIGATIONAL_STATUS_FOR_WIG = (
+        "Reserved for future amendment of navigational status for WIG"
+    )
+    RESERVED_FOR_FUTURE_USE_1 = "Reserved for future use 1"
+    RESERVED_FOR_FUTURE_USE_2 = "Reserved for future use 2"
+    RESERVED_FOR_FUTURE_USE_3 = "Reserved for future use 3"
+    AIS_SART_IS_ACTIVE = "AIS SART is active"
+    NOT_DEFINED_DEFAULT = "Not defined (default)"
+
+
 class ShipStatic(BaseModel):
     """Static ship data that will not change during the scenario."""
 
