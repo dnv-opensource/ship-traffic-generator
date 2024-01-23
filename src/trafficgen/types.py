@@ -166,7 +166,7 @@ class TrafficSituation(BaseModel):
     own_ship: Union[Ship, None] = None
     num_situations: Union[int, None] = None
     encounter: Union[List[Encounter], None] = None
-    target_ship: Union[List[TargetShip], None] = None
+    target_ships: Union[List[TargetShip], None] = None
 
     class Config:
         """For converting parameters written to file from snake to camel case."""

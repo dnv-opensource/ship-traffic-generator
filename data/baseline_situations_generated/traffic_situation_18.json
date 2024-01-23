@@ -8,7 +8,7 @@
     ],
     "ownShip": {
         "static": {
-            "id": "2243da41-3f64-4394-a75e-ec0453ee0a0e",
+            "id": "d700e603-10c8-4ce3-bb2f-9ae4fd80b37f",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -46,17 +46,17 @@
             }
         ]
     },
-    "targetShip": [
+    "targetShips": [
         {
             "static": {
-                "id": "6bd33d04-07ae-4741-9e4f-1e4bc1a2ff76",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "mmsi": 257083180,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "500c1686-6076-43e4-baec-2d01db90422c",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "mmsi": 219945000,
+                "name": "BASTO VI",
+                "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
                 "position": {
@@ -71,13 +71,13 @@
         },
         {
             "static": {
-                "id": "1675dd5d-3506-4b63-82f5-5c0ce5641d43",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "mmsi": 257845600,
-                "name": "BASTO IV",
+                "id": "500c1686-6076-43e4-baec-2d01db90422c",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "mmsi": 219945000,
+                "name": "BASTO VI",
                 "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {

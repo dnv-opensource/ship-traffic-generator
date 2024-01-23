@@ -65,7 +65,7 @@ def generate_traffic_situations(
                 encounter_settings.situation_length,
             )
             traffic_situation.own_ship = own_ship
-            traffic_situation.target_ship = []
+            traffic_situation.target_ships = []
             for encounter in desired_traffic_situation.encounter:
                 desired_encounter_type = encounter.desired_encounter_type
                 settings = encounter_settings
@@ -82,7 +82,7 @@ def generate_traffic_situations(
                     settings,
                 )
                 if encounter_found:
-                    traffic_situation.target_ship.append(target_ship)
+                    traffic_situation.target_ships.append(target_ship)
 
             traffic_situations.append(traffic_situation)
     return traffic_situations

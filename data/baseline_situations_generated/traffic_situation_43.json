@@ -8,7 +8,7 @@
     ],
     "ownShip": {
         "static": {
-            "id": "2243da41-3f64-4394-a75e-ec0453ee0a0e",
+            "id": "d700e603-10c8-4ce3-bb2f-9ae4fd80b37f",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -46,16 +46,16 @@
             }
         ]
     },
-    "targetShip": [
+    "targetShips": [
         {
             "static": {
-                "id": "7ca64231-7ca3-4c64-ac97-60d270ead854",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "mmsi": 219945000,
-                "name": "BASTO VI",
+                "id": "a85975ef-54bc-4e92-a95e-f7925e347f63",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
                 "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
@@ -71,7 +71,7 @@
         },
         {
             "static": {
-                "id": "6bd33d04-07ae-4741-9e4f-1e4bc1a2ff76",
+                "id": "76a84885-8e48-463c-8ba2-6669c70f02cd",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -93,14 +93,14 @@
         },
         {
             "static": {
-                "id": "6bd33d04-07ae-4741-9e4f-1e4bc1a2ff76",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "a85975ef-54bc-4e92-a95e-f7925e347f63",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "mmsi": 257083180,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "mmsi": 257845600,
+                "name": "BASTO IV",
+                "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
                 "position": {

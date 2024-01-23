@@ -30,7 +30,7 @@ def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.encounter is not None
         assert len(situation.encounter) == 1
         assert situation.encounter[0].desired_encounter_type is not None
@@ -50,7 +50,7 @@ def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path):
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.encounter is not None
         assert len(situation.encounter) == 1
         assert situation.encounter[0].desired_encounter_type is not None
@@ -68,7 +68,7 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.encounter is not None
         assert len(situation.encounter) == 1
         assert situation.encounter[0].desired_encounter_type is not None
@@ -87,7 +87,7 @@ def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.num_situations == 5
         assert situation.encounter is not None
         assert len(situation.encounter) == 2
@@ -109,7 +109,7 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path)
     num_situations_values_found: Set[Union[int, None]] = set()
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.encounter is not None
         assert len(situation.encounter) in {1, 2, 3}
         num_situations_values_found.add(situation.num_situations)
@@ -133,7 +133,7 @@ def test_read_situations_with_different_encounter_types(situations_folder_test_0
     desired_encounter_types_found: Set[EncounterType] = set()
     for situation in situations:
         assert situation.own_ship is not None
-        assert situation.target_ship is None
+        assert situation.target_ships is None
         assert situation.num_situations is None
         assert situation.encounter is not None
         assert len(situation.encounter) == 1

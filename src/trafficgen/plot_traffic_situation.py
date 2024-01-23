@@ -198,7 +198,7 @@ def plot_specific_traffic_situation(
         "black",
     )
 
-    target_ships: Union[List[TargetShip], None] = situation.target_ship
+    target_ships: Union[List[TargetShip], None] = situation.target_ships
     assert target_ships is not None
     for target_ship in target_ships:
         map_plot = add_ship_to_map(
@@ -287,8 +287,8 @@ def plot_traffic_situations(
     for situation in traffic_situations:
         assert situation.own_ship is not None
         max_value = find_max_value_for_plot(situation.own_ship, max_value)
-        assert situation.target_ship is not None
-        for target_ship in situation.target_ship:
+        assert situation.target_ships is not None
+        for target_ship in situation.target_ships:
             max_value = find_max_value_for_plot(target_ship, max_value)
 
     plot_number: int = 1
@@ -314,8 +314,8 @@ def plot_traffic_situations(
             axes,
             "black",
         )
-        assert situation.target_ship is not None
-        for target_ship in situation.target_ship:
+        assert situation.target_ships is not None
+        for target_ship in situation.target_ships:
             axes = add_ship_to_plot(
                 target_ship,
                 situation.common_vector,
