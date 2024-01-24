@@ -55,13 +55,11 @@ def generate_traffic_situations(
                 title=desired_traffic_situation.title,
                 input_file_name=desired_traffic_situation.input_file_name,
                 common_vector=desired_traffic_situation.common_vector,
-                lat_lon0=encounter_settings.lat_lon0,
             )
             assert traffic_situation.common_vector is not None
             own_ship.initial = desired_traffic_situation.own_ship.initial
             own_ship = update_position_data_own_ship(
                 own_ship,
-                encounter_settings.lat_lon0,
                 encounter_settings.situation_length,
             )
             traffic_situation.own_ship = own_ship

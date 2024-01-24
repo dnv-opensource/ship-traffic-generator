@@ -4,8 +4,8 @@
     "ownShip": {
         "startPose": {
             "position": {
-                "north": 0.0,
-                "east": 0.0
+                "latitude": 58.763449,
+                "longitude": 10.490654
             },
             "speed": 8.0,
             "course": 110.0

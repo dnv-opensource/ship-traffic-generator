@@ -36,9 +36,5 @@
     ],
     "situation_length": 60.0,
     "max_meeting_distance": 0.0,
-    "evolve_time": 120.0,
-    "lat_lon0": [
-        58.763449,
-        10.490654
-    ]
+    "evolve_time": 120.0
 }

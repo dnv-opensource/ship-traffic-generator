@@ -61,6 +61,9 @@ def generate_encounter(
     """
     encounter_found: bool = False
     outer_counter: int = 0
+    # Initial posision of own ship used as reference point for lat_lon0
+    assert own_ship.initial is not None
+    lat_lon0 = [own_ship.initial.position.latitude, own_ship.initial.position.longitude]
 
     target_ship = decide_target_ship(target_ships)
     assert target_ship.static is not None
@@ -152,13 +155,13 @@ def generate_encounter(
                     target_ship.initial.position,
                     target_ship.initial.sog,
                     target_ship.initial.cog,
-                    settings.lat_lon0,
+                    lat_lon0,
                 )
 
                 encounter_found = encounter_ok and not trajectory_on_land
 
     if encounter_found:
-        target_ship = update_position_data_target_ship(target_ship, settings.lat_lon0)
+        target_ship = update_position_data_target_ship(target_ship, lat_lon0)
     return target_ship, encounter_found
 
 
@@ -666,16 +669,13 @@ def update_position_data_target_ship(
 
 def update_position_data_own_ship(
     ship: OwnShip,
-    lat_lon0: List[float],
     delta_time: float,
 ) -> OwnShip:
     """
-    Update position data of the target ship to also include latitude and longitude
-    position of the target ship.
+    Update ship data of the own ship to also include waypoints.
 
     Params:
         * ship: Own ship data
-        * lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
         * delta_time: Delta time from now to the time new position is being calculated [minutes]
 
     Returns
@@ -684,8 +684,11 @@ def update_position_data_own_ship(
     """
     assert ship.initial is not None
 
-    lat_0 = lat_lon0[0]
-    lon_0 = lat_lon0[1]
+    lat_0 = ship.initial.position.latitude
+    lon_0 = ship.initial.position.longitude
+
+    ship.initial.position.east = 0
+    ship.initial.position.north = 0
 
     ship_position_future = calculate_position_at_certain_time(
         ship.initial.position,
@@ -693,14 +696,6 @@ def update_position_data_own_ship(
         ship.initial.cog,
         delta_time,
     )
-    lat, lon, _ = flat2llh(
-        ship.initial.position.north,
-        ship.initial.position.east,
-        deg_2_rad(lat_0),
-        deg_2_rad(lon_0),
-    )
-    ship.initial.position.latitude = round(rad_2_deg(lat), 6)
-    ship.initial.position.longitude = round(rad_2_deg(lon), 6)
 
     lat_future, lon_future, _ = flat2llh(
         ship_position_future.north,

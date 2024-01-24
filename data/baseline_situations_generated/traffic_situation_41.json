@@ -2,13 +2,9 @@
     "title": "CR-GW, CR-SO, OT-SO",
     "inputFileName": "baseline_situation_41_3_ts.json",
     "commonVector": 10.0,
-    "latLon0": [
-        58.763449,
-        10.490654
-    ],
     "ownShip": {
         "static": {
-            "id": "d700e603-10c8-4ce3-bb2f-9ae4fd80b37f",
+            "id": "cb8d9e7b-49eb-407b-bed3-2b5f1e1369b5",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -49,29 +45,29 @@
     "targetShips": [
         {
             "static": {
-                "id": "a85975ef-54bc-4e92-a95e-f7925e347f63",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "mmsi": 257845600,
-                "name": "BASTO IV",
+                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "mmsi": 219945000,
+                "name": "BASTO VI",
                 "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
                 "position": {
-                    "north": 2780.896662821702,
-                    "east": 10378.447636249331,
-                    "latitude": 58.788414,
-                    "longitude": 10.669998
+                    "north": 2982.1208443726337,
+                    "east": 11129.42650550887,
+                    "latitude": 58.790221,
+                    "longitude": 10.682975
                 },
-                "sog": 17.0,
-                "cog": 289.6
+                "sog": 18.0,
+                "cog": 287.5
             }
         },
         {
             "static": {
-                "id": "500c1686-6076-43e4-baec-2d01db90422c",
+                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
@@ -93,7 +89,7 @@
         },
         {
             "static": {
-                "id": "500c1686-6076-43e4-baec-2d01db90422c",
+                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,

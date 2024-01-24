@@ -185,15 +185,18 @@ def plot_specific_traffic_situation(
         situation_number = num_situations
 
     situation: TrafficSituation = traffic_situations[situation_number - 1]
-    assert situation.lat_lon0 is not None
     assert situation.own_ship is not None
+    assert situation.own_ship.initial is not None
     assert situation.common_vector is not None
 
-    map_plot = Map(location=(situation.lat_lon0[0], situation.lat_lon0[1]), zoom_start=10)
+    lat_0 = situation.own_ship.initial.position.latitude
+    lon_0 = situation.own_ship.initial.position.longitude
+
+    map_plot = Map(location=(lat_0, lon_0), zoom_start=10)
     map_plot = add_ship_to_map(
         situation.own_ship,
         situation.common_vector,
-        situation.lat_lon0,
+        [lat_0, lon_0],
         map_plot,
         "black",
     )
@@ -204,7 +207,7 @@ def plot_specific_traffic_situation(
         map_plot = add_ship_to_map(
             target_ship,
             situation.common_vector,
-            situation.lat_lon0,
+            [lat_0, lon_0],
             map_plot,
             "red",
         )

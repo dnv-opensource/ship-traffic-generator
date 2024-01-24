@@ -2,13 +2,9 @@
     "title": "OT-GW",
     "inputFileName": "baseline_situation_04_1_ts.json",
     "commonVector": 10.0,
-    "latLon0": [
-        58.763449,
-        10.490654
-    ],
     "ownShip": {
         "static": {
-            "id": "d700e603-10c8-4ce3-bb2f-9ae4fd80b37f",
+            "id": "cb8d9e7b-49eb-407b-bed3-2b5f1e1369b5",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -49,7 +45,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "500c1686-6076-43e4-baec-2d01db90422c",
+                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
