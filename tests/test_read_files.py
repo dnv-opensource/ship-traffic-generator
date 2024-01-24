@@ -195,4 +195,3 @@ def test_read_encounter_settings_file(settings_file: Path):
     assert settings.vector_range is not None
     assert settings.max_meeting_distance == 0.0
     assert settings.evolve_time == 120.0
-
