@@ -1,10 +1,10 @@
 """Domain specific data types used in trafficgen."""
 
 from enum import Enum
-from typing import List, Union
+from typing import List, Optional, Union
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 def to_camel(string: str) -> str:
@@ -99,7 +99,7 @@ class ShipStatic(BaseModel):
     width: float
     height: float
     speed_max: float
-    mmsi: int
+    mmsi: Optional[int] = Field(None, ge=100000000, le=999999999, description="Maritime Mobile Service Identity (MMSI)", examples=[123456789])
     name: str
     ship_type: GeneralShipType
 
