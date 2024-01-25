@@ -14,7 +14,7 @@
     "encounter": [
         {
             "desiredEncounterType": "head-on",
-            "beta": 2.0,
+            "beta": 10.0,
             "relativeSpeed": 1.2,
             "vectorTime": 15.0
         }
