@@ -6,6 +6,7 @@ crossing give-way and stand-on.
 
 import random
 from typing import List, Optional, Tuple, Union
+from uuid import uuid4
 
 import numpy as np
 
@@ -119,7 +120,9 @@ def generate_encounter(
             else:
                 target_ship.initial.sog = relative_sog * own_ship.initial.sog
 
-            target_ship.initial.sog = np.minimum(target_ship.initial.sog, target_ship.static.speed_max)
+            target_ship.initial.sog = round(
+                np.minimum(target_ship.initial.sog, target_ship.static.speed_max), 1
+            )
 
             target_ship_vector_length = target_ship.initial.sog * vector_time
             start_position_target_ship, position_found = find_start_position_target_ship(
@@ -157,6 +160,7 @@ def generate_encounter(
                 encounter_found = encounter_ok and not trajectory_on_land
 
     if encounter_found:
+        target_ship.static.id = uuid4()
         target_ship = update_position_data_target_ship(target_ship, lat_lon0)
     return target_ship, encounter_found
 
@@ -663,8 +667,8 @@ def update_position_data_target_ship(
         lat_0,
         lon_0,
     )
-    target_ship.initial.position.latitude = round(lat, 6)
-    target_ship.initial.position.longitude = round(lon, 6)
+    target_ship.initial.position.latitude = round(lat, 8)
+    target_ship.initial.position.longitude = round(lon, 8)
     return target_ship
 
 
@@ -704,8 +708,8 @@ def update_position_data_own_ship(
         lat_0,
         lon_0,
     )
-    ship_position_future.latitude = round(lat_future, 6)
-    ship_position_future.longitude = round(lon_future, 6)
+    ship_position_future.latitude = round(lat_future, 8)
+    ship_position_future.longitude = round(lon_future, 8)
 
     ship.waypoints = [
         Waypoint(position=ship.initial.position.model_copy()),

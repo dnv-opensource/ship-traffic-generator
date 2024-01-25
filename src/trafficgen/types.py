@@ -99,7 +99,13 @@ class ShipStatic(BaseModel):
     width: float
     height: float
     speed_max: float
-    mmsi: Optional[int] = Field(None, ge=100000000, le=999999999, description="Maritime Mobile Service Identity (MMSI)", examples=[123456789])
+    mmsi: Optional[int] = Field(
+        None,
+        ge=100000000,
+        le=999999999,
+        description="Maritime Mobile Service Identity (MMSI)",
+        examples=[123456789],
+    )
     name: str
     ship_type: GeneralShipType
 
@@ -161,7 +167,7 @@ class TrafficSituation(BaseModel):
 
     title: str
     input_file_name: Union[str, None] = None
-    common_vector: Union[float, None] = None
+    common_vector: float
     own_ship: Union[Ship, None] = None
     num_situations: Union[int, None] = None
     encounter: Union[List[Encounter], None] = None

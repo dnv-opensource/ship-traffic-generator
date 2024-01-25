@@ -1,10 +1,10 @@
 {
     "title": "CR-GW, OT-GW",
     "inputFileName": "baseline_situation_13_2_ts.json",
-    "commonVector": 10.0,
+    "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "cb8d9e7b-49eb-407b-bed3-2b5f1e1369b5",
+            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -17,10 +17,10 @@
             "position": {
                 "north": 0.0,
                 "east": 0.0,
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "latitude": 1.02561566,
+                "longitude": 0.18309645
             },
-            "sog": 10.0,
+            "sog": 5.14,
             "cog": 0.0
         },
         "waypoints": [
@@ -28,16 +28,16 @@
                 "position": {
                     "north": 0.0,
                     "east": 0.0,
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "latitude": 1.02561566,
+                    "longitude": 0.18309645
                 }
             },
             {
                 "position": {
-                    "north": 18518.399999999998,
+                    "north": 18504.0,
                     "east": 0.0,
-                    "latitude": 58.929696,
-                    "longitude": 10.490654
+                    "latitude": 1.02851496,
+                    "longitude": 0.18309645
                 }
             }
         ]
@@ -45,46 +45,44 @@
     "targetShips": [
         {
             "static": {
-                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "mmsi": 219945000,
-                "name": "BASTO VI",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "id": "1297dc47-5b02-420f-8871-b938f075521b",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
-                    "north": 4790.9273139567,
-                    "east": 8298.129523142494,
-                    "latitude": 58.806459,
-                    "longitude": 10.634049
+                    "north": 4781.0,
+                    "east": 8280.0,
+                    "latitude": 1.02636477,
+                    "longitude": 0.1855937
                 },
-                "sog": 15.0,
-                "cog": 275.3
+                "sog": 7.7,
+                "cog": 4.805
             }
         },
         {
             "static": {
-                "id": "dbefc9b2-a975-46aa-8672-a54a4c8125e2",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "mmsi": 219945000,
-                "name": "BASTO VI",
+                "id": "1ece7236-6a51-4497-b201-a02007d02f3a",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
                 "position": {
-                    "north": 1584.7890622706364,
-                    "east": 1109.6812478741967,
-                    "latitude": 58.777676,
-                    "longitude": 10.50983
+                    "north": 1581.0,
+                    "east": 1107.0,
+                    "latitude": 1.02586338,
+                    "longitude": 0.18343032
                 },
-                "sog": 7.0,
-                "cog": 340.0
+                "sog": 3.6,
+                "cog": 5.934
             }
         }
     ]

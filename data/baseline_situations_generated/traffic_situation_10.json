@@ -1,10 +1,10 @@
 {
     "title": "HO, OT-SO",
     "inputFileName": "baseline_situation_10_2_ts.json",
-    "commonVector": 10.0,
+    "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "cb8d9e7b-49eb-407b-bed3-2b5f1e1369b5",
+            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -17,10 +17,10 @@
             "position": {
                 "north": 0.0,
                 "east": 0.0,
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "latitude": 1.02561566,
+                "longitude": 0.18309645
             },
-            "sog": 10.0,
+            "sog": 5.14,
             "cog": 0.0
         },
         "waypoints": [
@@ -28,16 +28,16 @@
                 "position": {
                     "north": 0.0,
                     "east": 0.0,
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "latitude": 1.02561566,
+                    "longitude": 0.18309645
                 }
             },
             {
                 "position": {
-                    "north": 18518.399999999998,
+                    "north": 18504.0,
                     "east": 0.0,
-                    "latitude": 58.929696,
-                    "longitude": 10.490654
+                    "latitude": 1.02851496,
+                    "longitude": 0.18309645
                 }
             }
         ]
@@ -45,46 +45,44 @@
     "targetShips": [
         {
             "static": {
-                "id": "dd29bab9-1eb0-48cd-9add-ce637bb86f8d",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "mmsi": 257083180,
-                "name": "CANOLE",
-                "shipType": "Cargo"
-            },
-            "initial": {
-                "position": {
-                    "north": 10493.76,
-                    "east": 0.0,
-                    "latitude": 58.857656,
-                    "longitude": 10.490654
-                },
-                "sog": 10.0,
-                "cog": 180.0
-            }
-        },
-        {
-            "static": {
-                "id": "29376342-9c27-4875-8377-0a9a569e1505",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "mmsi": 257845600,
-                "name": "BASTO IV",
+                "id": "ef01bd19-f374-4aae-8ab9-c134e3f8f078",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
                 "shipType": "Passenger/Ro-Ro Cargo Ship"
             },
             "initial": {
                 "position": {
-                    "north": -3237.4633981434645,
-                    "east": 226.38549421597696,
-                    "latitude": 58.734385,
-                    "longitude": 10.494566
+                    "north": 10445.0,
+                    "east": 0.0,
+                    "latitude": 1.02725223,
+                    "longitude": 0.18309645
                 },
-                "sog": 17.0,
-                "cog": 358.4
+                "sog": 5.1,
+                "cog": 3.142
+            }
+        },
+        {
+            "static": {
+                "id": "36563699-7a7a-4732-b9e5-de89c500ae0d",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger/Ro-Ro Cargo Ship"
+            },
+            "initial": {
+                "position": {
+                    "north": -4189.0,
+                    "east": 293.0,
+                    "latitude": 1.02495931,
+                    "longitude": 0.18318482
+                },
+                "sog": 9.8,
+                "cog": 6.25
             }
         }
     ]

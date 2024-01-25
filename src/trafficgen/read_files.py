@@ -84,13 +84,15 @@ def convert_situation_data_from_maritime_to_si_units(situation: TrafficSituation
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
     situation.own_ship.initial.position.longitude = round(
-        deg_2_rad(situation.own_ship.initial.position.longitude), 6
+        deg_2_rad(situation.own_ship.initial.position.longitude), 8
     )
     situation.own_ship.initial.position.latitude = round(
-        deg_2_rad(situation.own_ship.initial.position.latitude), 6
+        deg_2_rad(situation.own_ship.initial.position.latitude), 8
     )
     situation.own_ship.initial.cog = round(deg_2_rad(situation.own_ship.initial.cog), 4)
     situation.own_ship.initial.sog = round(knot_2_m_pr_s(situation.own_ship.initial.sog), 2)
+
+    situation.common_vector = min_2_s(situation.common_vector)
 
     assert situation.encounter is not None
     for i in range(len(situation.encounter)):
@@ -147,8 +149,8 @@ def read_target_ship_files(target_ship_folder: Path) -> List[TargetShip]:
         data = convert_keys_to_snake_case(data)
 
         if "static" in data and "id" not in data["static"]:
-            ship_id: UUID = uuid4()
-            data["static"].update({"id": ship_id})
+            temp_id: UUID = uuid4()
+            data["static"].update({"id": temp_id})
         if "initial" in data and "nav_status" not in data["initial"]:
             data["initial"].update({"nav_status": AISNavStatus.UNDER_WAY_USING_ENGINE})
         target_ship: TargetShip = TargetShip(**data)

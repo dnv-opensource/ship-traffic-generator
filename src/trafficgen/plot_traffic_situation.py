@@ -164,7 +164,7 @@ def plot_specific_traffic_situation(
     lat_0 = situation.own_ship.initial.position.latitude
     lon_0 = situation.own_ship.initial.position.longitude
 
-    map_plot = Map(location=(lat_0, lon_0), zoom_start=10)
+    map_plot = Map(location=(rad_2_deg(lat_0), rad_2_deg(lon_0)), zoom_start=10)
     map_plot = add_ship_to_map(
         situation.own_ship,
         situation.common_vector,
@@ -343,7 +343,7 @@ def add_ship_to_plot(
 
     Params:
         ship: Ship information
-        vector_time: Vector time [min]
+        vector_time: Vector time [sec]
         axes: Instance of figure axis. If not set, instance is set to None
         color: Color of the ship. If not set, color is 'black'
     """
@@ -373,7 +373,7 @@ def add_ship_to_plot(
     )
     circle = Circle(
         xy=(pos_0_east, pos_0_north),
-        radius=vector_time / 100.0,  # type: ignore
+        radius=vector_time / 3000.0,  # type: ignore
         color=color,
     )
     _ = axes.add_patch(circle)
