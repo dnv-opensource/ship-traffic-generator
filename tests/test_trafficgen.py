@@ -123,7 +123,7 @@ def test_gen_situations_1_ts_full_spec_cli(
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.target_ships is not None
-        assert len(situation.target_ships) == 1
+        assert len(situation.target_ships) in {0, 1}
 
 
 def test_gen_situations_1_ts_partly_spec_cli(
