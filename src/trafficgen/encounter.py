@@ -23,12 +23,8 @@ from trafficgen.types import (
 )
 from trafficgen.utils import (
     calculate_position_at_certain_time,
-    convert_angle_minus_180_to_180_to_0_to_360,
-    deg_2_rad,
-    knot_2_m_pr_min,
-    m_pr_min_2_knot,
-    nm_2_m,
-    rad_2_deg,
+    convert_angle_0_to_2_pi_to_minus_pi_to_pi,
+    convert_angle_minus_pi_to_pi_to_0_to_2_pi,
 )
 
 
@@ -104,7 +100,7 @@ def generate_encounter(
             inner_counter += 1
             relative_sog = relative_sog_default
             if relative_sog is None:
-                min_target_ship_sog = m_pr_min_2_knot(
+                min_target_ship_sog = (
                     calculate_min_vector_length_target_ship(
                         own_ship.initial.position,
                         own_ship.initial.cog,
@@ -125,7 +121,7 @@ def generate_encounter(
 
             target_ship.initial.sog = np.minimum(target_ship.initial.sog, target_ship.static.speed_max)
 
-            target_ship_vector_length = knot_2_m_pr_min(target_ship.initial.sog) * vector_time
+            target_ship_vector_length = target_ship.initial.sog * vector_time
             start_position_target_ship, position_found = find_start_position_target_ship(
                 own_ship.initial.position,
                 own_ship.initial.cog,
@@ -295,7 +291,7 @@ def find_start_position_target_ship(
     n_2: float = target_ship_position_future.north
     e_2: float = target_ship_position_future.east
     v_r: float = target_ship_vector_length
-    psi: float = np.deg2rad(own_ship_cog + desired_beta)
+    psi: float = own_ship_cog + desired_beta
 
     n_4: float = n_1 + np.cos(psi)
     e_4: float = e_1 + np.sin(psi)
@@ -323,10 +319,10 @@ def find_start_position_target_ship(
     s_1 = (-b + np.sqrt(b**2 - 4 * a * c)) / (2 * a)
     s_2 = (-b - np.sqrt(b**2 - 4 * a * c)) / (2 * a)
 
-    e_31 = e_1 + s_1 * (e_4 - e_1)
-    n_31 = n_1 + s_1 * (n_4 - n_1)
-    e_32 = e_1 + s_2 * (e_4 - e_1)
-    n_32 = n_1 + s_2 * (n_4 - n_1)
+    e_31 = round(e_1 + s_1 * (e_4 - e_1), 0)
+    n_31 = round(n_1 + s_1 * (n_4 - n_1), 0)
+    e_32 = round(e_1 + s_2 * (e_4 - e_1), 0)
+    n_32 = round(n_1 + s_2 * (n_4 - n_1), 0)
 
     target_ship_cog_1 = calculate_ship_cog(
         pos_0=Position(north=n_31, east=e_31),
@@ -354,10 +350,17 @@ def find_start_position_target_ship(
     colreg_state2: EncounterType = determine_colreg(
         alpha2, beta2, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
-    if desired_encounter_type is colreg_state1 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(0.1):
+
+    if (
+        desired_encounter_type is colreg_state1
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+    ):
         start_position_target_ship = Position(north=n_31, east=e_31)
         start_position_found = True
-    elif desired_encounter_type is colreg_state2 and np.abs(beta1 - desired_beta % 360) < deg_2_rad(0.1):
+    elif (
+        desired_encounter_type is colreg_state2
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+    ):
         start_position_target_ship = Position(north=n_32, east=e_32)
         start_position_found = True
 
@@ -377,17 +380,17 @@ def assign_future_position_to_target_ship(
         * own_ship_position_future: Dict, own ship position at a given time in the
             future, {north, east}
         * max_meeting_distance: Maximum distance between own ship and target ship at
-            a given time in the future [nm]
+            a given time in the future [m]
 
     Returns
     -------
         future_position_target_ship: Future position of target ship {north, east} [m]
     """
     random_angle = random.uniform(0, 1) * 2 * np.pi
-    random_distance = random.uniform(0, 1) * nm_2_m(max_meeting_distance)
+    random_distance = random.uniform(0, 1) * max_meeting_distance
 
-    north: float = own_ship_position_future.north + random_distance * np.cos(deg_2_rad(random_angle))
-    east: float = own_ship_position_future.east + random_distance * np.sin(deg_2_rad(random_angle))
+    north: float = own_ship_position_future.north + random_distance * np.cos(random_angle)
+    east: float = own_ship_position_future.east + random_distance * np.sin(random_angle)
     return Position(north=north, east=east)
 
 
@@ -419,23 +422,27 @@ def determine_colreg(
         * encounter classification
     """
     # Mapping
-    alpha0360: float = alpha if alpha >= 0.0 else alpha + 360.0
-    beta0180: float = beta if (beta >= 0.0) & (beta <= 180.0) else beta - 360.0
+    alpha_2_pi: float = alpha if alpha >= 0.0 else alpha + 2 * np.pi
+    beta_pi: float = beta if (beta >= 0.0) & (beta <= np.pi) else beta - 2 * np.pi
 
     # Find appropriate rule set
     if (beta > theta15[0]) & (beta < theta15[1]) & (abs(alpha) - theta13_criteria <= 0.001):
         return EncounterType.OVERTAKING_STAND_ON
-    if (alpha0360 > theta15[0]) & (alpha0360 < theta15[1]) & (abs(beta0180) - theta13_criteria <= 0.001):
+    if (
+        (alpha_2_pi > theta15[0])
+        & (alpha_2_pi < theta15[1])
+        & (abs(beta_pi) - theta13_criteria <= 0.001)
+    ):
         return EncounterType.OVERTAKING_GIVE_WAY
-    if (abs(beta0180) - theta14_criteria <= 0.001) & (abs(alpha) - theta14_criteria <= 0.001):
+    if (abs(beta_pi) - theta14_criteria <= 0.001) & (abs(alpha) - theta14_criteria <= 0.001):
         return EncounterType.HEAD_ON
     if (beta > 0) & (beta < theta15[0]) & (alpha > -theta15[0]) & (alpha - theta15_criteria <= 0.001):
         return EncounterType.CROSSING_GIVE_WAY
     if (
-        (alpha0360 > 0)
-        & (alpha0360 < theta15[0])
-        & (beta0180 > -theta15[0])
-        & (beta0180 - theta15_criteria <= 0.001)
+        (alpha_2_pi > 0)
+        & (alpha_2_pi < theta15[0])
+        & (beta_pi > -theta15[0])
+        & (beta_pi - theta15_criteria <= 0.001)
     ):
         return EncounterType.CROSSING_STAND_ON
     return EncounterType.NO_RISK_COLLISION
@@ -453,18 +460,15 @@ def calculate_relative_bearing(
 
     Params:
         * position_own_ship: Dict, own ship position {north, east} [m]
-        * heading_own_ship: Own ship cog [deg]
+        * heading_own_ship: Own ship cog [rad]
         * position_target_ship: Dict, own ship position {north, east} [m]
-        * heading_target_ship: Target ship cog [deg]
+        * heading_target_ship: Target ship cog [rad]
 
     Returns
     -------
-        * beta: relative bearing between own ship and target ship seen from own ship [deg]
-        * alpha: relative bearing between target ship and own ship seen from target ship [deg]
+        * beta: relative bearing between own ship and target ship seen from own ship [rad]
+        * alpha: relative bearing between target ship and own ship seen from target ship [rad]
     """
-    heading_own_ship = np.deg2rad(heading_own_ship)
-    heading_target_ship = np.deg2rad(heading_target_ship)
-
     # POSE combination of relative bearing and contact angle
     n_own_ship: float = position_own_ship.north
     e_own_ship: float = position_own_ship.east
@@ -515,9 +519,6 @@ def calculate_relative_bearing(
     while alpha >= np.pi:
         alpha -= 2 * np.pi
 
-    beta = np.rad2deg(beta)
-    alpha = np.rad2deg(alpha)
-
     return beta, alpha
 
 
@@ -531,12 +532,12 @@ def calculate_ship_cog(pos_0: Position, pos_1: Position) -> float:
 
     Returns
     -------
-        cog: Ship cog [deg]
+        cog: Ship cog [rad]
     """
     cog: float = np.arctan2(pos_1.east - pos_0.east, pos_1.north - pos_0.north)
     if cog < 0.0:
         cog += 2 * np.pi
-    return round(np.rad2deg(cog), 1)
+    return round(cog, 3)
 
 
 def assign_vector_time(vector_time_range: List[float]):
@@ -567,13 +568,13 @@ def assign_sog_to_target_ship(
 
     Params:
         * encounter_type: Type of encounter
-        * own_ship_sog: Own ship sog [knot]
-        * min_target_ship_sog: Minimum target ship sog [knot]
+        * own_ship_sog: Own ship sog [m/s]
+        * min_target_ship_sog: Minimum target ship sog [m/s]
         * relative_sog_setting: Relative sog setting dependent on encounter [-]
 
     Returns
     -------
-        target_ship_sog: Target ship sog [knot]
+        target_ship_sog: Target ship sog [m/s]
     """
     if encounter_type is EncounterType.OVERTAKING_STAND_ON:
         relative_sog = relative_sog_setting.overtaking_stand_on
@@ -613,7 +614,7 @@ def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> f
 
     Returns
     -------
-        Relative bearing between own ship and target ship seen from own ship [deg]
+        Relative bearing between own ship and target ship seen from own ship [rad]
     """
     theta13_crit: float = settings.classification.theta13_criteria
     theta14_crit: float = settings.classification.theta14_criteria
@@ -629,7 +630,7 @@ def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> f
     if encounter_type is EncounterType.CROSSING_GIVE_WAY:
         return 0 + random.uniform(0, 1) * (theta15[0] - 0)
     if encounter_type is EncounterType.CROSSING_STAND_ON:
-        return convert_angle_minus_180_to_180_to_0_to_360(
+        return convert_angle_minus_pi_to_pi_to_0_to_2_pi(
             -theta15[1] + random.uniform(0, 1) * (theta15[1] + theta15_crit)
         )
     return 0.0
@@ -645,7 +646,7 @@ def update_position_data_target_ship(
 
     Params:
         * target_ship: Target ship data
-        * lat_lon0: Reference point, latitudinal [degree] and longitudinal [degree]
+        * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
 
     Returns
     -------
@@ -659,11 +660,11 @@ def update_position_data_target_ship(
     lat, lon, _ = flat2llh(
         target_ship.initial.position.north,
         target_ship.initial.position.east,
-        deg_2_rad(lat_0),
-        deg_2_rad(lon_0),
+        lat_0,
+        lon_0,
     )
-    target_ship.initial.position.latitude = round(rad_2_deg(lat), 6)
-    target_ship.initial.position.longitude = round(rad_2_deg(lon), 6)
+    target_ship.initial.position.latitude = round(lat, 6)
+    target_ship.initial.position.longitude = round(lon, 6)
     return target_ship
 
 
@@ -676,7 +677,7 @@ def update_position_data_own_ship(
 
     Params:
         * ship: Own ship data
-        * delta_time: Delta time from now to the time new position is being calculated [minutes]
+        * delta_time: Delta time from now to the time new position is being calculated [sec]
 
     Returns
     -------
@@ -700,11 +701,11 @@ def update_position_data_own_ship(
     lat_future, lon_future, _ = flat2llh(
         ship_position_future.north,
         ship_position_future.east,
-        deg_2_rad(lat_0),
-        deg_2_rad(lon_0),
+        lat_0,
+        lon_0,
     )
-    ship_position_future.latitude = round(rad_2_deg(lat_future), 6)
-    ship_position_future.longitude = round(rad_2_deg(lon_future), 6)
+    ship_position_future.latitude = round(lat_future, 6)
+    ship_position_future.longitude = round(lon_future, 6)
 
     ship.waypoints = [
         Waypoint(position=ship.initial.position.model_copy()),

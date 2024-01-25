@@ -2,13 +2,13 @@
     "title": "OT-SO",
     "commonVector": 10.0,
     "ownShip": {
-        "startPose": {
+        "initial": {
             "position": {
                 "latitude": 58.763449,
                 "longitude": 10.490654
             },
-            "speed": 8.0,
-            "course": 110.0
+            "sog": 8.0,
+            "cog": 110.0
         }
     },
     "encounter": [

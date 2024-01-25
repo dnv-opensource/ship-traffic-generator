@@ -19,12 +19,15 @@ from trafficgen.types import (
 )
 
 
-def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
+def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path, settings_file: Path):
     """
     Test reading traffic situations with full specification,
     meaning all parameters are specified.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_01)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_01, encounter_settings.input_units
+    )
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -39,12 +42,15 @@ def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
         assert situation.encounter[0].vector_time is not None
 
 
-def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path):
+def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path, settings_file: Path):
     """
     Test reading traffic situations using partly specification,
     meaning some of the parameters are specified.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_02)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_02, encounter_settings.input_units
+    )
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -57,12 +63,15 @@ def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path):
         assert situation.encounter[0].beta is None
 
 
-def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
+def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path, settings_file: Path):
     """
     Test reading traffic situations using using minimum specification,
     meaning only type of situation is specified.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_03)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_03, encounter_settings.input_units
+    )
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -77,11 +86,16 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
         assert situation.encounter[0].vector_time is None
 
 
-def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: Path):
+def test_read_situations_2_ts_one_to_many_situations(
+    situations_folder_test_04: Path, settings_file: Path
+):
     """
     Test reading a traffic situation file num_situations=5 and 2 encounter specifications.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_04)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_04, encounter_settings.input_units
+    )
     assert len(situations) == 1
 
     # sourcery skip: no-loop-in-tests
@@ -98,11 +112,14 @@ def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: 
             assert encounter.vector_time is None
 
 
-def test_read_situations_one_to_many_situations(situations_folder_test_05: Path):
+def test_read_situations_one_to_many_situations(situations_folder_test_05: Path, settings_file: Path):
     """
     Test reading three traffic situation files 1, 2 and 3 encounter specifications.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_05)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_05, encounter_settings.input_units
+    )
     assert len(situations) == 3
 
     # sourcery skip: no-loop-in-tests
@@ -122,11 +139,16 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path)
     assert num_situations_values_found == {6, 3, None}
 
 
-def test_read_situations_with_different_encounter_types(situations_folder_test_07: Path):
+def test_read_situations_with_different_encounter_types(
+    situations_folder_test_07: Path, settings_file: Path
+):
     """
     Test reading 5 traffic situation files with different encounter types.
     """
-    situations: List[TrafficSituation] = read_situation_files(situations_folder_test_07)
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    situations: List[TrafficSituation] = read_situation_files(
+        situations_folder_test_07, encounter_settings.input_units
+    )
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -194,4 +216,4 @@ def test_read_encounter_settings_file(settings_file: Path):
     assert settings.relative_speed is not None
     assert settings.vector_range is not None
     assert settings.max_meeting_distance == 0.0
-    assert settings.evolve_time == 120.0
+    assert settings.evolve_time == 120.0 * 60

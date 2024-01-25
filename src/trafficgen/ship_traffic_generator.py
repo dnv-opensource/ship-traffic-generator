@@ -29,6 +29,7 @@ def generate_traffic_situations(
 
     Params:
         * situation_folder: Path to situation folder, files describing the desired situations
+        * own_ship_file: Path to where own ships is found
         * target_ship_folder: Path to where different type of target ships is found
         * settings_file: Path to settings file
 
@@ -38,10 +39,12 @@ def generate_traffic_situations(
         One situation may consist of one or more encounters.
     """
 
-    desired_traffic_situations: List[TrafficSituation] = read_situation_files(situation_folder)
     own_ship: OwnShip = read_own_ship_file(own_ship_file)
     target_ships: List[TargetShip] = read_target_ship_files(target_ship_folder)
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
+    desired_traffic_situations: List[TrafficSituation] = read_situation_files(
+        situation_folder, encounter_settings.input_units
+    )
     traffic_situations: List[TrafficSituation] = []
 
     for desired_traffic_situation in desired_traffic_situations:

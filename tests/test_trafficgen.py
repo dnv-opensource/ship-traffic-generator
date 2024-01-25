@@ -7,7 +7,7 @@ import pytest
 from click.testing import CliRunner
 
 from trafficgen import cli
-from trafficgen.read_files import read_situation_files
+from trafficgen.read_files import read_generated_situation_files
 from trafficgen.ship_traffic_generator import generate_traffic_situations
 from trafficgen.types import TrafficSituation
 
@@ -117,7 +117,7 @@ def test_gen_situations_1_ts_full_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -161,7 +161,7 @@ def test_gen_situations_1_ts_partly_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -178,7 +178,7 @@ def test_gen_situations_1_ts_partly_spec_cli(
         #        the same assertions but leaves out the CLI part, does not show this
         #        behaviour when run in GitHub.
         #        Claas, 2023-11-25
-        assert len(situation.target_ships) in {0, 1}
+        assert len(situation.target_ships) == 1
 
 
 def test_gen_situations_1_ts_minimum_spec_cli(
@@ -214,7 +214,7 @@ def test_gen_situations_1_ts_minimum_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -255,7 +255,7 @@ def test_gen_situations_2_ts_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -296,7 +296,7 @@ def test_gen_situations_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 10
 
     # sourcery skip: no-loop-in-tests
@@ -338,7 +338,7 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 3
 
     # sourcery skip: no-loop-in-tests
@@ -380,7 +380,7 @@ def test_gen_situations_baseline_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[TrafficSituation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     # assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests

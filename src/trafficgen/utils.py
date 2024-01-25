@@ -5,39 +5,39 @@ import numpy as np
 from trafficgen.types import Position
 
 
-def m_pr_min_2_knot(speed_in_m_pr_min: float) -> float:
+def knot_2_m_pr_s(speed_in_knot: float) -> float:
     """
-    Convert ship speed in meters pr minutes to knot.
-
-    Params:
-        speed_in_m_pr_min: Ship speed in meters pr second
-
-    Returns
-    -------
-        speed_in_knot: Ship speed given in knots
-    """
-
-    knot_2_m_pr_sec: float = 0.5144
-    return speed_in_m_pr_min / (knot_2_m_pr_sec * 60.0)
-
-
-def knot_2_m_pr_min(speed_in_knot: float) -> float:
-    """
-    Convert ship speed in knot to meters pr minutes.
+    Convert ship speed in knots to meters pr second.
 
     Params:
         speed_in_knot: Ship speed given in knots
 
     Returns
     -------
-        speed_in_m_pr_min: Ship speed in meters pr minutes
+        speed_in_m_pr_s: Ship speed in meters pr second
     """
 
     knot_2_m_pr_sec: float = 0.5144
-    return speed_in_knot * knot_2_m_pr_sec * 60.0
+    return speed_in_knot * knot_2_m_pr_sec
 
 
-def m2nm(length_in_m: float) -> float:
+def min_2_s(time_in_min: float) -> float:
+    """
+    Convert time given in minutes to time given in seconds.
+
+    Params:
+        time_in_min: Time given in minutes
+
+    Returns
+    -------
+        time_in_s: Time in seconds
+    """
+
+    min_2_s_coeff: float = 60.0
+    return time_in_min * min_2_s_coeff
+
+
+def m_2_nm(length_in_m: float) -> float:
     """
     Convert length given in meters to length given in nautical miles.
 
@@ -49,8 +49,8 @@ def m2nm(length_in_m: float) -> float:
         length_in_nm: Length given in nautical miles
     """
 
-    m_2_nm: float = 1.0 / 1852.0
-    return m_2_nm * length_in_m
+    m_2_nm_coeff: float = 1.0 / 1852.0
+    return m_2_nm_coeff * length_in_m
 
 
 def nm_2_m(length_in_nm: float) -> float:
@@ -100,38 +100,38 @@ def rad_2_deg(angle_in_radians: float) -> float:
     return angle_in_radians * 180.0 / np.pi
 
 
-def convert_angle_minus_180_to_180_to_0_to_360(angle_180: float) -> float:
+def convert_angle_minus_pi_to_pi_to_0_to_2_pi(angle_pi: float) -> float:
     """
-    Convert an angle given in the region -180 to 180 degrees to an
-    angle given in the region 0 to 360 degrees.
+    Convert an angle given in the region -pi to pi degrees to an
+    angle given in the region 0 to 2pi radians.
 
     Params:
-        angle_180: Angle given in the region -180 to 180 degrees
+        angle_pi: Angle given in the region -pi to pi radians
 
     Returns
     -------
-        angle_360: Angle given in the region 0 to 360 degrees
+        angle_2_pi: Angle given in the region 0 to 2pi radians
 
     """
 
-    return angle_180 if angle_180 >= 0.0 else angle_180 + 360.0
+    return angle_pi if angle_pi >= 0.0 else angle_pi + 2 * np.pi
 
 
-def convert_angle_0_to_360_to_minus_180_to_180(angle_360: float) -> float:
+def convert_angle_0_to_2_pi_to_minus_pi_to_pi(angle_2_pi: float) -> float:
     """
-    Convert an angle given in the region 0 to 360 degrees to an
-    angle given in the region -180 to 180 degrees.
+    Convert an angle given in the region 0 to 2*pi degrees to an
+    angle given in the region -pi to pi degrees.
 
     Params:
-        angle_360: Angle given in the region 0 to 360 degrees
+        angle_2_pi: Angle given in the region 0 to 2pi radians
 
     Returns
     -------
-        angle_180: Angle given in the region -180 to 180 degrees
+        angle_pi: Angle given in the region -pi to pi radians
 
     """
 
-    return angle_360 if (angle_360 >= 0.0) & (angle_360 <= 180.0) else angle_360 - 360.0
+    return angle_2_pi if (angle_2_pi >= 0.0) & (angle_2_pi <= np.pi) else angle_2_pi - 2 * np.pi
 
 
 def calculate_position_at_certain_time(
@@ -142,12 +142,12 @@ def calculate_position_at_certain_time(
 ) -> Position:
     """
     Calculate the position of the ship at a given time based on initial position
-    and delta time, and constand speed and course.
+    and delta time, and constant speed and course.
 
     Params:
         position: Initial ship position [m]
-        speed: Ship speed [knot]
-        course: Ship course [deg]
+        speed: Ship speed [m/s]
+        course: Ship course [rad]
         delta_time: Delta time from now to the time new position is being calculated [minutes]
 
     Returns
@@ -156,8 +156,8 @@ def calculate_position_at_certain_time(
 
     """
 
-    north = position.north + knot_2_m_pr_min(speed) * delta_time * np.cos(deg_2_rad(course))
-    east = position.east + knot_2_m_pr_min(speed) * delta_time * np.sin(deg_2_rad(course))
+    north = position.north + speed * delta_time * np.cos(course)
+    east = position.east + speed * delta_time * np.sin(course)
     position_future: Position = Position(
         north=north,
         east=east,

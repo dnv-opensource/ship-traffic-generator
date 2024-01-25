@@ -36,5 +36,6 @@
     ],
     "situation_length": 60.0,
     "max_meeting_distance": 0.0,
-    "evolve_time": 120.0
+    "evolve_time": 120.0,
+    "input_units": "maritime"
 }

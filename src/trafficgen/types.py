@@ -205,6 +205,13 @@ class EncounterRelativeSpeed(BaseModel):
         populate_by_name = True
 
 
+class UnitType(Enum):
+    """Enumeration of encounter types."""
+
+    SI_UNITS = "si"
+    MARITIME_UNITS = "maritime"
+
+
 class EncounterSettings(BaseModel):
     """Data type for encounter settings."""
 
@@ -214,6 +221,7 @@ class EncounterSettings(BaseModel):
     situation_length: float
     max_meeting_distance: float
     evolve_time: float
+    input_units: UnitType
 
     class Config:
         """For converting parameters written to file from snake to camel case."""
