@@ -4,14 +4,14 @@
     "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
+            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
             "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
@@ -45,7 +45,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "ad466539-53d9-48de-af2c-ec4d664310ce",
+                "id": "51475b3c-b5c7-4620-a4e1-624118fd7e30",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -66,13 +66,13 @@
         },
         {
             "static": {
-                "id": "66c5e909-a598-4660-8e86-e53843fd5f7c",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "9d02359b-41c0-44d9-8141-695da3d1f0aa",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -87,13 +87,13 @@
         },
         {
             "static": {
-                "id": "05f20d0b-f28e-490b-bb1c-905e888778cb",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "cbe6af72-fd73-4c26-bcc2-0d9a55b67402",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

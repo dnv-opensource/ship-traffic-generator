@@ -4,14 +4,14 @@
     "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
+            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
             "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
@@ -45,13 +45,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "944730c8-be15-455e-b89a-c8010a0298d6",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "f54bd324-cad1-4360-aacf-17859dc53c18",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -66,13 +66,13 @@
         },
         {
             "static": {
-                "id": "85b50ce5-4c37-45a9-a249-0fd2193d30e9",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "id": "d8ca1e80-0627-4616-bf31-a92725d6a66d",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -87,7 +87,7 @@
         },
         {
             "static": {
-                "id": "bac733cc-cd26-419b-b81c-f22630e57e9f",
+                "id": "268ef1dc-2d41-419d-9388-f4f1293119eb",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

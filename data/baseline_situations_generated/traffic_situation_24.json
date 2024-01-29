@@ -4,14 +4,14 @@
     "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
+            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
             "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
@@ -45,13 +45,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "c79ef1e0-5b7f-4985-a5e3-3f6172a4ddf4",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "4a62ffa1-3c1c-4f45-8cc3-e2478ed549e9",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -66,13 +66,13 @@
         },
         {
             "static": {
-                "id": "f1728733-300c-4826-a8c9-188205f25d5b",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "fae0ec67-b2d1-4205-ac3f-af7c6b3819f6",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -87,7 +87,7 @@
         },
         {
             "static": {
-                "id": "5a8997a0-cf31-4b98-9141-90d8260c3148",
+                "id": "75f51293-f3f2-4f6a-8841-dc4f2d2f5d84",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

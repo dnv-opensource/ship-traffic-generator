@@ -4,14 +4,14 @@
     "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
+            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
             "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
@@ -45,13 +45,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "13836d9f-2ed6-432e-a9d9-940a3637df3e",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "id": "37c0f8e6-fe6a-477f-b84b-57b04379a1ad",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -66,7 +66,7 @@
         },
         {
             "static": {
-                "id": "b5775e3a-ec3d-4754-acae-683cf471d282",
+                "id": "7c1e5a08-c89f-4c3f-b538-e9bb77b0a7fc",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -87,13 +87,13 @@
         },
         {
             "static": {
-                "id": "0f31685e-de10-47c9-892e-020ca01904ac",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "id": "1c086302-7d5a-47dc-8c10-876f5a030334",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {

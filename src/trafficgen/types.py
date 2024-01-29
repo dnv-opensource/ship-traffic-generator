@@ -60,7 +60,7 @@ class GeneralShipType(str, Enum):
     LAW_ENFORCEMENT = "Law Enforcement"
     MEDICAL_TRANSPORT = "Medical Transport"
     NONCOMBATANT_SHIP = "Noncombatant ship"
-    PASSENGER = "Passenger/Ro-Ro Cargo Ship"
+    PASSENGER = "Passenger"
     CARGO = "Cargo"
     TANKER = "Tanker"
     OTHER_TYPE = "Other Type"

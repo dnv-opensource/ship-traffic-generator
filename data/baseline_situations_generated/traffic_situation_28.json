@@ -4,14 +4,14 @@
     "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0f26a475-32d8-434d-8f43-e87f9bfb8409",
+            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
             "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
@@ -45,7 +45,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "918adfb8-4903-4935-b159-956afd72d77e",
+                "id": "6eef5e92-4027-4c59-b7f3-8d07bd2caec1",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -66,13 +66,13 @@
         },
         {
             "static": {
-                "id": "17039288-1613-4cf6-aebd-e7893ae3d033",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "7afdc4d3-f99a-4e0b-807d-f5e2b2e8afc2",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger/Ro-Ro Cargo Ship"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -87,13 +87,13 @@
         },
         {
             "static": {
-                "id": "6f46b5a9-bbe7-4757-a350-65390d9c3bcb",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "eb292a68-5770-4023-9568-a2ae31ce6f5b",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
