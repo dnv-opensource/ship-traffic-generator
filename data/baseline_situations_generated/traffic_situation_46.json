@@ -1,110 +1,47 @@
 {
     "title": "CR-SO, CR-SO, CR-SO",
-    "inputFileName": "baseline_situation_46_3_ts.json",
-    "commonVector": 600.0,
     "ownShip": {
         "static": {
-            "id": "0216291f-1ce2-4e76-b752-7cf93e48f6ab",
+            "id": "dfa08451-74af-498c-b1b0-3f672f0991b8",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
-            "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger"
+            "shipType": "Passenger",
+            "speed_max": 17
         },
         "initial": {
             "position": {
-                "north": 0.0,
-                "east": 0.0,
                 "latitude": 1.02561566,
-                "longitude": 0.18309645
+                "longitude": 0.18309645,
+                "east": 0,
+                "north": 0
             },
             "sog": 5.14,
-            "cog": 0.0
+            "cog": 0.0,
+            "navStatus": "Under way using engine"
         },
         "waypoints": [
             {
                 "position": {
-                    "north": 0.0,
-                    "east": 0.0,
                     "latitude": 1.02561566,
-                    "longitude": 0.18309645
+                    "longitude": 0.18309645,
+                    "east": 0,
+                    "north": 0
                 }
             },
             {
                 "position": {
-                    "north": 18504.0,
-                    "east": 0.0,
                     "latitude": 1.02851496,
-                    "longitude": 0.18309645
+                    "longitude": 0.18309645,
+                    "north": 18504.0,
+                    "east": 0.0
                 }
             }
         ]
     },
-    "targetShips": [
-        {
-            "static": {
-                "id": "f54bd324-cad1-4360-aacf-17859dc53c18",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
-            },
-            "initial": {
-                "position": {
-                    "north": 9491.0,
-                    "east": -1673.0,
-                    "latitude": 1.02710276,
-                    "longitude": 0.18259187
-                },
-                "sog": 3.1,
-                "cog": 2.675
-            }
-        },
-        {
-            "static": {
-                "id": "d8ca1e80-0627-4616-bf31-a92725d6a66d",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "north": 1681.0,
-                    "east": -6273.0,
-                    "latitude": 1.02587905,
-                    "longitude": 0.18120451
-                },
-                "sog": 7.7,
-                "cog": 1.132
-            }
-        },
-        {
-            "static": {
-                "id": "268ef1dc-2d41-419d-9388-f4f1293119eb",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
-            },
-            "initial": {
-                "position": {
-                    "north": 12601.0,
-                    "east": -7275.0,
-                    "latitude": 1.02759005,
-                    "longitude": 0.18090231
-                },
-                "sog": 8.7,
-                "cog": 2.318
-            }
-        }
-    ]
+    "targetShips": [],
+    "input_file_name": "baseline_situation_46_3_ts.json",
+    "common_vector": 600.0
 }

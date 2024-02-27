@@ -7,14 +7,12 @@ from typing import Any, Dict, List, Union
 from uuid import UUID, uuid4
 
 from trafficgen.types import (
-    AISNavStatus,
     EncounterSettings,
-    OwnShip,
-    TargetShip,
-    TrafficSituation,
     UnitType,
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
+
+from maritime_schema.types.caga import AISNavStatus, OwnShip, TargetShip, TrafficSituation
 
 
 def read_situation_files(situation_folder: Path, input_units: UnitType) -> List[TrafficSituation]:
@@ -96,12 +94,12 @@ def convert_situation_data_from_maritime_to_si_units(situation: TrafficSituation
 
     assert situation.encounter is not None
     for i in range(len(situation.encounter)):
-        beta: Union[float, None] = situation.encounter[i].beta
-        vector_time: Union[float, None] = situation.encounter[i].vector_time
+        beta: Union[float, None] = situation.encounter[i]["beta"]
+        vector_time: Union[float, None] = situation.encounter[i]["vector_time"]
         if beta is not None:
-            situation.encounter[i].beta = round(deg_2_rad(beta), 4)
+            situation.encounter[i]["beta"] = round(deg_2_rad(beta), 4)
         if vector_time is not None:
-            situation.encounter[i].vector_time = min_2_s(vector_time)
+            situation.encounter[i]["vector_time"] = min_2_s(vector_time)
     return situation
 
 

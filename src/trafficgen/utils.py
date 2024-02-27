@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from trafficgen.types import Position
+from maritime_schema.types.caga import Position
 
 
 def knot_2_m_pr_s(speed_in_knot: float) -> float:

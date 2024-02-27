@@ -13,7 +13,8 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_files,
 )
-from trafficgen.types import EncounterSettings, OwnShip, TargetShip, TrafficSituation
+from trafficgen.types import EncounterSettings
+from maritime_schema.types.caga import OwnShip, TargetShip, TrafficSituation
 
 
 def generate_traffic_situations(
@@ -48,31 +49,36 @@ def generate_traffic_situations(
     traffic_situations: List[TrafficSituation] = []
 
     for desired_traffic_situation in desired_traffic_situations:
-        num_situations: int = desired_traffic_situation.num_situations or 1
+        if "num_situations" in desired_traffic_situation:
+            num_situations: int = desired_traffic_situation["num_situations"]
+        else:
+            num_situations: int = 1
         assert desired_traffic_situation.common_vector is not None
         assert desired_traffic_situation.own_ship is not None
         assert desired_traffic_situation.encounter is not None
 
         for _ in range(num_situations):
-            traffic_situation: TrafficSituation = TrafficSituation(
-                title=desired_traffic_situation.title,
-                input_file_name=desired_traffic_situation.input_file_name,
-                common_vector=desired_traffic_situation.common_vector,
-            )
-            assert traffic_situation.common_vector is not None
+
             own_ship.initial = desired_traffic_situation.own_ship.initial
             own_ship = update_position_data_own_ship(
                 own_ship,
                 encounter_settings.situation_length,
             )
-            traffic_situation.own_ship = own_ship
+            traffic_situation: TrafficSituation = TrafficSituation(
+                title=desired_traffic_situation.title,
+                input_file_name=desired_traffic_situation.input_file_name,
+                common_vector=desired_traffic_situation.common_vector,
+                own_ship=own_ship,
+            )
+            assert traffic_situation.common_vector is not None
+
             traffic_situation.target_ships = []
             for encounter in desired_traffic_situation.encounter:
-                desired_encounter_type = encounter.desired_encounter_type
+                desired_encounter_type = encounter["desired_encounter_type"]
                 settings = encounter_settings
-                beta: Union[float, None] = encounter.beta
-                relative_speed: Union[float, None] = encounter.relative_speed
-                vector_time: Union[float, None] = encounter.vector_time
+                beta: Union[float, None] = encounter["beta"]
+                relative_speed: Union[float, None] = encounter["relative_speed"]
+                vector_time: Union[float, None] = encounter["vector_time"]
                 target_ship, encounter_found = generate_encounter(
                     desired_encounter_type,
                     own_ship.model_copy(deep=True),
