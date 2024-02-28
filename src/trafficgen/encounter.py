@@ -18,12 +18,18 @@ from trafficgen.types import (
     EncounterType,
 )
 
-from maritime_schema.types.caga import Initial, OwnShip, Position, TargetShip, Waypoint
-
 from trafficgen.utils import (
     calculate_position_at_certain_time,
     convert_angle_0_to_2_pi_to_minus_pi_to_pi,
     convert_angle_minus_pi_to_pi_to_0_to_2_pi,
+)
+
+from maritime_schema.types.caga import (
+    Initial,
+    OwnShip,
+    Position,
+    TargetShip,
+    Waypoint,
 )
 
 

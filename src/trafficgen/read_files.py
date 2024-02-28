@@ -12,7 +12,12 @@ from trafficgen.types import (
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
-from maritime_schema.types.caga import AISNavStatus, OwnShip, TargetShip, TrafficSituation
+from maritime_schema.types.caga import (
+    AISNavStatus,
+    OwnShip,
+    TargetShip,
+    TrafficSituation,
+)
 
 
 def read_situation_files(situation_folder: Path, input_units: UnitType) -> List[TrafficSituation]:
