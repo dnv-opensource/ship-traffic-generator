@@ -2,7 +2,7 @@
     "title": "HO, OT-GW",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,50 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "8ff1a086-25cd-4c14-9570-fb59677a5052",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02693886,
+                    "longitude": 0.18300748,
+                    "north": 8445.0,
+                    "east": -295.0
+                },
+                "sog": 5.7,
+                "cog": 3.075
+            }
+        },
+        {
+            "static": {
+                "id": "ae3942b3-9085-4541-8dd0-9354de7f374f",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02600377,
+                    "longitude": 0.18322825,
+                    "north": 2477.0,
+                    "east": 437.0
+                },
+                "sog": 2.6,
+                "cog": 6.107
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_09_2_ts.json",
     "common_vector": 600.0
 }

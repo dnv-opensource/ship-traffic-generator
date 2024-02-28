@@ -2,7 +2,7 @@
     "title": "CR-SO, CR-SO",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,50 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "524b66bb-e108-4f07-8989-66ed2e7eeee3",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "name": "CANOLE",
+                "shipType": "Cargo",
+                "speed_max": 15
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02570199,
+                    "longitude": 0.18119667,
+                    "north": 551.0,
+                    "east": -6299.0
+                },
+                "sog": 7.7,
+                "cog": 0.931
+            }
+        },
+        {
+            "static": {
+                "id": "2dbbfbe8-ec42-4ffe-b056-babb997ccf6d",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "name": "CANOLE",
+                "shipType": "Cargo",
+                "speed_max": 15
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.0254795,
+                    "longitude": 0.18161047,
+                    "north": -869.0,
+                    "east": -4927.0
+                },
+                "sog": 8.2,
+                "cog": 0.731
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_15_2_ts.json",
     "common_vector": 600.0
 }

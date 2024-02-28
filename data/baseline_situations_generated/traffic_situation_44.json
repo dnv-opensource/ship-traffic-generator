@@ -2,7 +2,7 @@
     "title": "CR-GW, OT-GW, OT-SO",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,71 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "9589562f-761f-4e85-9982-24f0c2d2d7a1",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02649842,
+                    "longitude": 0.18674068,
+                    "north": 5634.0,
+                    "east": 12083.0
+                },
+                "sog": 7.2,
+                "cog": 4.98
+            }
+        },
+        {
+            "static": {
+                "id": "2bac4f67-3f37-42f1-a40a-e9efadf14e4c",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02613053,
+                    "longitude": 0.18345716,
+                    "north": 3286.0,
+                    "east": 1196.0
+                },
+                "sog": 2.6,
+                "cog": 5.89
+            }
+        },
+        {
+            "static": {
+                "id": "5224428e-c7eb-4fd4-ba3b-534d7994be53",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger",
+                "speed_max": 21
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02521345,
+                    "longitude": 0.18316431,
+                    "north": -2567.0,
+                    "east": 225.0
+                },
+                "sog": 8.2,
+                "cog": 6.251
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_44_3_ts.json",
     "common_vector": 600.0
 }

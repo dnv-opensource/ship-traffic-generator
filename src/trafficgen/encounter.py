@@ -89,7 +89,7 @@ def generate_encounter(
         )
 
         # Target ship
-        target_ship.initial = Initial.default()  # reset initial of target_ship (if one existed)
+        target_ship.initial = Initial()  # reset initial of target_ship (if one existed)
 
         target_ship_position_future = assign_future_position_to_target_ship(
             own_ship_position_future, settings.max_meeting_distance

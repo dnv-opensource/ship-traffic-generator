@@ -2,7 +2,7 @@
     "title": "CR-GW",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,29 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "f4088510-a8b5-4070-8269-31878443d6bd",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger",
+                "speed_max": 21
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02652036,
+                    "longitude": 0.18373041,
+                    "north": 5774.0,
+                    "east": 2102.0
+                },
+                "sog": 4.1,
+                "cog": 3.934
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_02_1_ts.json",
     "common_vector": 600.0
 }

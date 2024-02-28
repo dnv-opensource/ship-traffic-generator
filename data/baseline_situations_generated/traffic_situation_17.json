@@ -2,7 +2,7 @@
     "title": "CR-SO, OT-GW",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,50 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "06ac6cca-7afd-4cd6-baff-d38944454298",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02554029,
+                    "longitude": 0.18255478,
+                    "north": -481.0,
+                    "east": -1796.0
+                },
+                "sog": 6.2,
+                "cog": 0.38
+            }
+        },
+        {
+            "static": {
+                "id": "38278ede-a0a3-48e0-8574-335af5d6cd83",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "name": "CANOLE",
+                "shipType": "Cargo",
+                "speed_max": 15
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02571798,
+                    "longitude": 0.18321015,
+                    "north": 653.0,
+                    "east": 377.0
+                },
+                "sog": 4.1,
+                "cog": 6.129
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_17_2_ts.json",
     "common_vector": 600.0
 }

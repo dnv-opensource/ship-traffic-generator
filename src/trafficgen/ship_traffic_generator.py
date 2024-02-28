@@ -13,7 +13,7 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_files,
 )
-from trafficgen.types import EncounterSettings
+from trafficgen.types import EncounterSettings, EncounterType
 from maritime_schema.types.caga import OwnShip, TargetShip, TrafficSituation
 
 
@@ -74,7 +74,7 @@ def generate_traffic_situations(
 
             traffic_situation.target_ships = []
             for encounter in desired_traffic_situation.encounter:
-                desired_encounter_type = encounter["desired_encounter_type"]
+                desired_encounter_type = EncounterType(encounter["desired_encounter_type"])
                 settings = encounter_settings
                 beta: Union[float, None] = encounter["beta"]
                 relative_speed: Union[float, None] = encounter["relative_speed"]

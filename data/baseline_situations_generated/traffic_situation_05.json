@@ -2,7 +2,7 @@
     "title": "OT-SO",
     "ownShip": {
         "static": {
-            "id": "6983e2ad-4f17-414d-9c07-5c12214926cc",
+            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -41,7 +41,29 @@
             }
         ]
     },
-    "targetShips": [],
+    "targetShips": [
+        {
+            "static": {
+                "id": "5b67964d-45e9-416b-bade-49615b27065d",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "name": "BASTO",
+                "shipType": "Passenger",
+                "speed_max": 17
+            },
+            "initial": {
+                "position": {
+                    "latitude": 1.02507619,
+                    "longitude": 0.18281807,
+                    "north": -3443.0,
+                    "east": -923.0
+                },
+                "sog": 8.2,
+                "cog": 0.099
+            }
+        }
+    ],
     "input_file_name": "baseline_situation_05_1_ts.json",
     "common_vector": 600.0
 }
