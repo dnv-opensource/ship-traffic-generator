@@ -17,7 +17,7 @@ basemap-data-hires = "^1.3.2"
 global-land-mask = "^1.0.0"
 folium = "^0.14.0"
 pydantic = "^2.5"
-maritime-schema = { git = "https://github.com/dnv-opensource/maritime-schema.git" }
+maritime-schema = "^0.0.3"
 
 [tool.poetry.group.dev]
 optional = true
