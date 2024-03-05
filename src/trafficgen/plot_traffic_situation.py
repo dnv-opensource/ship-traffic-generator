@@ -10,7 +10,7 @@ from folium import Map, Polygon
 from matplotlib.patches import Circle
 
 from trafficgen.marine_system_simulator import flat2llh
-from trafficgen.types import Position, Ship, TargetShip, TrafficSituation
+from maritime_schema.types.caga import Position, Ship, TargetShip, TrafficSituation
 from trafficgen.utils import m_2_nm, rad_2_deg
 
 

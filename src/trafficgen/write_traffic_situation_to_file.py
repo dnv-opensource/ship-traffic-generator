@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import List
 
-from trafficgen.types import TrafficSituation
+from maritime_schema.types.caga import TrafficSituation
 
 
 def write_traffic_situations_to_json_file(situations: List[TrafficSituation], write_folder: Path):
