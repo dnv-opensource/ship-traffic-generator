@@ -1,6 +1,6 @@
 {
     "title": "CR-GW",
-    "commonVector": 10.0,
+    "description": "A crossing situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-give-way",
             "beta": 20.0,

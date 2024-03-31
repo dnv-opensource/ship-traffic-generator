@@ -1,10 +1,8 @@
 {
-    "static": {
-        "length": 178,
-        "width": 30,
-        "height": 30,
-        "speedMax": 21,
-        "name": "BASTO VI",
-        "shipType": "Passenger"
-    }
+    "length": 178,
+    "width": 30,
+    "height": 30,
+    "speedMax": 21,
+    "name": "BASTO VI",
+    "shipType": "Passenger"
 }

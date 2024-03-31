@@ -1,6 +1,6 @@
 {
     "title": "CR-SO, OT-SO",
-    "commonVector": 10.0,
+    "description": "A crossing stand-on and overtaking stand-on situation with two target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-stand-on",
             "beta": -105.0,

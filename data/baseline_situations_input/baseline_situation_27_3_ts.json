@@ -1,6 +1,6 @@
 {
     "title": "HO, CR-GW, CR-SO",
-    "commonVector": 10.0,
+    "description": "Head-on, crossing give-way and crossing stand-on situations with three target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "head-on",
             "beta": -2.0,

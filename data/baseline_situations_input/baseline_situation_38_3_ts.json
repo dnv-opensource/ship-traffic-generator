@@ -1,6 +1,6 @@
 {
     "title": "CR-GW, CR-GW, OT-GW",
-    "commonVector": 10.0,
+    "description": "Two crossing give-waysituations and one overtaking give-way situation with three target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-give-way",
             "beta": 9.0,

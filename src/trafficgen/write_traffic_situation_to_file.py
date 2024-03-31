@@ -11,8 +11,8 @@ def write_traffic_situations_to_json_file(situations: List[TrafficSituation], wr
     Write traffic situations to json file.
 
     Params:
-        traffic_situations: Traffic situations to be written to file
-        write_folder: Folder where the json files is to be written
+        * traffic_situations: Traffic situations to be written to file
+        * write_folder: Folder where the json files is to be written
     """
 
     Path(write_folder).mkdir(parents=True, exist_ok=True)

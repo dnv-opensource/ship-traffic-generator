@@ -1,10 +1,11 @@
 """Domain specific data types used in trafficgen."""
 
 from enum import Enum
-from typing import List, Optional, Union
-from uuid import UUID
+from typing import List, Union
+from unittest.mock import Base
 
-from pydantic import BaseModel, Field
+from maritime_schema.types.caga import Initial
+from pydantic import BaseModel
 
 
 def to_camel(string: str) -> str:
@@ -84,10 +85,34 @@ class EncounterSettings(BaseModel):
     classification: EncounterClassification
     relative_speed: EncounterRelativeSpeed
     vector_range: List[float]
+    common_vector: float
     situation_length: float
     max_meeting_distance: float
     evolve_time: float
     input_units: UnitType
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
+
+
+class OwnShipInitial(BaseModel):
+    """Data type for initial data for the own ship used for generating a situation."""
+
+    initial: Initial
+
+
+class SituationInput(BaseModel):
+    """Data type for inputs needed for generating a situations."""
+
+    title: str
+    description: str
+    input_file_name: Union[str, None] = None
+    num_situations: int
+    own_ship: OwnShipInitial
+    encounters: List[Encounter]
 
     class Config:
         """For converting parameters written to file from snake to camel case."""

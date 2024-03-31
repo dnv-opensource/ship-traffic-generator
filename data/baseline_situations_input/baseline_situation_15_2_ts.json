@@ -1,6 +1,6 @@
 {
     "title": "CR-SO, CR-SO",
-    "commonVector": 10.0,
+    "description": "Two crossing stand-on situations with two target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-stand-on",
             "beta": -85.0,

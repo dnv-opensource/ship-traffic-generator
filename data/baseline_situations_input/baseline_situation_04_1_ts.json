@@ -1,6 +1,6 @@
 {
     "title": "OT-GW",
-    "commonVector": 10.0,
+    "description": "A overting situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "overtaking-give-way",
             "beta": 15.0,

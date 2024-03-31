@@ -1,10 +1,8 @@
 {
-    "static": {
-        "length": 50,
-        "width": 10,
-        "height": 8,
-        "speedMax": 15,
-        "name": "CANOLE",
-        "shipType": "Cargo"
-    }
+    "length": 50,
+    "width": 10,
+    "height": 8,
+    "speedMax": 15,
+    "name": "CANOLE",
+    "shipType": "Cargo"
 }

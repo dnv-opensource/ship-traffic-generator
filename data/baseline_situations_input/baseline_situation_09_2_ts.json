@@ -1,6 +1,6 @@
 {
     "title": "HO, OT-GW",
-    "commonVector": 10.0,
+    "description": "A head-on and overtaking give-way situation with two target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "head-on",
             "beta": -2.0,

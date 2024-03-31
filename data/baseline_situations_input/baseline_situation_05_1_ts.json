@@ -1,6 +1,6 @@
 {
     "title": "OT-SO",
-    "commonVector": 10.0,
+    "description": "A overtaking situation with one target ship. Own ship is stand-on.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "overtaking-stand-on",
             "beta": 195.0,

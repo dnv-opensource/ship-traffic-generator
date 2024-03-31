@@ -1,6 +1,6 @@
 {
     "title": "HO, HO, OT-SO",
-    "commonVector": 10.0,
+    "description": "Two head-on situations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "head-on",
             "beta": -4.0,

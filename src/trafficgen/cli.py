@@ -133,7 +133,7 @@ def gen_situation(
 
     if visualize:
         click.echo("Plotting traffic situations")
-        plot_traffic_situations(generated_traffic_situations, col, row)
+        plot_traffic_situations(generated_traffic_situations, col, row, settings)
 
     # visualize_situation has no default, this is done on purpose,
     # so it can safely be ignored by users without generating an error msg,
@@ -146,7 +146,7 @@ def gen_situation(
     with contextlib.suppress(TypeError):
         if visualize_situation > 0:
             click.echo("Plotting a specific traffic situation")
-            plot_specific_traffic_situation(generated_traffic_situations, visualize_situation)
+            plot_specific_traffic_situation(generated_traffic_situations, visualize_situation, settings)
         else:
             click.echo(
                 "Invalid traffic situation number specified, not creating map plot. See --help for more info."

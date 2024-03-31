@@ -1,6 +1,6 @@
 {
     "title": "CR-GW, CR-SO, CR-SO",
-    "commonVector": 10.0,
+    "description": "One crossing give way and two crossing stand-on situations with three target ships.",
     "ownShip": {
         "initial": {
             "position": {
@@ -12,7 +12,7 @@
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-give-way",
             "beta": 10.0,
