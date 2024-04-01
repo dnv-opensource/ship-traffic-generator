@@ -270,6 +270,7 @@ def define_own_ship(
 
     Params:
         * desired_traffic_situation: Information about type of traffic situation to generate
+        * own_ship_static: Static information of own ship.
         * encounter_settings: Necessary setting for the encounter
         * lat_lon0: Reference position [deg]
 
