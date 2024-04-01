@@ -1,7 +1,5 @@
 """Module with helper functions to determine if a generated path is crossing land."""
 
-from typing import List
-
 from global_land_mask import globe
 from maritime_schema.types.caga import Position
 

@@ -1,22 +1,20 @@
 """Tests reading files."""
 
 from pathlib import Path
-from typing import List, Set, Union
+from typing import List, Set
+
+from maritime_schema.types.caga import (
+    GeneralShipType,
+    ShipStatic,
+)
 
 from trafficgen.read_files import (
     read_encounter_settings_file,
-    read_own_ship_file,
+    read_own_ship_static_file,
     read_situation_files,
-    read_target_ship_files,
+    read_target_ship_static_files,
 )
-from trafficgen.types import (
-    EncounterSettings,
-    EncounterType,
-    GeneralShipType,
-    Ship,
-    TargetShip,
-    TrafficSituation,
-)
+from trafficgen.types import EncounterSettings, EncounterType, SituationInput
 
 
 def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path, settings_file: Path):
@@ -25,21 +23,23 @@ def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path, setting
     meaning all parameters are specified.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_01, encounter_settings.input_units
     )
-    assert len(situations) == 5
+    assert len(desired_traffic_situations) == 5
 
     # sourcery skip: no-loop-in-tests
-    for situation in situations:
+    for situation in desired_traffic_situations:
+        assert situation.title is not None
+        assert situation.description is not None
         assert situation.own_ship is not None
-        assert situation.target_ships is None
-        assert situation.encounter is not None
-        assert len(situation.encounter) == 1
-        assert situation.encounter[0].desired_encounter_type is not None
-        assert situation.encounter[0].beta is None
-        assert situation.encounter[0].relative_speed is not None
-        assert situation.encounter[0].vector_time is not None
+        assert situation.num_situations is not None
+        assert situation.encounters is not None
+        assert len(situation.encounters) == 1
+        assert situation.encounters[0].desired_encounter_type is not None
+        assert situation.encounters[0].beta is None
+        assert situation.encounters[0].relative_speed is not None
+        assert situation.encounters[0].vector_time is not None
 
 
 def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path, settings_file: Path):
@@ -48,19 +48,18 @@ def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path, setti
     meaning some of the parameters are specified.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_02, encounter_settings.input_units
     )
-    assert len(situations) == 2
+    assert len(desired_traffic_situations) == 2
 
     # sourcery skip: no-loop-in-tests
-    for situation in situations:
+    for situation in desired_traffic_situations:
         assert situation.own_ship is not None
-        assert situation.target_ships is None
-        assert situation.encounter is not None
-        assert len(situation.encounter) == 1
-        assert situation.encounter[0].desired_encounter_type is not None
-        assert situation.encounter[0].beta is None
+        assert situation.encounters is not None
+        assert len(situation.encounters) == 1
+        assert situation.encounters[0].desired_encounter_type is not None
+        assert situation.encounters[0].beta is None
 
 
 def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path, settings_file: Path):
@@ -69,21 +68,20 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path, sett
     meaning only type of situation is specified.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_03, encounter_settings.input_units
     )
-    assert len(situations) == 2
+    assert len(desired_traffic_situations) == 2
 
     # sourcery skip: no-loop-in-tests
-    for situation in situations:
+    for situation in desired_traffic_situations:
         assert situation.own_ship is not None
-        assert situation.target_ships is None
-        assert situation.encounter is not None
-        assert len(situation.encounter) == 1
-        assert situation.encounter[0].desired_encounter_type is not None
-        assert situation.encounter[0].beta is None
-        assert situation.encounter[0].relative_speed is None
-        assert situation.encounter[0].vector_time is None
+        assert situation.encounters is not None
+        assert len(situation.encounters) == 1
+        assert situation.encounters[0].desired_encounter_type is not None
+        assert situation.encounters[0].beta is None
+        assert situation.encounters[0].relative_speed is None
+        assert situation.encounters[0].vector_time is None
 
 
 def test_read_situations_2_ts_one_to_many_situations(
@@ -93,19 +91,18 @@ def test_read_situations_2_ts_one_to_many_situations(
     Test reading a traffic situation file num_situations=5 and 2 encounter specifications.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_04, encounter_settings.input_units
     )
-    assert len(situations) == 1
+    assert len(desired_traffic_situations) == 1
 
     # sourcery skip: no-loop-in-tests
-    for situation in situations:
+    for situation in desired_traffic_situations:
         assert situation.own_ship is not None
-        assert situation.target_ships is None
         assert situation.num_situations == 5
-        assert situation.encounter is not None
-        assert len(situation.encounter) == 2
-        for encounter in situation.encounter:
+        assert situation.encounters is not None
+        assert len(situation.encounters) == 2
+        for encounter in situation.encounters:
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is None
             assert encounter.relative_speed is None
@@ -117,26 +114,25 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path,
     Test reading three traffic situation files 1, 2 and 3 encounter specifications.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_05, encounter_settings.input_units
     )
-    assert len(situations) == 3
+    assert len(desired_traffic_situations) == 3
 
     # sourcery skip: no-loop-in-tests
-    num_situations_values_found: Set[Union[int, None]] = set()
-    for situation in situations:
+    num_situations_values_found: Set[int] = set()
+    for situation in desired_traffic_situations:
         assert situation.own_ship is not None
-        assert situation.target_ships is None
-        assert situation.encounter is not None
-        assert len(situation.encounter) in {1, 2, 3}
+        assert situation.encounters is not None
+        assert len(situation.encounters) in {1, 2, 3}
         num_situations_values_found.add(situation.num_situations)
-        for encounter in situation.encounter:
+        for encounter in situation.encounters:
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is None
             assert encounter.relative_speed is None
             assert encounter.vector_time is None
 
-    assert num_situations_values_found == {6, 3, None}
+    assert num_situations_values_found == {6, 3, 1}
 
 
 def test_read_situations_with_different_encounter_types(
@@ -146,21 +142,19 @@ def test_read_situations_with_different_encounter_types(
     Test reading 5 traffic situation files with different encounter types.
     """
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    situations: List[TrafficSituation] = read_situation_files(
+    desired_traffic_situations: List[SituationInput] = read_situation_files(
         situations_folder_test_07, encounter_settings.input_units
     )
-    assert len(situations) == 5
+    assert len(desired_traffic_situations) == 5
 
     # sourcery skip: no-loop-in-tests
     desired_encounter_types_found: Set[EncounterType] = set()
-    for situation in situations:
+    for situation in desired_traffic_situations:
         assert situation.own_ship is not None
-        assert situation.target_ships is None
-        assert situation.num_situations is None
-        assert situation.encounter is not None
-        assert len(situation.encounter) == 1
-        desired_encounter_types_found.add(situation.encounter[0].desired_encounter_type)
-        for encounter in situation.encounter:
+        assert situation.encounters is not None
+        assert len(situation.encounters) == 1
+        desired_encounter_types_found.add(situation.encounters[0].desired_encounter_type)
+        for encounter in situation.encounters:
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is not None
             assert encounter.relative_speed is None
@@ -179,32 +173,25 @@ def test_read_own_ship(own_ship_file: Path):
     """
     Test reading own ship file.
     """
-    own_ship: Ship = read_own_ship_file(own_ship_file)
-    assert own_ship.static is not None
-    assert own_ship.initial is None
-    assert own_ship.waypoints is None
-    assert own_ship.static.ship_type is GeneralShipType.PASSENGER
+    own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
+    assert own_ship_static.length is not None
+    assert own_ship_static.width is not None
+    assert own_ship_static.speed_max is not None
+    assert own_ship_static.mmsi is not None
+    assert own_ship_static.ship_type is GeneralShipType.PASSENGER
 
 
 def test_read_target_ships(target_ships_folder: Path):
     """
     Test reading target ship files.
     """
-    target_ships: List[TargetShip] = read_target_ship_files(target_ships_folder)
-    assert len(target_ships) == 3
+    target_ships_static: List[ShipStatic] = read_target_ship_static_files(target_ships_folder)
 
     # sourcery skip: no-loop-in-tests
-    ship_types_found: Set[GeneralShipType] = set()
-    for target_ship in target_ships:
-        assert target_ship.static is not None
-        ship_types_found.add(target_ship.static.ship_type)
-        assert target_ship.initial is None
-        assert target_ship.waypoints is None
-
-    assert ship_types_found == {
-        GeneralShipType.PASSENGER,
-        GeneralShipType.CARGO,
-    }
+    for target_ship_static in target_ships_static:
+        assert target_ship_static.length is not None
+        assert target_ship_static.width is not None
+        assert target_ship_static.speed_max is not None
 
 
 def test_read_encounter_settings_file(settings_file: Path):

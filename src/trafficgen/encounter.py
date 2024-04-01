@@ -183,6 +183,11 @@ def generate_encounter(
         target_ship: TargetShip = TargetShip(
             static=target_ship_static, initial=target_ship_initial, waypoints=None
         )
+    else:
+        # Since encounter is not found, using initial values from own ship. Will not be taken into use.
+        target_ship: TargetShip = TargetShip(
+            static=target_ship_static, initial=own_ship.initial, waypoints=None
+        )
     return target_ship, encounter_found
 
 

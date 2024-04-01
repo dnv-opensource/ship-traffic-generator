@@ -1,6 +1,6 @@
 {
     "title": "CR-SO",
-    "commonVector": 10.0,
+    "description": "Test situation.",
     "ownShip": {
         "initial": {
             "position": {
@@ -8,10 +8,11 @@
                 "longitude": 10.490654
             },
             "sog": 11.0,
-            "cog": 45.0
+            "cog": 45.0,
+            "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "crossing-stand-on",
             "relativeSpeed": 1.4,

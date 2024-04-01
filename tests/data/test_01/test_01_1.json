@@ -1,6 +1,6 @@
 {
     "title": "HO",
-    "commonVector": 10.0,
+    "description": "Test situation.",
     "ownShip": {
         "initial": {
             "position": {
@@ -8,10 +8,11 @@
                 "longitude": 10.490654
             },
             "sog": 10.0,
-            "cog": 270.0
+            "cog": 270.0,
+            "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "head-on",
             "relativeSpeed": 1.2,

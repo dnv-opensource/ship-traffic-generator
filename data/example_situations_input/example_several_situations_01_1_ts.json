@@ -1,5 +1,6 @@
 {
     "title": "OT_GW",
+    "description": "A overtaking give-way situation. 5 different situations will be generated.",
     "ownShip": {
         "initial": {
             "position": {
@@ -7,7 +8,8 @@
                 "longitude": 10.490654
             },
             "sog": 7.0,
-            "cog": 0.0
+            "cog": 0.0,
+            "navStatus": "Under way using engine"
         }
     },
     "numSituations": 5,

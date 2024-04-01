@@ -1,7 +1,5 @@
 """Utility functions that are used by several other functions."""
 
-from typing import List
-
 import numpy as np
 from maritime_schema.types.caga import Position
 

@@ -2,7 +2,6 @@
 
 from enum import Enum
 from typing import List, Union
-from unittest.mock import Base
 
 from maritime_schema.types.caga import Initial
 from pydantic import BaseModel
