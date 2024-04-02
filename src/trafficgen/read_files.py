@@ -67,10 +67,9 @@ def read_generated_situation_files(situation_folder: Path) -> List[TrafficSituat
         file_path = os.path.join(situation_folder, file_name)
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
-
         data = convert_keys_to_snake_case(data)
-        situation: TrafficSituation = TrafficSituation(**data)
 
+        situation: TrafficSituation = TrafficSituation(**data)
         situation.input_file_name = file_name
         situations.append(situation)
     return situations
@@ -89,21 +88,21 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
     """
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
-    situation.own_ship.initial.position.longitude = round(
-        deg_2_rad(situation.own_ship.initial.position.longitude), 8
+    situation.own_ship.initial.position.longitude = deg_2_rad(
+        situation.own_ship.initial.position.longitude
     )
-    situation.own_ship.initial.position.latitude = round(
-        deg_2_rad(situation.own_ship.initial.position.latitude), 8
+    situation.own_ship.initial.position.latitude = deg_2_rad(
+        situation.own_ship.initial.position.latitude
     )
-    situation.own_ship.initial.cog = round(deg_2_rad(situation.own_ship.initial.cog), 4)
-    situation.own_ship.initial.sog = round(knot_2_m_pr_s(situation.own_ship.initial.sog), 2)
+    situation.own_ship.initial.cog = deg_2_rad(situation.own_ship.initial.cog)
+    situation.own_ship.initial.sog = knot_2_m_pr_s(situation.own_ship.initial.sog)
 
     assert situation.encounters is not None
     for encounter in situation.encounters:
         beta: Union[float, None] = encounter.beta
         vector_time: Union[float, None] = encounter.vector_time
         if beta is not None:
-            encounter.beta = round(deg_2_rad(beta), 4)
+            encounter.beta = deg_2_rad(beta)
         if vector_time is not None:
             encounter.vector_time = min_2_s(vector_time)
     return situation
@@ -154,8 +153,7 @@ def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
         if "id" not in data:
             ship_id: UUID = uuid4()
             data.update({"id": ship_id})
-        # if "initial" in data and "nav_status" not in data["initial"]:
-        #    data["initial"].update({"nav_status": AISNavStatus.UNDER_WAY_USING_ENGINE})
+
         target_ship_static: ShipStatic = ShipStatic(**data)
         target_ships_static.append(target_ship_static)
     return target_ships_static

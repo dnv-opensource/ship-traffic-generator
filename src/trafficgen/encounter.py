@@ -12,10 +12,9 @@ import numpy as np
 from maritime_schema.types.caga import (
     AISNavStatus,
     Initial,
-    OwnShip,
     Position,
+    Ship,
     ShipStatic,
-    TargetShip,
     Waypoint,
 )
 
@@ -36,13 +35,13 @@ from trafficgen.utils import (
 
 def generate_encounter(
     desired_encounter_type: EncounterType,
-    own_ship: OwnShip,
+    own_ship: Ship,
     target_ships_static: List[ShipStatic],
     beta_default: Optional[float],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
     settings: EncounterSettings,
-) -> Tuple[TargetShip, bool]:
+) -> Tuple[Ship, bool]:
     """
     Generate an encounter.
 
@@ -179,20 +178,32 @@ def generate_encounter(
             heading=target_ship_cog,
             nav_status=AISNavStatus.UNDER_WAY_USING_ENGINE,
         )
-
-        target_ship: TargetShip = TargetShip(
-            static=target_ship_static, initial=target_ship_initial, waypoints=None
+        target_ship_waypoint0 = Waypoint(
+            position=start_position_target_ship.model_copy(deep=True), turn_radius=None, data=None
         )
+
+        future_position_target_ship = calculate_position_at_certain_time(
+            start_position_target_ship,
+            lat_lon0,
+            target_ship_sog,
+            target_ship_cog,
+            settings.situation_length,
+        )
+
+        target_ship_waypoint1 = Waypoint(
+            position=future_position_target_ship, turn_radius=None, data=None
+        )
+        waypoints = [target_ship_waypoint0, target_ship_waypoint1]
+
+        target_ship = Ship(static=target_ship_static, initial=target_ship_initial, waypoints=waypoints)
     else:
         # Since encounter is not found, using initial values from own ship. Will not be taken into use.
-        target_ship: TargetShip = TargetShip(
-            static=target_ship_static, initial=own_ship.initial, waypoints=None
-        )
+        target_ship: Ship = Ship(static=target_ship_static, initial=own_ship.initial)
     return target_ship, encounter_found
 
 
 def check_encounter_evolvement(
-    own_ship: OwnShip,
+    own_ship: Ship,
     own_ship_position_future: Position,
     lat_lon0: Position,
     target_ship_sog: float,
@@ -264,7 +275,7 @@ def define_own_ship(
     own_ship_static: ShipStatic,
     encounter_settings: EncounterSettings,
     lat_lon0: Position,
-) -> OwnShip:
+) -> Ship:
     """
     Define own ship based on information in desired traffic situation.
 
@@ -279,7 +290,9 @@ def define_own_ship(
         * own_ship: Own ship
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
-    own_ship_waypoint0 = Waypoint(position=own_ship_initial.position, turn_radius=None, data=None)
+    own_ship_waypoint0 = Waypoint(
+        position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
+    )
     ship_position_future = calculate_position_at_certain_time(
         own_ship_initial.position,
         lat_lon0,
@@ -289,7 +302,7 @@ def define_own_ship(
     )
     own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, data=None)
 
-    own_ship = OwnShip(
+    own_ship = Ship(
         static=own_ship_static,
         initial=own_ship_initial,
         waypoints=[own_ship_waypoint0, own_ship_waypoint1],
@@ -401,7 +414,7 @@ def find_start_position_target_ship(
 
     # Assign conservative fallback values to return variables
     start_position_found: bool = False
-    start_position_target_ship = target_ship_position_future.model_copy()
+    start_position_target_ship = target_ship_position_future.model_copy(deep=True)
 
     if b**2 - 4 * a * c <= 0.0:
         # Do not run calculation of target ship start position. Return fallback values.

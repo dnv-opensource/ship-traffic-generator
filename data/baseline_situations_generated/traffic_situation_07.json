@@ -1,42 +1,38 @@
 {
     "title": "HO, CR-GW",
+    "description": "A head-on and crossing give-way situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "0e798a2d-9ac7-478e-881d-987c1d0de238",
+            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
+            "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "shipType": "Passenger",
-            "speed_max": 17
+            "shipType": "Passenger"
         },
         "initial": {
             "position": {
-                "latitude": 1.02561566,
-                "longitude": 0.18309645,
-                "east": 0,
-                "north": 0
+                "latitude": 58.763449,
+                "longitude": 10.490654
             },
-            "sog": 5.14,
+            "sog": 10.0,
             "cog": 0.0,
+            "heading": 0.0,
             "navStatus": "Under way using engine"
         },
         "waypoints": [
             {
                 "position": {
-                    "latitude": 1.02561566,
-                    "longitude": 0.18309645,
-                    "east": 0,
-                    "north": 0
+                    "latitude": 58.763449,
+                    "longitude": 10.490654
                 }
             },
             {
                 "position": {
-                    "latitude": 1.02851496,
-                    "longitude": 0.18309645,
-                    "north": 18504.0,
-                    "east": 0.0
+                    "latitude": 58.92969579,
+                    "longitude": 10.490654
                 }
             }
         ]
@@ -44,47 +40,73 @@
     "targetShips": [
         {
             "static": {
-                "id": "fe663062-2b70-4070-b5d4-1ef8d80621a9",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "name": "BASTO",
-                "shipType": "Passenger",
-                "speed_max": 17
+                "id": "7e28fa7c-3944-4b3f-8e51-f24452cdff77",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 1.02792614,
-                    "longitude": 0.1827855,
-                    "north": 14746.0,
-                    "east": -1031.0
+                    "latitude": 58.8958744,
+                    "longitude": 10.4728379
                 },
-                "sog": 7.2,
-                "cog": 3.022
-            }
+                "sog": 14.0,
+                "cog": 173.15,
+                "heading": 173.15,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.8958744,
+                        "longitude": 10.4728379
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.66484265,
+                        "longitude": 10.52627682
+                    }
+                }
+            ]
         },
         {
             "static": {
-                "id": "f7c9d51d-8a31-4f76-b2b5-976a2237af3f",
+                "id": "2cc0c318-a03b-4f5f-a526-5d832012135d",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,
+                "speedMax": 17.0,
                 "name": "BASTO",
-                "shipType": "Passenger",
-                "speed_max": 17
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 1.02614275,
-                    "longitude": 0.18383356,
-                    "north": 3364.0,
-                    "east": 2444.0
+                    "latitude": 58.79364892,
+                    "longitude": 10.53288731
                 },
-                "sog": 4.1,
-                "cog": 4.598
-            }
+                "sog": 8.0,
+                "cog": 263.5,
+                "heading": 263.5,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.79364892,
+                        "longitude": 10.53288731
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.77865635,
+                        "longitude": 10.27946644
+                    }
+                }
+            ]
         }
-    ],
-    "input_file_name": "baseline_situation_07_2_ts.json",
-    "common_vector": 600.0
+    ]
 }

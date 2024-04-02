@@ -22,6 +22,22 @@ def knot_2_m_pr_s(speed_in_knot: float) -> float:
     return speed_in_knot * knot_2_m_pr_sec
 
 
+def m_pr_s_2_knot(speed_in_m_pr_s: float) -> float:
+    """
+    Convert ship speed in knots to meters pr second.
+
+    Params:
+        * speed_in_m_pr_s: Ship speed given in meters pr second
+
+    Returns
+    -------
+        * speed_in_knot: Ship speed in knots
+    """
+
+    knot_2_m_pr_sec: float = 0.5144
+    return speed_in_m_pr_s / knot_2_m_pr_sec
+
+
 def min_2_s(time_in_min: float) -> float:
     """
     Convert time given in minutes to time given in seconds.
