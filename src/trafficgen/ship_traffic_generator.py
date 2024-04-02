@@ -60,13 +60,12 @@ def generate_traffic_situations(
         assert desired_traffic_situation.own_ship is not None
         assert desired_traffic_situation.encounters is not None
 
+        lat_lon0: Position = desired_traffic_situation.own_ship.initial.position
+
+        own_ship: Ship = define_own_ship(
+            desired_traffic_situation, own_ship_static, encounter_settings, lat_lon0
+        )
         for _ in range(num_situations):
-            lat_lon0: Position = desired_traffic_situation.own_ship.initial.position
-
-            own_ship: Ship = define_own_ship(
-                desired_traffic_situation, own_ship_static, encounter_settings, lat_lon0
-            )
-
             target_ships: List[Ship] = []
             for encounter in desired_traffic_situation.encounters:
                 desired_encounter_type = EncounterType(encounter.desired_encounter_type)
@@ -84,11 +83,11 @@ def generate_traffic_situations(
                     encounter_settings,
                 )
                 if encounter_found:
-                    target_ships.append(target_ship)
+                    target_ships.append(target_ship.model_copy(deep=True))
             traffic_situation: TrafficSituation = TrafficSituation(
                 title=desired_traffic_situation.title,
                 description=desired_traffic_situation.description,
-                own_ship=own_ship,
+                own_ship=own_ship.model_copy(deep=True),
                 target_ships=target_ships,
                 start_time=None,
                 environment=None,

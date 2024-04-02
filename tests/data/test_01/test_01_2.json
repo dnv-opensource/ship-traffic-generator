@@ -9,6 +9,7 @@
             },
             "sog": 12.0,
             "cog": 0.0,
+            "heading": 0.0,
             "navStatus": "Under way using engine"
         }
     },

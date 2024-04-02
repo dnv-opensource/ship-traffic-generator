@@ -95,6 +95,7 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
         situation.own_ship.initial.position.latitude
     )
     situation.own_ship.initial.cog = deg_2_rad(situation.own_ship.initial.cog)
+    situation.own_ship.initial.heading = deg_2_rad(situation.own_ship.initial.heading)
     situation.own_ship.initial.sog = knot_2_m_pr_s(situation.own_ship.initial.sog)
 
     assert situation.encounters is not None
