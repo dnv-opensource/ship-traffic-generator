@@ -74,9 +74,13 @@ def convert_own_ship_data_from_si_units_to_maritime(ship: OwnShip) -> OwnShip:
             waypoint.position.longitude = round(rad_2_deg(waypoint.position.longitude), 8)
             if waypoint.data is not None:
                 if waypoint.data.sog is not None:
-                    waypoint.data.sog.value = round(m_pr_s_2_knot(waypoint.data.sog.value), 1)
+                    if waypoint.data.sog.value is not None:
+                        waypoint.data.sog.value = round(m_pr_s_2_knot(waypoint.data.sog.value), 1)
                 if waypoint.data.heading is not None:
-                    waypoint.data.heading.value = round(m_pr_s_2_knot(waypoint.data.heading.value), 2)
+                    if waypoint.data.heading.value is not None:
+                        waypoint.data.heading.value = round(
+                            m_pr_s_2_knot(waypoint.data.heading.value), 2
+                        )
 
     return ship
 
@@ -105,8 +109,12 @@ def convert_target_ship_data_from_si_units_to_maritime(ship: TargetShip) -> Targ
             waypoint.position.longitude = round(rad_2_deg(waypoint.position.longitude), 8)
             if waypoint.data is not None:
                 if waypoint.data.sog is not None:
-                    waypoint.data.sog.value = round(m_pr_s_2_knot(waypoint.data.sog.value), 1)
+                    if waypoint.data.sog.value is not None:
+                        waypoint.data.sog.value = round(m_pr_s_2_knot(waypoint.data.sog.value), 1)
                 if waypoint.data.heading is not None:
-                    waypoint.data.heading.value = round(m_pr_s_2_knot(waypoint.data.heading.value), 2)
+                    if waypoint.data.heading.value is not None:
+                        waypoint.data.heading.value = round(
+                            m_pr_s_2_knot(waypoint.data.heading.value), 2
+                        )
 
     return ship
