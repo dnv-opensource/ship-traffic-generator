@@ -3,7 +3,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, MutableMapping, MutableSequence, Type, TypeVar, Union, cast
+from typing import Any, Dict, List, Union, cast
 from uuid import UUID, uuid4
 
 from maritime_schema.types.caga import (
@@ -247,12 +247,13 @@ def _convert_keys_to_snake_case(
                 converted_value = value
             converted_dict[converted_key] = converted_value
         return converted_dict
-    else:  # List
-        converted_list: List[Any] = []
-        for value in data:
-            if isinstance(value, (Dict, List)):
-                converted_value = _convert_keys_to_snake_case(value)
-            else:
-                converted_value = value
-            converted_list.append(value)
-        return converted_list
+
+    # List
+    converted_list: List[Any] = []
+    for value in data:
+        if isinstance(value, (Dict, List)):
+            converted_value = _convert_keys_to_snake_case(value)
+        else:
+            converted_value = value
+        converted_list.append(value)
+    return converted_list
