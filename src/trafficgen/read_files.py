@@ -3,7 +3,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, MutableMapping, MutableSequence, Type, TypeVar, Union
 from uuid import UUID, uuid4
 
 from maritime_schema.types.caga import (
@@ -227,28 +227,27 @@ def camel_to_snake(string: str) -> str:
     return "".join([f"_{c.lower()}" if c.isupper() else c for c in string]).lstrip("_")
 
 
-def convert_keys_to_snake_case(data: Dict[str, Any]) -> Dict[str, Any]:
+def convert_keys_to_snake_case(
+    data: Union[Dict[str, Any], List[Any]],
+) -> Union[Dict[str, Any], List[Any]]:
     """Convert keys in a nested dictionary from camel case to snake case."""
-    converted_dict = {}
-    for key, value in data.items():
-        converted_key = camel_to_snake(key)
-        if isinstance(value, dict):
-            converted_value = convert_keys_to_snake_case(value)
-        elif isinstance(value, list):
-            converted_value = convert_list_of_dict_to_snake_case(value)
-        else:
-            converted_value = value
-        converted_dict[converted_key] = converted_value
-    return converted_dict
 
-
-def convert_list_of_dict_to_snake_case(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Loops through a list of dics to convert keys from camel case to snake case."""
-
-    converted_list: List[Dict[str, Any]] = []
-    for item in data:
-        if not isinstance(item, dict):
-            return data
-        converted_item = convert_keys_to_snake_case(item)
-        converted_list.append(converted_item)
-    return converted_list
+    if isinstance(data, Dict):  # Dict
+        converted_dict: Dict[str, Any] = {}
+        for key, value in data.items():
+            converted_key = camel_to_snake(key)
+            if isinstance(value, (Dict, List)):
+                converted_value = convert_keys_to_snake_case(value)
+            else:
+                converted_value = value
+            converted_dict[converted_key] = converted_value
+        return converted_dict
+    else:  # List
+        converted_list: List[Any] = []
+        for value in data:
+            if isinstance(value, (Dict, List)):
+                converted_value = convert_keys_to_snake_case(value)
+            else:
+                converted_value = value
+            converted_list.append(value)
+        return converted_list
