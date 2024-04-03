@@ -3,7 +3,7 @@
     "description": "A head on situation with one target ship.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "dfd6b5f6-7b3c-402f-affd-e089840bc6e8",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "06e7aab7-cfd9-4339-a58a-c357ad2e3d16",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

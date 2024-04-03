@@ -3,7 +3,7 @@
     "description": "A head-on and overtaking stand-on situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "35f2184b-04bd-494b-a9ef-3d5709bf681e",
+                "id": "5d50c9d4-8488-4fcc-895f-fe732be3578a",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -75,12 +75,12 @@
         },
         {
             "static": {
-                "id": "06e96af4-67f1-413b-923b-c49cc1ce6ad4",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "ff44462c-63d9-4cfd-b1a5-8f91bebece23",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger"
             },
             "initial": {

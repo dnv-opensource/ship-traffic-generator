@@ -3,7 +3,7 @@
     "description": "A head-on and crossing stand-on situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "320bda36-a3a6-426e-a38d-aa8607595dc0",
+                "id": "523bc633-924b-400c-be0b-6a8ca909bc19",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "60e9e953-a03a-40f4-bd99-f39c88b13e37",
+                "id": "7165468f-e1a0-492d-8f7d-ebd74674e9db",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,

@@ -12,9 +12,10 @@ import numpy as np
 from maritime_schema.types.caga import (
     AISNavStatus,
     Initial,
+    OwnShip,
     Position,
-    Ship,
     ShipStatic,
+    TargetShip,
     Waypoint,
 )
 
@@ -35,13 +36,13 @@ from trafficgen.utils import (
 
 def generate_encounter(
     desired_encounter_type: EncounterType,
-    own_ship: Ship,
+    own_ship: OwnShip,
     target_ships_static: List[ShipStatic],
     beta_default: Optional[float],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
     settings: EncounterSettings,
-) -> Tuple[Ship, bool]:
+) -> Tuple[TargetShip, bool]:
     """
     Generate an encounter.
 
@@ -195,15 +196,17 @@ def generate_encounter(
         )
         waypoints = [target_ship_waypoint0, target_ship_waypoint1]
 
-        target_ship = Ship(static=target_ship_static, initial=target_ship_initial, waypoints=waypoints)
+        target_ship = TargetShip(
+            static=target_ship_static, initial=target_ship_initial, waypoints=waypoints
+        )
     else:
         # Since encounter is not found, using initial values from own ship. Will not be taken into use.
-        target_ship: Ship = Ship(static=target_ship_static, initial=own_ship.initial)
+        target_ship = TargetShip(static=target_ship_static, initial=own_ship.initial, waypoints=None)
     return target_ship, encounter_found
 
 
 def check_encounter_evolvement(
-    own_ship: Ship,
+    own_ship: OwnShip,
     own_ship_position_future: Position,
     lat_lon0: Position,
     target_ship_sog: float,
@@ -275,7 +278,7 @@ def define_own_ship(
     own_ship_static: ShipStatic,
     encounter_settings: EncounterSettings,
     lat_lon0: Position,
-) -> Ship:
+) -> OwnShip:
     """
     Define own ship based on information in desired traffic situation.
 
@@ -302,7 +305,7 @@ def define_own_ship(
     )
     own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, data=None)
 
-    own_ship = Ship(
+    own_ship = OwnShip(
         static=own_ship_static,
         initial=own_ship_initial,
         waypoints=[own_ship_waypoint0, own_ship_waypoint1],

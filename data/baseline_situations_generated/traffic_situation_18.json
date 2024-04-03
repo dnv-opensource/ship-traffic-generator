@@ -3,7 +3,7 @@
     "description": "A overtaking give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "60d045a5-cbb1-4fcb-840b-52b5916e1316",
+                "id": "28c09d53-482d-40d2-8e08-42336f115cfb",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "bac7d12b-04a8-4b07-8d06-f8ff945e2294",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "f2f9a04e-513d-4e39-a344-a4658b40a6fc",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

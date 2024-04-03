@@ -3,7 +3,7 @@
     "description": "Three overtaking stand-on situation with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,12 +40,12 @@
     "targetShips": [
         {
             "static": {
-                "id": "2aabc0f4-1527-4d9a-ac4a-f201fdb78356",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
+                "id": "fd4a8396-7cf2-4be2-b540-a14a4e035670",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "eea3aee9-6765-4d14-bd86-71a824c33509",
+                "id": "beeae9fe-a2cd-476e-b2a7-adbf7a6d13cb",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -110,13 +110,13 @@
         },
         {
             "static": {
-                "id": "8735ff51-f5ed-4a02-9995-ca0a917ffa37",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "7d9bd59a-f3dc-48ab-aa7f-2ca40ce296cb",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

@@ -3,7 +3,7 @@
     "description": "One crossing stand-on situation and two overtaking stand-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "d7be3b22-8b40-45bc-9c2a-e8f544166013",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "759294ef-e308-46a2-aba3-9e3058b33295",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "daa19248-67cd-437f-80b5-91c4de15f341",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "ec555ae4-fb63-473a-a391-4fb5510c6c96",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "456fca4d-8653-42ca-a87b-0d09055c5fed",
+                "id": "9393982e-c54d-47f0-94b0-6b7875fa9c9c",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,

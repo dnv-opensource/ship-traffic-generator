@@ -3,7 +3,7 @@
     "description": "A crossing give-way and crossing stand-on situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "0367c82d-83b1-4577-9105-85011bb19fee",
+                "id": "24f83ee0-db4a-4dd6-be3c-0ceb1e405bbf",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -75,12 +75,12 @@
         },
         {
             "static": {
-                "id": "df8cdef7-1708-4cba-962c-9b25ee7678f2",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
+                "id": "66154854-2f4e-4430-9a34-a6b220818a54",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
                 "shipType": "Passenger"
             },
             "initial": {

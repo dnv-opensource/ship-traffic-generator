@@ -3,7 +3,7 @@
     "description": "Three crossing give-way situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,12 +40,12 @@
     "targetShips": [
         {
             "static": {
-                "id": "b2a3af95-2b67-4c19-b69d-1fe3ca94c2f6",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "835bfb19-2e00-42a8-95b6-da51f5b9f4fb",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "a5a748de-262c-4798-9501-7bfc393f6082",
+                "id": "fdbb06fa-0b50-4f20-8380-e7ae07de7bc5",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "9cf74299-5782-4726-8e65-1ad1c4f2931d",
+                "id": "162380f5-9b7a-4004-9973-6aa9ca5209d0",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

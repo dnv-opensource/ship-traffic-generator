@@ -3,7 +3,7 @@
     "description": "Head-on and two overtaking give-way situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "128c0a31-c18e-47c6-8714-2028c1bc6a40",
+                "id": "2e73d6e4-0b5b-41c2-8f52-17a00171d011",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "1fada211-2724-4b0c-a6e1-b8fc87d18570",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "2982cdae-a022-4819-8205-c0fa15d15ebe",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "372ef36a-0641-4392-822d-d8b8f4df406b",
+                "id": "df727edd-1336-4cd3-b166-3aadb67e13f3",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,

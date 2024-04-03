@@ -3,7 +3,7 @@
     "description": "Head-on, crossing give-way and overtaking stand-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "75eb10ce-670e-44fe-8a24-b12ab71266d2",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "485be579-5666-434a-a2b2-30bd4926867c",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "c7b12623-5607-4b42-9f8a-ecd5341a48f5",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "f78d7ecd-c70c-4e0e-80bb-02d9775fdbb0",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -110,13 +110,13 @@
         },
         {
             "static": {
-                "id": "4df159dc-cdd6-4304-a572-f6a2c8f340c2",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "588b9ab3-d326-4998-a539-c753f06dc3f1",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {

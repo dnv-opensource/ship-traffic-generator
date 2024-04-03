@@ -4,9 +4,10 @@ from pathlib import Path
 from typing import List, Union
 
 from maritime_schema.types.caga import (
+    OwnShip,
     Position,
-    Ship,
     ShipStatic,
+    TargetShip,
     TrafficSituation,
 )
 
@@ -62,11 +63,11 @@ def generate_traffic_situations(
 
         lat_lon0: Position = desired_traffic_situation.own_ship.initial.position
 
-        own_ship: Ship = define_own_ship(
+        own_ship: OwnShip = define_own_ship(
             desired_traffic_situation, own_ship_static, encounter_settings, lat_lon0
         )
         for _ in range(num_situations):
-            target_ships: List[Ship] = []
+            target_ships: List[TargetShip] = []
             for encounter in desired_traffic_situation.encounters:
                 desired_encounter_type = EncounterType(encounter.desired_encounter_type)
                 beta: Union[float, None] = encounter.beta

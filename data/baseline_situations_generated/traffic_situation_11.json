@@ -3,7 +3,7 @@
     "description": "Two crossing give-way situations with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "9d63f390-e416-4dd2-bfaa-4420e86bd311",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "6f91c35d-02b0-4033-b263-d1ff95bcf6ff",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "0991fdaa-4607-4814-970b-d078a1a92804",
+                "id": "1622879e-6df6-4cf0-ba76-2d42862bab86",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

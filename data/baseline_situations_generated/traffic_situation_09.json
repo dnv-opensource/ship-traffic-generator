@@ -3,7 +3,7 @@
     "description": "A head-on and overtaking give-way situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "2f478fe4-0d80-475a-893b-4af9029cc16a",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
+                "id": "8f10873e-bc8c-4705-8a1b-9672b423a646",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "d818ad2e-af8c-4ca9-bd73-fb727a4f45ae",
+                "id": "29e03a5f-4e22-4d0d-b0a9-28d16caec54b",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,

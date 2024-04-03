@@ -3,7 +3,7 @@
     "description": "Head-on situations with two target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "8252388c-6a5c-422c-8ff7-f03202555195",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "2a768c67-57f9-40db-bc8b-0a15facfae1f",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "158f8e0f-067c-4832-906b-ec5574022da9",
+                "id": "5de15f5d-bee2-4c27-ba9b-6e21cab97026",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,

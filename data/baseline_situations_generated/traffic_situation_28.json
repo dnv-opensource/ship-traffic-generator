@@ -3,7 +3,7 @@
     "description": "Head-on, crossing give-way and overtaking give-way situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,12 +40,12 @@
     "targetShips": [
         {
             "static": {
-                "id": "afa79672-f721-41f3-8166-c2f5b0a66d26",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "537e475d-8c96-44e8-bfa7-78db251de2af",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -75,12 +75,12 @@
         },
         {
             "static": {
-                "id": "2afc7c58-bceb-4a1f-ac4f-3af320b1b2fa",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
+                "id": "ca6cbd48-e433-4f1f-9461-546e650aa4cc",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "317dfa81-2499-4681-a7d7-a12b6dec6e95",
+                "id": "3cf9a388-b07a-43cc-b2c5-2086f268b8d4",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

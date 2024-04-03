@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple, Union
 import matplotlib.pyplot as plt
 import numpy as np
 from folium import Map, Polygon
-from maritime_schema.types.caga import Position, Ship, TrafficSituation
+from maritime_schema.types.caga import Position, Ship, TargetShip, TrafficSituation
 from matplotlib.axes import Axes as Axes
 from matplotlib.patches import Circle
 
@@ -177,7 +177,7 @@ def plot_specific_traffic_situation(
         "black",
     )
 
-    target_ships: Union[List[Ship], None] = situation.target_ships
+    target_ships: Union[List[TargetShip], None] = situation.target_ships
     assert target_ships is not None
     for target_ship in target_ships:
         map_plot = add_ship_to_map(
@@ -268,6 +268,7 @@ def plot_traffic_situations(
     max_value: float = 0.0
     for situation in traffic_situations:
         assert situation.own_ship is not None
+        assert situation.own_ship.initial is not None
         lat_lon0 = situation.own_ship.initial.position
         max_value = find_max_value_for_plot(situation.own_ship, max_value, lat_lon0)
         assert situation.target_ships is not None

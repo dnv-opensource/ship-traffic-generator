@@ -3,7 +3,7 @@
     "description": "A crossing situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "static": {
-            "id": "ce433df5-bea2-4f5e-8679-92b43e3140be",
+            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "f93d0740-146c-4515-869e-7921ad857771",
+                "id": "12bf0a94-5074-4288-8e4f-9e3320084f1e",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
