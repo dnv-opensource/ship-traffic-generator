@@ -3,7 +3,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, MutableMapping, MutableSequence, Type, TypeVar, Union
+from typing import Any, Dict, List, MutableMapping, MutableSequence, Type, TypeVar, Union, cast
 from uuid import UUID, uuid4
 
 from maritime_schema.types.caga import (
@@ -227,7 +227,12 @@ def camel_to_snake(string: str) -> str:
     return "".join([f"_{c.lower()}" if c.isupper() else c for c in string]).lstrip("_")
 
 
-def convert_keys_to_snake_case(
+def convert_keys_to_snake_case(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Convert keys in a nested dictionary from camel case to snake case."""
+    return cast(Dict[str, Any], _convert_keys_to_snake_case(data))
+
+
+def _convert_keys_to_snake_case(
     data: Union[Dict[str, Any], List[Any]],
 ) -> Union[Dict[str, Any], List[Any]]:
     """Convert keys in a nested dictionary from camel case to snake case."""
@@ -237,7 +242,7 @@ def convert_keys_to_snake_case(
         for key, value in data.items():
             converted_key = camel_to_snake(key)
             if isinstance(value, (Dict, List)):
-                converted_value = convert_keys_to_snake_case(value)
+                converted_value = _convert_keys_to_snake_case(value)
             else:
                 converted_value = value
             converted_dict[converted_key] = converted_value
@@ -246,7 +251,7 @@ def convert_keys_to_snake_case(
         converted_list: List[Any] = []
         for value in data:
             if isinstance(value, (Dict, List)):
-                converted_value = convert_keys_to_snake_case(value)
+                converted_value = _convert_keys_to_snake_case(value)
             else:
                 converted_value = value
             converted_list.append(value)
