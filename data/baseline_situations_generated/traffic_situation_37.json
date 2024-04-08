@@ -3,7 +3,7 @@
     "description": "Two crossing give-waysituations and one crossing give-way situation with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "1797542b-a5d3-478e-987f-ce860d978311",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
+                "id": "bbf5bc7d-6eb9-416a-b608-edc5da98cbf1",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,12 +75,12 @@
         },
         {
             "static": {
-                "id": "5b460d4b-801b-42e4-a06c-5cc462dec53f",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
+                "id": "3f6e058d-3534-4c7f-881e-2359760bf947",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -110,13 +110,13 @@
         },
         {
             "static": {
-                "id": "50976ad5-4fea-4d03-b4b8-0eb1836c48e4",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "4db91974-0fc6-4a96-8def-ac8ce5ed60e2",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

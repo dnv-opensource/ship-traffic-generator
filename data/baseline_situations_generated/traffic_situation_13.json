@@ -3,7 +3,7 @@
     "description": "A crossing give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "5e252972-3b3e-4b88-95d6-2a74f789b475",
+                "id": "7b68f4ae-a6c1-4b7a-8115-99b8342c3a68",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "08efd006-be62-4408-a645-cb0c4d331160",
+                "id": "ebdfbb38-3b90-42de-beea-84bd64151c26",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

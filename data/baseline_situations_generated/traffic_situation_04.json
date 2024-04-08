@@ -3,7 +3,7 @@
     "description": "A overting situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "a69e9746-e28b-4c25-bb09-29b59a2d7c66",
+                "id": "8eda4e91-c378-486d-906b-ed3c5172d442",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

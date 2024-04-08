@@ -3,7 +3,7 @@
     "description": "Two crossing stand-on situations with two target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "94dfa092-55a5-430a-80e4-0a9b3f6ab236",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "2b98db41-8394-40bc-99fc-dc16afc0f38a",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "66d739c9-0359-4961-bde4-1f90d88321b3",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "d60144c7-75a3-4bac-a8c6-d6bf9fc41b4c",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {

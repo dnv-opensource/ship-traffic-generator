@@ -3,7 +3,7 @@
     "description": "Head-on situation and two grossing give-way situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "959831b1-503a-4acd-a447-98b857835049",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
+                "id": "d1847141-0545-4225-825f-c83b62f67750",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "809cb9f5-b7de-4a66-9a19-015d1ea04029",
+                "id": "ee64c1c5-aa8a-4e26-99be-01008c763ac1",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
@@ -110,13 +110,13 @@
         },
         {
             "static": {
-                "id": "1db38838-8782-4878-8f12-929514d1db3e",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "282cd239-523b-438e-8c60-b5a60846e218",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {

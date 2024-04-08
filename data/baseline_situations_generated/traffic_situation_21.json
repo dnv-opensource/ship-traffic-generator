@@ -3,7 +3,7 @@
     "description": "Three head-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "e3fc735c-0dc9-44d7-8acc-62834e67ec9f",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "9f1bd7c2-9e1c-4d8f-9d0e-7ef4e27d5496",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "e51acac5-e669-47d2-967f-d81822becefe",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "3cc1697f-f5f6-41e5-a0b3-c895b83c06f3",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -110,12 +110,12 @@
         },
         {
             "static": {
-                "id": "8e4f07be-dadc-4c61-b428-2c913e2735dd",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "f37e9d71-5d1e-4d97-accc-1ae4fff32e39",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger"
             },
             "initial": {

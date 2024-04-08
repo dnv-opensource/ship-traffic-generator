@@ -3,7 +3,7 @@
     "description": "A head-on and overtaking stand-on situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "5d50c9d4-8488-4fcc-895f-fe732be3578a",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "eed17a90-832e-477f-8e1f-e0ca273980b4",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "ff44462c-63d9-4cfd-b1a5-8f91bebece23",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "9581354e-ff6f-4802-ae3f-c50b254209b7",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {

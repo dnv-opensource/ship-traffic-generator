@@ -3,7 +3,7 @@
     "description": "Head-on, crossing give-way and crossing stand-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "555c2b32-283b-48a1-b946-244a63e6a7ee",
-                "length": 122.0,
-                "width": 20.0,
+                "id": "0b22113f-5f50-40fb-a2db-db7b58364e11",
+                "length": 50.0,
+                "width": 10.0,
                 "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {
@@ -75,13 +75,13 @@
         },
         {
             "static": {
-                "id": "77798f7c-5c08-4a54-8ad7-ef4254867437",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "bf87b810-dbde-4dd4-895b-96497985e6c9",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "BASTO",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -110,13 +110,13 @@
         },
         {
             "static": {
-                "id": "d698ab84-8058-46db-ab8f-6e0dcf0208c9",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
+                "id": "a5c0f58a-8f0a-47d6-b008-00426dd4865a",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "CANOLE",
+                "shipType": "Cargo"
             },
             "initial": {
                 "position": {

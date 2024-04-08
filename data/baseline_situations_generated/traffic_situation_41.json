@@ -3,7 +3,7 @@
     "description": "Crossing give way, crossing stand-on and overtaking stand-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,13 +40,13 @@
     "targetShips": [
         {
             "static": {
-                "id": "f867e7fd-2f99-4689-b88b-792317ac6cc7",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "163d9564-6acb-4aa5-bd00-9ff2b4991bef",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "BASTO VI",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
@@ -75,12 +75,12 @@
         },
         {
             "static": {
-                "id": "545099d9-17a0-4f2e-89ba-a489820275f6",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "fc71199f-e1ac-417d-8032-83c82ba602fd",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "BASTO",
                 "shipType": "Passenger"
             },
             "initial": {
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "83b3ca78-ae45-4a93-b6c2-7b457d6a87c7",
+                "id": "f22a543e-a509-4b7e-89e9-cb80cf85da8a",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,

@@ -3,7 +3,7 @@
     "description": "Crossing stand-on, overtaking give-way situation and overtaking stand-on situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "e5974507-ae0d-4d25-8402-aa0127d2d64b",
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -40,7 +40,7 @@
     "targetShips": [
         {
             "static": {
-                "id": "5e293f8a-b6d4-4d4f-b931-c9fc5e37a2a2",
+                "id": "32f5ddb7-a825-4fe7-8c83-b20991b093a4",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
@@ -75,7 +75,7 @@
         },
         {
             "static": {
-                "id": "274721e0-9038-4e4b-9256-3e454513a1eb",
+                "id": "3c2edcef-a2aa-44a8-9d98-cac29d7529a4",
                 "length": 178.0,
                 "width": 30.0,
                 "height": 30.0,
@@ -110,7 +110,7 @@
         },
         {
             "static": {
-                "id": "72a66102-1463-4d71-9aeb-9a65d8cb1ada",
+                "id": "7283426d-90ba-4111-90c2-c79c7e22a63c",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
