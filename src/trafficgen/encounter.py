@@ -64,8 +64,14 @@ def generate_encounter(
     """
     encounter_found: bool = False
     outer_counter: int = 0
-    # Initial posision of own ship used as reference point for lat_lon0
+
+    # Initiating some variables which later will be set if an encounter is found
     assert own_ship.initial is not None
+    target_ship_initial_position: Position = own_ship.initial.position
+    target_ship_sog: float = 0
+    target_ship_cog: float = 0
+
+    # Initial posision of own ship used as reference point for lat_lon0
     lat_lon0: Position = Position(
         latitude=own_ship.initial.position.latitude,
         longitude=own_ship.initial.position.longitude,
@@ -180,11 +186,11 @@ def generate_encounter(
             nav_status=AISNavStatus.UNDER_WAY_USING_ENGINE,
         )
         target_ship_waypoint0 = Waypoint(
-            position=start_position_target_ship.model_copy(deep=True), turn_radius=None, data=None
+            position=target_ship_initial_position.model_copy(deep=True), turn_radius=None, data=None
         )
 
         future_position_target_ship = calculate_position_at_certain_time(
-            start_position_target_ship,
+            target_ship_initial_position,
             lat_lon0,
             target_ship_sog,
             target_ship_cog,

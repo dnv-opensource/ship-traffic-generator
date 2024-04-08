@@ -291,7 +291,9 @@ def plot_traffic_situations(
         )
         _ = axes.set_title(situation.title)
         assert situation.own_ship is not None
+        assert situation.own_ship.initial
         assert encounter_settings.common_vector is not None
+        lat_lon0 = situation.own_ship.initial.position
         axes = add_ship_to_plot(
             situation.own_ship,
             encounter_settings.common_vector,
