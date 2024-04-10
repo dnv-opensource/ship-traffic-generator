@@ -52,7 +52,7 @@ See Poetry's documentation for information of how to install and set up.
 See above notes about creating and using a virtual environment.
 To install the package, including dev and doc dependencies:
 ```sh
-$ cd TMA_ship_traffic_generator
+$ cd ship_traffic_generator
 $ poetry install
 $ poetry install --with dev,docs
 ```
