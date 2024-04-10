@@ -7,7 +7,7 @@ license = "License stuff here" # FIXME
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9, <3.13"
 click = "^8.1"
 click-log = "^0.4.0"
 numpy = "^1.25.2"
@@ -17,6 +17,7 @@ basemap-data-hires = "^1.3.2"
 global-land-mask = "^1.0.0"
 folium = "^0.14.0"
 pydantic = "^2.5"
+maritime-schema = "^0.0.6"
 
 [tool.poetry.group.dev]
 optional = true

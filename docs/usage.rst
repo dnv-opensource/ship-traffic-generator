@@ -28,14 +28,14 @@ Example::
 
 Situations
 ~~~~~~~~~~
-When generating situations without specifying where the desired situations (``--situation``) are found, the 
+When generating situations without specifying where the desired situations (``--situation``) are found, the
 default path, which is ``default=./baseline_situations_input/``, will be used.
 
 Baseline situations
 ~~~~~~~~~~~~~~~~~~~
-The baseline situations are a set of generic traffic situations covering head-on, overtaking stand-on/give-way 
-and crossing stand-on/give-way encounters. To cover the combination of encounters for 1, 2 and 3 target ships, 
-there are in total 55 baseline situations. The input files for generating these situations are found in 
+The baseline situations are a set of generic traffic situations covering head-on, overtaking stand-on/give-way
+and crossing stand-on/give-way encounters. To cover the combination of encounters for 1, 2 and 3 target ships,
+there are in total 55 baseline situations. The input files for generating these situations are found in
 ``./baseline_situations_input/``
 
 Plotting
@@ -55,4 +55,4 @@ A specific encounter is visualized by using ``--visualize-situation INTEGER``, e
 This will open a browser window/tab with an OpenStreetMap background and the traffic situation
 radar plot as an overlay.
 Note that the integer needs to be within the range of the number of generated situations,
-for example 1 - 12 if you generated 12 situations. 
+for example 1 - 12 if you generated 12 situations.

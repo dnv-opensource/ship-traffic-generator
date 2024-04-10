@@ -1,34 +1,36 @@
 {
-  "title": "CR_SO, CR_SO, OT_SO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": -20.0,
-      "relative_speed": 1.8,
-      "vector_time": 18.0
+    "title": "CR-SO, CR-SO, OT-SO",
+    "description": "Two crossing stand-on situations and one overtaking stand-on situation with three target ships.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": -50.0,
-      "relative_speed": 1.4,
-      "vector_time": 16.0
-    },
-    {
-      "desired_encounter_type": "overtaking-stand-on",
-      "beta": -165.0,
-      "relative_speed": 1.9,
-      "vector_time": 22.0
-    }
-  ]
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-stand-on",
+            "beta": -20.0,
+            "relativeSpeed": 1.8,
+            "vectorTime": 18.0
+        },
+        {
+            "desiredEncounterType": "crossing-stand-on",
+            "beta": -50.0,
+            "relativeSpeed": 1.4,
+            "vectorTime": 16.0
+        },
+        {
+            "desiredEncounterType": "overtaking-stand-on",
+            "beta": -165.0,
+            "relativeSpeed": 1.9,
+            "vectorTime": 22.0
+        }
+    ]
 }

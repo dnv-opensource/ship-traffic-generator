@@ -1,28 +1,30 @@
 {
-  "title": "CR-GW, CR-GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-give-way",
-      "beta": 18.0,
-      "relative_speed": 1.3,
-      "vector_time": 19.0
+    "title": "CR-GW, CR-GW",
+    "description": "Two crossing give-way situations with two target ships.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "crossing-give-way",
-      "beta": 102.0,
-      "relative_speed": 1.4,
-      "vector_time": 15.0
-    }
-  ]
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-give-way",
+            "beta": 18.0,
+            "relativeSpeed": 1.3,
+            "vectorTime": 19.0
+        },
+        {
+            "desiredEncounterType": "crossing-give-way",
+            "beta": 102.0,
+            "relativeSpeed": 1.4,
+            "vectorTime": 15.0
+        }
+    ]
 }

@@ -36,9 +36,7 @@
     ],
     "situation_length": 60.0,
     "max_meeting_distance": 0.0,
+    "common_vector": 10.0,
     "evolve_time": 120.0,
-    "lat_lon_0": [
-        58.763449,
-        10.490654
-    ]
+    "input_units": "maritime"
 }

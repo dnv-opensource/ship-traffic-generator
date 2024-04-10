@@ -1,28 +1,30 @@
 {
-  "title": "CR-SO, OT-GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-stand-on",
-      "beta": -105.0,
-      "relative_speed": 1.2,
-      "vector_time": 13.0
+    "title": "CR-SO, OT-GW",
+    "description": "A crossing stand-on and overtaking give-way situation with two target ships.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "beta": 30.0,
-      "relative_speed": 0.8,
-      "vector_time": 10.0
-    }
-  ]
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-stand-on",
+            "beta": -105.0,
+            "relativeSpeed": 1.2,
+            "vectorTime": 13.0
+        },
+        {
+            "desiredEncounterType": "overtaking-give-way",
+            "beta": 30.0,
+            "relativeSpeed": 0.8,
+            "vectorTime": 10.0
+        }
+    ]
 }

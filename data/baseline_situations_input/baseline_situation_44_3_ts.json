@@ -1,34 +1,36 @@
 {
-  "title": "CR_GW, OT-GW, OT_SO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-give-way",
-      "beta": 65.0,
-      "relative_speed": 1.4,
-      "vector_time": 29.0
+    "title": "CR-GW, OT-GW, OT-SO",
+    "description": "Crossing give way, overtaking give-way and overtaking stand-on situations with three target ships.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "beta": 20.0,
-      "relative_speed": 0.5,
-      "vector_time": 20.0
-    },
-    {
-      "desired_encounter_type": "overtaking-stand-on",
-      "beta": 175.0,
-      "relative_speed": 1.6,
-      "vector_time": 14.0
-    }
-  ]
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-give-way",
+            "beta": 65.0,
+            "relativeSpeed": 1.4,
+            "vectorTime": 29.0
+        },
+        {
+            "desiredEncounterType": "overtaking-give-way",
+            "beta": 20.0,
+            "relativeSpeed": 0.5,
+            "vectorTime": 20.0
+        },
+        {
+            "desiredEncounterType": "overtaking-stand-on",
+            "beta": 175.0,
+            "relativeSpeed": 1.6,
+            "vectorTime": 14.0
+        }
+    ]
 }

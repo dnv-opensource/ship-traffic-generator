@@ -10,6 +10,7 @@ Wiley. ISBN-13: 978-1119575054
 
 Parts of the library have been re-implemented in Python and are found below.
 """
+
 from typing import Tuple
 
 import numpy as np
@@ -40,18 +41,18 @@ def flat2llh(
     Revisions: 2023-02-04 updates the formulas for latitude and longitude
 
     Params:
-        xn: Ship position, north [m]
-        yn: Ship position, east [m]
-        zn=0.0: Ship position, down [m]
-        lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
-        h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
-        of the ellipsoid
+        * xn: Ship position, north [m]
+        * yn: Ship position, east [m]
+        * zn=0.0: Ship position, down [m]
+        * lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+        * h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
+          of the ellipsoid
 
     Returns
     -------
-        lat: Latitude [rad]
-        lon: Longitude [rad]
-        h: Height [m]
+        * lat: Latitude [rad]
+        * lon: Longitude [rad]
+        * h: Height [m]
 
     """
     # WGS-84 parameters
@@ -95,18 +96,18 @@ def llh2flat(
     Revisions: 2023-02-04 updates the formulas for latitude and longitude
 
     Params:
-        lat: Ship position in latitude [rad]
-        lon: Ship position in longitude [rad]
-        h=0.0: Ship height in meters above the surface of the ellipsoid
-        lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
-        h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
-        the surface of the ellipsoid
+        * lat: Ship position in latitude [rad]
+        * lon: Ship position in longitude [rad]
+        * h=0.0: Ship height in meters above the surface of the ellipsoid
+        * lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
+        * h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
+          the surface of the ellipsoid
 
     Returns
     -------
-        x_n: Ship position, north [m]
-        y_n: Ship position, east [m]
-        z_n: Ship position, down [m]
+        * x_n: Ship position, north [m]
+        * y_n: Ship position, east [m]
+        * z_n: Ship position, down [m]
     """
 
     # WGS-84 parameters
@@ -142,11 +143,11 @@ def ssa(angle: float) -> float:
     Date:       2018-09-21
 
     Param:
-        angle: angle given in radius
+        * angle: angle given in radius
 
     Returns
     -------
-        smallest_angle: "smallest signed angle" or the smallest difference between two angles
+        * smallest_angle: "smallest signed angle" or the smallest difference between two angles
     """
 
     return np.mod(angle + np.pi, 2 * np.pi) - np.pi

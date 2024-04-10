@@ -1,90 +1,112 @@
 {
     "title": "CR-SO, CR-SO",
-    "input_file_name": "baseline_situation_15_2_ts.json",
-    "common_vector": 10.0,
-    "lat_lon_0": [
-        58.763449,
-        10.490654
-    ],
-    "own_ship": {
+    "description": "Two crossing stand-on situations with two target ships.",
+    "ownShip": {
         "static": {
+            "id": "da41746c-26eb-449d-b89d-c11633d33163",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
-            "speed_max": 17.0,
+            "speedMax": 17.0,
             "mmsi": 257847600,
             "name": "BASTO VI",
-            "ship_type": "Passenger/Ro-Ro Cargo Ship"
+            "shipType": "Passenger"
         },
-        "start_pose": {
-            "speed": 10.0,
-            "course": 0.0,
+        "initial": {
             "position": {
-                "north": 0.0,
-                "east": 0.0,
                 "latitude": 58.763449,
                 "longitude": 10.490654
-            }
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
         },
         "waypoints": [
             {
-                "north": 0.0,
-                "east": 0.0,
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "position": {
+                    "latitude": 58.763449,
+                    "longitude": 10.490654
+                }
             },
             {
-                "north": 18518.399999999998,
-                "east": 0.0,
-                "latitude": 58.929696,
-                "longitude": 10.490654
+                "position": {
+                    "latitude": 58.92969579,
+                    "longitude": 10.490654
+                }
             }
         ]
     },
-    "target_ship": [
+    "targetShips": [
         {
             "static": {
+                "id": "2b98db41-8394-40bc-99fc-dc16afc0f38a",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
-                "speed_max": 15.0,
-                "mmsi": 257083180,
+                "speedMax": 15.0,
                 "name": "CANOLE",
-                "ship_type": "General Cargo Ship"
+                "shipType": "Cargo"
             },
-            "start_pose": {
-                "speed": 15.0,
-                "course": 53.4,
+            "initial": {
                 "position": {
-                    "north": 552.6792318882533,
-                    "east": -6317.152527132703,
-                    "latitude": 58.768411,
-                    "longitude": 10.381491
-                }
+                    "latitude": 58.76839554,
+                    "longitude": 10.38187386
+                },
+                "sog": 15.0,
+                "cog": 53.29,
+                "heading": 53.29,
+                "navStatus": "Under way using engine"
             },
-            "id": 1
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.76839554,
+                        "longitude": 10.38187386
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.91716838,
+                        "longitude": 10.76586007
+                    }
+                }
+            ]
         },
         {
             "static": {
+                "id": "d60144c7-75a3-4bac-a8c6-d6bf9fc41b4c",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
-                "speed_max": 15.0,
-                "mmsi": 257083180,
+                "speedMax": 15.0,
                 "name": "CANOLE",
-                "ship_type": "General Cargo Ship"
+                "shipType": "Cargo"
             },
-            "start_pose": {
-                "speed": 15.0,
-                "course": 39.0,
+            "initial": {
                 "position": {
-                    "north": -769.9885484080899,
-                    "east": -4366.822055900632,
-                    "latitude": 58.756537,
-                    "longitude": 10.415194
-                }
+                    "latitude": 58.75565663,
+                    "longitude": 10.40558257
+                },
+                "sog": 15.9,
+                "cog": 41.83,
+                "heading": 41.83,
+                "navStatus": "Under way using engine"
             },
-            "id": 2
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.75565663,
+                        "longitude": 10.40558257
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.95313708,
+                        "longitude": 10.74576446
+                    }
+                }
+            ]
         }
     ]
 }

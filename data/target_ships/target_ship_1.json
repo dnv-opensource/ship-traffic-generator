@@ -1,12 +1,8 @@
 {
-  "static":{
     "length": 122,
     "width": 20,
     "height": 8,
-    "speed_max": 17,
-    "mmsi": 257845600,
-    "name": "BASTO IV",
-    "ship_type": "Passenger/Ro-Ro Cargo Ship"
-    }
-  }
-
+    "speedMax": 17,
+    "name": "BASTO",
+    "shipType": "Passenger"
+}

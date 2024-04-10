@@ -1,23 +1,25 @@
 {
-  "title": "CR-GW, OT-GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 8.0,
-      "course": 0.0
-    }
-  },
-  "num_situations": 3,
-  "encounter": [
-    {
-      "desired_encounter_type": "crossing-give-way"
+    "title": "CR-GW, OT-GW",
+    "description": "Test situation.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 8.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "overtaking-give-way"
-    }
-  ]
+    "numSituations": 3,
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-give-way"
+        },
+        {
+            "desiredEncounterType": "overtaking-give-way"
+        }
+    ]
 }

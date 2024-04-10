@@ -1,28 +1,30 @@
 {
-  "title": "HO, HO",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 10.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "head-on",
-      "beta": -1.0,
-      "relative_speed": 0.9,
-      "vector_time": 11.0
+    "title": "HO, HO",
+    "description": "Head-on situations with two target ships.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 10.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
     },
-    {
-      "desired_encounter_type": "head-on",
-      "beta": 4.0,
-      "relative_speed": 1.1,
-      "vector_time": 14.0
-    }
-  ]
+    "encounters": [
+        {
+            "desiredEncounterType": "head-on",
+            "beta": -1.0,
+            "relativeSpeed": 0.9,
+            "vectorTime": 11.0
+        },
+        {
+            "desiredEncounterType": "head-on",
+            "beta": 4.0,
+            "relativeSpeed": 1.1,
+            "vectorTime": 14.0
+        }
+    ]
 }
