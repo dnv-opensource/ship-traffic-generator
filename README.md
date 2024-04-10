@@ -1,6 +1,6 @@
 # Traffic Generator
-The tool generates a structured set of encounters for verifying automatic collision and grounding avoidance systems. 
-Based on input parameters such as desired situation, relative speed, relative bearing etc, 
+The tool generates a structured set of encounters for verifying automatic collision and grounding avoidance systems.
+Based on input parameters such as desired situation, relative speed, relative bearing etc,
 the tool will generate a set of traffic situations. The traffic situations may be written to files and/or inspected using plots.
 
 A paper is written describing the background for the tool and how it works <a href="./docs/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
@@ -9,7 +9,7 @@ A paper is written describing the background for the tool and how it works <a hr
 ## Quickstart
 After you clone this repository, `trafficgen` can then be installed with the following steps:
 ```sh
-$ cd TMA_ship_traffic_generator
+$ cd ship_traffic_generator
 ```
 
 It is recommended to install the `trafficgen` package and it's dependencies in a separate
@@ -46,7 +46,7 @@ $ trafficgen gen-situation --help
 or build the documentation (see below).
 
 ## Development & Documentation
-For development (dependency management, documentation and testing) it is recommended to use [Poetry](https://python-poetry.org/docs/). 
+For development (dependency management, documentation and testing) it is recommended to use [Poetry](https://python-poetry.org/docs/).
 See Poetry's documentation for information of how to install and set up.
 
 See above notes about creating and using a virtual environment.
@@ -89,4 +89,4 @@ The html documentation will then be available in `docs/build/html/index.html`
 ## Credits
 This package was created with Cookiecutter and the `audreyr/cookiecutter-pypackage` project template.
 * [Cookiecutter](https://github.com/audreyr/cookiecutter)
-* [`audreyr/cookiecutter-pypackage`](https://github.com/audreyr/cookiecutter-pypackage) 
+* [`audreyr/cookiecutter-pypackage`](https://github.com/audreyr/cookiecutter-pypackage)
