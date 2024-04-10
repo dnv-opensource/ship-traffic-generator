@@ -2,6 +2,15 @@
 History
 =======
 
+0.3.0 (2024-04-10)
+------------------
+
+Changed
+
+* using types from maritime schema
+* lat/lon used instead of north/east
+* the generated output files are using "maritime" units: knots and degrees
+
 
 0.2.0 (2024-01-11)
 ------------------

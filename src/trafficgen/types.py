@@ -3,59 +3,15 @@
 from enum import Enum
 from typing import List, Union
 
+from maritime_schema.types.caga import Initial
 from pydantic import BaseModel
 
 
-class Position(BaseModel):
-    """Data type for a ship's position with attributes north, east in [m]."""
+def to_camel(string: str) -> str:
+    """Return a camel case formated string from snake case string."""
 
-    north: float = 0.0
-    east: float = 0.0
-    latitude: float = 0.0
-    longitude: float = 0.0
-
-
-class Pose(BaseModel):
-    """Data type for a (ship) pose."""
-
-    speed: float = 0.0
-    course: float = 0.0
-    position: Position = Position()
-
-
-class ShipType(Enum):
-    """Enumeration of ship types."""
-
-    PASSENGER_RORO = "Passenger/Ro-Ro Cargo Ship"
-    GENERAL_CARGO = "General Cargo Ship"
-    FISHING = "Fishing"
-    MILITARY = "Military ops"
-
-
-class StaticShipData(BaseModel):
-    """Data type for static ship data."""
-
-    length: float
-    width: float
-    height: float
-    speed_max: float
-    mmsi: int
-    name: str
-    ship_type: ShipType
-
-
-class Ship(BaseModel):
-    """Data type for a ship."""
-
-    static: Union[StaticShipData, None] = None
-    start_pose: Union[Pose, None] = None
-    waypoints: Union[List[Position], None] = None
-
-
-class TargetShip(Ship):
-    """Data type for a target ship."""
-
-    id: Union[int, None] = None
+    words = string.split("_")
+    return words[0] + "".join(word.capitalize() for word in words[1:])
 
 
 class EncounterType(Enum):
@@ -77,18 +33,11 @@ class Encounter(BaseModel):
     relative_speed: Union[float, None] = None
     vector_time: Union[float, None] = None
 
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
 
-class Situation(BaseModel):
-    """Data type for a traffic situation."""
-
-    title: str
-    input_file_name: Union[str, None] = None
-    common_vector: Union[float, None] = None
-    lat_lon_0: Union[List[float], None] = None
-    own_ship: Union[Ship, None] = None
-    num_situations: Union[int, None] = None
-    encounter: Union[List[Encounter], None] = None
-    target_ship: Union[List[TargetShip], None] = None
+        alias_generator = to_camel
+        populate_by_name = True
 
 
 class EncounterClassification(BaseModel):
@@ -98,6 +47,12 @@ class EncounterClassification(BaseModel):
     theta14_criteria: float
     theta15_criteria: float
     theta15: List[float]
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
 
 
 class EncounterRelativeSpeed(BaseModel):
@@ -109,6 +64,19 @@ class EncounterRelativeSpeed(BaseModel):
     crossing_give_way: List[float]
     crossing_stand_on: List[float]
 
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
+
+
+class UnitType(Enum):
+    """Enumeration of encounter types."""
+
+    SI_UNITS = "si"
+    MARITIME_UNITS = "maritime"
+
 
 class EncounterSettings(BaseModel):
     """Data type for encounter settings."""
@@ -116,7 +84,37 @@ class EncounterSettings(BaseModel):
     classification: EncounterClassification
     relative_speed: EncounterRelativeSpeed
     vector_range: List[float]
+    common_vector: float
     situation_length: float
     max_meeting_distance: float
     evolve_time: float
-    lat_lon_0: List[float]
+    input_units: UnitType
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True
+
+
+class OwnShipInitial(BaseModel):
+    """Data type for initial data for the own ship used for generating a situation."""
+
+    initial: Initial
+
+
+class SituationInput(BaseModel):
+    """Data type for inputs needed for generating a situations."""
+
+    title: str
+    description: str
+    input_file_name: Union[str, None] = None
+    num_situations: int
+    own_ship: OwnShipInitial
+    encounters: List[Encounter]
+
+    class Config:
+        """For converting parameters written to file from snake to camel case."""
+
+        alias_generator = to_camel
+        populate_by_name = True

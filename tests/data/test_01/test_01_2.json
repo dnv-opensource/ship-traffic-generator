@@ -1,21 +1,23 @@
 {
-  "title": "OT-GW",
-  "common_vector": 10.0,
-  "own_ship": {
-    "start_pose": {
-      "position": {
-        "north": 0.0,
-        "east": 0.0
-      },
-      "speed": 12.0,
-      "course": 0.0
-    }
-  },
-  "encounter": [
-    {
-      "desired_encounter_type": "overtaking-give-way",
-      "relative_speed": 0.6,
-      "vector_time": 25.0
-    }
-  ]
+    "title": "OT-GW",
+    "description": "Test situation.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "latitude": 58.763449,
+                "longitude": 10.490654
+            },
+            "sog": 12.0,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        }
+    },
+    "encounters": [
+        {
+            "desiredEncounterType": "overtaking-give-way",
+            "relativeSpeed": 0.6,
+            "vectorTime": 25.0
+        }
+    ]
 }

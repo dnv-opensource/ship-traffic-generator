@@ -13,7 +13,9 @@ import click
 import click_log
 
 from trafficgen.plot_traffic_situation import plot_specific_traffic_situation, plot_traffic_situations
+from trafficgen.read_files import read_encounter_settings_file
 from trafficgen.ship_traffic_generator import generate_traffic_situations
+from trafficgen.types import EncounterSettings
 from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
 
 logger = logging.getLogger(__name__)
@@ -131,9 +133,10 @@ def gen_situation(
         settings_file=Path(settings),
     )
 
+    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
     if visualize:
         click.echo("Plotting traffic situations")
-        plot_traffic_situations(generated_traffic_situations, col, row)
+        plot_traffic_situations(generated_traffic_situations, col, row, encounter_settings)
 
     # visualize_situation has no default, this is done on purpose,
     # so it can safely be ignored by users without generating an error msg,
@@ -146,7 +149,9 @@ def gen_situation(
     with contextlib.suppress(TypeError):
         if visualize_situation > 0:
             click.echo("Plotting a specific traffic situation")
-            plot_specific_traffic_situation(generated_traffic_situations, visualize_situation)
+            plot_specific_traffic_situation(
+                generated_traffic_situations, visualize_situation, encounter_settings
+            )
         else:
             click.echo(
                 "Invalid traffic situation number specified, not creating map plot. See --help for more info."

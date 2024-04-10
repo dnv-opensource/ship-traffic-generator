@@ -1,12 +1,8 @@
 {
-  "static":{
     "length": 50,
     "width": 10,
     "height": 8,
-    "speed_max": 15,
-    "mmsi": 257083180,
+    "speedMax": 15,
     "name": "CANOLE",
-    "ship_type": "General Cargo Ship"
-  }
+    "shipType": "Cargo"
 }
-

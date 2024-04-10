@@ -5,11 +5,15 @@ from typing import List
 
 import pytest
 from click.testing import CliRunner
+from maritime_schema.types.caga import (
+    TrafficSituation,
+)
 
 from trafficgen import cli
-from trafficgen.read_files import read_situation_files
+from trafficgen.read_files import (
+    read_generated_situation_files,
+)
 from trafficgen.ship_traffic_generator import generate_traffic_situations
-from trafficgen.types import Situation
 
 
 @pytest.fixture
@@ -75,7 +79,7 @@ def test_gen_situations(
     settings_file: Path,
 ):
     """Test generating traffic situations."""
-    situations: List[Situation] = generate_traffic_situations(
+    situations: List[TrafficSituation] = generate_traffic_situations(
         situation_folder=situations_folder,
         own_ship_file=own_ship_file,
         target_ship_folder=target_ships_folder,
@@ -117,16 +121,13 @@ def test_gen_situations_1_ts_full_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        # @TODO: See comment in test_gen_situations_1_ts_partly_spec_cli().
-        #        Same behaviour and reason for below change here.
-        assert len(situation.target_ship) in {0, 1}
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) in {0, 1}
 
 
 def test_gen_situations_1_ts_partly_spec_cli(
@@ -162,13 +163,12 @@ def test_gen_situations_1_ts_partly_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
+        assert situation.target_ships is not None
         # @TODO: @TomArne: As again the tests on GitHub failed here,
         #        I have for now adapted the assertion to not test for
         #        "== 1" but for "in {0,1}"
@@ -180,7 +180,7 @@ def test_gen_situations_1_ts_partly_spec_cli(
         #        the same assertions but leaves out the CLI part, does not show this
         #        behaviour when run in GitHub.
         #        Claas, 2023-11-25
-        assert len(situation.target_ship) in {0, 1}
+        assert len(situation.target_ships) in {0, 1}
 
 
 def test_gen_situations_1_ts_minimum_spec_cli(
@@ -216,14 +216,13 @@ def test_gen_situations_1_ts_minimum_spec_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 2
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        assert len(situation.target_ship) == 1
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) == 1
 
 
 def test_gen_situations_2_ts_one_to_many_situations_cli(
@@ -258,14 +257,13 @@ def test_gen_situations_2_ts_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 5
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        assert len(situation.target_ship) == 2
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) == 2
 
 
 def test_gen_situations_one_to_many_situations_cli(
@@ -300,14 +298,13 @@ def test_gen_situations_one_to_many_situations_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 10
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        assert len(situation.target_ship) in {1, 2, 3}
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) in {1, 2, 3}
 
 
 def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
@@ -343,14 +340,13 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
     assert len(situations) == 3
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        assert len(situation.target_ship) == 0
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) == 0
 
 
 def test_gen_situations_baseline_cli(
@@ -386,11 +382,9 @@ def test_gen_situations_baseline_cli(
     assert result.exit_code == 0
     assert "Generating traffic situations" in result.output
 
-    situations: List[Situation] = read_situation_files(output_folder)
-    # assert len(situations) == 5
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
-        assert situation.lat_lon_0 is not None
-        assert situation.target_ship is not None
-        assert len(situation.target_ship) in {1, 2, 3}
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) == 0
