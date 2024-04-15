@@ -1,10 +1,11 @@
 """Domain specific data types used in trafficgen."""
 
 from enum import Enum
-from typing import List, Union
+from typing import List, Optional, Union
 
-from maritime_schema.types.caga import Initial
+from maritime_schema.types.caga import Initial, Waypoint
 from pydantic import BaseModel
+from pydantic.fields import Field
 
 
 def to_camel(string: str) -> str:
@@ -71,13 +72,6 @@ class EncounterRelativeSpeed(BaseModel):
         populate_by_name = True
 
 
-class UnitType(Enum):
-    """Enumeration of encounter types."""
-
-    SI_UNITS = "si"
-    MARITIME_UNITS = "maritime"
-
-
 class EncounterSettings(BaseModel):
     """Data type for encounter settings."""
 
@@ -88,7 +82,7 @@ class EncounterSettings(BaseModel):
     situation_length: float
     max_meeting_distance: float
     evolve_time: float
-    input_units: UnitType
+    disable_land_check: bool
 
     class Config:
         """For converting parameters written to file from snake to camel case."""
@@ -101,6 +95,7 @@ class OwnShipInitial(BaseModel):
     """Data type for initial data for the own ship used for generating a situation."""
 
     initial: Initial
+    waypoints: Optional[List[Waypoint]] = Field(None, description="An array of `Waypoint` objects.")
 
 
 class SituationInput(BaseModel):

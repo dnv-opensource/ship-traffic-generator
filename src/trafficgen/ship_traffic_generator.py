@@ -50,9 +50,7 @@ def generate_traffic_situations(
     own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
     target_ships_static: List[ShipStatic] = read_target_ship_static_files(target_ship_folder)
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    desired_traffic_situations: List[SituationInput] = read_situation_files(
-        situation_folder, encounter_settings.input_units
-    )
+    desired_traffic_situations: List[SituationInput] = read_situation_files(situation_folder)
     traffic_situations: List[TrafficSituation] = []
 
     for desired_traffic_situation in desired_traffic_situations:
