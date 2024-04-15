@@ -106,6 +106,7 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
         vector_time: Union[float, None] = encounter.vector_time
         if beta is not None:
             if isinstance(beta, List):
+                assert len(beta) == 2
                 for i in range(len(beta)):
                     beta[i] = deg_2_rad(beta[i])
                 encounter.beta = beta

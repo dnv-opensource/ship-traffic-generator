@@ -182,6 +182,7 @@ def generate_encounter(
                         target_ship_sog,
                         target_ship_cog,
                         lat_lon0,
+                        settings.situation_length,
                     )
                     encounter_found = encounter_ok and not trajectory_on_land
                 else:
