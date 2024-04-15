@@ -103,7 +103,6 @@ class SituationInput(BaseModel):
 
     title: str
     description: str
-    input_file_name: Union[str, None] = None
     num_situations: int
     own_ship: OwnShipInitial
     encounters: List[Encounter]

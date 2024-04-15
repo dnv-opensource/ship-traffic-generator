@@ -41,7 +41,6 @@ def read_situation_files(situation_folder: Path) -> List[SituationInput]:
         situation: SituationInput = SituationInput(**data)
         situation = convert_situation_data_from_maritime_to_si_units(situation)
 
-        situation.input_file_name = file_name
         situations.append(situation)
     return situations
 
@@ -65,7 +64,6 @@ def read_generated_situation_files(situation_folder: Path) -> List[TrafficSituat
         data = convert_keys_to_snake_case(data)
 
         situation: TrafficSituation = TrafficSituation(**data)
-        situation.input_file_name = file_name
         situations.append(situation)
     return situations
 
