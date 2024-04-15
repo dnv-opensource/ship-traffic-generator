@@ -232,7 +232,6 @@ def calculate_position_along_track_using_waypoints(
     -------
         * position{latitude, longitude}: Estimated ship position in delta time minutes [rad]
     """
-    accumulate_distance: float = 0
     time_in_transit: float = 0
 
     for i in range(1, len(waypoints)):
