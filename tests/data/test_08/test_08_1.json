@@ -1,5 +1,5 @@
 {
-    "title": "HO",
+    "title": "CR-GW",
     "description": "Test situation.",
     "ownShip": {
         "initial": {
@@ -7,7 +7,7 @@
                 "latitude": 58.763449,
                 "longitude": 10.490654
             },
-            "sog": 10.0,
+            "sog": 8.0,
             "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
@@ -15,10 +15,11 @@
     },
     "encounters": [
         {
-            "desiredEncounterType": "head-on",
-            "beta": 10.0,
-            "relativeSpeed": 1.2,
-            "vectorTime": 15.0
+            "desiredEncounterType": "crossing-give-way",
+            "beta": [
+                30.0,
+                60.0
+            ]
         }
     ]
 }

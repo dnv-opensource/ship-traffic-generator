@@ -30,7 +30,7 @@ class Encounter(BaseModel):
     """Data type for an encounter."""
 
     desired_encounter_type: EncounterType
-    beta: Union[float, None] = None
+    beta: Union[List[float], float, None] = None
     relative_speed: Union[float, None] = None
     vector_time: Union[float, None] = None
 

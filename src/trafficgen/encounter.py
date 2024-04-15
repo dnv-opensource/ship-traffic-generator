@@ -40,7 +40,7 @@ def generate_encounter(
     desired_encounter_type: EncounterType,
     own_ship: OwnShip,
     target_ships_static: List[ShipStatic],
-    beta_default: Optional[float],
+    beta_default: Optional[Union[List[float], float]],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
     settings: EncounterSettings,
@@ -91,12 +91,15 @@ def generate_encounter(
         # resetting vector_time, beta and relative_sog to default values before
         # new search for situation is done
         vector_time: Union[float, None] = vector_time_default
-        beta: Union[float, None] = beta_default
 
         if vector_time is None:
             vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])
-        if beta is None:
-            beta = assign_beta(desired_encounter_type, settings)
+        if beta_default is None:
+            beta: float = assign_beta(desired_encounter_type, settings)
+        elif isinstance(beta_default, List):
+            beta: float = assign_beta_from_list(beta_default)
+        else:
+            beta: float = beta_default
 
         # Own ship
         assert own_ship.initial is not None
@@ -363,7 +366,7 @@ def calculate_min_vector_length_target_ship(
     -------
         * min_vector_length: Minimum vector length (target ship sog x vector)
     """
-    psi: float = np.deg2rad(own_ship_cog + desired_beta)
+    psi: float = own_ship_cog + desired_beta
 
     own_ship_position_north, own_ship_position_east, _ = llh2flat(
         own_ship_position.latitude, own_ship_position.longitude, lat_lon0.latitude, lat_lon0.longitude
@@ -501,7 +504,7 @@ def find_start_position_target_ship(
         start_position_found = True
     elif (
         desired_encounter_type is colreg_state2
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.001
     ):
         start_position_target_ship = Position(latitude=lat32, longitude=lon32)
         start_position_found = True
@@ -762,6 +765,23 @@ def assign_sog_to_target_ship(
     ) * own_ship_sog
 
     return target_ship_sog
+
+
+def assign_beta_from_list(beta_limit: List[float]) -> float:
+    """
+    Assign random (uniform) relative bearing beta between own ship
+    and target ship depending between the limits given by beta_limit.
+
+    Params:
+        * beta_limit: Limits for beta
+
+    Returns
+    -------
+        * Relative bearing between own ship and target ship seen from own ship [rad]
+    """
+    assert len(beta_limit) == 2
+    beta: float = beta_limit[0] + random.uniform(0, 1) * (beta_limit[1] - beta_limit[0])
+    return beta
 
 
 def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> float:

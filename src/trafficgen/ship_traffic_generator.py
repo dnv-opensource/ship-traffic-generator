@@ -68,7 +68,7 @@ def generate_traffic_situations(
             target_ships: List[TargetShip] = []
             for encounter in desired_traffic_situation.encounters:
                 desired_encounter_type = EncounterType(encounter.desired_encounter_type)
-                beta: Union[float, None] = encounter.beta
+                beta: Union[List[float], float, None] = encounter.beta
                 relative_speed: Union[float, None] = encounter.relative_speed
                 vector_time: Union[float, None] = encounter.vector_time
 
