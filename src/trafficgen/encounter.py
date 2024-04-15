@@ -499,13 +499,13 @@ def find_start_position_target_ship(
 
     if (
         desired_encounter_type is colreg_state1
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.01
     ):
         start_position_target_ship = Position(latitude=lat31, longitude=lon31)
         start_position_found = True
     elif (
         desired_encounter_type is colreg_state2
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.001
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.01
     ):
         start_position_target_ship = Position(latitude=lat32, longitude=lon32)
         start_position_found = True
