@@ -116,8 +116,8 @@ Example 4: Assign range for `beta`:
             "speed": 7.0,
             "course": 0.0,
             "position": {
-                "north": 0.0,
-                "east": 0.0
+                "latitude": 58.763449,
+                "longitude": 10.490654
             }
         },
         "encounter": [
