@@ -34,9 +34,9 @@
         10.0,
         30.0
     ],
-    "situation_length": 60.0,
+    "situation_length": 10.0,
     "max_meeting_distance": 0.0,
-    "common_vector": 10.0,
+    "common_vector": 5.0,
     "evolve_time": 120.0,
-    "input_units": "maritime"
+    "disable_land_check": false
 }

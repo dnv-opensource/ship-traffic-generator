@@ -349,8 +349,8 @@ def test_gen_situations_ot_gw_target_ship_speed_too_high_cli(
         assert len(situation.target_ships) == 0
 
 
-def test_gen_situations_baseline_cli(
-    situations_folder_test_08: Path,
+def test_gen_situations_illegal_beta_cli(
+    situations_folder_test_07: Path,
     own_ship_file: Path,
     target_ships_folder: Path,
     settings_file: Path,
@@ -360,6 +360,45 @@ def test_gen_situations_baseline_cli(
     Testing situation were desired beta does not match desired encounter
     situation. The result should be that number of target ships are 0 for
     all situations.
+    """
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.main,
+        [
+            "gen-situation",
+            "-s",
+            str(situations_folder_test_07),
+            "-os",
+            str(own_ship_file),
+            "-t",
+            str(target_ships_folder),
+            "-c",
+            str(settings_file),
+            "-o",
+            str(output_folder),
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert "Generating traffic situations" in result.output
+
+    situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) == 0
+
+
+def test_gen_situation_beta_limited_cli(
+    situations_folder_test_08: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
+):
+    """
+    Testing situation were the desired relative bearing is specified as a range.
     """
     runner = CliRunner()
     result = runner.invoke(
@@ -383,8 +422,9 @@ def test_gen_situations_baseline_cli(
     assert "Generating traffic situations" in result.output
 
     situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
+    assert len(situations) == 1
 
     # sourcery skip: no-loop-in-tests
     for situation in situations:
         assert situation.target_ships is not None
-        assert len(situation.target_ships) == 0
+        assert len(situation.target_ships) == 1

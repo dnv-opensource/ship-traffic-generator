@@ -76,9 +76,10 @@ def convert_ship_data_from_si_units_to_maritime(ship: T_ship) -> T_ship:
             waypoint.position.longitude = round(rad_2_deg(waypoint.position.longitude), 8)
             if not waypoint.data:
                 continue
-            if waypoint.data.sog is not None and waypoint.data.sog.value is not None:  # type: ignore
-                waypoint.data.sog.value = round(m_pr_s_2_knot(waypoint.data.sog.value), 1)  # type: ignore
-            if waypoint.data.heading is not None and waypoint.data.heading.value is not None:  # type: ignore
-                waypoint.data.heading.value = round(m_pr_s_2_knot(waypoint.data.heading.value), 2)  # type: ignore
+            assert waypoint.data.model_extra
+            if waypoint.data.model_extra.get("sog") is not None:
+                waypoint.data.model_extra["sog"]["value"] = round(m_pr_s_2_knot(waypoint.data.model_extra["sog"]["value"]), 1)  # type: ignore
+            if waypoint.data.model_extra.get("heading") is not None:
+                waypoint.data.model_extra["heading"]["value"] = round(m_pr_s_2_knot(waypoint.data.model_extra["heading"]["value"]), 2)  # type: ignore
 
     return ship
