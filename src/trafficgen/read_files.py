@@ -11,15 +11,11 @@ from maritime_schema.types.caga import (
     TrafficSituation,
 )
 
-from trafficgen.types import (
-    EncounterSettings,
-    SituationInput,
-    UnitType,
-)
+from trafficgen.types import EncounterSettings, SituationInput
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
 
-def read_situation_files(situation_folder: Path, input_units: UnitType) -> List[SituationInput]:
+def read_situation_files(situation_folder: Path) -> List[SituationInput]:
     """
     Read traffic situation files.
 
@@ -43,10 +39,8 @@ def read_situation_files(situation_folder: Path, input_units: UnitType) -> List[
             data["num_situations"] = 1
 
         situation: SituationInput = SituationInput(**data)
-        if input_units.value == "maritime":
-            situation = convert_situation_data_from_maritime_to_si_units(situation)
+        situation = convert_situation_data_from_maritime_to_si_units(situation)
 
-        situation.input_file_name = file_name
         situations.append(situation)
     return situations
 
@@ -70,7 +64,6 @@ def read_generated_situation_files(situation_folder: Path) -> List[TrafficSituat
         data = convert_keys_to_snake_case(data)
 
         situation: TrafficSituation = TrafficSituation(**data)
-        situation.input_file_name = file_name
         situations.append(situation)
     return situations
 
@@ -98,12 +91,27 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
     situation.own_ship.initial.heading = deg_2_rad(situation.own_ship.initial.heading)
     situation.own_ship.initial.sog = knot_2_m_pr_s(situation.own_ship.initial.sog)
 
+    if situation.own_ship.waypoints is not None:
+        for waypoint in situation.own_ship.waypoints:
+            waypoint.position.latitude = deg_2_rad(waypoint.position.latitude)
+            waypoint.position.longitude = deg_2_rad(waypoint.position.longitude)
+            if waypoint.data is not None:
+                assert waypoint.data.model_extra
+                if waypoint.data.model_extra.get("sog") is not None:
+                    waypoint.data.model_extra["sog"]["value"] = knot_2_m_pr_s(waypoint.data.model_extra["sog"]["value"])  # type: ignore
+
     assert situation.encounters is not None
     for encounter in situation.encounters:
-        beta: Union[float, None] = encounter.beta
+        beta: Union[List[float], float, None] = encounter.beta
         vector_time: Union[float, None] = encounter.vector_time
         if beta is not None:
-            encounter.beta = deg_2_rad(beta)
+            if isinstance(beta, List):
+                assert len(beta) == 2
+                for i in range(len(beta)):
+                    beta[i] = deg_2_rad(beta[i])
+                encounter.beta = beta
+            else:
+                encounter.beta = deg_2_rad(beta)
         if vector_time is not None:
             encounter.vector_time = min_2_s(vector_time)
     return situation
@@ -176,9 +184,7 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     data = check_input_units(data)
     encounter_settings: EncounterSettings = EncounterSettings(**data)
 
-    # assert encounter_settings.input_units is not None
-    if encounter_settings.input_units.value == "maritime":
-        encounter_settings = convert_settings_data_from_maritime_to_si_units(encounter_settings)
+    encounter_settings = convert_settings_data_from_maritime_to_si_units(encounter_settings)
 
     return encounter_settings
 

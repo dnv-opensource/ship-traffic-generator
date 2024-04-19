@@ -2,6 +2,19 @@
 History
 =======
 
+
+0.4.0 (2024-04-19)
+------------------
+
+Changed
+
+* possible to have several aypoints for own ship
+* fixing pyright error
+* beta (relative bearing between osn ship and target ship seen from own ship)
+  is not just a number, but could also be a range
+* situation length is used when checking if target ship is passing land
+
+
 0.3.0 (2024-04-10)
 ------------------
 

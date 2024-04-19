@@ -28,6 +28,8 @@ from trafficgen.types import (
     SituationInput,
 )
 from trafficgen.utils import (
+    calculate_bearing_between_waypoints,
+    calculate_position_along_track_using_waypoints,
     calculate_position_at_certain_time,
     convert_angle_0_to_2_pi_to_minus_pi_to_pi,
     convert_angle_minus_pi_to_pi_to_0_to_2_pi,
@@ -38,7 +40,7 @@ def generate_encounter(
     desired_encounter_type: EncounterType,
     own_ship: OwnShip,
     target_ships_static: List[ShipStatic],
-    beta_default: Optional[float],
+    beta_default: Optional[Union[List[float], float]],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
     settings: EncounterSettings,
@@ -89,20 +91,26 @@ def generate_encounter(
         # resetting vector_time, beta and relative_sog to default values before
         # new search for situation is done
         vector_time: Union[float, None] = vector_time_default
-        beta: Union[float, None] = beta_default
 
         if vector_time is None:
             vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])
-        if beta is None:
-            beta = assign_beta(desired_encounter_type, settings)
+        if beta_default is None:
+            beta: float = assign_beta(desired_encounter_type, settings)
+        elif isinstance(beta_default, List):
+            beta: float = assign_beta_from_list(beta_default)
+        else:
+            beta: float = beta_default
 
         # Own ship
         assert own_ship.initial is not None
-        own_ship_position_future = calculate_position_at_certain_time(
-            own_ship.initial.position,
-            lat_lon0,
+        assert own_ship.waypoints is not None
+        # Assuming ship is pointing in the direction of wp1
+        own_ship_cog = calculate_bearing_between_waypoints(
+            own_ship.waypoints[0].position, own_ship.waypoints[1].position
+        )
+        own_ship_position_future = calculate_position_along_track_using_waypoints(
+            own_ship.waypoints,
             own_ship.initial.sog,
-            own_ship.initial.cog,
             vector_time,
         )
 
@@ -118,7 +126,7 @@ def generate_encounter(
                 min_target_ship_sog = (
                     calculate_min_vector_length_target_ship(
                         own_ship.initial.position,
-                        own_ship.initial.cog,
+                        own_ship_cog,
                         target_ship_position_future,
                         beta,
                         lat_lon0,
@@ -142,7 +150,7 @@ def generate_encounter(
             start_position_target_ship, position_found = find_start_position_target_ship(
                 own_ship.initial.position,
                 lat_lon0,
-                own_ship.initial.cog,
+                own_ship_cog,
                 target_ship_position_future,
                 target_ship_vector_length,
                 beta,
@@ -157,7 +165,8 @@ def generate_encounter(
                 )
                 encounter_ok: bool = check_encounter_evolvement(
                     own_ship,
-                    own_ship_position_future,
+                    own_ship_cog,
+                    own_ship.initial.position,
                     lat_lon0,
                     target_ship_sog,
                     target_ship_cog,
@@ -166,15 +175,18 @@ def generate_encounter(
                     settings,
                 )
 
-                # Check if trajectory passes land
-                trajectory_on_land = path_crosses_land(
-                    target_ship_initial_position,
-                    target_ship_sog,
-                    target_ship_cog,
-                    lat_lon0,
-                )
-
-                encounter_found = encounter_ok and not trajectory_on_land
+                if settings.disable_land_check is False:
+                    # Check if trajectory passes land
+                    trajectory_on_land = path_crosses_land(
+                        target_ship_initial_position,
+                        target_ship_sog,
+                        target_ship_cog,
+                        lat_lon0,
+                        settings.situation_length,
+                    )
+                    encounter_found = encounter_ok and not trajectory_on_land
+                else:
+                    encounter_found = encounter_ok
 
     if encounter_found:
         target_ship_static.id = uuid4()
@@ -213,6 +225,7 @@ def generate_encounter(
 
 def check_encounter_evolvement(
     own_ship: OwnShip,
+    own_ship_cog: float,
     own_ship_position_future: Position,
     lat_lon0: Position,
     target_ship_sog: float,
@@ -243,7 +256,6 @@ def check_encounter_evolvement(
     assert own_ship.initial is not None
 
     own_ship_sog: float = own_ship.initial.sog
-    own_ship_cog: float = own_ship.initial.cog
     evolve_time: float = settings.evolve_time
 
     # Calculating position back in time to ensure that the encounter do not change from one type
@@ -299,22 +311,35 @@ def define_own_ship(
         * own_ship: Own ship
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
-    own_ship_waypoint0 = Waypoint(
-        position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
-    )
-    ship_position_future = calculate_position_at_certain_time(
-        own_ship_initial.position,
-        lat_lon0,
-        own_ship_initial.sog,
-        own_ship_initial.cog,
-        encounter_settings.situation_length,
-    )
-    own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, data=None)
+    if desired_traffic_situation.own_ship.waypoints is None:
+        # If waypoints are not given, let initial position be the first waypoint,
+        # then calculate second waypoint some time in the future
+        own_ship_waypoint0 = Waypoint(
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
+        )
+        ship_position_future = calculate_position_at_certain_time(
+            own_ship_initial.position,
+            lat_lon0,
+            own_ship_initial.sog,
+            own_ship_initial.cog,
+            encounter_settings.situation_length,
+        )
+        own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, data=None)
+        own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+    elif len(desired_traffic_situation.own_ship.waypoints) == 1:
+        # If one waypoint is given, use initial position as first waypoint
+        own_ship_waypoint0 = Waypoint(
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
+        )
+        own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0]
+        own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+    else:
+        own_ship_waypoints: List[Waypoint] = desired_traffic_situation.own_ship.waypoints
 
     own_ship = OwnShip(
         static=own_ship_static,
         initial=own_ship_initial,
-        waypoints=[own_ship_waypoint0, own_ship_waypoint1],
+        waypoints=own_ship_waypoints,
     )
 
     return own_ship
@@ -342,7 +367,7 @@ def calculate_min_vector_length_target_ship(
     -------
         * min_vector_length: Minimum vector length (target ship sog x vector)
     """
-    psi: float = np.deg2rad(own_ship_cog + desired_beta)
+    psi: float = own_ship_cog + desired_beta
 
     own_ship_position_north, own_ship_position_east, _ = llh2flat(
         own_ship_position.latitude, own_ship_position.longitude, lat_lon0.latitude, lat_lon0.longitude
@@ -474,13 +499,13 @@ def find_start_position_target_ship(
 
     if (
         desired_encounter_type is colreg_state1
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.01
     ):
         start_position_target_ship = Position(latitude=lat31, longitude=lon31)
         start_position_found = True
     elif (
         desired_encounter_type is colreg_state2
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.001
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.01
     ):
         start_position_target_ship = Position(latitude=lat32, longitude=lon32)
         start_position_found = True
@@ -741,6 +766,23 @@ def assign_sog_to_target_ship(
     ) * own_ship_sog
 
     return target_ship_sog
+
+
+def assign_beta_from_list(beta_limit: List[float]) -> float:
+    """
+    Assign random (uniform) relative bearing beta between own ship
+    and target ship depending between the limits given by beta_limit.
+
+    Params:
+        * beta_limit: Limits for beta
+
+    Returns
+    -------
+        * Relative bearing between own ship and target ship seen from own ship [rad]
+    """
+    assert len(beta_limit) == 2
+    beta: float = beta_limit[0] + random.uniform(0, 1) * (beta_limit[1] - beta_limit[0])
+    return beta
 
 
 def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> float:

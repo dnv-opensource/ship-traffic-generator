@@ -6,21 +6,25 @@ Example 1: Complete specified situation::
 
     {
         "title": "HO",
-        "common_vector": 10.0,
-        "own_ship": {
-            "speed": 10.0,
-            "course": 0.0,
-            "position": {
-                "north": 0.0,
-                "east": 0.0
+        "description": "A head on situation with one target ship.",
+        "ownShip": {
+            "initial": {
+                "position": {
+                    "latitude": 58.763449,
+                    "longitude": 10.490654
+                },
+                "sog": 10.0,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
             }
         },
-        "encounter": [
+        "encounters": [
             {
-            "desired_encounter_type": "head-on",
-            "beta": 2.0,
-            "relative_speed": 1.2,
-            "vector_time": 15.0
+                "desiredEncounterType": "head-on",
+                "beta": 2.0,
+                "relativeSpeed": 1.2,
+                "vectorTime": 15.0
             }
         ]
     }
@@ -53,18 +57,22 @@ Example 2: Minimum specified situation::
 
     {
         "title": "HO",
-        "common_vector": 10.0,
-        "own_ship": {
-            "speed": 10.0,
-            "course": 0.0,
-            "position": {
-                "north": 0.0,
-                "east": 0.0
+        "description": "A head on situation with one target ship.",
+        "ownShip": {
+            "initial": {
+                "position": {
+                    "latitude": 58.763449,
+                    "longitude": 10.490654
+                },
+                "sog": 10.0,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
             }
         },
-        "encounter": [
+        "encounters": [
             {
-            "desired_encounter_type": "head-on"
+                "desiredEncounterType": "head-on",
             }
         ]
     }
@@ -72,23 +80,50 @@ Example 2: Minimum specified situation::
 
 You can also request the generation of several traffic situations of the same encounter type by specifying `num_situations`:
 
-Example 3: Generate multiple situations using `num_situations`::
+Example 3: Generate multiple situations using `numSituations`::
 
     {
-        "title": "OT_GW",
+        "title": "HO",
+        "description": "A head on situation with one target ship.",
+        "numSituations": 5
+        "ownShip": {
+            "initial": {
+                "position": {
+                    "latitude": 58.763449,
+                    "longitude": 10.490654
+                },
+                "sog": 10.0,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
+            }
+        },
+        "encounters": [
+            {
+                "desiredEncounterType": "head-on",
+            }
+        ]
+    }
+
+The next example show how it is possible to give a range for the relative bearing between own ship and target ship
+
+Example 4: Assign range for `beta`:
+
+    {
+        "title": "CR_GW",
         "common_vector": 10.0,
         "own_ship": {
             "speed": 7.0,
             "course": 0.0,
             "position": {
-                "north": 0.0,
-                "east": 0.0
+                "latitude": 58.763449,
+                "longitude": 10.490654
             }
         },
-        "num_situations": 5,
         "encounter": [
             {
-            "desired_encounter_type": "overtaking-give-way"
+            "desired_encounter_type": "crossing-give-way",
+            "beta": [45.0,120.0]
             }
         ]
     }
