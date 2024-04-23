@@ -3,7 +3,7 @@
     "description": "Two crossing give-waysituations and one overtaking give-way situation with three target ships.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,7 +31,7 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
@@ -40,105 +40,105 @@
     "targetShips": [
         {
             "static": {
-                "id": "7b0cb04f-9141-4d0d-875e-485af3197df4",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "0f1edcd0-c5a7-40b5-ac23-18036cd001d8",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "target_ship_1",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.88292003,
-                    "longitude": 10.52708109
+                    "latitude": 58.85631106,
+                    "longitude": 10.5189593
                 },
                 "sog": 12.1,
-                "cog": 196.47,
-                "heading": 196.47,
+                "cog": 192.74,
+                "heading": 192.74,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.88292003,
-                        "longitude": 10.52708109
+                        "latitude": 58.85631106,
+                        "longitude": 10.5189593
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.6907638,
-                        "longitude": 10.41774831
+                        "latitude": 58.82373776,
+                        "longitude": 10.50477984
                     }
                 }
             ]
         },
         {
             "static": {
-                "id": "d2689851-2bde-4c4c-a1e5-ff6d40e740cf",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "a16a6a0e-7afc-4d98-ba84-00778780a143",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "target_ship_2",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.82723332,
-                    "longitude": 10.61343127
+                    "latitude": 58.82181995,
+                    "longitude": 10.60301119
                 },
                 "sog": 14.0,
-                "cog": 255.37,
-                "heading": 255.37,
+                "cog": 242.3,
+                "heading": 242.3,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.82723332,
-                        "longitude": 10.61343127
+                        "latitude": 58.82181995,
+                        "longitude": 10.60301119
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.76844979,
-                        "longitude": 10.18005105
+                        "latitude": 58.80379462,
+                        "longitude": 10.53691303
                     }
                 }
             ]
         },
         {
             "static": {
-                "id": "9aadb47b-2144-46ec-9983-cb17fd1d58c0",
+                "id": "cf1ee3ce-adb2-4626-8a9c-998626f22f44",
                 "length": 50.0,
                 "width": 10.0,
                 "height": 8.0,
                 "speedMax": 15.0,
-                "name": "CANOLE",
+                "name": "target_ship_3",
                 "shipType": "Cargo"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.79704237,
-                    "longitude": 10.51418991
+                    "latitude": 58.77098103,
+                    "longitude": 10.49592452
                 },
                 "sog": 4.1,
-                "cog": 323.09,
-                "heading": 323.09,
+                "cog": 352.25,
+                "heading": 352.25,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.79704237,
-                        "longitude": 10.51418991
+                        "latitude": 58.77098103,
+                        "longitude": 10.49592452
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.85130972,
-                        "longitude": 10.43573451
+                        "latitude": 58.78218933,
+                        "longitude": 10.49299005
                     }
                 }
             ]
