@@ -40,6 +40,7 @@ def generate_encounter(
     desired_encounter_type: EncounterType,
     own_ship: OwnShip,
     target_ships_static: List[ShipStatic],
+    encounter_number: int,
     beta_default: Optional[Union[List[float], float]],
     relative_sog_default: Optional[float],
     vector_time_default: Optional[float],
@@ -53,6 +54,7 @@ def generate_encounter(
         * own_ship: Dict, information about own ship that will encounter a target ship
         * target_ships_static: List of target ships including static information that
           may be used in an encounter
+        * encounter_number: Integer, used to naming the target ships. target_ship_1,2 etc.
         * beta_default: User defined beta. If not set, this is None.
         * relative_sog_default: User defined relative sog between own ship and
                                 target ship. If not set, this is None.
@@ -190,6 +192,7 @@ def generate_encounter(
 
     if encounter_found:
         target_ship_static.id = uuid4()
+        target_ship_static.name = f"target_ship_{encounter_number}"
         target_ship_initial: Initial = Initial(
             position=target_ship_initial_position,
             sog=target_ship_sog,

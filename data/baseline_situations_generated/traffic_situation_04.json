@@ -3,7 +3,7 @@
     "description": "A overting situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,7 +31,7 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
@@ -40,35 +40,35 @@
     "targetShips": [
         {
             "static": {
-                "id": "8eda4e91-c378-486d-906b-ed3c5172d442",
-                "length": 50.0,
-                "width": 10.0,
+                "id": "c100dcad-206c-4ec2-83c6-86de7ca39221",
+                "length": 122.0,
+                "width": 20.0,
                 "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "speedMax": 17.0,
+                "name": "target_ship_1",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.78336982,
-                    "longitude": 10.50093584
+                    "latitude": 58.77167228,
+                    "longitude": 10.49490498
                 },
                 "sog": 5.1,
-                "cog": 344.18,
-                "heading": 344.18,
+                "cog": 353.51,
+                "heading": 353.51,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.78336982,
-                        "longitude": 10.50093584
+                        "latitude": 58.77167228,
+                        "longitude": 10.49490498
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.86421368,
-                        "longitude": 10.45683011
+                        "latitude": 58.78558739,
+                        "longitude": 10.4918603
                     }
                 }
             ]

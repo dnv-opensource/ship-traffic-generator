@@ -3,7 +3,7 @@
     "description": "Two overtaking give-way situations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,7 +31,7 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
@@ -40,105 +40,35 @@
     "targetShips": [
         {
             "static": {
-                "id": "fbcc16a5-b3ff-4443-8944-91cd6c309ec7",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "2db3c199-dc28-4f00-b1ce-7ecaed62f27e",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "target_ship_3",
                 "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.77758838,
-                    "longitude": 10.490654
-                },
-                "sog": 7.0,
-                "cog": 0.0,
-                "heading": 0.0,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.77758838,
-                        "longitude": 10.490654
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.89393528,
-                        "longitude": 10.490654
-                    }
-                }
-            ]
-        },
-        {
-            "static": {
-                "id": "d561e694-505e-48e2-a692-07355480361d",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.8138211,
-                    "longitude": 10.50774432
-                },
-                "sog": 4.1,
-                "cog": 344.81,
-                "heading": 344.81,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.8138211,
-                        "longitude": 10.50774432
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.8793177,
-                        "longitude": 10.47350517
-                    }
-                }
-            ]
-        },
-        {
-            "static": {
-                "id": "e61db5c7-2c92-4589-b99f-6991ce023a0c",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.72519637,
-                    "longitude": 10.48420841
+                    "latitude": 58.69760886,
+                    "longitude": 10.47955998
                 },
                 "sog": 16.9,
-                "cog": 2.06,
-                "heading": 2.06,
+                "cog": 3.55,
+                "heading": 3.55,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.72519637,
-                        "longitude": 10.48420841
+                        "latitude": 58.69760886,
+                        "longitude": 10.47955998
                     }
                 },
                 {
                     "position": {
-                        "latitude": 59.00618586,
-                        "longitude": 10.5036882
+                        "latitude": 58.74438077,
+                        "longitude": 10.48514903
                     }
                 }
             ]
