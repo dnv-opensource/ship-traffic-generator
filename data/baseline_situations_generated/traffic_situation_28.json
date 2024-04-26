@@ -3,7 +3,7 @@
     "description": "Head-on, crossing give-way and overtaking give-way situations with three target ships.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,7 +31,7 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
@@ -40,105 +40,105 @@
     "targetShips": [
         {
             "static": {
-                "id": "4f38713b-ad82-4d4f-93ce-b7147715ba6b",
+                "id": "c0b0771c-7ee1-41c1-b3c8-4658a9da6564",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "target_ship_1",
+                "shipType": "Passenger"
+            },
+            "initial": {
+                "position": {
+                    "latitude": 58.8577654,
+                    "longitude": 10.4811325
+                },
+                "sog": 12.1,
+                "cog": 175.73,
+                "heading": 175.73,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.8577654,
+                        "longitude": 10.4811325
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.8244624,
+                        "longitude": 10.4859231
+                    }
+                }
+            ]
+        },
+        {
+            "static": {
+                "id": "cf24a238-7713-4257-90af-b225944261d2",
                 "length": 122.0,
                 "width": 20.0,
                 "height": 8.0,
                 "speedMax": 17.0,
-                "name": "BASTO",
+                "name": "target_ship_2",
                 "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.8853529,
-                    "longitude": 10.47835035
-                },
-                "sog": 12.1,
-                "cog": 174.52,
-                "heading": 174.52,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.8853529,
-                        "longitude": 10.47835035
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.6858925,
-                        "longitude": 10.51516418
-                    }
-                }
-            ]
-        },
-        {
-            "static": {
-                "id": "aefc1eb4-dbea-41d0-a1a1-8d4bf09cc654",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.80961071,
-                    "longitude": 10.61754401
+                    "latitude": 58.8080666,
+                    "longitude": 10.61331031
                 },
                 "sog": 14.0,
-                "cog": 270.84,
-                "heading": 270.84,
+                "cog": 255.14,
+                "heading": 255.14,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.80961071,
-                        "longitude": 10.61754401
+                        "latitude": 58.8080666,
+                        "longitude": 10.61331031
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.81301048,
-                        "longitude": 10.16968375
+                        "latitude": 58.79811933,
+                        "longitude": 10.54115628
                     }
                 }
             ]
         },
         {
             "static": {
-                "id": "02945308-eb40-4df5-a99d-6e642da03790",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "e49e0040-72fa-482e-bda5-06aa7db0b932",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "target_ship_3",
                 "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.78250799,
-                    "longitude": 10.51183978
+                    "latitude": 58.76616017,
+                    "longitude": 10.49366079
                 },
                 "sog": 6.0,
-                "cog": 333.92,
-                "heading": 333.92,
+                "cog": 356.44,
+                "heading": 356.44,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.78250799,
-                        "longitude": 10.51183978
+                        "latitude": 58.76616017,
+                        "longitude": 10.49366079
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.87249445,
-                        "longitude": 10.42705767
+                        "latitude": 58.78282583,
+                        "longitude": 10.49166335
                     }
                 }
             ]

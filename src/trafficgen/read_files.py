@@ -153,7 +153,9 @@ def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
         * target_ships_static: List of different target ships with static information
     """
     target_ships_static: List[ShipStatic] = []
+    i = 0
     for file_name in sorted([file for file in os.listdir(target_ship_folder) if file.endswith(".json")]):
+        i = i + 1
         file_path = os.path.join(target_ship_folder, file_name)
         with open(file_path, encoding="utf-8") as f:
             data = json.load(f)

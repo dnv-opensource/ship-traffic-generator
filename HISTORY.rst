@@ -3,6 +3,14 @@ History
 =======
 
 
+0.5.0 (2024-04-26)
+------------------
+
+Changed
+
+* removed specific names for target ships. Files generated with target ship 1, 2 etc.
+* changed tests. Still need to figure out why some tests "fail" using CLI.
+
 0.4.0 (2024-04-19)
 ------------------
 

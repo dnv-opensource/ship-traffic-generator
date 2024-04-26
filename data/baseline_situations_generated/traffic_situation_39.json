@@ -3,7 +3,7 @@
     "description": "Two crossing give-waysituations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,7 +31,7 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
@@ -40,105 +40,105 @@
     "targetShips": [
         {
             "static": {
-                "id": "ed7e4cfb-51f9-410a-bb20-50ff8dd8c076",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
+                "id": "a80e778a-6544-4676-89d6-f5aed89cd25d",
+                "length": 50.0,
+                "width": 10.0,
+                "height": 8.0,
+                "speedMax": 15.0,
+                "name": "target_ship_1",
+                "shipType": "Cargo"
+            },
+            "initial": {
+                "position": {
+                    "latitude": 58.87899691,
+                    "longitude": 10.52986324
+                },
+                "sog": 18.1,
+                "cog": 193.03,
+                "heading": 193.03,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "latitude": 58.87899691,
+                        "longitude": 10.52986324
+                    }
+                },
+                {
+                    "position": {
+                        "latitude": 58.83019281,
+                        "longitude": 10.50812407
+                    }
+                }
+            ]
+        },
+        {
+            "static": {
+                "id": "1345fe0c-5885-4cb9-ae57-5c349fe9be11",
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "speedMax": 17.0,
+                "name": "target_ship_2",
                 "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.90021047,
-                    "longitude": 10.53706916
-                },
-                "sog": 18.1,
-                "cog": 195.49,
-                "heading": 195.49,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.90021047,
-                        "longitude": 10.53706916
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.61056945,
-                        "longitude": 10.38252513
-                    }
-                }
-            ]
-        },
-        {
-            "static": {
-                "id": "6c6fde64-02c9-4d5d-9d81-5f2a1d79d2e9",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.77180694,
-                    "longitude": 10.58189453
+                    "latitude": 58.77486823,
+                    "longitude": 10.61533211
                 },
                 "sog": 12.1,
-                "cog": 314.78,
-                "heading": 314.78,
+                "cog": 284.13,
+                "heading": 284.13,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.77180694,
-                        "longitude": 10.58189453
+                        "latitude": 58.77486823,
+                        "longitude": 10.61533211
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.91295602,
-                        "longitude": 10.30813352
+                        "latitude": 58.7830208,
+                        "longitude": 10.55299388
                     }
                 }
             ]
         },
         {
             "static": {
-                "id": "b2e7c856-97eb-42d7-b30c-63b3518aa66a",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "CANOLE",
-                "shipType": "Cargo"
+                "id": "454cb381-b56f-40cc-aa9c-78f9b3574edf",
+                "length": 178.0,
+                "width": 30.0,
+                "height": 30.0,
+                "speedMax": 21.0,
+                "name": "target_ship_3",
+                "shipType": "Passenger"
             },
             "initial": {
                 "position": {
-                    "latitude": 58.73299771,
-                    "longitude": 10.48032032
+                    "latitude": 58.71663194,
+                    "longitude": 10.47475603
                 },
                 "sog": 16.9,
-                "cog": 4.13,
-                "heading": 4.13,
+                "cog": 6.3,
+                "heading": 6.3,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.73299771,
-                        "longitude": 10.48032032
+                        "latitude": 58.71663194,
+                        "longitude": 10.47475603
                     }
                 },
                 {
                     "position": {
-                        "latitude": 59.01344091,
-                        "longitude": 10.51925466
+                        "latitude": 58.76321066,
+                        "longitude": 10.48465844
                     }
                 }
             ]

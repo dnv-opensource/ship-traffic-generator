@@ -3,7 +3,7 @@
     "description": "A overtaking give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "static": {
-            "id": "da41746c-26eb-449d-b89d-c11633d33163",
+            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
             "length": 122.0,
             "width": 20.0,
             "height": 8.0,
@@ -31,82 +31,11 @@
             },
             {
                 "position": {
-                    "latitude": 58.92969579,
+                    "latitude": 58.7911568,
                     "longitude": 10.490654
                 }
             }
         ]
     },
-    "targetShips": [
-        {
-            "static": {
-                "id": "1f73b5c5-38d8-4f73-ab80-5dd65ee1996c",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "BASTO",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.77612507,
-                    "longitude": 10.49718599
-                },
-                "sog": 7.0,
-                "cog": 353.29,
-                "heading": 353.29,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.77612507,
-                        "longitude": 10.49718599
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.89167402,
-                        "longitude": 10.47100189
-                    }
-                }
-            ]
-        },
-        {
-            "static": {
-                "id": "e22c02c1-18f3-4be7-80ea-39314d877635",
-                "length": 178.0,
-                "width": 30.0,
-                "height": 30.0,
-                "speedMax": 21.0,
-                "name": "BASTO VI",
-                "shipType": "Passenger"
-            },
-            "initial": {
-                "position": {
-                    "latitude": 58.78618871,
-                    "longitude": 10.51106216
-                },
-                "sog": 6.0,
-                "cog": 340.45,
-                "heading": 340.45,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "latitude": 58.78618871,
-                        "longitude": 10.51106216
-                    }
-                },
-                {
-                    "position": {
-                        "latitude": 58.88060138,
-                        "longitude": 10.44653395
-                    }
-                }
-            ]
-        }
-    ]
+    "targetShips": []
 }

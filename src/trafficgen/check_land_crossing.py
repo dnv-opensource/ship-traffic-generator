@@ -40,6 +40,6 @@ def path_crosses_land(
 
         lat = rad_2_deg(position_2.latitude)
         lon = rad_2_deg(position_2.longitude)
-        if globe.is_land(lat, lon):  # type: ignore  (The global_land_mask package is unfortunately not typed.)
+        if globe.is_land(lat, lon):  # type: ignore  (The package is unfortunately not typed.)
             return True
     return False
