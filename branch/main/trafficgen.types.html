@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.types module &mdash; Traffic Generator 0.5.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="trafficgen.utils module" href="trafficgen.utils.html" />
+    <link rel="prev" title="trafficgen.ship_traffic_generator module" href="trafficgen.ship_traffic_generator.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="trafficgen.html">trafficgen package</a></li>
+      <li class="breadcrumb-item active">trafficgen.types module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/trafficgen.types.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-trafficgen.types">
+<span id="trafficgen-types-module"></span><h1>trafficgen.types module<a class="headerlink" href="#module-trafficgen.types" title="Link to this heading"></a></h1>
+<p>Domain specific data types used in trafficgen.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">Encounter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desiredEncounterType</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relativeSpeed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#Encounter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Encounter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for an encounter.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/trafficgen/types.html#Encounter.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.Encounter.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For converting parameters written to file from snake to camel case.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.Config.alias_generator">
+<span class="sig-name descname"><span class="pre">alias_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#trafficgen.types.Encounter.Config.alias_generator" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.Config.populate_by_name">
+<span class="sig-name descname"><span class="pre">populate_by_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trafficgen.types.Encounter.Config.populate_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.beta">
+<span class="sig-name descname"><span class="pre">beta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.beta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.desired_encounter_type">
+<span class="sig-name descname"><span class="pre">desired_encounter_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#trafficgen.types.EncounterType" title="trafficgen.types.EncounterType"><span class="pre">EncounterType</span></a></em><a class="headerlink" href="#trafficgen.types.Encounter.desired_encounter_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.Encounter.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alias_generator':</span> <span class="pre">&lt;function</span> <span class="pre">to_camel&gt;,</span> <span class="pre">'populate_by_name':</span> <span class="pre">True}</span></em><a class="headerlink" href="#trafficgen.types.Encounter.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'beta':</span> <span class="pre">FieldInfo(annotation=Union[List[float],</span> <span class="pre">float,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None,</span> <span class="pre">alias='beta',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'desired_encounter_type':</span> <span class="pre">FieldInfo(annotation=EncounterType,</span> <span class="pre">required=True,</span> <span class="pre">alias='desiredEncounterType',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'relative_speed':</span> <span class="pre">FieldInfo(annotation=Union[float,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None,</span> <span class="pre">alias='relativeSpeed',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'vector_time':</span> <span class="pre">FieldInfo(annotation=Union[float,</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None,</span> <span class="pre">alias='vectorTime',</span> <span class="pre">alias_priority=1)}</span></em><a class="headerlink" href="#trafficgen.types.Encounter.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.relative_speed">
+<span class="sig-name descname"><span class="pre">relative_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.relative_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.Encounter.vector_time">
+<span class="sig-name descname"><span class="pre">vector_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.Encounter.vector_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta13Criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta14Criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta15Criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta15</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterClassification" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for the encounter classification.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterClassification.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterClassification.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For converting parameters written to file from snake to camel case.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.Config.alias_generator">
+<span class="sig-name descname"><span class="pre">alias_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#trafficgen.types.EncounterClassification.Config.alias_generator" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.Config.populate_by_name">
+<span class="sig-name descname"><span class="pre">populate_by_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.Config.populate_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alias_generator':</span> <span class="pre">&lt;function</span> <span class="pre">to_camel&gt;,</span> <span class="pre">'populate_by_name':</span> <span class="pre">True}</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'theta13_criteria':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='theta13Criteria',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'theta14_criteria':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='theta14Criteria',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'theta15':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='theta15',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'theta15_criteria':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='theta15Criteria',</span> <span class="pre">alias_priority=1)}</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta13_criteria">
+<span class="sig-name descname"><span class="pre">theta13_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta13_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta14_criteria">
+<span class="sig-name descname"><span class="pre">theta14_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta14_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta15">
+<span class="sig-name descname"><span class="pre">theta15</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta15" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterClassification.theta15_criteria">
+<span class="sig-name descname"><span class="pre">theta15_criteria</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterClassification.theta15_criteria" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterRelativeSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overtakingStandOn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overtakingGiveWay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headOn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossingGiveWay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossingStandOn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterRelativeSpeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for relative speed between two ships in an encounter.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterRelativeSpeed.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For converting parameters written to file from snake to camel case.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.Config.alias_generator">
+<span class="sig-name descname"><span class="pre">alias_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.Config.alias_generator" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.Config.populate_by_name">
+<span class="sig-name descname"><span class="pre">populate_by_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.Config.populate_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.crossing_give_way">
+<span class="sig-name descname"><span class="pre">crossing_give_way</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.crossing_give_way" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.crossing_stand_on">
+<span class="sig-name descname"><span class="pre">crossing_stand_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.crossing_stand_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.head_on">
+<span class="sig-name descname"><span class="pre">head_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.head_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alias_generator':</span> <span class="pre">&lt;function</span> <span class="pre">to_camel&gt;,</span> <span class="pre">'populate_by_name':</span> <span class="pre">True}</span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'crossing_give_way':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='crossingGiveWay',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'crossing_stand_on':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='crossingStandOn',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'head_on':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='headOn',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'overtaking_give_way':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='overtakingGiveWay',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'overtaking_stand_on':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='overtakingStandOn',</span> <span class="pre">alias_priority=1)}</span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.overtaking_give_way">
+<span class="sig-name descname"><span class="pre">overtaking_give_way</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.overtaking_give_way" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterRelativeSpeed.overtaking_stand_on">
+<span class="sig-name descname"><span class="pre">overtaking_stand_on</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterRelativeSpeed.overtaking_stand_on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#trafficgen.types.EncounterClassification" title="trafficgen.types.EncounterClassification"><span class="pre">EncounterClassification</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">relativeSpeed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#trafficgen.types.EncounterRelativeSpeed" title="trafficgen.types.EncounterRelativeSpeed"><span class="pre">EncounterRelativeSpeed</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorRange</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonVector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">situationLength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxMeetingDistance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evolveTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disableLandCheck</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterSettings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for encounter settings.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterSettings.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterSettings.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For converting parameters written to file from snake to camel case.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.Config.alias_generator">
+<span class="sig-name descname"><span class="pre">alias_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#trafficgen.types.EncounterSettings.Config.alias_generator" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.Config.populate_by_name">
+<span class="sig-name descname"><span class="pre">populate_by_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.Config.populate_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.classification">
+<span class="sig-name descname"><span class="pre">classification</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#trafficgen.types.EncounterClassification" title="trafficgen.types.EncounterClassification"><span class="pre">EncounterClassification</span></a></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.classification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.common_vector">
+<span class="sig-name descname"><span class="pre">common_vector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.common_vector" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.disable_land_check">
+<span class="sig-name descname"><span class="pre">disable_land_check</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.disable_land_check" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.evolve_time">
+<span class="sig-name descname"><span class="pre">evolve_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.evolve_time" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.max_meeting_distance">
+<span class="sig-name descname"><span class="pre">max_meeting_distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.max_meeting_distance" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alias_generator':</span> <span class="pre">&lt;function</span> <span class="pre">to_camel&gt;,</span> <span class="pre">'populate_by_name':</span> <span class="pre">True}</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'classification':</span> <span class="pre">FieldInfo(annotation=EncounterClassification,</span> <span class="pre">required=True,</span> <span class="pre">alias='classification',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'common_vector':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='commonVector',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'disable_land_check':</span> <span class="pre">FieldInfo(annotation=bool,</span> <span class="pre">required=True,</span> <span class="pre">alias='disableLandCheck',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'evolve_time':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='evolveTime',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'max_meeting_distance':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='maxMeetingDistance',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'relative_speed':</span> <span class="pre">FieldInfo(annotation=EncounterRelativeSpeed,</span> <span class="pre">required=True,</span> <span class="pre">alias='relativeSpeed',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'situation_length':</span> <span class="pre">FieldInfo(annotation=float,</span> <span class="pre">required=True,</span> <span class="pre">alias='situationLength',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'vector_range':</span> <span class="pre">FieldInfo(annotation=List[float],</span> <span class="pre">required=True,</span> <span class="pre">alias='vectorRange',</span> <span class="pre">alias_priority=1)}</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.relative_speed">
+<span class="sig-name descname"><span class="pre">relative_speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#trafficgen.types.EncounterRelativeSpeed" title="trafficgen.types.EncounterRelativeSpeed"><span class="pre">EncounterRelativeSpeed</span></a></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.relative_speed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.situation_length">
+<span class="sig-name descname"><span class="pre">situation_length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.situation_length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterSettings.vector_range">
+<span class="sig-name descname"><span class="pre">vector_range</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.EncounterSettings.vector_range" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">EncounterType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#EncounterType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.EncounterType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enumeration of encounter types.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.CROSSING_GIVE_WAY">
+<span class="sig-name descname"><span class="pre">CROSSING_GIVE_WAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crossing-give-way'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.CROSSING_GIVE_WAY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.CROSSING_STAND_ON">
+<span class="sig-name descname"><span class="pre">CROSSING_STAND_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'crossing-stand-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.CROSSING_STAND_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.HEAD_ON">
+<span class="sig-name descname"><span class="pre">HEAD_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'head-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.HEAD_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.NO_RISK_COLLISION">
+<span class="sig-name descname"><span class="pre">NO_RISK_COLLISION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'noRiskCollision'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.NO_RISK_COLLISION" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.OVERTAKING_GIVE_WAY">
+<span class="sig-name descname"><span class="pre">OVERTAKING_GIVE_WAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'overtaking-give-way'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.OVERTAKING_GIVE_WAY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.EncounterType.OVERTAKING_STAND_ON">
+<span class="sig-name descname"><span class="pre">OVERTAKING_STAND_ON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'overtaking-stand-on'</span></em><a class="headerlink" href="#trafficgen.types.EncounterType.OVERTAKING_STAND_ON" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">OwnShipInitial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Waypoint</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#OwnShipInitial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.OwnShipInitial" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for initial data for the own ship used for generating a situation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Initial</span></em><a class="headerlink" href="#trafficgen.types.OwnShipInitial.initial" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.OwnShipInitial.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.OwnShipInitial.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'initial':</span> <span class="pre">FieldInfo(annotation=Initial,</span> <span class="pre">required=True),</span> <span class="pre">'waypoints':</span> <span class="pre">FieldInfo(annotation=Union[List[Waypoint],</span> <span class="pre">NoneType],</span> <span class="pre">required=False,</span> <span class="pre">default=None,</span> <span class="pre">description='An</span> <span class="pre">array</span> <span class="pre">of</span> <span class="pre">`Waypoint`</span> <span class="pre">objects.')}</span></em><a class="headerlink" href="#trafficgen.types.OwnShipInitial.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.OwnShipInitial.waypoints">
+<span class="sig-name descname"><span class="pre">waypoints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Waypoint</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#trafficgen.types.OwnShipInitial.waypoints" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">SituationInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numSituations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ownShip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#trafficgen.types.OwnShipInitial" title="trafficgen.types.OwnShipInitial"><span class="pre">OwnShipInitial</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">encounters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#trafficgen.types.Encounter" title="trafficgen.types.Encounter"><span class="pre">Encounter</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/trafficgen/types.html#SituationInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.SituationInput" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Data type for inputs needed for generating a situations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="_modules/trafficgen/types.html#SituationInput.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.SituationInput.Config" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>For converting parameters written to file from snake to camel case.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.Config.alias_generator">
+<span class="sig-name descname"><span class="pre">alias_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#trafficgen.types.SituationInput.Config.alias_generator" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.Config.populate_by_name">
+<span class="sig-name descname"><span class="pre">populate_by_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.Config.populate_by_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.encounters">
+<span class="sig-name descname"><span class="pre">encounters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#trafficgen.types.Encounter" title="trafficgen.types.Encounter"><span class="pre">Encounter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#trafficgen.types.SituationInput.encounters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.model_computed_fields">
+<span class="sig-name descname"><span class="pre">model_computed_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ComputedFieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.model_computed_fields" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of computed field names and their corresponding <cite>ComputedFieldInfo</cite> objects.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.model_config">
+<span class="sig-name descname"><span class="pre">model_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">ConfigDict</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alias_generator':</span> <span class="pre">&lt;function</span> <span class="pre">to_camel&gt;,</span> <span class="pre">'populate_by_name':</span> <span class="pre">True}</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.model_config" title="Link to this definition"></a></dt>
+<dd><p>Configuration for the model, should be a dictionary conforming to [<cite>ConfigDict</cite>][pydantic.config.ConfigDict].</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.model_fields">
+<span class="sig-name descname"><span class="pre">model_fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FieldInfo</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'description':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True,</span> <span class="pre">alias='description',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'encounters':</span> <span class="pre">FieldInfo(annotation=List[Encounter],</span> <span class="pre">required=True,</span> <span class="pre">alias='encounters',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'num_situations':</span> <span class="pre">FieldInfo(annotation=int,</span> <span class="pre">required=True,</span> <span class="pre">alias='numSituations',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'own_ship':</span> <span class="pre">FieldInfo(annotation=OwnShipInitial,</span> <span class="pre">required=True,</span> <span class="pre">alias='ownShip',</span> <span class="pre">alias_priority=1),</span> <span class="pre">'title':</span> <span class="pre">FieldInfo(annotation=str,</span> <span class="pre">required=True,</span> <span class="pre">alias='title',</span> <span class="pre">alias_priority=1)}</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.model_fields" title="Link to this definition"></a></dt>
+<dd><p>Metadata about the fields defined on the model,
+mapping of field names to [<cite>FieldInfo</cite>][pydantic.fields.FieldInfo].</p>
+<p>This replaces <cite>Model.__fields__</cite> from Pydantic V1.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.num_situations">
+<span class="sig-name descname"><span class="pre">num_situations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.num_situations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.own_ship">
+<span class="sig-name descname"><span class="pre">own_ship</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#trafficgen.types.OwnShipInitial" title="trafficgen.types.OwnShipInitial"><span class="pre">OwnShipInitial</span></a></em><a class="headerlink" href="#trafficgen.types.SituationInput.own_ship" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="trafficgen.types.SituationInput.title">
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#trafficgen.types.SituationInput.title" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="trafficgen.types.to_camel">
+<span class="sig-prename descclassname"><span class="pre">trafficgen.types.</span></span><span class="sig-name descname"><span class="pre">to_camel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/trafficgen/types.html#to_camel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#trafficgen.types.to_camel" title="Link to this definition"></a></dt>
+<dd><p>Return a camel case formated string from snake case string.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="trafficgen.ship_traffic_generator.html" class="btn btn-neutral float-left" title="trafficgen.ship_traffic_generator module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="trafficgen.utils.html" class="btn btn-neutral float-right" title="trafficgen.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
