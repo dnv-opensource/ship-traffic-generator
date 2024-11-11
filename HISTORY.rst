@@ -3,6 +3,13 @@ History
 =======
 
 
+0.6.0 (2024-11-11)
+------------------
+
+Changed
+
+* Updated to download-artifact@v4  (from download-artifact@v3)
+
 0.5.0 (2024-04-26)
 ------------------
 
