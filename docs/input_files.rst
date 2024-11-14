@@ -107,7 +107,7 @@ Example 3: Generate multiple situations using `numSituations`::
 
 The next example show how it is possible to give a range for the relative bearing between own ship and target ship
 
-Example 4: Assign range for `beta`:
+Example 4: Assign range for `beta`::
 
     {
         "title": "CR_GW",

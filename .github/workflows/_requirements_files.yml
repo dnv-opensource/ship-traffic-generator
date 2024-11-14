@@ -21,7 +21,7 @@ jobs:
           poetry export -o requirements-dev.txt --without-hashes --format requirements.txt --with dev
           poetry export -o requirements-docs.txt --without-hashes --format requirements.txt --with docs
       - name: Upload requirements files as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: requirements-files
           path: |
