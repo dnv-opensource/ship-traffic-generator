@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.types &mdash; Traffic Generator 0.5.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.types</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.types</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Domain specific data types used in trafficgen.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">maritime_schema.types.caga</span> <span class="kn">import</span> <span class="n">Initial</span><span class="p">,</span> <span class="n">Waypoint</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">pydantic.fields</span> <span class="kn">import</span> <span class="n">Field</span>
+
+
+<div class="viewcode-block" id="to_camel">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.to_camel">[docs]</a>
+<span class="k">def</span> <span class="nf">to_camel</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a camel case formated string from snake case string.&quot;&quot;&quot;</span>
+
+    <span class="n">words</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span></div>
+
+
+
+<div class="viewcode-block" id="EncounterType">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterType">[docs]</a>
+<span class="k">class</span> <span class="nc">EncounterType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumeration of encounter types.&quot;&quot;&quot;</span>
+
+    <span class="n">OVERTAKING_STAND_ON</span> <span class="o">=</span> <span class="s2">&quot;overtaking-stand-on&quot;</span>
+    <span class="n">OVERTAKING_GIVE_WAY</span> <span class="o">=</span> <span class="s2">&quot;overtaking-give-way&quot;</span>
+    <span class="n">HEAD_ON</span> <span class="o">=</span> <span class="s2">&quot;head-on&quot;</span>
+    <span class="n">CROSSING_GIVE_WAY</span> <span class="o">=</span> <span class="s2">&quot;crossing-give-way&quot;</span>
+    <span class="n">CROSSING_STAND_ON</span> <span class="o">=</span> <span class="s2">&quot;crossing-stand-on&quot;</span>
+    <span class="n">NO_RISK_COLLISION</span> <span class="o">=</span> <span class="s2">&quot;noRiskCollision&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Encounter">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.Encounter">[docs]</a>
+<span class="k">class</span> <span class="nc">Encounter</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for an encounter.&quot;&quot;&quot;</span>
+
+    <span class="n">desired_encounter_type</span><span class="p">:</span> <span class="n">EncounterType</span>
+    <span class="n">beta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">relative_speed</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">vector_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Encounter.Config">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.Encounter.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For converting parameters written to file from snake to camel case.&quot;&quot;&quot;</span>
+
+        <span class="n">alias_generator</span> <span class="o">=</span> <span class="n">to_camel</span>
+        <span class="n">populate_by_name</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EncounterClassification">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterClassification">[docs]</a>
+<span class="k">class</span> <span class="nc">EncounterClassification</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for the encounter classification.&quot;&quot;&quot;</span>
+
+    <span class="n">theta13_criteria</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">theta14_criteria</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">theta15_criteria</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">theta15</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+
+<div class="viewcode-block" id="EncounterClassification.Config">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterClassification.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For converting parameters written to file from snake to camel case.&quot;&quot;&quot;</span>
+
+        <span class="n">alias_generator</span> <span class="o">=</span> <span class="n">to_camel</span>
+        <span class="n">populate_by_name</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EncounterRelativeSpeed">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed">[docs]</a>
+<span class="k">class</span> <span class="nc">EncounterRelativeSpeed</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for relative speed between two ships in an encounter.&quot;&quot;&quot;</span>
+
+    <span class="n">overtaking_stand_on</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">overtaking_give_way</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">head_on</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">crossing_give_way</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">crossing_stand_on</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+
+<div class="viewcode-block" id="EncounterRelativeSpeed.Config">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterRelativeSpeed.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For converting parameters written to file from snake to camel case.&quot;&quot;&quot;</span>
+
+        <span class="n">alias_generator</span> <span class="o">=</span> <span class="n">to_camel</span>
+        <span class="n">populate_by_name</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EncounterSettings">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterSettings">[docs]</a>
+<span class="k">class</span> <span class="nc">EncounterSettings</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for encounter settings.&quot;&quot;&quot;</span>
+
+    <span class="n">classification</span><span class="p">:</span> <span class="n">EncounterClassification</span>
+    <span class="n">relative_speed</span><span class="p">:</span> <span class="n">EncounterRelativeSpeed</span>
+    <span class="n">vector_range</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="n">common_vector</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">situation_length</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">max_meeting_distance</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">evolve_time</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">disable_land_check</span><span class="p">:</span> <span class="nb">bool</span>
+
+<div class="viewcode-block" id="EncounterSettings.Config">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.EncounterSettings.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For converting parameters written to file from snake to camel case.&quot;&quot;&quot;</span>
+
+        <span class="n">alias_generator</span> <span class="o">=</span> <span class="n">to_camel</span>
+        <span class="n">populate_by_name</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="OwnShipInitial">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.OwnShipInitial">[docs]</a>
+<span class="k">class</span> <span class="nc">OwnShipInitial</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for initial data for the own ship used for generating a situation.&quot;&quot;&quot;</span>
+
+    <span class="n">initial</span><span class="p">:</span> <span class="n">Initial</span>
+    <span class="n">waypoints</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Waypoint</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;An array of `Waypoint` objects.&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SituationInput">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.SituationInput">[docs]</a>
+<span class="k">class</span> <span class="nc">SituationInput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data type for inputs needed for generating a situations.&quot;&quot;&quot;</span>
+
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">num_situations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">own_ship</span><span class="p">:</span> <span class="n">OwnShipInitial</span>
+    <span class="n">encounters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Encounter</span><span class="p">]</span>
+
+<div class="viewcode-block" id="SituationInput.Config">
+<a class="viewcode-back" href="../../trafficgen.types.html#trafficgen.types.SituationInput.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For converting parameters written to file from snake to camel case.&quot;&quot;&quot;</span>
+
+        <span class="n">alias_generator</span> <span class="o">=</span> <span class="n">to_camel</span>
+        <span class="n">populate_by_name</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

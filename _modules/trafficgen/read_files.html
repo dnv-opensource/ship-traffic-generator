@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trafficgen.read_files &mdash; Traffic Generator 0.5.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=1dd76d02"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Traffic Generator
+          </a>
+              <div class="version">
+                0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_files.html">Input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Traffic Generator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">trafficgen.read_files</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for trafficgen.read_files</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Functions to read the files needed to build one or more traffic situations.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">uuid4</span>
+
+<span class="kn">from</span> <span class="nn">maritime_schema.types.caga</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ShipStatic</span><span class="p">,</span>
+    <span class="n">TrafficSituation</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">trafficgen.types</span> <span class="kn">import</span> <span class="n">EncounterSettings</span><span class="p">,</span> <span class="n">SituationInput</span>
+<span class="kn">from</span> <span class="nn">trafficgen.utils</span> <span class="kn">import</span> <span class="n">deg_2_rad</span><span class="p">,</span> <span class="n">knot_2_m_pr_s</span><span class="p">,</span> <span class="n">min_2_s</span><span class="p">,</span> <span class="n">nm_2_m</span>
+
+
+<div class="viewcode-block" id="read_situation_files">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.read_situation_files">[docs]</a>
+<span class="k">def</span> <span class="nf">read_situation_files</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">SituationInput</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read traffic situation files.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * situation_folder: Path to the folder where situation files are found</span>
+<span class="sd">        * input_units: Specify if the inputs are given in si or maritime units</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * situations: List of desired traffic situations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">situations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SituationInput</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">)]):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;num_situations&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;num_situations&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">situation</span><span class="p">:</span> <span class="n">SituationInput</span> <span class="o">=</span> <span class="n">SituationInput</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">situation</span> <span class="o">=</span> <span class="n">convert_situation_data_from_maritime_to_si_units</span><span class="p">(</span><span class="n">situation</span><span class="p">)</span>
+
+        <span class="n">situations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">situation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">situations</span></div>
+
+
+
+<div class="viewcode-block" id="read_generated_situation_files">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.read_generated_situation_files">[docs]</a>
+<span class="k">def</span> <span class="nf">read_generated_situation_files</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TrafficSituation</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the generated traffic situation files. Used for testing the trafficgen algorithm.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * situation_folder: Path to the folder where situation files are found</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * situations: List of desired traffic situations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">situations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TrafficSituation</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">)]):</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">situation_folder</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">situation</span><span class="p">:</span> <span class="n">TrafficSituation</span> <span class="o">=</span> <span class="n">TrafficSituation</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">situations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">situation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">situations</span></div>
+
+
+
+<div class="viewcode-block" id="convert_situation_data_from_maritime_to_si_units">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.convert_situation_data_from_maritime_to_si_units">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_situation_data_from_maritime_to_si_units</span><span class="p">(</span><span class="n">situation</span><span class="p">:</span> <span class="n">SituationInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SituationInput</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert situation data which is given in maritime units to SI units.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_file: Path to the own_ship_file file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * own_ship information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span>
+        <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span>
+    <span class="p">)</span>
+    <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span>
+        <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span>
+    <span class="p">)</span>
+    <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">cog</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">cog</span><span class="p">)</span>
+    <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">heading</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">heading</span><span class="p">)</span>
+    <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">sog</span> <span class="o">=</span> <span class="n">knot_2_m_pr_s</span><span class="p">(</span><span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">initial</span><span class="o">.</span><span class="n">sog</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">waypoints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">waypoint</span> <span class="ow">in</span> <span class="n">situation</span><span class="o">.</span><span class="n">own_ship</span><span class="o">.</span><span class="n">waypoints</span><span class="p">:</span>
+            <span class="n">waypoint</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">waypoint</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span>
+            <span class="n">waypoint</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">waypoint</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">waypoint</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">waypoint</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">model_extra</span>
+                <span class="k">if</span> <span class="n">waypoint</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">model_extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sog&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">waypoint</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">model_extra</span><span class="p">[</span><span class="s2">&quot;sog&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">knot_2_m_pr_s</span><span class="p">(</span><span class="n">waypoint</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">model_extra</span><span class="p">[</span><span class="s2">&quot;sog&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">assert</span> <span class="n">situation</span><span class="o">.</span><span class="n">encounters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">encounter</span> <span class="ow">in</span> <span class="n">situation</span><span class="o">.</span><span class="n">encounters</span><span class="p">:</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">encounter</span><span class="o">.</span><span class="n">beta</span>
+        <span class="n">vector_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">encounter</span><span class="o">.</span><span class="n">vector_time</span>
+        <span class="k">if</span> <span class="n">beta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">List</span><span class="p">):</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">beta</span><span class="p">)):</span>
+                    <span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">encounter</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">encounter</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">vector_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">encounter</span><span class="o">.</span><span class="n">vector_time</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">vector_time</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">situation</span></div>
+
+
+
+<div class="viewcode-block" id="read_own_ship_static_file">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.read_own_ship_static_file">[docs]</a>
+<span class="k">def</span> <span class="nf">read_own_ship_static_file</span><span class="p">(</span><span class="n">own_ship_static_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShipStatic</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read own ship static data from file.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_file: Path to the own_ship_static_file file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * own_ship static information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">own_ship_static_file</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">ship_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="n">uuid4</span><span class="p">()</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">ship_id</span><span class="p">})</span>
+
+    <span class="n">ship_static</span><span class="p">:</span> <span class="n">ShipStatic</span> <span class="o">=</span> <span class="n">ShipStatic</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ship_static</span></div>
+
+
+
+<div class="viewcode-block" id="read_target_ship_static_files">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.read_target_ship_static_files">[docs]</a>
+<span class="k">def</span> <span class="nf">read_target_ship_static_files</span><span class="p">(</span><span class="n">target_ship_folder</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ShipStatic</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read target ship static data files.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * target_ship_folder: Path to the folder where target ships are found</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * target_ships_static: List of different target ships with static information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target_ships_static</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ShipStatic</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">target_ship_folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">)]):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_ship_folder</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">ship_id</span><span class="p">:</span> <span class="n">UUID</span> <span class="o">=</span> <span class="n">uuid4</span><span class="p">()</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">ship_id</span><span class="p">})</span>
+
+        <span class="n">target_ship_static</span><span class="p">:</span> <span class="n">ShipStatic</span> <span class="o">=</span> <span class="n">ShipStatic</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">target_ships_static</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_ship_static</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_ships_static</span></div>
+
+
+
+<div class="viewcode-block" id="read_encounter_settings_file">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.read_encounter_settings_file">[docs]</a>
+<span class="k">def</span> <span class="nf">read_encounter_settings_file</span><span class="p">(</span><span class="n">settings_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EncounterSettings</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read encounter settings file.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * settings_file: Path to the encounter setting file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * encounter_settings: Settings for the encounter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">settings_file</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">check_input_units</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">encounter_settings</span><span class="p">:</span> <span class="n">EncounterSettings</span> <span class="o">=</span> <span class="n">EncounterSettings</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">encounter_settings</span> <span class="o">=</span> <span class="n">convert_settings_data_from_maritime_to_si_units</span><span class="p">(</span><span class="n">encounter_settings</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">encounter_settings</span></div>
+
+
+
+<div class="viewcode-block" id="convert_settings_data_from_maritime_to_si_units">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.convert_settings_data_from_maritime_to_si_units">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_settings_data_from_maritime_to_si_units</span><span class="p">(</span><span class="n">settings</span><span class="p">:</span> <span class="n">EncounterSettings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EncounterSettings</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert situation data which is given in maritime units to SI units.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        * own_ship_file: Path to the own_ship_file file</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        * own_ship information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">settings</span><span class="o">.</span><span class="n">classification</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta13_criteria</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta13_criteria</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta14_criteria</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta14_criteria</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15_criteria</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15_criteria</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">deg_2_rad</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">theta15</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">vector_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">settings</span><span class="o">.</span><span class="n">situation_length</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">situation_length</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">max_meeting_distance</span> <span class="o">=</span> <span class="n">nm_2_m</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">max_meeting_distance</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">evolve_time</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">evolve_time</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">common_vector</span> <span class="o">=</span> <span class="n">min_2_s</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">common_vector</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">settings</span></div>
+
+
+
+<div class="viewcode-block" id="check_input_units">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.check_input_units">[docs]</a>
+<span class="k">def</span> <span class="nf">check_input_units</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if input unit is specified, if not specified it is set to SI.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="s2">&quot;input_units&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;input_units&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;si&quot;</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="camel_to_snake">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.camel_to_snake">[docs]</a>
+<span class="k">def</span> <span class="nf">camel_to_snake</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a camel case string to snake case.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">else</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="p">])</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="convert_keys_to_snake_case">
+<a class="viewcode-back" href="../../trafficgen.read_files.html#trafficgen.read_files.convert_keys_to_snake_case">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert keys in a nested dictionary from camel case to snake case.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">_convert_keys_to_snake_case</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_convert_keys_to_snake_case</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert keys in a nested dictionary from camel case to snake case.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Dict</span><span class="p">):</span>  <span class="c1"># Dict</span>
+        <span class="n">converted_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">converted_key</span> <span class="o">=</span> <span class="n">camel_to_snake</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">)):</span>
+                <span class="n">converted_value</span> <span class="o">=</span> <span class="n">_convert_keys_to_snake_case</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">converted_value</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">converted_dict</span><span class="p">[</span><span class="n">converted_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">converted_value</span>
+        <span class="k">return</span> <span class="n">converted_dict</span>
+
+    <span class="c1"># List</span>
+    <span class="n">converted_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">)):</span>
+            <span class="n">converted_value</span> <span class="o">=</span> <span class="n">_convert_keys_to_snake_case</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">converted_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">converted_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">converted_list</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, DNV, Tom Arne Pedersen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
