@@ -14,8 +14,8 @@
         },
         "initial": {
             "position": {
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "lat": 58.763449,
+                "lon": 10.490654
             },
             "sog": 10.0,
             "cog": 0.0,
@@ -25,14 +25,14 @@
         "waypoints": [
             {
                 "position": {
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "lat": 58.763449,
+                    "lon": 10.490654
                 }
             },
             {
                 "position": {
-                    "latitude": 58.7911568,
-                    "longitude": 10.490654
+                    "lat": 58.7911568,
+                    "lon": 10.490654
                 }
             }
         ]
@@ -50,8 +50,8 @@
             },
             "initial": {
                 "position": {
-                    "latitude": 58.8577654,
-                    "longitude": 10.4811325
+                    "lat": 58.8577654,
+                    "lon": 10.4811325
                 },
                 "sog": 12.1,
                 "cog": 175.73,
@@ -61,14 +61,14 @@
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.8577654,
-                        "longitude": 10.4811325
+                        "lat": 58.8577654,
+                        "lon": 10.4811325
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.8244624,
-                        "longitude": 10.4859231
+                        "lat": 58.8244624,
+                        "lon": 10.4859231
                     }
                 }
             ]
@@ -85,8 +85,8 @@
             },
             "initial": {
                 "position": {
-                    "latitude": 58.8080666,
-                    "longitude": 10.61331031
+                    "lat": 58.8080666,
+                    "lon": 10.61331031
                 },
                 "sog": 14.0,
                 "cog": 255.14,
@@ -96,14 +96,14 @@
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.8080666,
-                        "longitude": 10.61331031
+                        "lat": 58.8080666,
+                        "lon": 10.61331031
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.79811933,
-                        "longitude": 10.54115628
+                        "lat": 58.79811933,
+                        "lon": 10.54115628
                     }
                 }
             ]
@@ -120,8 +120,8 @@
             },
             "initial": {
                 "position": {
-                    "latitude": 58.76616017,
-                    "longitude": 10.49366079
+                    "lat": 58.76616017,
+                    "lon": 10.49366079
                 },
                 "sog": 6.0,
                 "cog": 356.44,
@@ -131,14 +131,14 @@
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.76616017,
-                        "longitude": 10.49366079
+                        "lat": 58.76616017,
+                        "lon": 10.49366079
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.78282583,
-                        "longitude": 10.49166335
+                        "lat": 58.78282583,
+                        "lon": 10.49166335
                     }
                 }
             ]

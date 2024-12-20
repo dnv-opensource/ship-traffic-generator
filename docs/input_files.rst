@@ -10,8 +10,8 @@ Example 1: Complete specified situation::
         "ownShip": {
             "initial": {
                 "position": {
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "lat": 58.763449,
+                    "lon": 10.490654
                 },
                 "sog": 10.0,
                 "cog": 0.0,
@@ -61,8 +61,8 @@ Example 2: Minimum specified situation::
         "ownShip": {
             "initial": {
                 "position": {
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "lat": 58.763449,
+                    "lon": 10.490654
                 },
                 "sog": 10.0,
                 "cog": 0.0,
@@ -89,8 +89,8 @@ Example 3: Generate multiple situations using `numSituations`::
         "ownShip": {
             "initial": {
                 "position": {
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "lat": 58.763449,
+                    "lon": 10.490654
                 },
                 "sog": 10.0,
                 "cog": 0.0,
@@ -116,8 +116,8 @@ Example 4: Assign range for `beta`::
             "speed": 7.0,
             "course": 0.0,
             "position": {
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "lat": 58.763449,
+                "lon": 10.490654
             }
         },
         "encounter": [

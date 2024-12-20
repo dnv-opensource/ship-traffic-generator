@@ -6,26 +6,23 @@ crossing give-way and stand-on.
 
 import random
 from typing import List, Optional, Tuple, Union
-from uuid import uuid4
 
 import numpy as np
-from maritime_schema.types.caga import (
-    AISNavStatus,
-    Initial,
-    OwnShip,
-    Position,
-    ShipStatic,
-    TargetShip,
-    Waypoint,
-)
 
 from trafficgen.check_land_crossing import path_crosses_land
 from trafficgen.marine_system_simulator import flat2llh, llh2flat
 from trafficgen.types import (
+    AisNavStatus,
     EncounterRelativeSpeed,
     EncounterSettings,
     EncounterType,
+    GeoPosition,
+    Initial,
+    OwnShip,
+    ShipStatic,
     SituationInput,
+    TargetShip,
+    Waypoint,
 )
 from trafficgen.utils import (
     calculate_bearing_between_waypoints,
@@ -67,18 +64,19 @@ def generate_encounter(
         * encounter_found: True=encounter found, False=encounter not found
     """
     encounter_found: bool = False
+    target_ship_id: int = 10  # Id of first target ship
     outer_counter: int = 0
 
     # Initiating some variables which later will be set if an encounter is found
     assert own_ship.initial is not None
-    target_ship_initial_position: Position = own_ship.initial.position
+    target_ship_initial_position: GeoPosition = own_ship.initial.position
     target_ship_sog: float = 0
     target_ship_cog: float = 0
 
     # Initial posision of own ship used as reference point for lat_lon0
-    lat_lon0: Position = Position(
-        latitude=own_ship.initial.position.latitude,
-        longitude=own_ship.initial.position.longitude,
+    lat_lon0: GeoPosition = GeoPosition(
+        lat=own_ship.initial.position.lat,
+        lon=own_ship.initial.position.lon,
     )
 
     target_ship_static: ShipStatic = decide_target_ship(target_ships_static)
@@ -117,7 +115,7 @@ def generate_encounter(
         )
 
         # Target ship
-        target_ship_position_future: Position = assign_future_position_to_target_ship(
+        target_ship_position_future: GeoPosition = assign_future_position_to_target_ship(
             own_ship_position_future, lat_lon0, settings.max_meeting_distance
         )
 
@@ -145,8 +143,8 @@ def generate_encounter(
             else:
                 target_ship_sog: float = relative_sog * own_ship.initial.sog
 
-            assert target_ship_static.speed_max is not None
-            target_ship_sog = round(np.minimum(target_ship_sog, target_ship_static.speed_max), 1)
+            assert target_ship_static.sog_max is not None
+            target_ship_sog = round(np.minimum(target_ship_sog, target_ship_static.sog_max), 1)
 
             target_ship_vector_length = target_ship_sog * vector_time
             start_position_target_ship, position_found = find_start_position_target_ship(
@@ -161,7 +159,7 @@ def generate_encounter(
             )
 
             if position_found:
-                target_ship_initial_position: Position = start_position_target_ship
+                target_ship_initial_position: GeoPosition = start_position_target_ship
                 target_ship_cog: float = calculate_ship_cog(
                     target_ship_initial_position, target_ship_position_future, lat_lon0
                 )
@@ -191,17 +189,18 @@ def generate_encounter(
                     encounter_found = encounter_ok
 
     if encounter_found:
-        target_ship_static.id = uuid4()
+        target_ship_static.id = target_ship_id
+        target_ship_id += 1
         target_ship_static.name = f"target_ship_{encounter_number}"
         target_ship_initial: Initial = Initial(
             position=target_ship_initial_position,
             sog=target_ship_sog,
             cog=target_ship_cog,
             heading=target_ship_cog,
-            nav_status=AISNavStatus.UNDER_WAY_USING_ENGINE,
+            nav_status=AisNavStatus.UNDER_WAY_USING_ENGINE,
         )
         target_ship_waypoint0 = Waypoint(
-            position=target_ship_initial_position.model_copy(deep=True), turn_radius=None, data=None
+            position=target_ship_initial_position.model_copy(deep=True), turn_radius=None, leg=None
         )
 
         future_position_target_ship = calculate_position_at_certain_time(
@@ -213,7 +212,7 @@ def generate_encounter(
         )
 
         target_ship_waypoint1 = Waypoint(
-            position=future_position_target_ship, turn_radius=None, data=None
+            position=future_position_target_ship, turn_radius=None, leg=None
         )
         waypoints = [target_ship_waypoint0, target_ship_waypoint1]
 
@@ -229,11 +228,11 @@ def generate_encounter(
 def check_encounter_evolvement(
     own_ship: OwnShip,
     own_ship_cog: float,
-    own_ship_position_future: Position,
-    lat_lon0: Position,
+    own_ship_position_future: GeoPosition,
+    lat_lon0: GeoPosition,
     target_ship_sog: float,
     target_ship_cog: float,
-    target_ship_position_future: Position,
+    target_ship_position_future: GeoPosition,
     desired_encounter_type: EncounterType,
     settings: EncounterSettings,
 ) -> bool:
@@ -298,7 +297,7 @@ def define_own_ship(
     desired_traffic_situation: SituationInput,
     own_ship_static: ShipStatic,
     encounter_settings: EncounterSettings,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
 ) -> OwnShip:
     """
     Define own ship based on information in desired traffic situation.
@@ -318,7 +317,7 @@ def define_own_ship(
         # If waypoints are not given, let initial position be the first waypoint,
         # then calculate second waypoint some time in the future
         own_ship_waypoint0 = Waypoint(
-            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
         )
         ship_position_future = calculate_position_at_certain_time(
             own_ship_initial.position,
@@ -327,12 +326,12 @@ def define_own_ship(
             own_ship_initial.cog,
             encounter_settings.situation_length,
         )
-        own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, data=None)
+        own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, leg=None)
         own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
     elif len(desired_traffic_situation.own_ship.waypoints) == 1:
         # If one waypoint is given, use initial position as first waypoint
         own_ship_waypoint0 = Waypoint(
-            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, data=None
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
         )
         own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0]
         own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
@@ -349,11 +348,11 @@ def define_own_ship(
 
 
 def calculate_min_vector_length_target_ship(
-    own_ship_position: Position,
+    own_ship_position: GeoPosition,
     own_ship_cog: float,
-    target_ship_position_future: Position,
+    target_ship_position_future: GeoPosition,
     desired_beta: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
 ) -> float:
     """
     Calculate minimum vector length (target ship sog x vector). This will
@@ -373,13 +372,13 @@ def calculate_min_vector_length_target_ship(
     psi: float = own_ship_cog + desired_beta
 
     own_ship_position_north, own_ship_position_east, _ = llh2flat(
-        own_ship_position.latitude, own_ship_position.longitude, lat_lon0.latitude, lat_lon0.longitude
+        own_ship_position.lat, own_ship_position.lon, lat_lon0.lat, lat_lon0.lon
     )
     target_ship_position_future_north, target_ship_position_future_east, _ = llh2flat(
-        target_ship_position_future.latitude,
-        target_ship_position_future.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        target_ship_position_future.lat,
+        target_ship_position_future.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
 
     p_1 = np.array([own_ship_position_north, own_ship_position_east])
@@ -392,15 +391,15 @@ def calculate_min_vector_length_target_ship(
 
 
 def find_start_position_target_ship(
-    own_ship_position: Position,
-    lat_lon0: Position,
+    own_ship_position: GeoPosition,
+    lat_lon0: GeoPosition,
     own_ship_cog: float,
-    target_ship_position_future: Position,
+    target_ship_position_future: GeoPosition,
     target_ship_vector_length: float,
     desired_beta: float,
     desired_encounter_type: EncounterType,
     settings: EncounterSettings,
-) -> Tuple[Position, bool]:
+) -> Tuple[GeoPosition, bool]:
     """
     Find start position of target ship using desired beta and vector length.
 
@@ -423,14 +422,12 @@ def find_start_position_target_ship(
     theta15_criteria: float = settings.classification.theta15_criteria
     theta15: List[float] = settings.classification.theta15
 
-    n_1, e_1, _ = llh2flat(
-        own_ship_position.latitude, own_ship_position.longitude, lat_lon0.latitude, lat_lon0.longitude
-    )
+    n_1, e_1, _ = llh2flat(own_ship_position.lat, own_ship_position.lon, lat_lon0.lat, lat_lon0.lon)
     n_2, e_2, _ = llh2flat(
-        target_ship_position_future.latitude,
-        target_ship_position_future.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        target_ship_position_future.lat,
+        target_ship_position_future.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
     v_r: float = target_ship_vector_length
     psi: float = own_ship_cog + desired_beta
@@ -466,16 +463,16 @@ def find_start_position_target_ship(
     e_32 = round(e_1 + s_2 * (e_4 - e_1), 0)
     n_32 = round(n_1 + s_2 * (n_4 - n_1), 0)
 
-    lat31, lon31, _ = flat2llh(n_31, e_31, lat_lon0.latitude, lat_lon0.longitude)
+    lat31, lon31, _ = flat2llh(n_31, e_31, lat_lon0.lat, lat_lon0.lon)
     target_ship_cog_1: float = calculate_ship_cog(
-        pos_0=Position(latitude=lat31, longitude=lon31),
+        pos_0=GeoPosition(lat=lat31, lon=lon31),
         pos_1=target_ship_position_future,
         lat_lon0=lat_lon0,
     )
     beta1, alpha1 = calculate_relative_bearing(
         position_own_ship=own_ship_position,
         heading_own_ship=own_ship_cog,
-        position_target_ship=Position(latitude=lat31, longitude=lon31),
+        position_target_ship=GeoPosition(lat=lat31, lon=lon31),
         heading_target_ship=target_ship_cog_1,
         lat_lon0=lat_lon0,
     )
@@ -483,16 +480,16 @@ def find_start_position_target_ship(
         alpha1, beta1, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
 
-    lat32, lon32, _ = flat2llh(n_32, e_32, lat_lon0.latitude, lat_lon0.longitude)
+    lat32, lon32, _ = flat2llh(n_32, e_32, lat_lon0.lat, lat_lon0.lon)
     target_ship_cog_2 = calculate_ship_cog(
-        pos_0=Position(latitude=lat32, longitude=lon32),
+        pos_0=GeoPosition(lat=lat32, lon=lon32),
         pos_1=target_ship_position_future,
         lat_lon0=lat_lon0,
     )
     beta2, alpha2 = calculate_relative_bearing(
         position_own_ship=own_ship_position,
         heading_own_ship=own_ship_cog,
-        position_target_ship=Position(latitude=lat32, longitude=lon32),
+        position_target_ship=GeoPosition(lat=lat32, lon=lon32),
         heading_target_ship=target_ship_cog_2,
         lat_lon0=lat_lon0,
     )
@@ -504,23 +501,23 @@ def find_start_position_target_ship(
         desired_encounter_type is colreg_state1
         and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.01
     ):
-        start_position_target_ship = Position(latitude=lat31, longitude=lon31)
+        start_position_target_ship = GeoPosition(lat=lat31, lon=lon31)
         start_position_found = True
     elif (
         desired_encounter_type is colreg_state2
         and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.01
     ):
-        start_position_target_ship = Position(latitude=lat32, longitude=lon32)
+        start_position_target_ship = GeoPosition(lat=lat32, lon=lon32)
         start_position_found = True
 
     return start_position_target_ship, start_position_found
 
 
 def assign_future_position_to_target_ship(
-    own_ship_position_future: Position,
-    lat_lon0: Position,
+    own_ship_position_future: GeoPosition,
+    lat_lon0: GeoPosition,
     max_meeting_distance: float,
-) -> Position:
+) -> GeoPosition:
     """
     Randomly assign future position of target ship. If drawing a circle with radius
     max_meeting_distance around future position of own ship, future position of
@@ -541,15 +538,15 @@ def assign_future_position_to_target_ship(
     random_distance = random.uniform(0, 1) * max_meeting_distance
 
     own_ship_position_future_north, own_ship_position_future_east, _ = llh2flat(
-        own_ship_position_future.latitude,
-        own_ship_position_future.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        own_ship_position_future.lat,
+        own_ship_position_future.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
     north: float = own_ship_position_future_north + random_distance * np.cos(random_angle)
     east: float = own_ship_position_future_east + random_distance * np.sin(random_angle)
-    latitude, longitude, _ = flat2llh(north, east, lat_lon0.latitude, lat_lon0.longitude)
-    return Position(latitude=latitude, longitude=longitude)
+    lat, lon, _ = flat2llh(north, east, lat_lon0.lat, lat_lon0.lon)
+    return GeoPosition(lat=lat, lon=lon)
 
 
 def determine_colreg(
@@ -607,20 +604,20 @@ def determine_colreg(
 
 
 def calculate_relative_bearing(
-    position_own_ship: Position,
+    position_own_ship: GeoPosition,
     heading_own_ship: float,
-    position_target_ship: Position,
+    position_target_ship: GeoPosition,
     heading_target_ship: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
 ) -> Tuple[float, float]:
     """
     Calculate relative bearing between own ship and target ship, both seen from
     own ship and seen from target ship.
 
     Params:
-        * position_own_ship: Own ship position {latitude, longitude} [rad]
+        * position_own_ship: Own ship position {lat, lon} [rad]
         * heading_own_ship: Own ship heading [rad]
-        * position_target_ship: Target ship position {latitude, longitude} [rad]
+        * position_target_ship: Target ship position {lat, lon} [rad]
         * heading_target_ship: Target ship heading [rad]
         * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
 
@@ -631,13 +628,13 @@ def calculate_relative_bearing(
     """
     # POSE combination of relative bearing and contact angle
     n_own_ship, e_own_ship, _ = llh2flat(
-        position_own_ship.latitude, position_own_ship.longitude, lat_lon0.latitude, lat_lon0.longitude
+        position_own_ship.lat, position_own_ship.lon, lat_lon0.lat, lat_lon0.lon
     )
     n_target_ship, e_target_ship, _ = llh2flat(
-        position_target_ship.latitude,
-        position_target_ship.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        position_target_ship.lat,
+        position_target_ship.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
 
     # Absolute bearing of target ship relative to own ship
@@ -687,20 +684,20 @@ def calculate_relative_bearing(
     return beta, alpha
 
 
-def calculate_ship_cog(pos_0: Position, pos_1: Position, lat_lon0: Position) -> float:
+def calculate_ship_cog(pos_0: GeoPosition, pos_1: GeoPosition, lat_lon0: GeoPosition) -> float:
     """
     Calculate ship cog between two waypoints.
 
     Params:
-        * waypoint_0: Dict, waypoint {latitude, longitude} [rad]
-        * waypoint_1: Dict, waypoint {latitude, longitude} [rad]
+        * waypoint_0: Dict, waypoint {lat, lon} [rad]
+        * waypoint_1: Dict, waypoint {lat, lon} [rad]
 
     Returns
     -------
         * cog: Ship cog [rad]
     """
-    n_0, e_0, _ = llh2flat(pos_0.latitude, pos_0.longitude, lat_lon0.latitude, lat_lon0.longitude)
-    n_1, e_1, _ = llh2flat(pos_1.latitude, pos_1.longitude, lat_lon0.latitude, lat_lon0.longitude)
+    n_0, e_0, _ = llh2flat(pos_0.lat, pos_0.lon, lat_lon0.lat, lat_lon0.lon)
+    n_1, e_1, _ = llh2flat(pos_1.lat, pos_1.lon, lat_lon0.lat, lat_lon0.lon)
 
     cog: float = np.arctan2(e_1 - e_0, n_1 - n_0)
     if cog < 0.0:

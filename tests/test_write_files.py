@@ -3,14 +3,13 @@
 from pathlib import Path
 from typing import List
 
-from maritime_schema.types.caga import (
-    TrafficSituation,
-)
-
 from trafficgen.read_files import (
     read_generated_situation_files,
 )
 from trafficgen.ship_traffic_generator import generate_traffic_situations
+from trafficgen.types import (
+    TrafficSituation,
+)
 from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
 
 

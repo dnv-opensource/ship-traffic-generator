@@ -3,18 +3,19 @@
 from pathlib import Path
 from typing import List, Set
 
-from maritime_schema.types.caga import (
-    GeneralShipType,
-    ShipStatic,
-)
-
 from trafficgen.read_files import (
     read_encounter_settings_file,
     read_own_ship_static_file,
     read_situation_files,
     read_target_ship_static_files,
 )
-from trafficgen.types import EncounterSettings, EncounterType, SituationInput
+from trafficgen.types import (
+    AisShipType,
+    EncounterSettings,
+    EncounterType,
+    ShipStatic,
+    SituationInput,
+)
 
 
 def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
@@ -152,11 +153,12 @@ def test_read_own_ship(own_ship_file: Path):
     Test reading own ship file.
     """
     own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
-    assert own_ship_static.length is not None
-    assert own_ship_static.width is not None
-    assert own_ship_static.speed_max is not None
+    assert own_ship_static.dimensions is not None
+    assert own_ship_static.dimensions.length is not None
+    assert own_ship_static.dimensions.width is not None
+    assert own_ship_static.sog_max is not None
     assert own_ship_static.mmsi is not None
-    assert own_ship_static.ship_type is GeneralShipType.PASSENGER
+    assert own_ship_static.ship_type is AisShipType.PASSENGER
 
 
 def test_read_target_ships(target_ships_folder: Path):
@@ -167,9 +169,10 @@ def test_read_target_ships(target_ships_folder: Path):
 
     # sourcery skip: no-loop-in-tests
     for target_ship_static in target_ships_static:
-        assert target_ship_static.length is not None
-        assert target_ship_static.width is not None
-        assert target_ship_static.speed_max is not None
+        assert target_ship_static.dimensions is not None
+        assert target_ship_static.dimensions.length is not None
+        assert target_ship_static.dimensions.width is not None
+        assert target_ship_static.sog_max is not None
 
 
 def test_read_encounter_settings_file(settings_file: Path):

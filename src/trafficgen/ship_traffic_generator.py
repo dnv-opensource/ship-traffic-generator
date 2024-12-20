@@ -1,15 +1,8 @@
 """Functions to generate traffic situations."""
 
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 from typing import List, Union
-
-from maritime_schema.types.caga import (
-    OwnShip,
-    Position,
-    ShipStatic,
-    TargetShip,
-    TrafficSituation,
-)
 
 from trafficgen.encounter import (
     define_own_ship,
@@ -21,7 +14,21 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_static_files,
 )
-from trafficgen.types import EncounterSettings, EncounterType, SituationInput
+from trafficgen.types import (
+    EncounterSettings,
+    EncounterType,
+    GeoPosition,
+    OwnShip,
+    ShipStatic,
+    SituationInput,
+    TargetShip,
+    TrafficSituation,
+)
+
+try:
+    project_version = version("trafficgen")
+except PackageNotFoundError:
+    project_version = "Not found"
 
 
 def generate_traffic_situations(
@@ -59,7 +66,7 @@ def generate_traffic_situations(
         assert desired_traffic_situation.own_ship is not None
         assert desired_traffic_situation.encounters is not None
 
-        lat_lon0: Position = desired_traffic_situation.own_ship.initial.position
+        lat_lon0: GeoPosition = desired_traffic_situation.own_ship.initial.position
 
         own_ship: OwnShip = define_own_ship(
             desired_traffic_situation, own_ship_static, encounter_settings, lat_lon0
@@ -86,12 +93,12 @@ def generate_traffic_situations(
                     target_ships.append(target_ship.model_copy(deep=True))
 
             traffic_situation: TrafficSituation = TrafficSituation(
+                version=project_version,
                 title=desired_traffic_situation.title,
                 description=desired_traffic_situation.description,
                 own_ship=own_ship.model_copy(deep=True),
                 target_ships=target_ships,
                 start_time=None,
-                environment=None,
             )
             traffic_situations.append(traffic_situation)
     return traffic_situations

@@ -6,12 +6,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Union, cast
 from uuid import UUID, uuid4
 
-from maritime_schema.types.caga import (
-    ShipStatic,
-    TrafficSituation,
-)
-
-from trafficgen.types import EncounterSettings, SituationInput
+from trafficgen.types import EncounterSettings, ShipStatic, SituationInput, TrafficSituation
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
 
@@ -81,24 +76,32 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
     """
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
-    situation.own_ship.initial.position.longitude = deg_2_rad(
-        situation.own_ship.initial.position.longitude
-    )
-    situation.own_ship.initial.position.latitude = deg_2_rad(
-        situation.own_ship.initial.position.latitude
-    )
+    assert situation.own_ship.initial.heading is not None
+    situation.own_ship.initial.position.lon = deg_2_rad(situation.own_ship.initial.position.lon)
+    situation.own_ship.initial.position.lat = deg_2_rad(situation.own_ship.initial.position.lat)
     situation.own_ship.initial.cog = deg_2_rad(situation.own_ship.initial.cog)
     situation.own_ship.initial.heading = deg_2_rad(situation.own_ship.initial.heading)
     situation.own_ship.initial.sog = knot_2_m_pr_s(situation.own_ship.initial.sog)
 
     if situation.own_ship.waypoints is not None:
         for waypoint in situation.own_ship.waypoints:
-            waypoint.position.latitude = deg_2_rad(waypoint.position.latitude)
-            waypoint.position.longitude = deg_2_rad(waypoint.position.longitude)
-            if waypoint.data is not None:
-                assert waypoint.data.model_extra
-                if waypoint.data.model_extra.get("sog") is not None:
-                    waypoint.data.model_extra["sog"]["value"] = knot_2_m_pr_s(waypoint.data.model_extra["sog"]["value"])  # type: ignore
+            waypoint.position.lat = deg_2_rad(waypoint.position.lat)
+            waypoint.position.lon = deg_2_rad(waypoint.position.lon)
+            if waypoint.turn_radius is not None:
+                waypoint.turn_radius = nm_2_m(waypoint.turn_radius)
+            if waypoint.leg is not None:
+                if waypoint.leg.starboard_xtd is not None:
+                    waypoint.leg.starboard_xtd = nm_2_m(waypoint.leg.starboard_xtd)
+                if waypoint.leg.portside_xtd is not None:
+                    waypoint.leg.portside_xtd = nm_2_m(waypoint.leg.portside_xtd)
+                if waypoint.leg.data is not None:
+                    if waypoint.leg.data.sog is not None:
+                        assert waypoint.leg.data.sog.value is not None
+                        assert waypoint.leg.data.sog.interp_start is not None
+                        assert waypoint.leg.data.sog.interp_end is not None
+                        waypoint.leg.data.sog.value = knot_2_m_pr_s(waypoint.leg.data.sog.value)
+                        waypoint.leg.data.sog.interp_start = nm_2_m(waypoint.leg.data.sog.interp_start)
+                        waypoint.leg.data.sog.interp_end = nm_2_m(waypoint.leg.data.sog.interp_end)
 
     assert situation.encounters is not None
     for encounter in situation.encounters:
@@ -133,7 +136,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     data = convert_keys_to_snake_case(data)
 
     if "id" not in data:
-        ship_id: UUID = uuid4()
+        ship_id: int = 0
         data.update({"id": ship_id})
 
     ship_static: ShipStatic = ShipStatic(**data)
@@ -162,7 +165,7 @@ def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
         data = convert_keys_to_snake_case(data)
 
         if "id" not in data:
-            ship_id: UUID = uuid4()
+            ship_id: int = 10 + i
             data.update({"id": ship_id})
 
         target_ship_static: ShipStatic = ShipStatic(**data)

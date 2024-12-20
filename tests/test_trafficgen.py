@@ -5,15 +5,15 @@ from typing import List
 
 import pytest
 from click.testing import CliRunner
-from maritime_schema.types.caga import (
-    TrafficSituation,
-)
 
 from trafficgen import cli
 from trafficgen.read_files import (
     read_generated_situation_files,
 )
 from trafficgen.ship_traffic_generator import generate_traffic_situations
+from trafficgen.types import (
+    TrafficSituation,
+)
 
 
 @pytest.fixture

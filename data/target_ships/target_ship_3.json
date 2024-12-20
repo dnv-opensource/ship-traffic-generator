@@ -1,7 +1,9 @@
 {
-    "length": 178,
-    "width": 30,
-    "height": 30,
-    "speedMax": 21,
+    "dimensions": {
+        "length": 178,
+        "width": 30,
+        "height": 30
+    },
+    "sogMax": 21,
     "shipType": "Passenger"
 }

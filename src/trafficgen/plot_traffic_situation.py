@@ -1,32 +1,32 @@
 # The matplotlib package is unfortunately not fully typed. Hence the following pyright exemption.
 # pyright: reportUnknownMemberType=false
 """Functions to prepare and plot traffic situations."""
+
 import math
 from typing import List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
 from folium import Map, Polygon
-from maritime_schema.types.caga import Position, Ship, TargetShip, TrafficSituation
 from matplotlib.axes import Axes as Axes
 from matplotlib.patches import Circle
 
 from trafficgen.marine_system_simulator import flat2llh, llh2flat
-from trafficgen.types import EncounterSettings
+from trafficgen.types import EncounterSettings, GeoPosition, Ship, TargetShip, TrafficSituation
 from trafficgen.utils import m_2_nm, rad_2_deg
 
 
 def calculate_vector_arrow(
-    position: Position,
+    position: GeoPosition,
     direction: float,
     vector_length: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
 ) -> List[Tuple[float, float]]:
     """
     Calculate the arrow with length vector pointing in the direction of ship course.
 
     Params:
-        * position: {latitude}, {longitude} position of the ship [rad]
+        * position: {lat}, {lon} position of the ship [rad]
         * direction: direction the arrow is pointing [rad]
         * vector_length: length of vector [m]
         * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
@@ -35,9 +35,7 @@ def calculate_vector_arrow(
     -------
         * arrow_points: Polygon points to draw the arrow [deg]
     """
-    north_start, east_start, _ = llh2flat(
-        position.latitude, position.longitude, lat_lon0.latitude, lat_lon0.longitude
-    )
+    north_start, east_start, _ = llh2flat(position.lat, position.lon, lat_lon0.lat, lat_lon0.lon)
 
     side_length = vector_length / 10
     sides_angle = 25
@@ -50,13 +48,13 @@ def calculate_vector_arrow(
     north_arrow_side_2 = north_end + side_length * np.cos(direction + np.pi + sides_angle)
     east_arrow_side_2 = east_end + side_length * np.sin(direction + np.pi + sides_angle)
 
-    lat_start, lon_start, _ = flat2llh(north_start, east_start, lat_lon0.latitude, lat_lon0.longitude)
-    lat_end, lon_end, _ = flat2llh(north_end, east_end, lat_lon0.latitude, lat_lon0.longitude)
+    lat_start, lon_start, _ = flat2llh(north_start, east_start, lat_lon0.lat, lat_lon0.lon)
+    lat_end, lon_end, _ = flat2llh(north_end, east_end, lat_lon0.lat, lat_lon0.lon)
     lat_arrow_side_1, lon_arrow_side_1, _ = flat2llh(
-        north_arrow_side_1, east_arrow_side_1, lat_lon0.latitude, lat_lon0.longitude
+        north_arrow_side_1, east_arrow_side_1, lat_lon0.lat, lat_lon0.lon
     )
     lat_arrow_side_2, lon_arrow_side_2, _ = flat2llh(
-        north_arrow_side_2, east_arrow_side_2, lat_lon0.latitude, lat_lon0.longitude
+        north_arrow_side_2, east_arrow_side_2, lat_lon0.lat, lat_lon0.lon
     )
 
     point_1 = (rad_2_deg(lat_start), rad_2_deg(lon_start))
@@ -68,9 +66,9 @@ def calculate_vector_arrow(
 
 
 def calculate_ship_outline(
-    position: Position,
+    position: GeoPosition,
     course: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
     ship_length: float = 100.0,
     ship_width: float = 15.0,
 ) -> List[Tuple[float, float]]:
@@ -78,7 +76,7 @@ def calculate_ship_outline(
     Calculate the outline of the ship pointing in the direction of ship course.
 
     Params:
-        * position: {latitude}, {longitude} position of the ship [rad]
+        * position: {lat}, {lon} position of the ship [rad]
         * course: course of the ship [rad]
         * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
         * ship_length: Ship length. If not given, ship length is set to 100
@@ -88,9 +86,7 @@ def calculate_ship_outline(
     -------
         * ship_outline_points: Polygon points to draw the ship [deg]
     """
-    north_start, east_start, _ = llh2flat(
-        position.latitude, position.longitude, lat_lon0.latitude, lat_lon0.longitude
-    )
+    north_start, east_start, _ = llh2flat(position.lat, position.lon, lat_lon0.lat, lat_lon0.lon)
 
     # increase size for visualizing
     ship_length *= 10
@@ -98,7 +94,7 @@ def calculate_ship_outline(
 
     north_pos1 = north_start + np.cos(course) * (-ship_length / 2) - np.sin(course) * ship_width / 2
     east_pos1 = east_start + np.sin(course) * (-ship_length / 2) + np.cos(course) * ship_width / 2
-    lat_pos1, lon_pos1, _ = flat2llh(north_pos1, east_pos1, lat_lon0.latitude, lat_lon0.longitude)
+    lat_pos1, lon_pos1, _ = flat2llh(north_pos1, east_pos1, lat_lon0.lat, lat_lon0.lon)
 
     north_pos2 = (
         north_start
@@ -110,11 +106,11 @@ def calculate_ship_outline(
         + np.sin(course) * (ship_length / 2 - ship_length * 0.1)
         + np.cos(course) * ship_width / 2
     )
-    lat_pos2, lon_pos2, _ = flat2llh(north_pos2, east_pos2, lat_lon0.latitude, lat_lon0.longitude)
+    lat_pos2, lon_pos2, _ = flat2llh(north_pos2, east_pos2, lat_lon0.lat, lat_lon0.lon)
 
     north_pos3 = north_start + np.cos(course) * (ship_length / 2)
     east_pos3 = east_start + np.sin(course) * (ship_length / 2)
-    lat_pos3, lon_pos3, _ = flat2llh(north_pos3, east_pos3, lat_lon0.latitude, lat_lon0.longitude)
+    lat_pos3, lon_pos3, _ = flat2llh(north_pos3, east_pos3, lat_lon0.lat, lat_lon0.lon)
 
     north_pos4 = (
         north_start
@@ -126,11 +122,11 @@ def calculate_ship_outline(
         + np.sin(course) * (ship_length / 2 - ship_length * 0.1)
         + np.cos(course) * (-ship_width / 2)
     )
-    lat_pos4, lon_pos4, _ = flat2llh(north_pos4, east_pos4, lat_lon0.latitude, lat_lon0.longitude)
+    lat_pos4, lon_pos4, _ = flat2llh(north_pos4, east_pos4, lat_lon0.lat, lat_lon0.lon)
 
     north_pos5 = north_start + np.cos(course) * (-ship_length / 2) - np.sin(course) * (-ship_width / 2)
     east_pos5 = east_start + np.sin(course) * (-ship_length / 2) + np.cos(course) * (-ship_width / 2)
-    lat_pos5, lon_pos5, _ = flat2llh(north_pos5, east_pos5, lat_lon0.latitude, lat_lon0.longitude)
+    lat_pos5, lon_pos5, _ = flat2llh(north_pos5, east_pos5, lat_lon0.lat, lat_lon0.lon)
 
     point_1 = (rad_2_deg(lat_pos1), rad_2_deg(lon_pos1))
     point_2 = (rad_2_deg(lat_pos2), rad_2_deg(lon_pos2))
@@ -168,7 +164,7 @@ def plot_specific_traffic_situation(
 
     lat_lon0 = situation.own_ship.initial.position
 
-    map_plot = Map(location=(rad_2_deg(lat_lon0.latitude), rad_2_deg(lat_lon0.longitude)), zoom_start=10)
+    map_plot = Map(location=(rad_2_deg(lat_lon0.lat), rad_2_deg(lat_lon0.lon)), zoom_start=10)
     map_plot = add_ship_to_map(
         situation.own_ship,
         encounter_settings.common_vector,
@@ -193,7 +189,7 @@ def plot_specific_traffic_situation(
 def add_ship_to_map(
     ship: Ship,
     vector_time: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
     map_plot: Optional[Map],
     color: str = "black",
 ) -> Map:
@@ -212,9 +208,7 @@ def add_ship_to_map(
         * m: Updated instance of Map.
     """
     if map_plot is None:
-        map_plot = Map(
-            location=(rad_2_deg(lat_lon0.latitude), rad_2_deg(lat_lon0.longitude)), zoom_start=10
-        )
+        map_plot = Map(location=(rad_2_deg(lat_lon0.lat), rad_2_deg(lat_lon0.lon)), zoom_start=10)
 
     assert ship.initial is not None
     vector_length = vector_time * ship.initial.sog
@@ -289,7 +283,7 @@ def plot_traffic_situations(
             xlabel="[nm]",
             ylabel="[nm]",
         )
-        _ = axes.set_title(situation.title)
+        _ = axes.set_title(str(situation.title))
         assert situation.own_ship is not None
         assert situation.own_ship.initial
         assert encounter_settings.common_vector is not None
@@ -322,7 +316,7 @@ def plot_traffic_situations(
 def find_max_value_for_plot(
     ship: Ship,
     max_value: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
 ) -> float:
     """
     Find the maximum deviation from the Reference point in north and east direction.
@@ -339,10 +333,10 @@ def find_max_value_for_plot(
     assert ship.initial is not None
 
     north, east, _ = llh2flat(
-        ship.initial.position.latitude,
-        ship.initial.position.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        ship.initial.position.lat,
+        ship.initial.position.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
     max_value = np.max(
         [
@@ -357,7 +351,7 @@ def find_max_value_for_plot(
 def add_ship_to_plot(
     ship: Ship,
     vector_time: float,
-    lat_lon0: Position,
+    lat_lon0: GeoPosition,
     axes: Optional[Axes],
     color: str = "black",
 ):
@@ -376,10 +370,10 @@ def add_ship_to_plot(
 
     assert ship.initial is not None
     pos_0_north, pos_0_east, _ = llh2flat(
-        ship.initial.position.latitude,
-        ship.initial.position.longitude,
-        lat_lon0.latitude,
-        lat_lon0.longitude,
+        ship.initial.position.lat,
+        ship.initial.position.lon,
+        lat_lon0.lat,
+        lat_lon0.lon,
     )
     pos_0_north = m_2_nm(pos_0_north)
     pos_0_east = m_2_nm(pos_0_east)

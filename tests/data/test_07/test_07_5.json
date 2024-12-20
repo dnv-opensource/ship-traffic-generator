@@ -4,8 +4,8 @@
     "ownShip": {
         "initial": {
             "position": {
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "lat": 58.763449,
+                "lon": 10.490654
             },
             "sog": 11.0,
             "cog": 45.0,

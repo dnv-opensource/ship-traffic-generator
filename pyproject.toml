@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trafficgen"
-version = "0.5.0"
+version = "0.7.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 authors = ["Tom Arne Pedersen <Tom.Arne.Pedersen@dnv.com>"]
 license = "MIT License"
@@ -17,7 +17,7 @@ basemap-data-hires = "^1.3.2"
 global-land-mask = "^1.0.0"
 folium = "^0.14.0"
 pydantic = "^2.5"
-maritime-schema = "^0.0.6"
+
 
 [tool.poetry.group.dev]
 optional = true

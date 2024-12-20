@@ -1,7 +1,9 @@
 {
-    "length": 50,
-    "width": 10,
-    "height": 8,
-    "speedMax": 15,
+    "dimensions": {
+        "length": 50,
+        "width": 10,
+        "height": 8
+    },
+    "sogMax": 15,
     "shipType": "Cargo"
 }

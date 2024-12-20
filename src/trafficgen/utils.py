@@ -3,9 +3,9 @@
 from typing import List
 
 import numpy as np
-from maritime_schema.types.caga import Position, Waypoint
 
 from trafficgen.marine_system_simulator import flat2llh, llh2flat
+from trafficgen.types import GeoPosition, Waypoint
 
 
 def knot_2_m_pr_s(speed_in_knot: float) -> float:
@@ -154,50 +154,48 @@ def convert_angle_0_to_2_pi_to_minus_pi_to_pi(angle_2_pi: float) -> float:
 
 
 def calculate_position_at_certain_time(
-    position: Position,
-    lat_lon0: Position,
+    position: GeoPosition,
+    lat_lon0: GeoPosition,
     speed: float,
     course: float,
     delta_time: float,
-) -> Position:
+) -> GeoPosition:
     """
     Calculate the position of the ship at a given time based on initial position
     and delta time, and constant speed and course.
 
     Params:
-        * position{latitude, longitude}: Initial ship position [rad]
+        * position{lat, lon}: Initial ship position [rad]
         * speed: Ship speed [m/s]
         * course: Ship course [rad]
         * delta_time: Delta time from now to the time new position is being calculated [minutes]
 
     Returns
     -------
-        * position{latitude, longitude}: Estimated ship position in delta time minutes [rad]
+        * position{lat, lon}: Estimated ship position in delta time minutes [rad]
     """
 
-    north, east, _ = llh2flat(
-        position.latitude, position.longitude, lat_lon0.latitude, lat_lon0.longitude
-    )
+    north, east, _ = llh2flat(position.lat, position.lon, lat_lon0.lat, lat_lon0.lon)
 
     north = north + speed * delta_time * np.cos(course)
     east = east + speed * delta_time * np.sin(course)
 
-    lat_future, lon_future, _ = flat2llh(north, east, lat_lon0.latitude, lat_lon0.longitude)
+    lat_future, lon_future, _ = flat2llh(north, east, lat_lon0.lat, lat_lon0.lon)
 
-    position_future: Position = Position(
-        latitude=lat_future,
-        longitude=lon_future,
+    position_future: GeoPosition = GeoPosition(
+        lat=lat_future,
+        lon=lon_future,
     )
     return position_future
 
 
-def calculate_distance(position_prev: Position, position_next: Position) -> float:
+def calculate_distance(position_prev: GeoPosition, position_next: GeoPosition) -> float:
     """
     Calculate the distance in meter between two waypoints.
 
     Params:
-        * position_prev{latitude, longitude}: Previous waypoint [rad]
-        * position_next{latitude, longitude}: Next waypoint [rad]
+        * position_prev{lat, lon}: Previous waypoint [rad]
+        * position_next{lat, lon}: Next waypoint [rad]
 
     Returns
     -------
@@ -205,7 +203,7 @@ def calculate_distance(position_prev: Position, position_next: Position) -> floa
     """
     # Using position of previous waypoint as reference point
     north_next, east_next, _ = llh2flat(
-        position_next.latitude, position_next.longitude, position_prev.latitude, position_prev.longitude
+        position_next.lat, position_next.lon, position_prev.lat, position_prev.lon
     )
 
     distance: float = np.sqrt(north_next**2 + east_next**2)
@@ -217,27 +215,27 @@ def calculate_position_along_track_using_waypoints(
     waypoints: List[Waypoint],
     inital_speed: float,
     vector_time: float,
-) -> Position:
+) -> GeoPosition:
     """
     Calculate the position of the ship at a given time based on initial position
     and delta time, and constant speed and course.
 
     Params:
-        * position{latitude, longitude}: Initial ship position [rad]
+        * position{lat, lon}: Initial ship position [rad]
         * speed: Ship speed [m/s]
         * course: Ship course [rad]
         * delta_time: Delta time from now to the time new position is being calculated [sec]
 
     Returns
     -------
-        * position{latitude, longitude}: Estimated ship position in delta time minutes [rad]
+        * position{lat, lon}: Estimated ship position in delta time minutes [rad]
     """
     time_in_transit: float = 0
 
     for i in range(1, len(waypoints)):
         ship_speed: float = inital_speed
-        if waypoints[i].data is not None and waypoints[i].data.model_extra["sog"] is not None:  # type: ignore
-            ship_speed = waypoints[i].data.model_extra["sog"]["value"]  # type: ignore
+        if waypoints[i].leg is not None and waypoints[i].leg.data.sog is not None:  # type: ignore
+            ship_speed = waypoints[i].leg.data.sog  # type: ignore
 
         dist_between_waypoints = calculate_distance(waypoints[i - 1].position, waypoints[i].position)
 
@@ -259,13 +257,13 @@ def calculate_position_along_track_using_waypoints(
     return waypoints[-1].position
 
 
-def calculate_bearing_between_waypoints(position_prev: Position, position_next: Position) -> float:
+def calculate_bearing_between_waypoints(position_prev: GeoPosition, position_next: GeoPosition) -> float:
     """
     Calculate the bearing in rad between two waypoints.
 
     Params:
-        * position_prev{latitude, longitude}: Previous waypoint [rad]
-        * position_next{latitude, longitude}: Next waypoint [rad]
+        * position_prev{lat, lon}: Previous waypoint [rad]
+        * position_next{lat, lon}: Next waypoint [rad]
 
     Returns
     -------
@@ -273,7 +271,7 @@ def calculate_bearing_between_waypoints(position_prev: Position, position_next: 
     """
     # Using position of previous waypoint as reference point
     north_next, east_next, _ = llh2flat(
-        position_next.latitude, position_next.longitude, position_prev.latitude, position_prev.longitude
+        position_next.lat, position_next.lon, position_prev.lat, position_prev.lon
     )
 
     bearing: float = convert_angle_minus_pi_to_pi_to_0_to_2_pi(np.arctan2(east_next, north_next))
@@ -282,24 +280,24 @@ def calculate_bearing_between_waypoints(position_prev: Position, position_next: 
 
 
 def calculate_destination_along_track(
-    position_prev: Position, distance: float, bearing: float
-) -> Position:
+    position_prev: GeoPosition, distance: float, bearing: float
+) -> GeoPosition:
     """
     Calculate the destination along the track between two waypoints when distance along the track is given.
 
     Params:
-        * position_prev{latitude, longitude}: Previous waypoint [rad]
+        * position_prev{lat, lon}: Previous waypoint [rad]
         * distance: Distance to travel [m]
         * bearing: Bearing from previous waypoint to next waypoint [rad]
 
     Returns
     -------
-        * destination{latitude, longitude}: Destination along the track [rad]
+        * destination{lat, lon}: Destination along the track [rad]
     """
     north = distance * np.cos(bearing)
     east = distance * np.sin(bearing)
 
-    lat, lon, _ = flat2llh(north, east, position_prev.latitude, position_prev.longitude)
-    destination = Position(latitude=lat, longitude=lon)
+    lat, lon, _ = flat2llh(north, east, position_prev.lat, position_prev.lon)
+    destination = GeoPosition(lat=lat, lon=lon)
 
     return destination
