@@ -6,7 +6,14 @@ from pathlib import Path
 from typing import Any, Dict, List, Union, cast
 from uuid import UUID, uuid4
 
-from trafficgen.types import EncounterSettings, ShipStatic, SituationInput, TrafficSituation
+from trafficgen.types import (
+    EncounterSettings,
+    OwnShip,
+    ShipStatic,
+    SituationInput,
+    TargetShip,
+    TrafficSituation,
+)
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
 
@@ -140,6 +147,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
         data.update({"id": ship_id})
 
     ship_static: ShipStatic = ShipStatic(**data)
+    ship_static = convert_ship_data_from_maritime_to_si_units(ship_static)
 
     return ship_static
 
@@ -169,8 +177,25 @@ def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
             data.update({"id": ship_id})
 
         target_ship_static: ShipStatic = ShipStatic(**data)
+        target_ship_static = convert_ship_data_from_maritime_to_si_units(target_ship_static)
         target_ships_static.append(target_ship_static)
     return target_ships_static
+
+
+def convert_ship_data_from_maritime_to_si_units(ship: ShipStatic) -> ShipStatic:
+    """
+    Convert ship static data which is given in maritime units to SI units.
+
+    Returns
+    -------
+        * ShipStatic
+    """
+    if ship.sog_max is not None:
+        ship.sog_max = knot_2_m_pr_s(ship.sog_max)
+    if ship.sog_min is not None:
+        ship.sog_min = knot_2_m_pr_s(ship.sog_min)
+
+    return ship
 
 
 def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
