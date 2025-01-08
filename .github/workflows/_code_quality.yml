@@ -3,55 +3,78 @@ name: Code Quality
 on: workflow_call
 
 jobs:
-  black:
-    name: black
+  ruff_format:
     runs-on: ubuntu-latest
+    name: ruff format
     steps:
       - uses: actions/checkout@v4
-      - uses: psf/black@stable
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          options: '--check --diff'
-          src: '.'
-          jupyter: true
-          version: '==23.12'
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
+      - name: Run ruff format
+        run: uv run ruff format --diff
 
-  ruff:
+  ruff_check:
     runs-on: ubuntu-latest
-    name: ruff
+    name: ruff check
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          python-version: '3.11'
-          cache: 'pip' # cache pip dependencies
-      - uses: actions/download-artifact@v4
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: requirements-files
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-      - name: Install ruff
-        run: pip install ruff==0.1.8
-      - name: Run ruff
-        run: ruff .
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
+      - name: Run ruff check
+        run: uv run ruff check --diff
 
   pyright:
     runs-on: ubuntu-latest
     name: pyright
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          python-version: '3.11'
-          cache: 'pip' # cache pip dependencies
-      - uses: actions/download-artifact@v4
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: requirements-files
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest
-      - name: Install pyright
-        run: pip install pyright==1.1.338
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
       - name: Run pyright
-        run: pyright .
+        run: uv run pyright
+
+  mypy:
+    runs-on: ubuntu-latest
+    name: mypy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
+      - name: Run mypy
+        run: uv run mypy
