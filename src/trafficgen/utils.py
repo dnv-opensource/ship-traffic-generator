@@ -1,7 +1,5 @@
 """Utility functions that are used by several other functions."""
 
-from typing import List
-
 import numpy as np
 
 from trafficgen.marine_system_simulator import flat2llh, llh2flat
@@ -19,7 +17,6 @@ def knot_2_m_pr_s(speed_in_knot: float) -> float:
     -------
         * speed_in_m_pr_s: Ship speed in meters pr second
     """
-
     knot_2_m_pr_sec: float = 0.5144
     return speed_in_knot * knot_2_m_pr_sec
 
@@ -35,7 +32,6 @@ def m_pr_s_2_knot(speed_in_m_pr_s: float) -> float:
     -------
         * speed_in_knot: Ship speed in knots
     """
-
     knot_2_m_pr_sec: float = 0.5144
     return speed_in_m_pr_s / knot_2_m_pr_sec
 
@@ -51,7 +47,6 @@ def min_2_s(time_in_min: float) -> float:
     -------
         * time_in_s: Time in seconds
     """
-
     min_2_s_coeff: float = 60.0
     return time_in_min * min_2_s_coeff
 
@@ -67,7 +62,6 @@ def m_2_nm(length_in_m: float) -> float:
     -------
         * length_in_nm: Length given in nautical miles
     """
-
     m_2_nm_coeff: float = 1.0 / 1852.0
     return m_2_nm_coeff * length_in_m
 
@@ -83,7 +77,6 @@ def nm_2_m(length_in_nm: float) -> float:
     -------
         * length_in_m: Length given in meters
     """
-
     nm_2_m_factor: float = 1852.0
     return length_in_nm * nm_2_m_factor
 
@@ -99,7 +92,6 @@ def deg_2_rad(angle_in_degrees: float) -> float:
     -------
         * angle given in radians: Angle given in radians
     """
-
     return angle_in_degrees * np.pi / 180.0
 
 
@@ -115,7 +107,6 @@ def rad_2_deg(angle_in_radians: float) -> float:
         * angle given in radians: Angle given in radians
 
     """
-
     return angle_in_radians * 180.0 / np.pi
 
 
@@ -132,7 +123,6 @@ def convert_angle_minus_pi_to_pi_to_0_to_2_pi(angle_pi: float) -> float:
         * angle_2_pi: Angle given in the region 0 to 2pi radians
 
     """
-
     return angle_pi if angle_pi >= 0.0 else angle_pi + 2 * np.pi
 
 
@@ -149,7 +139,6 @@ def convert_angle_0_to_2_pi_to_minus_pi_to_pi(angle_2_pi: float) -> float:
         * angle_pi: Angle given in the region -pi to pi radians
 
     """
-
     return angle_2_pi if (angle_2_pi >= 0.0) & (angle_2_pi <= np.pi) else angle_2_pi - 2 * np.pi
 
 
@@ -161,8 +150,9 @@ def calculate_position_at_certain_time(
     delta_time: float,
 ) -> GeoPosition:
     """
-    Calculate the position of the ship at a given time based on initial position
-    and delta time, and constant speed and course.
+    Calculate the position of the ship at a given time.
+
+    The calculated position is based on initial position and delta time, in addition to constant speed and course.
 
     Params:
         * position{lat, lon}: Initial ship position [rad]
@@ -174,7 +164,6 @@ def calculate_position_at_certain_time(
     -------
         * position{lat, lon}: Estimated ship position in delta time minutes [rad]
     """
-
     north, east, _ = llh2flat(position.lat, position.lon, lat_lon0.lat, lat_lon0.lon)
 
     north = north + speed * delta_time * np.cos(course)
@@ -202,9 +191,7 @@ def calculate_distance(position_prev: GeoPosition, position_next: GeoPosition) -
         * distance: Distance between waypoints [m]
     """
     # Using position of previous waypoint as reference point
-    north_next, east_next, _ = llh2flat(
-        position_next.lat, position_next.lon, position_prev.lat, position_prev.lon
-    )
+    north_next, east_next, _ = llh2flat(position_next.lat, position_next.lon, position_prev.lat, position_prev.lon)
 
     distance: float = np.sqrt(north_next**2 + east_next**2)
 
@@ -212,12 +199,14 @@ def calculate_distance(position_prev: GeoPosition, position_next: GeoPosition) -
 
 
 def calculate_position_along_track_using_waypoints(
-    waypoints: List[Waypoint],
+    waypoints: list[Waypoint],
     inital_speed: float,
     vector_time: float,
 ) -> GeoPosition:
     """
-    Calculate the position of the ship at a given time based on initial position
+    Calculate the position along the track using waypoints.
+
+    The position along the track is calculated based on initial position
     and delta time, and constant speed and course.
 
     Params:
@@ -234,8 +223,8 @@ def calculate_position_along_track_using_waypoints(
 
     for i in range(1, len(waypoints)):
         ship_speed: float = inital_speed
-        if waypoints[i].leg is not None and waypoints[i].leg.data.sog is not None:  # type: ignore
-            ship_speed = waypoints[i].leg.data.sog  # type: ignore
+        if waypoints[i].leg is not None and waypoints[i].leg.data.sog is not None:  # type: ignore[attr-defined]
+            ship_speed = waypoints[i].leg.data.sog  # type: ignore[attr-defined]
 
         dist_between_waypoints = calculate_distance(waypoints[i - 1].position, waypoints[i].position)
 
@@ -245,12 +234,8 @@ def calculate_position_along_track_using_waypoints(
         if dist_travel > dist_between_waypoints:
             time_in_transit = time_in_transit + dist_between_waypoints / ship_speed
         else:
-            bearing = calculate_bearing_between_waypoints(
-                waypoints[i - 1].position, waypoints[i].position
-            )
-            position_along_track = calculate_destination_along_track(
-                waypoints[i - 1].position, dist_travel, bearing
-            )
+            bearing = calculate_bearing_between_waypoints(waypoints[i - 1].position, waypoints[i].position)
+            position_along_track = calculate_destination_along_track(waypoints[i - 1].position, dist_travel, bearing)
             return position_along_track
 
     # if ship reach last waypoint in less time than vector_time, last waypoint is used
@@ -258,8 +243,7 @@ def calculate_position_along_track_using_waypoints(
 
 
 def calculate_bearing_between_waypoints(position_prev: GeoPosition, position_next: GeoPosition) -> float:
-    """
-    Calculate the bearing in rad between two waypoints.
+    """Calculate the bearing in rad between two waypoints.
 
     Params:
         * position_prev{lat, lon}: Previous waypoint [rad]
@@ -270,18 +254,14 @@ def calculate_bearing_between_waypoints(position_prev: GeoPosition, position_nex
         * bearing: Bearing between waypoints [m]
     """
     # Using position of previous waypoint as reference point
-    north_next, east_next, _ = llh2flat(
-        position_next.lat, position_next.lon, position_prev.lat, position_prev.lon
-    )
+    north_next, east_next, _ = llh2flat(position_next.lat, position_next.lon, position_prev.lat, position_prev.lon)
 
     bearing: float = convert_angle_minus_pi_to_pi_to_0_to_2_pi(np.arctan2(east_next, north_next))
 
     return bearing
 
 
-def calculate_destination_along_track(
-    position_prev: GeoPosition, distance: float, bearing: float
-) -> GeoPosition:
+def calculate_destination_along_track(position_prev: GeoPosition, distance: float, bearing: float) -> GeoPosition:
     """
     Calculate the destination along the track between two waypoints when distance along the track is given.
 

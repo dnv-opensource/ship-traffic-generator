@@ -11,8 +11,6 @@ Wiley. ISBN-13: 978-1119575054
 Parts of the library have been re-implemented in Python and are found below.
 """
 
-from typing import Tuple
-
 import numpy as np
 
 
@@ -23,10 +21,9 @@ def flat2llh(
     lon_0: float,
     z_n: float = 0.0,
     height_ref: float = 0.0,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
-    Compute lon lon (rad), lat lat (rad) and height h (m) for the
-    NED coordinates (xn,yn,zn).
+    Compute lon lon (rad), lat lat (rad) and height h (m) for the NED coordinates (xn,yn,zn).
 
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
@@ -80,10 +77,9 @@ def llh2flat(
     lon_0: float,
     height: float = 0.0,
     height_ref: float = 0.0,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
-    Compute (north, east) for a flat Earth coordinate system from lon
-    lon (rad) and lat lat (rad).
+    Compute (north, east) for a flat Earth coordinate system from lon lon (rad) and lat lat (rad).
 
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
@@ -109,7 +105,6 @@ def llh2flat(
         * y_n: Ship position, east [m]
         * z_n: Ship position, down [m]
     """
-
     # WGS-84 parameters
     a_radius = 6378137  # Semi-major axis (equitorial radius)
     f_factor = 1 / 298.257223563  # Flattening
@@ -149,5 +144,4 @@ def ssa(angle: float) -> float:
     -------
         * smallest_angle: "smallest signed angle" or the smallest difference between two angles
     """
-
     return np.mod(angle + np.pi, 2 * np.pi) - np.pi

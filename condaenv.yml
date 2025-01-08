@@ -1,5 +1,0 @@
-name: testenv
-channels:
-- defaults
-dependencies:
-- pip

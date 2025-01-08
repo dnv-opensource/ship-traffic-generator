@@ -1,11 +1,12 @@
 """
-Functions to generate encounters consisting of one own ship and one to many target ships.
+Functions to generate encounters.
+
+The encounters consist of one own ship and one to many target ships.
 The generated encounters may be of type head-on, overtaking give-way and stand-on and
 crossing give-way and stand-on.
 """
 
 import random
-from typing import List, Optional, Tuple, Union
 
 import numpy as np
 
@@ -36,13 +37,13 @@ from trafficgen.utils import (
 def generate_encounter(
     desired_encounter_type: EncounterType,
     own_ship: OwnShip,
-    target_ships_static: List[ShipStatic],
+    target_ships_static: list[ShipStatic],
     encounter_number: int,
-    beta_default: Optional[Union[List[float], float]],
-    relative_sog_default: Optional[float],
-    vector_time_default: Optional[float],
+    beta_default: list[float] | float | None,
+    relative_sog_default: float | None,
+    vector_time_default: float | None,
     settings: EncounterSettings,
-) -> Tuple[TargetShip, bool]:
+) -> tuple[TargetShip, bool]:
     """
     Generate an encounter.
 
@@ -90,13 +91,13 @@ def generate_encounter(
 
         # resetting vector_time, beta and relative_sog to default values before
         # new search for situation is done
-        vector_time: Union[float, None] = vector_time_default
+        vector_time: float | None = vector_time_default
 
         if vector_time is None:
             vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])
         if beta_default is None:
             beta: float = assign_beta(desired_encounter_type, settings)
-        elif isinstance(beta_default, List):
+        elif isinstance(beta_default, list):
             beta: float = assign_beta_from_list(beta_default)
         else:
             beta: float = beta_default
@@ -211,14 +212,10 @@ def generate_encounter(
             settings.situation_length,
         )
 
-        target_ship_waypoint1 = Waypoint(
-            position=future_position_target_ship, turn_radius=None, leg=None
-        )
+        target_ship_waypoint1 = Waypoint(position=future_position_target_ship, turn_radius=None, leg=None)
         waypoints = [target_ship_waypoint0, target_ship_waypoint1]
 
-        target_ship = TargetShip(
-            static=target_ship_static, initial=target_ship_initial, waypoints=waypoints
-        )
+        target_ship = TargetShip(static=target_ship_static, initial=target_ship_initial, waypoints=waypoints)
     else:
         # Since encounter is not found, using initial values from own ship. Will not be taken into use.
         target_ship = TargetShip(static=target_ship_static, initial=own_ship.initial, waypoints=None)
@@ -237,7 +234,9 @@ def check_encounter_evolvement(
     settings: EncounterSettings,
 ) -> bool:
     """
-    Check encounter evolvement. The generated encounter should be the same type of
+    Check encounter evolvement.
+
+    The generated encounter should be the same type of
     encounter (head-on, crossing, give-way) also some time before the encounter is started.
 
     Params:
@@ -253,7 +252,7 @@ def check_encounter_evolvement(
     theta13_criteria: float = settings.classification.theta13_criteria
     theta14_criteria: float = settings.classification.theta14_criteria
     theta15_criteria: float = settings.classification.theta15_criteria
-    theta15: List[float] = settings.classification.theta15
+    theta15: list[float] = settings.classification.theta15
 
     assert own_ship.initial is not None
 
@@ -327,16 +326,16 @@ def define_own_ship(
             encounter_settings.situation_length,
         )
         own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, leg=None)
-        own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+        own_ship_waypoints: list[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
     elif len(desired_traffic_situation.own_ship.waypoints) == 1:
         # If one waypoint is given, use initial position as first waypoint
         own_ship_waypoint0 = Waypoint(
             position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
         )
         own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0]
-        own_ship_waypoints: List[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+        own_ship_waypoints: list[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
     else:
-        own_ship_waypoints: List[Waypoint] = desired_traffic_situation.own_ship.waypoints
+        own_ship_waypoints: list[Waypoint] = desired_traffic_situation.own_ship.waypoints
 
     own_ship = OwnShip(
         static=own_ship_static,
@@ -355,8 +354,9 @@ def calculate_min_vector_length_target_ship(
     lat_lon0: GeoPosition,
 ) -> float:
     """
-    Calculate minimum vector length (target ship sog x vector). This will
-    ensure that ship sog is high enough to find proper situation.
+    Calculate minimum vector length (target ship sog x vector).
+
+    This is done to ensure that ship sog is high enough to find proper situation.
 
     Params:
         * own_ship_position: Own ship initial position, latitudinal [rad] and longitudinal [rad]
@@ -399,7 +399,7 @@ def find_start_position_target_ship(
     desired_beta: float,
     desired_encounter_type: EncounterType,
     settings: EncounterSettings,
-) -> Tuple[GeoPosition, bool]:
+) -> tuple[GeoPosition, bool]:
     """
     Find start position of target ship using desired beta and vector length.
 
@@ -420,7 +420,7 @@ def find_start_position_target_ship(
     theta13_criteria: float = settings.classification.theta13_criteria
     theta14_criteria: float = settings.classification.theta14_criteria
     theta15_criteria: float = settings.classification.theta15_criteria
-    theta15: List[float] = settings.classification.theta15
+    theta15: list[float] = settings.classification.theta15
 
     n_1, e_1, _ = llh2flat(own_ship_position.lat, own_ship_position.lon, lat_lon0.lat, lat_lon0.lon)
     n_2, e_2, _ = llh2flat(
@@ -436,12 +436,7 @@ def find_start_position_target_ship(
     e_4: float = e_1 + np.sin(psi)
 
     b: float = (
-        -2 * e_2 * e_4
-        - 2 * n_2 * n_4
-        + 2 * e_1 * e_2
-        + 2 * n_1 * n_2
-        + 2 * e_1 * (e_4 - e_1)
-        + 2 * n_1 * (n_4 - n_1)
+        -2 * e_2 * e_4 - 2 * n_2 * n_4 + 2 * e_1 * e_2 + 2 * n_1 * n_2 + 2 * e_1 * (e_4 - e_1) + 2 * n_1 * (n_4 - n_1)
     )
     a: float = (e_4 - e_1) ** 2 + (n_4 - n_1) ** 2
     c: float = e_2**2 + n_2**2 - 2 * e_1 * e_2 - 2 * n_1 * n_2 - v_r**2 + e_1**2 + n_1**2
@@ -519,9 +514,10 @@ def assign_future_position_to_target_ship(
     max_meeting_distance: float,
 ) -> GeoPosition:
     """
-    Randomly assign future position of target ship. If drawing a circle with radius
-    max_meeting_distance around future position of own ship, future position of
-    target ship shall be somewhere inside this circle.
+    Randomly assign future position of target ship.
+
+    If drawing a circle with radius max_meeting_distance around future position of own ship,
+    future position of target ship shall be somewhere inside this circle.
 
     Params:
         * own_ship_position_future: Dict, own ship position at a given time in the
@@ -555,10 +551,12 @@ def determine_colreg(
     theta13_criteria: float,
     theta14_criteria: float,
     theta15_criteria: float,
-    theta15: List[float],
+    theta15: list[float],
 ) -> EncounterType:
     """
-    Determine the colreg type based on alpha, relative bearing between target ship and own
+    Determine the colreg type.
+
+    Colreg type is based on alpha, relative bearing between target ship and own
     ship seen from target ship, and beta, relative bearing between own ship and target ship
     seen from own ship.
 
@@ -583,22 +581,13 @@ def determine_colreg(
     # Find appropriate rule set
     if (beta > theta15[0]) & (beta < theta15[1]) & (abs(alpha) - theta13_criteria <= 0.001):
         return EncounterType.OVERTAKING_STAND_ON
-    if (
-        (alpha_2_pi > theta15[0])
-        & (alpha_2_pi < theta15[1])
-        & (abs(beta_pi) - theta13_criteria <= 0.001)
-    ):
+    if (alpha_2_pi > theta15[0]) & (alpha_2_pi < theta15[1]) & (abs(beta_pi) - theta13_criteria <= 0.001):
         return EncounterType.OVERTAKING_GIVE_WAY
     if (abs(beta_pi) - theta14_criteria <= 0.001) & (abs(alpha) - theta14_criteria <= 0.001):
         return EncounterType.HEAD_ON
     if (beta > 0) & (beta < theta15[0]) & (alpha > -theta15[0]) & (alpha - theta15_criteria <= 0.001):
         return EncounterType.CROSSING_GIVE_WAY
-    if (
-        (alpha_2_pi > 0)
-        & (alpha_2_pi < theta15[0])
-        & (beta_pi > -theta15[0])
-        & (beta_pi - theta15_criteria <= 0.001)
-    ):
+    if (alpha_2_pi > 0) & (alpha_2_pi < theta15[0]) & (beta_pi > -theta15[0]) & (beta_pi - theta15_criteria <= 0.001):
         return EncounterType.CROSSING_STAND_ON
     return EncounterType.NO_RISK_COLLISION
 
@@ -609,10 +598,9 @@ def calculate_relative_bearing(
     position_target_ship: GeoPosition,
     heading_target_ship: float,
     lat_lon0: GeoPosition,
-) -> Tuple[float, float]:
+) -> tuple[float, float]:
     """
-    Calculate relative bearing between own ship and target ship, both seen from
-    own ship and seen from target ship.
+    Calculate relative bearing between own ship and target ship.
 
     Params:
         * position_own_ship: Own ship position {lat, lon} [rad]
@@ -627,9 +615,7 @@ def calculate_relative_bearing(
         * alpha: relative bearing between target ship and own ship seen from target ship [rad]
     """
     # POSE combination of relative bearing and contact angle
-    n_own_ship, e_own_ship, _ = llh2flat(
-        position_own_ship.lat, position_own_ship.lon, lat_lon0.lat, lat_lon0.lon
-    )
+    n_own_ship, e_own_ship, _ = llh2flat(position_own_ship.lat, position_own_ship.lon, lat_lon0.lat, lat_lon0.lon)
     n_target_ship, e_target_ship, _ = llh2flat(
         position_target_ship.lat,
         position_target_ship.lon,
@@ -705,7 +691,7 @@ def calculate_ship_cog(pos_0: GeoPosition, pos_1: GeoPosition, lat_lon0: GeoPosi
     return round(cog, 3)
 
 
-def assign_vector_time(vector_time_range: List[float]):
+def assign_vector_time(vector_time_range: list[float]) -> float:
     """
     Assign random (uniform) vector time.
 
@@ -716,9 +702,7 @@ def assign_vector_time(vector_time_range: List[float]):
     -------
         * vector_time: Vector time [min]
     """
-    vector_time: float = vector_time_range[0] + random.uniform(0, 1) * (
-        vector_time_range[1] - vector_time_range[0]
-    )
+    vector_time: float = vector_time_range[0] + random.uniform(0, 1) * (vector_time_range[1] - vector_time_range[0])
     return vector_time
 
 
@@ -727,7 +711,7 @@ def assign_sog_to_target_ship(
     own_ship_sog: float,
     min_target_ship_sog: float,
     relative_sog_setting: EncounterRelativeSpeed,
-):
+) -> float:
     """
     Assign random (uniform) sog to target ship depending on type of encounter.
 
@@ -755,10 +739,7 @@ def assign_sog_to_target_ship(
         relative_sog = [0.0, 0.0]
 
     # Check that minimum target ship sog is in the relative sog range
-    if (
-        min_target_ship_sog / own_ship_sog > relative_sog[0]
-        and min_target_ship_sog / own_ship_sog < relative_sog[1]
-    ):
+    if min_target_ship_sog / own_ship_sog > relative_sog[0] and min_target_ship_sog / own_ship_sog < relative_sog[1]:
         relative_sog[0] = min_target_ship_sog / own_ship_sog
 
     target_ship_sog: float = (
@@ -768,10 +749,12 @@ def assign_sog_to_target_ship(
     return target_ship_sog
 
 
-def assign_beta_from_list(beta_limit: List[float]) -> float:
+def assign_beta_from_list(beta_limit: list[float]) -> float:
     """
-    Assign random (uniform) relative bearing beta between own ship
-    and target ship depending between the limits given by beta_limit.
+    Assign random (uniform) relative bearing.
+
+    The beta between own ship
+    and target ship depending is somewhere between the limits given by beta_limit.
 
     Params:
         * beta_limit: Limits for beta
@@ -787,8 +770,7 @@ def assign_beta_from_list(beta_limit: List[float]) -> float:
 
 def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> float:
     """
-    Assign random (uniform) relative bearing beta between own ship
-    and target ship depending on type of encounter.
+    Assign random (uniform) relative bearing.
 
     Params:
         * encounter_type: Type of encounter
@@ -801,7 +783,7 @@ def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> f
     theta13_crit: float = settings.classification.theta13_criteria
     theta14_crit: float = settings.classification.theta14_criteria
     theta15_crit: float = settings.classification.theta15_criteria
-    theta15: List[float] = settings.classification.theta15
+    theta15: list[float] = settings.classification.theta15
 
     if encounter_type is EncounterType.OVERTAKING_STAND_ON:
         return theta15[0] + random.uniform(0, 1) * (theta15[1] - theta15[0])
@@ -818,7 +800,7 @@ def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> f
     return 0.0
 
 
-def decide_target_ship(target_ships_static: List[ShipStatic]) -> ShipStatic:
+def decide_target_ship(target_ships_static: list[ShipStatic]) -> ShipStatic:
     """
     Randomly pick a target ship from a list of target ships.
 

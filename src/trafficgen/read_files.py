@@ -3,21 +3,18 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Union, cast
-from uuid import UUID, uuid4
+from typing import Any, cast
 
 from trafficgen.types import (
     EncounterSettings,
-    OwnShip,
     ShipStatic,
     SituationInput,
-    TargetShip,
     TrafficSituation,
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
 
-def read_situation_files(situation_folder: Path) -> List[SituationInput]:
+def read_situation_files(situation_folder: Path) -> list[SituationInput]:
     """
     Read traffic situation files.
 
@@ -29,10 +26,10 @@ def read_situation_files(situation_folder: Path) -> List[SituationInput]:
     -------
         * situations: List of desired traffic situations
     """
-    situations: List[SituationInput] = []
+    situations: list[SituationInput] = []
     for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
-        file_path = os.path.join(situation_folder, file_name)
-        with open(file_path, encoding="utf-8") as f:
+        file_path = situation_folder / file_name
+        with Path.open(file_path, encoding="utf-8") as f:
             data = json.load(f)
 
         data = convert_keys_to_snake_case(data)
@@ -47,7 +44,7 @@ def read_situation_files(situation_folder: Path) -> List[SituationInput]:
     return situations
 
 
-def read_generated_situation_files(situation_folder: Path) -> List[TrafficSituation]:
+def read_generated_situation_files(situation_folder: Path) -> list[TrafficSituation]:
     """
     Read the generated traffic situation files. Used for testing the trafficgen algorithm.
 
@@ -58,10 +55,10 @@ def read_generated_situation_files(situation_folder: Path) -> List[TrafficSituat
     -------
         * situations: List of desired traffic situations
     """
-    situations: List[TrafficSituation] = []
+    situations: list[TrafficSituation] = []
     for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
-        file_path = os.path.join(situation_folder, file_name)
-        with open(file_path, encoding="utf-8") as f:
+        file_path = situation_folder / file_name
+        with Path.open(file_path, encoding="utf-8") as f:
             data = json.load(f)
         data = convert_keys_to_snake_case(data)
 
@@ -112,10 +109,10 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
 
     assert situation.encounters is not None
     for encounter in situation.encounters:
-        beta: Union[List[float], float, None] = encounter.beta
-        vector_time: Union[float, None] = encounter.vector_time
+        beta: list[float] | float | None = encounter.beta
+        vector_time: float | None = encounter.vector_time
         if beta is not None:
-            if isinstance(beta, List):
+            if isinstance(beta, list):
                 assert len(beta) == 2
                 for i in range(len(beta)):
                     beta[i] = deg_2_rad(beta[i])
@@ -138,7 +135,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     -------
         * own_ship static information
     """
-    with open(own_ship_static_file, encoding="utf-8") as f:
+    with Path.open(own_ship_static_file, encoding="utf-8") as f:
         data = json.load(f)
     data = convert_keys_to_snake_case(data)
 
@@ -152,7 +149,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     return ship_static
 
 
-def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
+def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     Read target ship static data files.
 
@@ -163,12 +160,12 @@ def read_target_ship_static_files(target_ship_folder: Path) -> List[ShipStatic]:
     -------
         * target_ships_static: List of different target ships with static information
     """
-    target_ships_static: List[ShipStatic] = []
+    target_ships_static: list[ShipStatic] = []
     i = 0
     for file_name in sorted([file for file in os.listdir(target_ship_folder) if file.endswith(".json")]):
         i = i + 1
-        file_path = os.path.join(target_ship_folder, file_name)
-        with open(file_path, encoding="utf-8") as f:
+        file_path = target_ship_folder / file_name
+        with Path.open(file_path, encoding="utf-8") as f:
             data = json.load(f)
         data = convert_keys_to_snake_case(data)
 
@@ -209,7 +206,7 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     -------
         * encounter_settings: Settings for the encounter
     """
-    with open(settings_file, encoding="utf-8") as f:
+    with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
     data = check_input_units(data)
     encounter_settings: EncounterSettings = EncounterSettings(**data)
@@ -249,9 +246,8 @@ def convert_settings_data_from_maritime_to_si_units(settings: EncounterSettings)
     return settings
 
 
-def check_input_units(data: Dict[str, Any]) -> Dict[str, Any]:
+def check_input_units(data: dict[str, Any]) -> dict[str, Any]:
     """Check if input unit is specified, if not specified it is set to SI."""
-
     if "input_units" not in data:
         data["input_units"] = "si"
 
@@ -263,33 +259,26 @@ def camel_to_snake(string: str) -> str:
     return "".join([f"_{c.lower()}" if c.isupper() else c for c in string]).lstrip("_")
 
 
-def convert_keys_to_snake_case(data: Dict[str, Any]) -> Dict[str, Any]:
+def convert_keys_to_snake_case(data: dict[str, Any]) -> dict[str, Any]:
     """Convert keys in a nested dictionary from camel case to snake case."""
-    return cast(Dict[str, Any], _convert_keys_to_snake_case(data))
+    return cast(dict[str, Any], _convert_keys_to_snake_case(data))
 
 
 def _convert_keys_to_snake_case(
-    data: Union[Dict[str, Any], List[Any]],
-) -> Union[Dict[str, Any], List[Any]]:
+    data: dict[str, Any] | list[Any],
+) -> dict[str, Any] | list[Any]:
     """Convert keys in a nested dictionary from camel case to snake case."""
-
-    if isinstance(data, Dict):  # Dict
-        converted_dict: Dict[str, Any] = {}
+    if isinstance(data, dict):  # Dict
+        converted_dict: dict[str, Any] = {}
         for key, value in data.items():
             converted_key = camel_to_snake(key)
-            if isinstance(value, (Dict, List)):
-                converted_value = _convert_keys_to_snake_case(value)
-            else:
-                converted_value = value
+            converted_value = _convert_keys_to_snake_case(value) if isinstance(value, dict | list) else value
             converted_dict[converted_key] = converted_value
         return converted_dict
 
     # List
-    converted_list: List[Any] = []
+    converted_list: list[Any] = []
     for value in data:
-        if isinstance(value, (Dict, List)):
-            converted_value = _convert_keys_to_snake_case(value)
-        else:
-            converted_value = value
+        converted_value = _convert_keys_to_snake_case(value) if isinstance(value, dict | list) else value
         converted_list.append(value)
     return converted_list

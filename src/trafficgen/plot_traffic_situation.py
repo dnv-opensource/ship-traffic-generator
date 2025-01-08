@@ -3,12 +3,11 @@
 """Functions to prepare and plot traffic situations."""
 
 import math
-from typing import List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
 from folium import Map, Polygon
-from matplotlib.axes import Axes as Axes
+from matplotlib.axes import Axes
 from matplotlib.patches import Circle
 
 from trafficgen.marine_system_simulator import flat2llh, llh2flat
@@ -21,7 +20,7 @@ def calculate_vector_arrow(
     direction: float,
     vector_length: float,
     lat_lon0: GeoPosition,
-) -> List[Tuple[float, float]]:
+) -> list[tuple[float, float]]:
     """
     Calculate the arrow with length vector pointing in the direction of ship course.
 
@@ -50,12 +49,8 @@ def calculate_vector_arrow(
 
     lat_start, lon_start, _ = flat2llh(north_start, east_start, lat_lon0.lat, lat_lon0.lon)
     lat_end, lon_end, _ = flat2llh(north_end, east_end, lat_lon0.lat, lat_lon0.lon)
-    lat_arrow_side_1, lon_arrow_side_1, _ = flat2llh(
-        north_arrow_side_1, east_arrow_side_1, lat_lon0.lat, lat_lon0.lon
-    )
-    lat_arrow_side_2, lon_arrow_side_2, _ = flat2llh(
-        north_arrow_side_2, east_arrow_side_2, lat_lon0.lat, lat_lon0.lon
-    )
+    lat_arrow_side_1, lon_arrow_side_1, _ = flat2llh(north_arrow_side_1, east_arrow_side_1, lat_lon0.lat, lat_lon0.lon)
+    lat_arrow_side_2, lon_arrow_side_2, _ = flat2llh(north_arrow_side_2, east_arrow_side_2, lat_lon0.lat, lat_lon0.lon)
 
     point_1 = (rad_2_deg(lat_start), rad_2_deg(lon_start))
     point_2 = (rad_2_deg(lat_end), rad_2_deg(lon_end))
@@ -71,7 +66,7 @@ def calculate_ship_outline(
     lat_lon0: GeoPosition,
     ship_length: float = 100.0,
     ship_width: float = 15.0,
-) -> List[Tuple[float, float]]:
+) -> list[tuple[float, float]]:
     """
     Calculate the outline of the ship pointing in the direction of ship course.
 
@@ -96,16 +91,8 @@ def calculate_ship_outline(
     east_pos1 = east_start + np.sin(course) * (-ship_length / 2) + np.cos(course) * ship_width / 2
     lat_pos1, lon_pos1, _ = flat2llh(north_pos1, east_pos1, lat_lon0.lat, lat_lon0.lon)
 
-    north_pos2 = (
-        north_start
-        + np.cos(course) * (ship_length / 2 - ship_length * 0.1)
-        - np.sin(course) * ship_width / 2
-    )
-    east_pos2 = (
-        east_start
-        + np.sin(course) * (ship_length / 2 - ship_length * 0.1)
-        + np.cos(course) * ship_width / 2
-    )
+    north_pos2 = north_start + np.cos(course) * (ship_length / 2 - ship_length * 0.1) - np.sin(course) * ship_width / 2
+    east_pos2 = east_start + np.sin(course) * (ship_length / 2 - ship_length * 0.1) + np.cos(course) * ship_width / 2
     lat_pos2, lon_pos2, _ = flat2llh(north_pos2, east_pos2, lat_lon0.lat, lat_lon0.lon)
 
     north_pos3 = north_start + np.cos(course) * (ship_length / 2)
@@ -113,15 +100,9 @@ def calculate_ship_outline(
     lat_pos3, lon_pos3, _ = flat2llh(north_pos3, east_pos3, lat_lon0.lat, lat_lon0.lon)
 
     north_pos4 = (
-        north_start
-        + np.cos(course) * (ship_length / 2 - ship_length * 0.1)
-        - np.sin(course) * (-ship_width / 2)
+        north_start + np.cos(course) * (ship_length / 2 - ship_length * 0.1) - np.sin(course) * (-ship_width / 2)
     )
-    east_pos4 = (
-        east_start
-        + np.sin(course) * (ship_length / 2 - ship_length * 0.1)
-        + np.cos(course) * (-ship_width / 2)
-    )
+    east_pos4 = east_start + np.sin(course) * (ship_length / 2 - ship_length * 0.1) + np.cos(course) * (-ship_width / 2)
     lat_pos4, lon_pos4, _ = flat2llh(north_pos4, east_pos4, lat_lon0.lat, lat_lon0.lon)
 
     north_pos5 = north_start + np.cos(course) * (-ship_length / 2) - np.sin(course) * (-ship_width / 2)
@@ -138,10 +119,10 @@ def calculate_ship_outline(
 
 
 def plot_specific_traffic_situation(
-    traffic_situations: List[TrafficSituation],
+    traffic_situations: list[TrafficSituation],
     situation_number: int,
     encounter_settings: EncounterSettings,
-):
+) -> None:
     """
     Plot a specific situation in map.
 
@@ -149,11 +130,10 @@ def plot_specific_traffic_situation(
         * traffic_situations: Generated traffic situations
         * situation_number: The specific situation to be plotted
     """
-
     num_situations = len(traffic_situations)
     if situation_number > num_situations:
         print(
-            f"Situation_number specified higher than number of situations available, plotting last situation: {num_situations}"
+            f"Situation_number specified higher than number of situations available, plotting last situation: {num_situations}"  # noqa: E501
         )
         situation_number = num_situations
 
@@ -173,7 +153,7 @@ def plot_specific_traffic_situation(
         "black",
     )
 
-    target_ships: Union[List[TargetShip], None] = situation.target_ships
+    target_ships: list[TargetShip] | None = situation.target_ships
     assert target_ships is not None
     for target_ship in target_ships:
         map_plot = add_ship_to_map(
@@ -190,7 +170,7 @@ def add_ship_to_map(
     ship: Ship,
     vector_time: float,
     lat_lon0: GeoPosition,
-    map_plot: Optional[Map],
+    map_plot: Map | None,
     color: str = "black",
 ) -> Map:
     """
@@ -232,11 +212,11 @@ def add_ship_to_map(
 
 
 def plot_traffic_situations(
-    traffic_situations: List[TrafficSituation],
+    traffic_situations: list[TrafficSituation],
     col: int,
     row: int,
     encounter_settings: EncounterSettings,
-):
+) -> None:
     """
     Plot the traffic situations in one more figures.
 
@@ -352,9 +332,9 @@ def add_ship_to_plot(
     ship: Ship,
     vector_time: float,
     lat_lon0: GeoPosition,
-    axes: Optional[Axes],
+    axes: Axes | None,
     color: str = "black",
-):
+) -> Axes:
     """
     Add the ship to the plot.
 
@@ -396,7 +376,7 @@ def add_ship_to_plot(
     )
     circle = Circle(
         xy=(pos_0_east, pos_0_north),
-        radius=vector_time / 3000.0,  # type: ignore
+        radius=vector_time / 3000.0,
         color=color,
     )
     _ = axes.add_patch(circle)

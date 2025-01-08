@@ -1,0 +1,13 @@
+[paths]
+source =
+    src/trafficgen
+    */site-packages/trafficgen
+
+[run]
+source = trafficgen
+branch = True
+
+[report]
+fail_under = 10.0
+show_missing = True
+skip_covered = True

@@ -1,7 +1,7 @@
 """Functions to clean traffic situations data before writing it to a json file."""
 
 from pathlib import Path
-from typing import List, TypeVar
+from typing import TypeVar
 
 from trafficgen.types import OwnShip, Ship, TargetShip, TrafficSituation
 from trafficgen.utils import m_2_nm, m_pr_s_2_knot, rad_2_deg
@@ -9,7 +9,7 @@ from trafficgen.utils import m_2_nm, m_pr_s_2_knot, rad_2_deg
 T_ship = TypeVar("T_ship", Ship, OwnShip, TargetShip)
 
 
-def write_traffic_situations_to_json_file(situations: List[TrafficSituation], write_folder: Path):
+def write_traffic_situations_to_json_file(situations: list[TrafficSituation], write_folder: Path) -> None:
     """
     Write traffic situations to json file.
 
@@ -17,7 +17,6 @@ def write_traffic_situations_to_json_file(situations: List[TrafficSituation], wr
         * traffic_situations: Traffic situations to be written to file
         * write_folder: Folder where the json files is to be written
     """
-
     Path(write_folder).mkdir(parents=True, exist_ok=True)
     for i, situation in enumerate(situations):
         file_number: int = i + 1
@@ -26,7 +25,7 @@ def write_traffic_situations_to_json_file(situations: List[TrafficSituation], wr
         data: str = situation.model_dump_json(
             by_alias=True, indent=4, exclude_unset=True, exclude_defaults=False, exclude_none=True
         )
-        with open(output_file_path, "w", encoding="utf-8") as outfile:
+        with Path.open(output_file_path, "w", encoding="utf-8") as outfile:
             _ = outfile.write(data)
 
 
@@ -86,14 +85,8 @@ def convert_ship_data_from_si_units_to_maritime(ship: T_ship) -> T_ship:
                         assert waypoint.leg.data.sog.value is not None
                         assert waypoint.leg.data.sog.interp_start is not None
                         assert waypoint.leg.data.sog.interp_end is not None
-                        waypoint.leg.data.sog.value = round(
-                            m_pr_s_2_knot(waypoint.leg.data.sog.value), 2
-                        )
-                        waypoint.leg.data.sog.interp_start = round(
-                            m_2_nm(waypoint.leg.data.sog.interp_start), 2
-                        )
-                        waypoint.leg.data.sog.interp_end = round(
-                            m_2_nm(waypoint.leg.data.sog.interp_end), 2
-                        )
+                        waypoint.leg.data.sog.value = round(m_pr_s_2_knot(waypoint.leg.data.sog.value), 2)
+                        waypoint.leg.data.sog.interp_start = round(m_2_nm(waypoint.leg.data.sog.interp_start), 2)
+                        waypoint.leg.data.sog.interp_end = round(m_2_nm(waypoint.leg.data.sog.interp_end), 2)
 
     return ship

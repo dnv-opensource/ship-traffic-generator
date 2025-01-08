@@ -6,45 +6,72 @@ the tool will generate a set of traffic situations. The traffic situations may b
 A paper is written describing the background for the tool and how it works <a href="./docs/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
 
 
-## Quickstart
-After you clone this repository, `trafficgen` can then be installed with the following steps:
+## UV
+This project uses `uv` as package manager.
+If you haven't already, install [uv](https://docs.astral.sh/uv), preferably using it's ["Standalone installer"](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2) method: <br>
+..on Windows:
 ```sh
-$ cd ship_traffic_generator
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+..on MacOS and Linux:
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+(see [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) for all / alternative installation methods.)
+
+Once installed, you can update `uv` to its latest version, anytime, by running:
+```sh
+uv self update
 ```
 
-It is recommended to install the `trafficgen` package and it's dependencies in a separate
-Python environment (Anaconda, pyenv, or virtualenv). `trafficgen` requires Python 3.10 or higher.
+## Python
+The traffic generator requires Python 3.10 or later. <br>
 
-In Anaconda this can be done with:
+If you don't already have a compatible version installed on your machine, you way install Python through `uv`:
 ```sh
-$ conda create --name myenv python=3.10
-$ conda activate myenv
+uv python install
+```
+This will install the latest stable version of Python into the uv Python directory, i.e. as a uv-managed version of Python.
+
+Alternatively, and if you want a standalone version of Python on your machine, you can install Python either via `winget`:
+```sh
+winget install --id Python.Python
+```
+or you can download and install Python from the [python.org](https://www.python.org/downloads/) website.
+
+## Clone the repository
+Clone the traffig generator repository into your local development directory:
+```sh
+git clone https://github.com/dnv-opensource/ship-traffic-generator path/to/your/dir/ship-traffic-generator
+```
+Change into the project directory after cloning:
+```sh
+cd ship-traffic-generator
 ```
 
-In Powershell terminal with venv (also from VSCode), this can be done with:
+## Install dependencies
+Run `uv sync` to create a virtual environment and install all project dependencies into it:
 ```sh
-$ python -m venv .venv
-$ .venv\Scripts\Activate.ps1
+uv sync
 ```
+> **Note**: Using `--no-dev` will omit installing development dependencies.
 
-Then update pip/setuptools, and install the dependencies for this repo:
-```sh
-$ python -m pip install --upgrade pip setuptools
-$ pip install -e .
-```
+> **Note**: `uv` will create a new virtual environment called `.venv` in the project root directory when running
+> `uv sync` the first time. Optionally, you can create your own virtual environment using e.g. `uv venv`, before running
+> `uv sync`.
 
-This will install the `trafficgen` Python package and command line tool (cli).
 You can check your installation by running:
 ```sh
-$ trafficgen --help
+uv run trafficgen --help
 ```
 
 For more information on usage, run:
 ```sh
-$ trafficgen gen-situation --help
+trafficgen gen-situation --help
 ```
 or build the documentation (see below).
 
+TODO: FORTSETT HER, HVORDAN BYGGE DOKUMENTASJON
 ## Development & Documentation
 For development (dependency management, documentation and testing) it is recommended to use [Poetry](https://python-poetry.org/docs/).
 See Poetry's documentation for information of how to install and set up.

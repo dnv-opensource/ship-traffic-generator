@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+title: trafficgen
+message: Ship Traffic Generator.
+type: software
+authors:
+  - name: DNV
+    address: 'Veritasveien 1, 1363 Høvik'
+    city: Oslo
+    website: 'https://www.dnv.com/'
+  - given-names: Tom Arne
+    family-names: Pedersen
+    email: Tom.Arne.Pedersen@dnv.com
+    affiliation: DNV
+  - given-names: Claas
+    family-names: Rostock
+    email: claas.rostock@dnv.com
+    affiliation: DNV
+  - given-names: Minos
+    family-names: Hemrich
+    email: Minos.Hemrich@dnv.com
+    affiliation: DNV
+testers:
+  - given-names: Grunde
+    family-names: Løvoll
+    affiliation: DNV
+  - given-names: Stephanie
+    family-names: Kemna
+    affiliation: DNV
+abstract: >-
+  The tool trafficgen generates unlimited set of encounters (based on input parameters)
+  to allow a systematic assessment of the vessel's ability to act according to COLREG
+  using simulation-based testing.
+keywords:
+  - Traffic Generator
+  - Simulation-based testing
+  - Systematic assessment
+license: MIT
+url: 'https://github.com/dnv-opensource/ship-traffic-generator'
+version: 0.6.0

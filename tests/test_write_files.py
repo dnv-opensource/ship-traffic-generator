@@ -1,16 +1,18 @@
 """Tests writing files."""
 
 from pathlib import Path
-from typing import List
+from typing import TYPE_CHECKING
 
 from trafficgen.read_files import (
     read_generated_situation_files,
 )
 from trafficgen.ship_traffic_generator import generate_traffic_situations
-from trafficgen.types import (
-    TrafficSituation,
-)
 from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
+
+if TYPE_CHECKING:
+    from trafficgen.types import (
+        TrafficSituation,
+    )
 
 
 def test_write_situations_multiple(
@@ -22,14 +24,14 @@ def test_write_situations_multiple(
 ):
     """Test writing multiple traffic situations in one call."""
 
-    situations: List[TrafficSituation] = generate_traffic_situations(
+    situations: list[TrafficSituation] = generate_traffic_situations(
         situation_folder=situations_folder,
         own_ship_file=own_ship_file,
         target_ship_folder=target_ships_folder,
         settings_file=settings_file,
     )
     write_traffic_situations_to_json_file(situations, output_folder)
-    reread_situations: List[TrafficSituation] = read_generated_situation_files(output_folder)
+    reread_situations: list[TrafficSituation] = read_generated_situation_files(output_folder)
 
     assert len(situations) == len(reread_situations)
 

@@ -27,7 +27,6 @@ def path_crosses_land(
     -------
         is_on_land: True if parts of the path crosses land.
     """
-
     num_checks = 10
     for i in range(int(time_interval / num_checks)):
         position_2 = calculate_position_at_certain_time(
