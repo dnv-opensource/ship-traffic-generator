@@ -5,7 +5,7 @@ from __future__ import annotations
 import datetime
 from enum import Enum
 from importlib.metadata import PackageNotFoundError, version
-from typing import Annotated, Any, Optional, Self
+from typing import Annotated, Any, Self
 
 from pydantic import BaseModel, ConfigDict
 from pydantic.fields import Field
