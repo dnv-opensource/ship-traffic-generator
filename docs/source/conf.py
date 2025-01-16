@@ -40,7 +40,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.todo",
     "sphinxcontrib.mermaid",
-    "sphinx_click"
+    "sphinx_click",
 ]
 
 # Extenstion for myst_parser
@@ -70,7 +70,7 @@ exclude_patterns = []
 html_title = f"trafficgen {release}"
 html_theme = "furo"
 html_static_path = ["_static"]
-html_logo = "_static/DNV_logo.png"
+html_logo = "_static/DNV_logo_RGB.jpg"
 autodoc_default_options = {
     "member-order": "groupwise",
     "undoc-members": True,
