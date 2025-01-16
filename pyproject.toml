@@ -112,7 +112,6 @@ mypy_path = "stubs"
 files = [
     "src",
     "tests",
-    "data",
 ]
 exclude = [
     "^src/folder_to_be_excluded/",
