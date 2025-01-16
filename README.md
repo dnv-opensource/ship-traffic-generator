@@ -5,6 +5,11 @@ the tool will generate a set of traffic situations. The traffic situations may b
 
 A paper is written describing the background for the tool and how it works <a href="./docs/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
 
+## Installation
+To install Ship Traffic Generator, run this command in your terminal:
+```sh
+pip install trafficgen
+```
 
 ## UV
 This project uses `uv` as package manager.
