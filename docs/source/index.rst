@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-my-package Documentation
+Trafficgen Documentation
 ========================
 
 .. toctree::
@@ -12,7 +12,6 @@ my-package Documentation
 
    README
    api
-   cli
    CHANGELOG
    STYLEGUIDE
    LICENSE

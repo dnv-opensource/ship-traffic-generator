@@ -112,3 +112,4 @@ ENV/
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+docs/source/input_files.rst

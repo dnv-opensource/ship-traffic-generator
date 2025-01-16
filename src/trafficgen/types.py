@@ -1,9 +1,11 @@
 """Domain specific data types used in trafficgen."""
 
+from __future__ import annotations
+
 import datetime
 from enum import Enum
 from importlib.metadata import PackageNotFoundError, version
-from typing import Annotated, Any, Optional
+from typing import Annotated, Any, Optional, Self
 
 from pydantic import BaseModel, ConfigDict
 from pydantic.fields import Field
@@ -12,7 +14,7 @@ from pyproj import Geod
 try:
     project_version = version("trafficgen")
 except PackageNotFoundError:
-    project_version = None
+    project_version = "-.-"
 
 
 def to_camel(string: str) -> str:
@@ -38,14 +40,18 @@ class StringIntEnumMixin(str, Enum):
     - String value with underscores: "underway_using_engine"
     """
 
-    def __new__(cls: type["StringIntEnumMixin"], str_value: str, num_value: int) -> "StringIntEnumMixin":  # noqa: D102
+    def __init__(self, str_value: str, num_value: int) -> None:
+        self._value_ = str_value
+        self.num_value = num_value
+
+    def __new__(cls: type[Self], str_value: str, num_value: int) -> Self:  # noqa: D102
         obj = str.__new__(cls, str_value)
         obj._value_ = str_value  # Assign the string value
-        obj.num_value = num_value  # type: ignore[PGH003]
+        obj.num_value = num_value
         return obj
 
     @classmethod
-    def _missing_(cls: type["StringIntEnumMixin"], value: object) -> Optional["StringIntEnumMixin"]:
+    def _missing_(cls: type[Self], value: object) -> Self | None:
         # Handle case-insensitive string matching and underscores
         if isinstance(value, str):
             value_str = value.replace("_", " ").lower()

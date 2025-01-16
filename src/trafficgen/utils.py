@@ -227,9 +227,10 @@ def calculate_position_along_track_using_waypoints(
 
     for i in range(1, len(waypoints)):
         ship_speed: float = inital_speed
-        if waypoints[i].leg is not None and waypoints[i].leg.data.sog is not None:  # type: ignore[attr-defined]
-            assert waypoints[i].leg.data.sog.value is not None  # type: ignore  # noqa: PGH003
-            ship_speed = waypoints[i].leg.data.sog.value  # type: ignore  # noqa: PGH003
+        waypoint: Waypoint = waypoints[i]
+        if waypoint.leg is not None and waypoint.leg.data is not None and waypoint.leg.data.sog is not None:
+            assert waypoint.leg.data.sog.value is not None
+            ship_speed = waypoint.leg.data.sog.value
 
         dist_between_waypoints = calculate_distance(waypoints[i - 1].position, waypoints[i].position)
 

@@ -21,12 +21,12 @@ sys.path.insert(0, str(Path("../../src").absolute()))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "my-package"
-copyright = "2024, DNV AS. All rights reserved."
-author = "Author One, Author Two, Author Three"
+project = "trafficgen"
+copyright = "2025, DNV AS. All rights reserved."
+author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = "0.6.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -40,6 +40,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.todo",
     "sphinxcontrib.mermaid",
+    "sphinx_click"
 ]
 
 # Extenstion for myst_parser
@@ -66,10 +67,10 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_title = f"my-package {release}"
+html_title = f"trafficgen {release}"
 html_theme = "furo"
 html_static_path = ["_static"]
-html_logo = "_static/my_package.svg"
+html_logo = "_static/DNV_logo.png"
 autodoc_default_options = {
     "member-order": "groupwise",
     "undoc-members": True,

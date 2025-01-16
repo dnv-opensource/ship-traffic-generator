@@ -28,7 +28,7 @@ name = "trafficgen"
 version = "0.6.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
-requires-python = ">= 3.10"
+requires-python = ">= 3.11"
 license = { file = "LICENSE" }
 authors = [
     { name = "Tom Arne Pedersen", email = "Tom.Arne.Pedersen@dnv.com" },
@@ -47,7 +47,6 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Operating System :: Microsoft :: Windows",
@@ -92,6 +91,7 @@ dev = [
     "sphinx-argparse-cli>=1.19",
     "sphinx-autodoc-typehints>=2.5",
     "sphinxcontrib-mermaid>=1.0.0",
+    "sphinx-click>=6.0.0",
     "myst-parser>=4.0",
     "furo>=2024.8",
     "jupyter>=1.1",

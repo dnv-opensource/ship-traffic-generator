@@ -10,8 +10,18 @@ To install Ship Traffic Generator, run this command in your terminal:
 ```sh
 pip install trafficgen
 ```
+This is the preferred method to install Traffic Generator, as it will always install the most recent stable release.
 
-## UV
+You can check your installation by running:
+```sh
+uv run trafficgen --help
+```
+
+See documentation for usage of the Ship Traffic Generator.
+
+## Development Setup
+
+### Install UV
 This project uses `uv` as package manager.
 If you haven't already, install [uv](https://docs.astral.sh/uv), preferably using it's ["Standalone installer"](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2) method: <br>
 ..on Windows:
@@ -29,8 +39,8 @@ Once installed, you can update `uv` to its latest version, anytime, by running:
 uv self update
 ```
 
-## Python
-The traffic generator requires Python 3.10 or later. <br>
+### Install Python
+The traffic generator requires Python 3.11 or later. <br>
 
 If you don't already have a compatible version installed on your machine, you way install Python through `uv`:
 ```sh
@@ -44,7 +54,7 @@ winget install --id Python.Python
 ```
 or you can download and install Python from the [python.org](https://www.python.org/downloads/) website.
 
-## Clone the repository
+### Clone the repository
 Clone the traffig generator repository into your local development directory:
 ```sh
 git clone https://github.com/dnv-opensource/ship-traffic-generator path/to/your/dir/ship-traffic-generator
@@ -54,7 +64,7 @@ Change into the project directory after cloning:
 cd ship-traffic-generator
 ```
 
-## Install dependencies
+### Install dependencies
 Run `uv sync` to create a virtual environment and install all project dependencies into it:
 ```sh
 uv sync
@@ -65,60 +75,28 @@ uv sync
 > `uv sync` the first time. Optionally, you can create your own virtual environment using e.g. `uv venv`, before running
 > `uv sync`.
 
-You can check your installation by running:
+### (Optional) Activate the virtual environment
+When using `uv`, there is in almost all cases no longer a need to manually activate the virtual environment. <br>
+`uv` will find the `.venv` virtual environment in the working directory or any parent directory, and activate it on the fly whenever you run a command via `uv` inside your project folder structure:
 ```sh
-uv run trafficgen --help
+uv run <command>
 ```
 
-For more information on usage, run:
+However, you still _can_ manually activate the virtual environment if needed.
+When developing in an IDE, for instance, this can in some cases be necessary depending on your IDE settings.
+To manually activate the virtual environment, run one of the "known" legacy commands: <br>
+..on Windows:
 ```sh
-trafficgen gen-situation --help
+.venv\Scripts\activate.bat
 ```
-or build the documentation (see below).
-
-TODO: FORTSETT HER, HVORDAN BYGGE DOKUMENTASJON
-## Development & Documentation
-For development (dependency management, documentation and testing) it is recommended to use [Poetry](https://python-poetry.org/docs/).
-See Poetry's documentation for information of how to install and set up.
-
-See above notes about creating and using a virtual environment.
-To install the package, including dev and doc dependencies:
+..on Linux:
 ```sh
-$ cd ship_traffic_generator
-$ poetry install
-$ poetry install --with dev,docs
-```
-which will install the package, the cli and all development and documentation dependencies.
-
-
-You can check your installation with:
-```sh
-$ trafficgen --help
-```
-or
-```sh
-$ trafficgen gen-situation --help
-```
-Note: You may have to restart your terminal (or update the path) for the command line command to work, or use the Poetry shell (`poetry shell`) to correct the search path.
-
-Testing in the project is done using [pytest](https://docs.pytest.org/) and
-the format of the code is checked with [flake8](https://flake8.pycqa.org/en/latest/).
-You can run the tests and check formating with [`tox`](https://tox.wiki/):
-```sh
-$ tox run
+source .venv/bin/activate
 ```
 
-To generate documentation do:
+### Documentation
+To generate documentation use:
 ```sh
-$ cd docs
-$ sphinx-build -M html . build
+uv run docs/make.bat html
 ```
 The html documentation will then be available in `docs/build/html/index.html`
-
-
-
-
-## Credits
-This package was created with Cookiecutter and the `audreyr/cookiecutter-pypackage` project template.
-* [Cookiecutter](https://github.com/audreyr/cookiecutter)
-* [`audreyr/cookiecutter-pypackage`](https://github.com/audreyr/cookiecutter-pypackage)
