@@ -112,6 +112,8 @@ def rad_2_deg(angle_in_radians: float) -> float:
 
 def convert_angle_minus_pi_to_pi_to_0_to_2_pi(angle_pi: float) -> float:
     """
+    Angle conversion functions.
+
     Convert an angle given in the region -pi to pi degrees to an
     angle given in the region 0 to 2pi radians.
 
@@ -128,6 +130,8 @@ def convert_angle_minus_pi_to_pi_to_0_to_2_pi(angle_pi: float) -> float:
 
 def convert_angle_0_to_2_pi_to_minus_pi_to_pi(angle_2_pi: float) -> float:
     """
+    Angle conversion functions.
+
     Convert an angle given in the region 0 to 2*pi degrees to an
     angle given in the region -pi to pi degrees.
 

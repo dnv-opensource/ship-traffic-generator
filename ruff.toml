@@ -79,7 +79,9 @@ ignore-names = [
 ]
 
 [lint.pylint]
-max-args = 7
+max-args = 10
+max-statements = 75
+max-branches = 15
 
 [lint.flake8-pytest-style]
 raises-require-match-for = [

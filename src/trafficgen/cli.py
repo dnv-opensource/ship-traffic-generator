@@ -37,7 +37,7 @@ output_folder: Path = default_data_path / "test_output"
 
 @click.group()
 @click_log.simple_verbosity_option(logger)
-def main(args=None):
+def main(args=None):  # noqa: ANN001, ANN201, ARG001
     """Entry point for console script as configured in pyproject.toml.
 
     Runs the command line interface and parses arguments and options entered on the console.
@@ -113,16 +113,16 @@ def main(args=None):
     help="Plot individual traffic situation, specify an INTEGER value larger than 0.",
 )
 def gen_situation(
-    situations,
-    own_ship,
-    targets,
-    settings,
-    visualize,
-    col,
-    row,
-    visualize_situation,
-    output,
-):
+    situations: str,
+    own_ship: str,
+    targets: str,
+    settings: str,
+    col: int,
+    row: int,
+    visualize_situation: int,
+    output: str,
+    visualize: bool,  # noqa: FBT001
+) -> None:
     r"""Console script for trafficgen.
     Example: \n
     trafficgen gen-situation -s ./data/example_situations_input

@@ -2,6 +2,7 @@
 # pyright: reportUnknownMemberType=false
 """Functions to prepare and plot traffic situations."""
 
+import logging
 import math
 
 import matplotlib.pyplot as plt
@@ -132,8 +133,13 @@ def plot_specific_traffic_situation(
     """
     num_situations = len(traffic_situations)
     if situation_number > num_situations:
-        print(
-            f"Situation_number specified higher than number of situations available, plotting last situation: {num_situations}"  # noqa: E501
+        # Configure logging
+        logging.basicConfig(level=logging.INFO)
+
+        # Replace print with logging
+        logging.info(
+            f"Situation_number specified higher than number of situations available, "
+            f"plotting last situation: {num_situations}"
         )
         situation_number = num_situations
 

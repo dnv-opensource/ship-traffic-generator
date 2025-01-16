@@ -85,7 +85,8 @@ def generate_encounter(
 
     # Searching for encounter. Two loops used. Only vector time is locked in the
     # first loop. In the second loop, beta and sog are assigned.
-    while not encounter_found and outer_counter < 5:
+    maximum_loops = 5
+    while not encounter_found and outer_counter < maximum_loops:
         outer_counter += 1
         inner_counter: int = 0
 
@@ -120,7 +121,7 @@ def generate_encounter(
             own_ship_position_future, lat_lon0, settings.max_meeting_distance
         )
 
-        while not encounter_found and inner_counter < 5:
+        while not encounter_found and inner_counter < maximum_loops:
             inner_counter += 1
             relative_sog = relative_sog_default
             if relative_sog is None:
@@ -492,15 +493,16 @@ def find_start_position_target_ship(
         alpha2, beta2, theta13_criteria, theta14_criteria, theta15_criteria, theta15
     )
 
+    limit: float = 0.01
     if (
         desired_encounter_type is colreg_state1
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < 0.01
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta1 - desired_beta))) < limit
     ):
         start_position_target_ship = GeoPosition(lat=lat31, lon=lon31)
         start_position_found = True
     elif (
         desired_encounter_type is colreg_state2
-        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < 0.01
+        and np.abs(convert_angle_0_to_2_pi_to_minus_pi_to_pi(np.abs(beta2 - desired_beta))) < limit
     ):
         start_position_target_ship = GeoPosition(lat=lat32, lon=lon32)
         start_position_found = True
@@ -578,16 +580,18 @@ def determine_colreg(
     alpha_2_pi: float = alpha if alpha >= 0.0 else alpha + 2 * np.pi
     beta_pi: float = beta if (beta >= 0.0) & (beta <= np.pi) else beta - 2 * np.pi
 
+    limit: float = 0.001
+
     # Find appropriate rule set
-    if (beta > theta15[0]) & (beta < theta15[1]) & (abs(alpha) - theta13_criteria <= 0.001):
+    if (beta > theta15[0]) & (beta < theta15[1]) & (abs(alpha) - theta13_criteria <= limit):
         return EncounterType.OVERTAKING_STAND_ON
-    if (alpha_2_pi > theta15[0]) & (alpha_2_pi < theta15[1]) & (abs(beta_pi) - theta13_criteria <= 0.001):
+    if (alpha_2_pi > theta15[0]) & (alpha_2_pi < theta15[1]) & (abs(beta_pi) - theta13_criteria <= limit):
         return EncounterType.OVERTAKING_GIVE_WAY
-    if (abs(beta_pi) - theta14_criteria <= 0.001) & (abs(alpha) - theta14_criteria <= 0.001):
+    if (abs(beta_pi) - theta14_criteria <= limit) & (abs(alpha) - theta14_criteria <= limit):
         return EncounterType.HEAD_ON
-    if (beta > 0) & (beta < theta15[0]) & (alpha > -theta15[0]) & (alpha - theta15_criteria <= 0.001):
+    if (beta > 0) & (beta < theta15[0]) & (alpha > -theta15[0]) & (alpha - theta15_criteria <= limit):
         return EncounterType.CROSSING_GIVE_WAY
-    if (alpha_2_pi > 0) & (alpha_2_pi < theta15[0]) & (beta_pi > -theta15[0]) & (beta_pi - theta15_criteria <= 0.001):
+    if (alpha_2_pi > 0) & (alpha_2_pi < theta15[0]) & (beta_pi > -theta15[0]) & (beta_pi - theta15_criteria <= limit):
         return EncounterType.CROSSING_STAND_ON
     return EncounterType.NO_RISK_COLLISION
 
@@ -626,29 +630,24 @@ def calculate_relative_bearing(
     # Absolute bearing of target ship relative to own ship
     bng_own_ship_target_ship: float = 0.0
     if e_own_ship == e_target_ship:
+        bng_own_ship_target_ship = 0.0 if n_own_ship <= n_target_ship else np.pi
+    elif e_own_ship < e_target_ship:
         if n_own_ship <= n_target_ship:
-            bng_own_ship_target_ship = 0.0
+            bng_own_ship_target_ship = 1 / 2 * np.pi - np.arctan(
+                abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
+            )
         else:
-            bng_own_ship_target_ship = np.pi
+            bng_own_ship_target_ship = 1 / 2 * np.pi + np.arctan(
+                abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
+            )
+    elif n_own_ship <= n_target_ship:
+        bng_own_ship_target_ship = 3 / 2 * np.pi + np.arctan(
+            abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
+        )
     else:
-        if e_own_ship < e_target_ship:
-            if n_own_ship <= n_target_ship:
-                bng_own_ship_target_ship = 1 / 2 * np.pi - np.arctan(
-                    abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
-                )
-            else:
-                bng_own_ship_target_ship = 1 / 2 * np.pi + np.arctan(
-                    abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
-                )
-        else:
-            if n_own_ship <= n_target_ship:
-                bng_own_ship_target_ship = 3 / 2 * np.pi + np.arctan(
-                    abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
-                )
-            else:
-                bng_own_ship_target_ship = 3 / 2 * np.pi - np.arctan(
-                    abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
-                )
+        bng_own_ship_target_ship = 3 / 2 * np.pi - np.arctan(
+            abs(n_target_ship - n_own_ship) / abs(e_target_ship - e_own_ship)
+        )
 
     # Bearing of own ship from the perspective of the contact
     bng_target_ship_own_ship: float = bng_own_ship_target_ship + np.pi
@@ -763,7 +762,8 @@ def assign_beta_from_list(beta_limit: list[float]) -> float:
     -------
         * Relative bearing between own ship and target ship seen from own ship [rad]
     """
-    assert len(beta_limit) == 2
+    beta_limit_length = 2
+    assert len(beta_limit) == beta_limit_length
     beta: float = beta_limit[0] + random.uniform(0, 1) * (beta_limit[1] - beta_limit[0])
     return beta
 

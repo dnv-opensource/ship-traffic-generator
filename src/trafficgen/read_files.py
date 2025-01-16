@@ -6,10 +6,13 @@ from pathlib import Path
 from typing import Any, cast
 
 from trafficgen.types import (
+    Encounter,
     EncounterSettings,
+    Initial,
     ShipStatic,
     SituationInput,
     TrafficSituation,
+    Waypoint,
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
 
@@ -72,48 +75,103 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
     Convert situation data which is given in maritime units to SI units.
 
     Params:
-        * own_ship_file: Path to the own_ship_file file
+        * situation: Situation data to be converted
 
     Returns
     -------
-        * own_ship information
+        * situation: Converted situation data
     """
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
     assert situation.own_ship.initial.heading is not None
-    situation.own_ship.initial.position.lon = deg_2_rad(situation.own_ship.initial.position.lon)
-    situation.own_ship.initial.position.lat = deg_2_rad(situation.own_ship.initial.position.lat)
-    situation.own_ship.initial.cog = deg_2_rad(situation.own_ship.initial.cog)
-    situation.own_ship.initial.heading = deg_2_rad(situation.own_ship.initial.heading)
-    situation.own_ship.initial.sog = knot_2_m_pr_s(situation.own_ship.initial.sog)
 
+    situation.own_ship.initial = convert_own_ship_initial_data(situation.own_ship.initial)
     if situation.own_ship.waypoints is not None:
-        for waypoint in situation.own_ship.waypoints:
-            waypoint.position.lat = deg_2_rad(waypoint.position.lat)
-            waypoint.position.lon = deg_2_rad(waypoint.position.lon)
-            if waypoint.turn_radius is not None:
-                waypoint.turn_radius = nm_2_m(waypoint.turn_radius)
-            if waypoint.leg is not None:
-                if waypoint.leg.starboard_xtd is not None:
-                    waypoint.leg.starboard_xtd = nm_2_m(waypoint.leg.starboard_xtd)
-                if waypoint.leg.portside_xtd is not None:
-                    waypoint.leg.portside_xtd = nm_2_m(waypoint.leg.portside_xtd)
-                if waypoint.leg.data is not None:
-                    if waypoint.leg.data.sog is not None:
-                        assert waypoint.leg.data.sog.value is not None
-                        assert waypoint.leg.data.sog.interp_start is not None
-                        assert waypoint.leg.data.sog.interp_end is not None
-                        waypoint.leg.data.sog.value = knot_2_m_pr_s(waypoint.leg.data.sog.value)
-                        waypoint.leg.data.sog.interp_start = nm_2_m(waypoint.leg.data.sog.interp_start)
-                        waypoint.leg.data.sog.interp_end = nm_2_m(waypoint.leg.data.sog.interp_end)
+        situation.own_ship.waypoints = convert_own_ship_waypoints(situation.own_ship.waypoints)
 
     assert situation.encounters is not None
-    for encounter in situation.encounters:
+    situation.encounters = convert_encounters(situation.encounters)
+
+    return situation
+
+
+def convert_own_ship_initial_data(initial: Initial) -> Initial:
+    """
+    Convert own ship initial data which is given in maritime units to SI units.
+
+    Params:
+        * initial: Own ship initial data to be converted
+
+    Returns
+    -------
+        * initial: Converted own ship initial data
+    """
+    initial.position.lon = deg_2_rad(initial.position.lon)
+    initial.position.lat = deg_2_rad(initial.position.lat)
+    initial.cog = deg_2_rad(initial.cog)
+    assert initial.heading is not None
+    initial.heading = deg_2_rad(initial.heading)
+    initial.sog = knot_2_m_pr_s(initial.sog)
+    return initial
+
+
+def convert_own_ship_waypoints(waypoints: list[Waypoint]) -> list[Waypoint]:
+    """
+    Convert own ship waypoint data which is given in maritime units to SI units.
+
+    Parameters
+    ----------
+    waypoints : list[Waypoint]
+        Waypoint data to be converted
+
+    Returns
+    -------
+    list[Waypoint]
+        Converted waypoint data
+    """
+    for waypoint in waypoints:
+        waypoint.position.lat = deg_2_rad(waypoint.position.lat)
+        waypoint.position.lon = deg_2_rad(waypoint.position.lon)
+        if waypoint.turn_radius is not None:
+            waypoint.turn_radius = nm_2_m(waypoint.turn_radius)
+        if waypoint.leg is not None:
+            if waypoint.leg.starboard_xtd is not None:
+                waypoint.leg.starboard_xtd = nm_2_m(waypoint.leg.starboard_xtd)
+            if waypoint.leg.portside_xtd is not None:
+                waypoint.leg.portside_xtd = nm_2_m(waypoint.leg.portside_xtd)
+            if waypoint.leg.data is not None and waypoint.leg.data.sog is not None:
+                assert waypoint.leg.data.sog.value is not None
+                assert waypoint.leg.data.sog.interp_start is not None
+                assert waypoint.leg.data.sog.interp_end is not None
+                waypoint.leg.data.sog.value = knot_2_m_pr_s(waypoint.leg.data.sog.value)
+                waypoint.leg.data.sog.interp_start = nm_2_m(waypoint.leg.data.sog.interp_start)
+                waypoint.leg.data.sog.interp_end = nm_2_m(waypoint.leg.data.sog.interp_end)
+    return waypoints
+
+
+def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
+    """
+    Convert encounter data which is given in maritime units to SI units.
+
+    Parameters
+    ----------
+    encounters : list[Encounter]
+        Encounter data to be converted
+
+    Returns
+    -------
+    list[Encounter]
+        Converted encounter data
+    """
+    assert encounters is not None
+    beta_list_length = 2
+
+    for encounter in encounters:
         beta: list[float] | float | None = encounter.beta
         vector_time: float | None = encounter.vector_time
         if beta is not None:
             if isinstance(beta, list):
-                assert len(beta) == 2
+                assert len(beta) == beta_list_length
                 for i in range(len(beta)):
                     beta[i] = deg_2_rad(beta[i])
                 encounter.beta = beta
@@ -121,7 +179,7 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
                 encounter.beta = deg_2_rad(beta)
         if vector_time is not None:
             encounter.vector_time = min_2_s(vector_time)
-    return situation
+    return encounters
 
 
 def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:

@@ -1,9 +1,9 @@
 """Domain specific data types used in trafficgen."""
 
-from datetime import datetime
+import datetime
 from enum import Enum
 from importlib.metadata import PackageNotFoundError, version
-from typing import Annotated, Any, Optional, Type
+from typing import Annotated, Any, Optional
 
 from pydantic import BaseModel, ConfigDict
 from pydantic.fields import Field
@@ -17,7 +17,6 @@ except PackageNotFoundError:
 
 def to_camel(string: str) -> str:
     """Return a camel case formated string from snake case string."""
-
     words = string.split("_")
     return words[0] + "".join(word.capitalize() for word in words[1:])
 
@@ -39,14 +38,14 @@ class StringIntEnumMixin(str, Enum):
     - String value with underscores: "underway_using_engine"
     """
 
-    def __new__(cls: Type["StringIntEnumMixin"], str_value: str, num_value: int) -> "StringIntEnumMixin":
+    def __new__(cls: type["StringIntEnumMixin"], str_value: str, num_value: int) -> "StringIntEnumMixin":  # noqa: D102
         obj = str.__new__(cls, str_value)
         obj._value_ = str_value  # Assign the string value
-        obj.num_value = num_value  # type: ignore
+        obj.num_value = num_value  # type: ignore[PGH003]
         return obj
 
     @classmethod
-    def _missing_(cls: Type["StringIntEnumMixin"], value: object) -> Optional["StringIntEnumMixin"]:
+    def _missing_(cls: type["StringIntEnumMixin"], value: object) -> Optional["StringIntEnumMixin"]:
         # Handle case-insensitive string matching and underscores
         if isinstance(value, str):
             value_str = value.replace("_", " ").lower()
@@ -59,7 +58,7 @@ class StringIntEnumMixin(str, Enum):
         # Handle numeric values
         if isinstance(value, int):
             for member in cls:
-                if member.num_value == value:  # type: ignore
+                if member.num_value == value:  # type: ignore[PGH003]
                     return member
         return None
 
@@ -67,6 +66,7 @@ class StringIntEnumMixin(str, Enum):
 class AisShipType(StringIntEnumMixin):
     """
     AIS Ship Type (not including cargo type).
+
     Source: https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1371-5-201402-I!!PDF-E.pdf#page=116.
     """
 
@@ -98,6 +98,7 @@ class AisShipType(StringIntEnumMixin):
 class AisNavStatus(StringIntEnumMixin):
     """
     AIS Navigational Status.
+
     Source: https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1371-5-201402-I!!PDF-E.pdf#page=113.
     """
 
@@ -175,31 +176,26 @@ class Dimensions(BaseModelConfig):
 
     """
 
-    length: Optional[Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[130.0])]] = None
-    width: Optional[Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[30.0])]] = None
-    height: Optional[Annotated[float, Field(gt=0, description="Height of the ship in meters", examples=[15.0])]] = None
-    draught: Optional[Annotated[float, Field(gt=0, description="Draught of the ship in meters", examples=[15.0])]] = (
+    length: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[130.0])] | None = None
+    width: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[30.0])] | None = None
+    height: Annotated[float, Field(gt=0, description="Height of the ship in meters", examples=[15.0])] | None = None
+    draught: Annotated[float, Field(gt=0, description="Draught of the ship in meters", examples=[15.0])] | None = None
+
+    a: Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Bow", examples=[80])] | None = None
+    b: Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Stern", examples=[20])] | None = None
+    c: Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Port", examples=[20])] | None = None
+    d: Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Starboard", examples=[20])] | None = (
         None
     )
 
-    a: Optional[Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Bow", examples=[80])]] = None
-    b: Optional[Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Stern", examples=[20])]] = (
-        None
-    )
-    c: Optional[Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Port", examples=[20])]] = None
-    d: Optional[
-        Annotated[float, Field(gt=0, description="Distance in meters from CCRP to Starboard", examples=[20])]
-    ] = None
-
-    def __init__(self, **data: Any):
+    def __init__(self, **data: Any) -> None:  # noqa: ANN401
         super().__init__(**data)
         """If length and width are given, and not a, b, c, d, calculate them, and vice-versa"""
-        if self.length and self.width:
-            if not self.a and not self.b and not self.c and not self.d:
-                self.a = self.length / 2
-                self.b = self.length / 2
-                self.c = self.width / 2
-                self.d = self.width / 2
+        if self.length and self.width and not self.a and not self.b and not self.c and not self.d:
+            self.a = self.length / 2
+            self.b = self.length / 2
+            self.c = self.width / 2
+            self.d = self.width / 2
         if self.a and self.b and self.c and self.d:
             self.length = self.a + self.b
             self.width = self.c + self.d
@@ -209,40 +205,42 @@ class ShipStatic(BaseModelConfig):
     """Static ship data that will not change during the scenario."""
 
     id: Annotated[int, Field(ge=0, le=2**32, description="Ship Identifier", examples=[1])]
-    mmsi: Optional[
+    mmsi: (
         Annotated[
             int,
             Field(
-                ge=100000000,
-                le=999999999,
-                description="Maritime Mobile Service Identity (MMSI)",
-                examples=[123456789],
+                ge=100000000, le=999999999, description="Maritime Mobile Service Identity (MMSI)", examples=[123456789]
             ),
         ]
-    ] = None
-    imo: Optional[Annotated[int, Field(ge=1000000, le=9999999, description="IMO Number", examples=[1234567])]] = None
-    name: Optional[Annotated[str, Field(description="Ship name", examples=["RMS Titanic"])]] = None
+        | None
+    ) = None
+    imo: Annotated[int, Field(ge=1000000, le=9999999, description="IMO Number", examples=[1234567])] | None = None
+    name: Annotated[str, Field(description="Ship name", examples=["RMS Titanic"])] | None = None
 
-    dimensions: Optional[Annotated[Dimensions, Field(description="Key ship dimensions")]] = None
+    dimensions: Annotated[Dimensions, Field(description="Key ship dimensions")] | None = None
 
-    ship_type: Optional[Annotated[AisShipType, Field(description="General ship type, based on AIS")]] = None
+    ship_type: Annotated[AisShipType, Field(description="General ship type, based on AIS")] | None = None
 
-    path_type: Optional[
+    path_type: (
         Annotated[
             PathType,
             Field(
                 default=PathType.RTZ,
-                description="Specifies the control-point model (e.g., Bezier, RTZ) used to define the path for the ship to follow.",
+                description=(
+                    "Specifies the control-point model (e.g., Bezier, RTZ) "
+                    "used to define the path for the ship to follow."
+                ),
             ),
         ]
-    ] = None
+        | None
+    ) = None
 
-    sog_min: Optional[
-        Annotated[float, Field(ge=0, description="Minimum ship speed over ground in knots", examples=[5.0])]
-    ] = None
-    sog_max: Optional[
-        Annotated[float, Field(ge=0, description="Maximum ship speed over ground in knots", examples=[15.0])]
-    ] = None
+    sog_min: (
+        Annotated[float, Field(ge=0, description="Minimum ship speed over ground in knots", examples=[5.0])] | None
+    ) = None
+    sog_max: (
+        Annotated[float, Field(ge=0, description="Maximum ship speed over ground in knots", examples=[15.0])] | None
+    ) = None
 
     model_config = ConfigDict(extra="allow")
 
@@ -262,7 +260,7 @@ class Position(BaseModelConfig):
     y: Annotated[float, Field(description="y-coordinate. Noth is positive", examples=[231])]
 
 
-def create_position_example():
+def create_position_example() -> GeoPosition:
     """Create a position class."""
     return GeoPosition(lon=57.2343, lat=10.3432)
 
@@ -282,60 +280,72 @@ class Initial(BaseModelConfig):
         float,
         Field(ge=0, le=360, description="Initial ship course over ground (COG) in degrees", examples=[45.0]),
     ]
-    heading: Optional[
-        Annotated[float, Field(ge=0, le=360, description="Initial ship heading in degrees", examples=[45.2])]
-    ] = None
-    nav_status: Optional[Annotated[AisNavStatus, Field(description="AIS Navigational Status")]] = None
+    heading: (
+        Annotated[float, Field(ge=0, le=360, description="Initial ship heading in degrees", examples=[45.2])] | None
+    ) = None
+    nav_status: Annotated[AisNavStatus, Field(description="AIS Navigational Status")] | None = None
 
 
 class DataPoint(BaseModelConfig):
     """Data type for storing data which is numerical and continuos."""
 
-    value: Optional[
-        Annotated[float, Field(description="the value of the data at the current waypoint", examples=[12.3])]
-    ] = None
-    interp_start: Optional[
+    value: (
+        Annotated[float, Field(description="the value of the data at the current waypoint", examples=[12.3])] | None
+    ) = None
+    interp_start: (
         Annotated[
             float,
             Field(
-                description="distance before start of the next leg (NM), to start interpolating to the next leg's value",
+                description=(
+                    "distance before start of the next leg (NM), to start interpolating to the next leg's value"
+                ),
                 examples=[10],
             ),
         ]
-    ] = None
-    interp_end: Optional[
+        | None
+    ) = None
+    interp_end: (
         Annotated[
             float,
             Field(
-                description="distance after the start of the next leg (NM), to finish interpolating to the next leg's value",
+                description=(
+                    "distance after the start of the next leg (NM) to finish interpolating to the next leg's value"
+                ),
                 examples=[10],
             ),
         ]
-    ] = None
-    interp_method: Optional[
-        Annotated[InterpolationMethod | str, Field(description="Method used for interpolation")]
-    ] = None
+        | None
+    ) = None
+    interp_method: Annotated[InterpolationMethod | str, Field(description="Method used for interpolation")] | None = (
+        None
+    )
 
 
-data_description = """The `data` field can be used to store data, which is numerical and continuous. One such example is the vessels speed over ground (SOG). Every `data` object, can have the 4 following attributes:
-\n`value`: This is the value of the data over the current leg.
-\n`interpStart`: This is the distance (in NM) before the leg change, where the value will start changing (via interpolation) to the new value in the next leg.
-\n`interpEnd`: This is the distance (in NM) after the leg change, where the value will finish changing (via interpolation) to the new value in the next leg.
-\n`interpMethod`: This sets the interpolation (linear, cosine, smoothstep, etc.) that will be used to perform the interpolation."""
+data_description = (
+    "The `data` field can be used to store data, which is numerical and continuous."
+    "One such example is the vessels speed over ground (SOG). Every `data` object, can have the 4 following attributes:"
+    "\n`value`: This is the value of the data over the current leg."
+    "\n`interpStart`: This is the distance (in NM) before the leg change, where the value will start changing"
+    "(via interpolation) to the new value in the next leg."
+    "\n`interpEnd`: This is the distance (in NM) after the leg change, where the value will finish changing"
+    "(via interpolation) to the new value in the next leg."
+    "\n`interpMethod`: This sets the interpolation (linear, cosine, smoothstep, etc.) "
+    "that will be used to perform the interpolation."
+)
 
 
 class RouteData(BaseModelConfig):
     """Data type for data along a route."""
 
-    sog: Optional[Annotated[DataPoint, Field(description=data_description)]] = None
+    sog: Annotated[DataPoint, Field(description=data_description)] | None = None
 
 
 class Leg(BaseModelConfig):
     """Data type for a leg."""
 
-    starboard_xtd: Optional[Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")]] = None
-    portside_xtd: Optional[Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")]] = None
-    data: Optional[Annotated[RouteData, Field(description=data_description)]] = None
+    starboard_xtd: Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")] | None = None
+    portside_xtd: Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")] | None = None
+    data: Annotated[RouteData, Field(description=data_description)] | None = None
 
 
 class Waypoint(BaseModelConfig):
@@ -345,16 +355,16 @@ class Waypoint(BaseModelConfig):
         GeoPosition,
         Field(description="A geographical coordinate.", examples=[GeoPosition(lon=11.2313, lat=51.2123)]),
     ]
-    turn_radius: Optional[
+    turn_radius: (
         Annotated[
-            float,
-            Field(description="Orthodrome turn radius in nautical miles as defined in RTZ.", examples=[200]),
+            float, Field(description="Orthodrome turn radius in nautical miles as defined in RTZ.", examples=[200])
         ]
-    ] = None
-    leg: Optional[Annotated[Leg, Field(description="Current Leg information.")]] = None
+        | None
+    ) = None
+    leg: Annotated[Leg, Field(description="Current Leg information.")] | None = None
 
 
-def create_ship_static_example():
+def create_ship_static_example() -> ShipStatic:
     """Create a ShipStatic class."""
     return ShipStatic(
         id=1,
@@ -367,7 +377,7 @@ def create_ship_static_example():
     )
 
 
-def create_initial_example():
+def create_initial_example() -> Initial:
     """Create a (Ship) Initial class."""
     return Initial(
         position=create_position_example(),
@@ -378,39 +388,43 @@ def create_initial_example():
     )
 
 
-def create_data_point_example():
+def create_data_point_example() -> DataPoint:
     """Create a DataPoint class."""
     return DataPoint(value=12.3, interp_start=100, interp_end=100, interp_method=InterpolationMethod.LINEAR)
 
 
-def create_waypoint_example():
+def create_waypoint_example() -> Waypoint:
     """Create a Waypoint class."""
     return Waypoint(
         position=create_position_example(),
         turn_radius=1.0,
-        data=RouteData(sog=create_data_point_example()),  # type:ignore
+        leg=Leg(data=RouteData(sog=create_data_point_example())),
     )
 
 
 static_description = "Static ship information which does not change during a scenario."
-initial_description = "Initial pose of the ship. If `waypoints` are provided, then these should correspond to the pose of the ship at the starting waypoint"
-waypoints_description = "An array of `Waypoint` objects. Each waypoint object must have a `position` property. If no turn radius is provided, it will be assumed to be `0`. Additional data can be added to each waypoint leg."
+initial_description = (
+    "Initial pose of the ship. If `waypoints` are provided,"
+    "then these should correspond to the pose of the ship at the starting waypoint"
+)
+waypoints_description = (
+    "An array of `Waypoint` objects. Each waypoint object must have a `position` property."
+    "If no turn radius is provided, it will be assumed to be `0`."
+    "Additional data can be added to each waypoint leg."
+)
 
 
 class Ship(BaseModelConfig):
     """Data type for a ship."""
 
-    initial: Optional[
-        Annotated[Initial, Field(description=initial_description, examples=[create_initial_example()])]
-    ] = None
-    waypoints: Optional[
-        Annotated[
-            list[Waypoint],
-            Field(description=waypoints_description, examples=[create_waypoint_example()]),
-        ]
-    ] = None
+    initial: Annotated[Initial, Field(description=initial_description, examples=[create_initial_example()])] | None = (
+        None
+    )
+    waypoints: (
+        Annotated[list[Waypoint], Field(description=waypoints_description, examples=[create_waypoint_example()])] | None
+    ) = None
 
-    def __init__(self, **data: Any):
+    def __init__(self, **data: Any) -> None:  # noqa: ANN401
         super().__init__(**data)
         if not self.waypoints:
             self.waypoints = self._generate_waypoints()
@@ -440,8 +454,7 @@ class Ship(BaseModelConfig):
             waypoints = [waypoint0, waypoint1]
             return waypoints
 
-        else:
-            return None
+        return None
 
 
 class OwnShip(Ship):
@@ -449,7 +462,7 @@ class OwnShip(Ship):
 
     static: Annotated[ShipStatic, Field(description=static_description, examples=[create_ship_static_example()])]
 
-    def __init__(self, **data: Any):
+    def __init__(self, **data: Any) -> None:  # noqa: ANN401
         super().__init__(**data)
         if not self.static.name:
             self.static.name = "OS"
@@ -460,13 +473,13 @@ class TargetShip(Ship):
 
     static: Annotated[ShipStatic, Field(description=static_description, examples=[create_ship_static_example()])]
 
-    def __init__(self, **data: Any):
+    def __init__(self, **data: Any) -> None:  # noqa: ANN401
         super().__init__(**data)
         if not self.static.name:
             self.static.name = f"TGT {self.static.id}"
 
 
-def create_ship_example():
+def create_ship_example() -> Ship:
     """Create a Ship class."""
     return Ship(
         static=create_ship_static_example(),
@@ -475,12 +488,12 @@ def create_ship_example():
     )
 
 
-def create_own_ship_example():
+def create_own_ship_example() -> OwnShip:
     """Create a OwnShip class."""
     return OwnShip(static=create_ship_static_example(), initial=create_initial_example(), waypoints=None)
 
 
-def create_target_example():
+def create_target_example() -> TargetShip:
     """Create a TargetShip class."""
     return TargetShip(static=create_ship_static_example(), initial=create_initial_example(), waypoints=None)
 
@@ -489,10 +502,10 @@ class TrafficSituation(BaseModelConfig):
     """Data type for a traffic situation."""
 
     version: Annotated[str, Field(description="Ship traffic generator version number", examples=[project_version])]
-    title: Optional[
-        Annotated[str, Field(description="The title of the traffic situation", examples=["overtaking_18"])]
-    ] = None
-    description: Optional[
+    title: (
+        Annotated[str, Field(description="The title of the traffic situation", examples=["overtaking_18"])] | None
+    ) = None
+    description: (
         Annotated[
             str,
             Field(
@@ -500,23 +513,23 @@ class TrafficSituation(BaseModelConfig):
                 examples=["Crossing situation with 3 target vessels in the Oslo fjord"],
             ),
         ]
-    ] = None
-    start_time: Optional[
+        | None
+    ) = None
+    start_time: (
         Annotated[
-            datetime,
+            datetime.datetime,
             Field(
                 description="Starting time of the situation in `ISO 8601` format `YYYY-MM-DDThh:mm:ssZ`",
-                examples=[datetime(2025, 1, 1, 0, 0, 0)],
+                examples=[datetime.datetime(2025, 1, 1, 0, 0, 0, tzinfo=datetime.UTC)],
             ),
         ]
-    ] = None
+        | None
+    ) = None
     own_ship: Annotated[OwnShip, Field(description="Own Ship (OS) data", examples=[create_ship_example()])]
-    target_ships: Optional[
-        Annotated[
-            list[TargetShip],
-            Field(description="Target Ship (TGT) data", examples=[[create_ship_example()]]),
-        ]
-    ] = None
+    target_ships: (
+        Annotated[list[TargetShip], Field(description="Target Ship (TGT) data", examples=[[create_ship_example()]])]
+        | None
+    ) = None
 
 
 class EncounterType(Enum):
@@ -583,7 +596,7 @@ class OwnShipInitial(BaseModelConfig):
     """Data type for initial data for the own ship used for generating a situation."""
 
     initial: Initial
-    waypoints: Optional[list[Waypoint]] = Field(None, description="An array of `Waypoint` objects.")
+    waypoints: list[Waypoint] | None = Field(None, description="An array of `Waypoint` objects.")
 
 
 class SituationInput(BaseModelConfig):
