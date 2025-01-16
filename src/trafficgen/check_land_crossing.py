@@ -39,6 +39,6 @@ def path_crosses_land(
 
         lat = rad_2_deg(position_2.lat)
         lon = rad_2_deg(position_2.lon)
-        if globe.is_land(lat, lon):  # type: ignore  (The package is unfortunately not typed.)
+        if globe.is_land(lat, lon):  # type: ignore  # noqa: PGH003
             return True
     return False

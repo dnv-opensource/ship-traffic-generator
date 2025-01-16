@@ -96,12 +96,14 @@ def generate_encounter(
 
         if vector_time is None:
             vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])
+
+        beta: float = 0.0
         if beta_default is None:
-            beta: float = assign_beta(desired_encounter_type, settings)
+            beta = assign_beta(desired_encounter_type, settings)
         elif isinstance(beta_default, list):
-            beta: float = assign_beta_from_list(beta_default)
+            beta = assign_beta_from_list(beta_default)
         else:
-            beta: float = beta_default
+            beta = beta_default
 
         # Own ship
         assert own_ship.initial is not None
@@ -136,14 +138,14 @@ def generate_encounter(
                     / vector_time
                 )
 
-                target_ship_sog: float = assign_sog_to_target_ship(
+                target_ship_sog = assign_sog_to_target_ship(
                     desired_encounter_type,
                     own_ship.initial.sog,
                     min_target_ship_sog,
                     settings.relative_speed,
                 )
             else:
-                target_ship_sog: float = relative_sog * own_ship.initial.sog
+                target_ship_sog = relative_sog * own_ship.initial.sog
 
             assert target_ship_static.sog_max is not None
             target_ship_sog = round(np.minimum(target_ship_sog, target_ship_static.sog_max), 1)
@@ -161,8 +163,8 @@ def generate_encounter(
             )
 
             if position_found:
-                target_ship_initial_position: GeoPosition = start_position_target_ship
-                target_ship_cog: float = calculate_ship_cog(
+                target_ship_initial_position = start_position_target_ship
+                target_ship_cog = calculate_ship_cog(
                     target_ship_initial_position, target_ship_position_future, lat_lon0
                 )
                 encounter_ok: bool = check_encounter_evolvement(
@@ -313,6 +315,7 @@ def define_own_ship(
         * own_ship: Own ship
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
+    own_ship_waypoints: list[Waypoint] = []
     if desired_traffic_situation.own_ship.waypoints is None:
         # If waypoints are not given, let initial position be the first waypoint,
         # then calculate second waypoint some time in the future
@@ -327,16 +330,16 @@ def define_own_ship(
             encounter_settings.situation_length,
         )
         own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, leg=None)
-        own_ship_waypoints: list[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+        own_ship_waypoints = [own_ship_waypoint0, own_ship_waypoint1]
     elif len(desired_traffic_situation.own_ship.waypoints) == 1:
         # If one waypoint is given, use initial position as first waypoint
         own_ship_waypoint0 = Waypoint(
             position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
         )
         own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0]
-        own_ship_waypoints: list[Waypoint] = [own_ship_waypoint0, own_ship_waypoint1]
+        own_ship_waypoints = [own_ship_waypoint0, own_ship_waypoint1]
     else:
-        own_ship_waypoints: list[Waypoint] = desired_traffic_situation.own_ship.waypoints
+        own_ship_waypoints = desired_traffic_situation.own_ship.waypoints
 
     own_ship = OwnShip(
         static=own_ship_static,
