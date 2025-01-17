@@ -47,22 +47,31 @@ def generate_encounter(
     """
     Generate an encounter.
 
-    Params:
-        * desired_encounter_type: Desired encounter to be generated
-        * own_ship: Dict, information about own ship that will encounter a target ship
-        * target_ships_static: List of target ships including static information that
-          may be used in an encounter
-        * encounter_number: Integer, used to naming the target ships. target_ship_1,2 etc.
-        * beta_default: User defined beta. If not set, this is None.
-        * relative_sog_default: User defined relative sog between own ship and
-                                target ship. If not set, this is None.
-        * vector_time_default: User defined vector time. If not set, this is None.
-        * settings: Encounter settings
+    Parameters
+    ----------
+    desired_encounter_type : EncounterType
+        Desired encounter to be generated.
+    own_ship : OwnShip
+        Information about own ship that will encounter a target ship.
+    target_ships_static : list[ShipStatic]
+        List of target ships including static information that may be used in an encounter.
+    encounter_number : Int
+        Integer identifying the encounter.
+    beta_default : list[float] | float | None
+        User defined beta. If not set, this is None [rad].
+    relative_sog_default : float | None
+        User defined relative sog between own ship and target ship. If not set, this is None [m/s].
+    vector_time_default : float | None
+        User defined vector time. If not set, this is None [min].
+    settings : EncounterSettings
+        Encounter settings
 
     Returns
     -------
-        * target_ship: target ship information, such as initial position, sog and cog
-        * encounter_found: True=encounter found, False=encounter not found
+    target_ship : TargetShip
+        target ship information, such as initial position, sog and cog
+    encounter_found : bool
+        True=encounter found, False=encounter not found
     """
     encounter_found: bool = False
     target_ship_id: int = 10  # Id of first target ship
@@ -234,7 +243,7 @@ def check_encounter_evolvement(
     target_ship_cog: float,
     target_ship_position_future: GeoPosition,
     desired_encounter_type: EncounterType,
-    settings: EncounterSettings,
+    encounter_settings: EncounterSettings,
 ) -> bool:
     """
     Check encounter evolvement.
@@ -242,25 +251,41 @@ def check_encounter_evolvement(
     The generated encounter should be the same type of
     encounter (head-on, crossing, give-way) also some time before the encounter is started.
 
-    Params:
-        * own_ship: Own ship information such as initial position, sog and cog
-        * target_ship: Target ship information such as initial position, sog and cog
-        * desired_encounter_type: Desired type of encounter to be generated
-        * settings: Encounter settings
+    Parameters
+    ----------
+    own_ship : OwnShip
+        Own ship information such as initial position, sog and cog
+    own_ship_cog : float
+        Own ship cog [rad]
+    own_ship_position_future : GeoPosition
+        Own ship future position {lat, lon} [rad].
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
+    target_ship_sog : float
+        Target ship speed over ground [m/s]
+    target_ship_cog : float
+        Target ship course over ground [rad]
+    target_ship_position_future : GeoPosition
+        Target ship future position {lat, lon} [rad]
+    desired_encounter_type : EncounterType
+        Desired type of encounter to be generated
+    encounter_settings : EncounterSettings
+        Encounter settings
 
     Returns
     -------
-        * returns True if encounter ok, False if encounter not ok
+    encounterOK : bool
+        Returns True if encounter ok, False if encounter not ok
     """
-    theta13_criteria: float = settings.classification.theta13_criteria
-    theta14_criteria: float = settings.classification.theta14_criteria
-    theta15_criteria: float = settings.classification.theta15_criteria
-    theta15: list[float] = settings.classification.theta15
+    theta13_criteria: float = encounter_settings.classification.theta13_criteria
+    theta14_criteria: float = encounter_settings.classification.theta14_criteria
+    theta15_criteria: float = encounter_settings.classification.theta15_criteria
+    theta15: list[float] = encounter_settings.classification.theta15
 
     assert own_ship.initial is not None
 
     own_ship_sog: float = own_ship.initial.sog
-    evolve_time: float = settings.evolve_time
+    evolve_time: float = encounter_settings.evolve_time
 
     # Calculating position back in time to ensure that the encounter do not change from one type
     # to another before the encounter is started
@@ -304,15 +329,21 @@ def define_own_ship(
     """
     Define own ship based on information in desired traffic situation.
 
-    Params:
-        * desired_traffic_situation: Information about type of traffic situation to generate
-        * own_ship_static: Static information of own ship.
-        * encounter_settings: Necessary setting for the encounter
-        * lat_lon0: Reference position [deg]
+    Parameters
+    ----------
+    desired_traffic_situation : SituationInput
+        Information about type of traffic situation to generate
+    own_ship_static : ShipStatic
+        Static information of own ship.
+    encounter_settings : EncounterSettings
+        Necessary setting for the encounter
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
 
     Returns
     -------
-        * own_ship: Own ship
+    own_ship : OwnShip
+        Own ship including static, initial and waypoints.
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
     own_ship_waypoints: list[Waypoint] = []
@@ -362,16 +393,23 @@ def calculate_min_vector_length_target_ship(
 
     This is done to ensure that ship sog is high enough to find proper situation.
 
-    Params:
-        * own_ship_position: Own ship initial position, latitudinal [rad] and longitudinal [rad]
-        * own_ship_cog: Own ship initial cog
-        * target_ship_position_future: Target ship future position
-        * desired_beta: Desired relative bearing between
-        * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
+    Parameters
+    ----------
+    own_ship_position : GeoPosition
+        Own ship initial position, latitudinal [rad] and longitudinal [rad]
+    own_ship_cog : float
+        Own ship initial cog [rad]
+    target_ship_position_future : GeoPosition
+        Target ship future position, latitudinal [rad] and longitudinal [rad]
+    desired_beta : float
+        Desired relative bearing between own ship and target ship seen from own ship [rad]
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
 
     Returns
     -------
-        * min_vector_length: Minimum vector length (target ship sog x vector)
+    min_vector_length : float
+        Minimum vector length (target ship sog x vector)
     """
     psi: float = own_ship_cog + desired_beta
 
@@ -402,29 +440,41 @@ def find_start_position_target_ship(
     target_ship_vector_length: float,
     desired_beta: float,
     desired_encounter_type: EncounterType,
-    settings: EncounterSettings,
+    encounter_settings: EncounterSettings,
 ) -> tuple[GeoPosition, bool]:
     """
     Find start position of target ship using desired beta and vector length.
 
-    Params:
-        * own_ship_position: Own ship initial position, sog and cog
-        * own_ship_cog: Own ship initial cog
-        * target_ship_position_future: Target ship future position
-        * target_ship_vector_length: vector length (target ship sog x vector)
-        * desired_beta: Desired bearing between own ship and target ship seen from own ship
-        * desired_encounter_type: Desired type of encounter to be generated
-        * settings: Encounter settings
+    Parameters
+    ----------
+    own_ship_position : GeoPosition
+        Own ship position {lat, lon} [rad]
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
+    own_ship_cog : float
+        Own ship course over ground [rad]
+    target_ship_position_future : GeoPosition
+        Target ship future position {lat, lon} [rad]
+    target_ship_vector_length : float
+        vector length (target ship sog x vector)
+    desired_beta : float
+        Desired bearing between own ship and target ship seen from own ship [rad]
+    desired_encounter_type : EncounterType
+        Desired type of encounter to be generated
+    encounter_settings : EncounterSettings
+        Encounter settings
 
     Returns
     -------
-        * start_position_target_ship: Dict, initial position of target ship {north, east} [m]
-        * start_position_found: 0=position not found, 1=position found
+    start_position_target_ship : GeoPosition
+        Initial position of target ship {lat, lon} [rad]
+    start_position_found : bool
+        False if position not found, True if position found
     """
-    theta13_criteria: float = settings.classification.theta13_criteria
-    theta14_criteria: float = settings.classification.theta14_criteria
-    theta15_criteria: float = settings.classification.theta15_criteria
-    theta15: list[float] = settings.classification.theta15
+    theta13_criteria: float = encounter_settings.classification.theta13_criteria
+    theta14_criteria: float = encounter_settings.classification.theta14_criteria
+    theta15_criteria: float = encounter_settings.classification.theta15_criteria
+    theta15: list[float] = encounter_settings.classification.theta15
 
     n_1, e_1, _ = llh2flat(own_ship_position.lat, own_ship_position.lon, lat_lon0.lat, lat_lon0.lon)
     n_2, e_2, _ = llh2flat(
@@ -524,16 +574,19 @@ def assign_future_position_to_target_ship(
     If drawing a circle with radius max_meeting_distance around future position of own ship,
     future position of target ship shall be somewhere inside this circle.
 
-    Params:
-        * own_ship_position_future: Dict, own ship position at a given time in the
-            future, {north, east}
-        * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
-        * max_meeting_distance: Maximum distance between own ship and target ship at
-            a given time in the future [m]
+    Parameters
+    ----------
+    own_ship_position_future : GeoPosition
+        Own ship position at a given time in the future {lat, lon} [rad]
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
+    max_meeting_distance : float
+        Maximum distance between own ship and target ship at a given time in the future [m]
 
     Returns
     -------
-        future_position_target_ship: Future position of target ship {north, east} [m]
+    future_position_target_ship : GeoPosition
+        Future position of target ship {lat, lon} [rad]
     """
     random_angle = random.uniform(0, 1) * 2 * np.pi
     random_distance = random.uniform(0, 1) * max_meeting_distance
@@ -565,19 +618,25 @@ def determine_colreg(
     ship seen from target ship, and beta, relative bearing between own ship and target ship
     seen from own ship.
 
-    Params:
-        * alpha: relative bearing between target ship and own ship seen from target ship
-        * beta: relative bearing between own ship and target ship seen from own ship
-        * theta13_criteria: Tolerance for "coming up with" relative bearing
-        * theta14_criteria: Tolerance for "reciprocal or nearly reciprocal cogs",
-          "when in any doubt... assume... [head-on]"
-        * theta15_criteria: Crossing aspect limit, used for classifying a crossing encounter
-        * theta15: 22.5 deg aft of the beam, used for classifying a crossing and an overtaking
-                   encounter
+    Parameters
+    ----------
+    alpha : float
+        Relative bearing between target ship and own ship seen from target ship [rad]
+    beta : float
+        Relative bearing between own ship and target ship seen from own ship [rad]
+    theta13_criteria : float
+        Tolerance for "coming up with" relative bearing
+    theta14_criteria : float
+        Tolerance for "reciprocal or nearly reciprocal cogs", "when in any doubt... assume... [head-on]"
+    theta15_criteria : float
+        Crossing aspect limit, used for classifying a crossing encounter
+    theta15 : list[float]
+        22.5 deg aft of the beam, used for classifying a crossing and an overtaking encounter [rad, rad]
 
     Returns
     -------
-        * encounter classification
+    encounter_classification : EncounterType
+        Classification of the encounter
     """
     # Mapping
     alpha_2_pi: float = alpha if alpha >= 0.0 else alpha + 2 * np.pi
@@ -609,17 +668,25 @@ def calculate_relative_bearing(
     """
     Calculate relative bearing between own ship and target ship.
 
-    Params:
-        * position_own_ship: Own ship position {lat, lon} [rad]
-        * heading_own_ship: Own ship heading [rad]
-        * position_target_ship: Target ship position {lat, lon} [rad]
-        * heading_target_ship: Target ship heading [rad]
-        * lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad]
+    Parameters
+    ----------
+    position_own_ship : GeoPosition
+        Own ship position {lat, lon} [rad]
+    heading_own_ship : float
+        Own ship heading [rad]
+    position_target_ship : GeoPosition
+        Target ship position {lat, lon} [rad]
+    heading_target_ship : float
+        Target ship heading [rad]
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
 
     Returns
     -------
-        * beta: relative bearing between own ship and target ship seen from own ship [rad]
-        * alpha: relative bearing between target ship and own ship seen from target ship [rad]
+    beta : float
+        Relative bearing between own ship and target ship seen from own ship [rad]
+    alpha : float
+        Relative bearing between target ship and own ship seen from target ship [rad]
     """
     # POSE combination of relative bearing and contact angle
     n_own_ship, e_own_ship, _ = llh2flat(position_own_ship.lat, position_own_ship.lon, lat_lon0.lat, lat_lon0.lon)
@@ -676,13 +743,19 @@ def calculate_ship_cog(pos_0: GeoPosition, pos_1: GeoPosition, lat_lon0: GeoPosi
     """
     Calculate ship cog between two waypoints.
 
-    Params:
-        * waypoint_0: Dict, waypoint {lat, lon} [rad]
-        * waypoint_1: Dict, waypoint {lat, lon} [rad]
+    Parameters
+    ----------
+    pos_0 : GeoPosition
+        First waypoint {lat, lon} [rad]
+    pos_1: GeoPosition
+        Second waypoint {lat, lon} [rad]
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad]
 
     Returns
     -------
-        * cog: Ship cog [rad]
+    cog : float
+        Ship coourse over ground [rad]
     """
     n_0, e_0, _ = llh2flat(pos_0.lat, pos_0.lon, lat_lon0.lat, lat_lon0.lon)
     n_1, e_1, _ = llh2flat(pos_1.lat, pos_1.lon, lat_lon0.lat, lat_lon0.lon)
@@ -697,12 +770,15 @@ def assign_vector_time(vector_time_range: list[float]) -> float:
     """
     Assign random (uniform) vector time.
 
-    Params:
-        * vector_range: Minimum and maximum value for vector time
+    Parameters
+    ----------
+    vector_time_range : list[float]
+        Minimum and maximum value for vector time [min]
 
     Returns
     -------
-        * vector_time: Vector time [min]
+    vector_time : float
+        Vector time [min]
     """
     vector_time: float = vector_time_range[0] + random.uniform(0, 1) * (vector_time_range[1] - vector_time_range[0])
     return vector_time
@@ -717,15 +793,21 @@ def assign_sog_to_target_ship(
     """
     Assign random (uniform) sog to target ship depending on type of encounter.
 
-    Params:
-        * encounter_type: Type of encounter
-        * own_ship_sog: Own ship sog [m/s]
-        * min_target_ship_sog: Minimum target ship sog [m/s]
-        * relative_sog_setting: Relative sog setting dependent on encounter [-]
+    Parameters
+    ----------
+    encounter_type : EncounterType
+        Type of encounter
+    own_ship_sog : float
+        Own ship speed over ground [m/s]
+    min_target_ship_sog : float
+        Minimum target ship speed over ground [m/s]
+    relative_sog_setting : EncounterRelativeSpeed
+        Relative speed over ground setting dependent on encounter [-]
 
     Returns
     -------
-        * target_ship_sog: Target ship sog [m/s]
+    target_ship_sog : float
+        Target ship speed over ground [m/s]
     """
     if encounter_type is EncounterType.OVERTAKING_STAND_ON:
         relative_sog = relative_sog_setting.overtaking_stand_on
@@ -755,15 +837,17 @@ def assign_beta_from_list(beta_limit: list[float]) -> float:
     """
     Assign random (uniform) relative bearing.
 
-    The beta between own ship
-    and target ship depending is somewhere between the limits given by beta_limit.
+    The beta between own ship and target ship depending is somewhere between
+    the limits given by beta_limit.
 
     Params:
-        * beta_limit: Limits for beta
+    beta_limit : list[float]
+        Limits for beta {min, max} [rad]
 
     Returns
     -------
-        * Relative bearing between own ship and target ship seen from own ship [rad]
+    relative_bearing : float
+        Relative bearing between own ship and target ship seen from own ship [rad]
     """
     beta_limit_length = 2
     assert len(beta_limit) == beta_limit_length
@@ -771,22 +855,26 @@ def assign_beta_from_list(beta_limit: list[float]) -> float:
     return beta
 
 
-def assign_beta(encounter_type: EncounterType, settings: EncounterSettings) -> float:
+def assign_beta(encounter_type: EncounterType, encounter_settings: EncounterSettings) -> float:
     """
     Assign random (uniform) relative bearing.
 
-    Params:
-        * encounter_type: Type of encounter
-        * settings: Encounter settings
+    Parameters
+    ----------
+    encounter_type : EncounterType
+        Type of encounter
+    encounter_settings : EncounterSettings
+        Encounter settings
 
     Returns
     -------
-        * Relative bearing between own ship and target ship seen from own ship [rad]
+    relative_bearing : float
+        Relative bearing between own ship and target ship seen from own ship [rad]
     """
-    theta13_crit: float = settings.classification.theta13_criteria
-    theta14_crit: float = settings.classification.theta14_criteria
-    theta15_crit: float = settings.classification.theta15_criteria
-    theta15: list[float] = settings.classification.theta15
+    theta13_crit: float = encounter_settings.classification.theta13_criteria
+    theta14_crit: float = encounter_settings.classification.theta14_criteria
+    theta15_crit: float = encounter_settings.classification.theta15_criteria
+    theta15: list[float] = encounter_settings.classification.theta15
 
     if encounter_type is EncounterType.OVERTAKING_STAND_ON:
         return theta15[0] + random.uniform(0, 1) * (theta15[1] - theta15[0])
@@ -807,12 +895,15 @@ def decide_target_ship(target_ships_static: list[ShipStatic]) -> ShipStatic:
     """
     Randomly pick a target ship from a list of target ships.
 
-    Params:
-        * target_ships: list of target ships with static information
+    Parameters
+    ----------
+    target_ships : list[ShipStatic]
+        List of target ships with static information
 
     Returns
     -------
-        * The target ship, info of type, size etc.
+    target_ship : ShipStatic
+        The target ship, info of type, size etc.
     """
     num_target_ships: int = len(target_ships_static)
     target_ship_to_use: int = random.randint(1, num_target_ships)

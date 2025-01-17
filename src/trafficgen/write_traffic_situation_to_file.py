@@ -13,9 +13,12 @@ def write_traffic_situations_to_json_file(situations: list[TrafficSituation], wr
     """
     Write traffic situations to json file.
 
-    Params:
-        * traffic_situations: Traffic situations to be written to file
-        * write_folder: Folder where the json files is to be written
+    Parameters
+    ----------
+    traffic_situations : list[TrafficSituation]
+        List of traffic situations to be written to file
+    write_folder : Path
+        Path to the folder where the json files is to be written
     """
     Path(write_folder).mkdir(parents=True, exist_ok=True)
     for i, situation in enumerate(situations):
@@ -33,12 +36,15 @@ def convert_situation_data_from_si_units_to__maritime(situation: TrafficSituatio
     """
     Convert situation data which is given in SI units to maritime units.
 
-    Params:
-        * situation: Traffic situation data
+    Parameters
+    ----------
+    situation : TrafficSituation
+        Traffic situation data
 
     Returns
     -------
-        * situation: Converted traffic situation data
+    situation : TrafficSituation
+        Converted traffic situation data
     """
     assert situation.own_ship is not None
     situation.own_ship = convert_ship_data_from_si_units_to_maritime(situation.own_ship)
@@ -54,12 +60,15 @@ def convert_ship_data_from_si_units_to_maritime(ship: T_ship) -> T_ship:
     """
     Convert ship data which is given in SI units to maritime units.
 
-    Params:
-        * ship: Ship data
+    Parameters
+    ----------
+    ship : T_ship
+        Ship data
 
     Returns
     -------
-        * ship: Converted ship data
+    ship : T_ship
+        Converted ship data
     """
     assert ship.initial is not None
     assert ship.initial.heading is not None

@@ -21,13 +21,15 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
     """
     Read traffic situation files.
 
-    Params:
-        * situation_folder: Path to the folder where situation files are found
-        * input_units: Specify if the inputs are given in si or maritime units
+    Parameters
+    ----------
+    situation_folder : Path
+        Path to the folder where situation files are found
 
     Returns
     -------
-        * situations: List of desired traffic situations
+    situations : list[SituationInput]
+        List of desired traffic situations
     """
     situations: list[SituationInput] = []
     for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
@@ -51,12 +53,15 @@ def read_generated_situation_files(situation_folder: Path) -> list[TrafficSituat
     """
     Read the generated traffic situation files. Used for testing the trafficgen algorithm.
 
-    Params:
-        * situation_folder: Path to the folder where situation files are found
+    Parameters
+    ----------
+    situation_folder : Path
+        Path to the folder where situation files are found
 
     Returns
     -------
-        * situations: List of desired traffic situations
+    situations : list[TrafficSituation]
+        List of desired traffic situations
     """
     situations: list[TrafficSituation] = []
     for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
@@ -74,12 +79,15 @@ def convert_situation_data_from_maritime_to_si_units(situation: SituationInput) 
     """
     Convert situation data which is given in maritime units to SI units.
 
-    Params:
-        * situation: Situation data to be converted
+    Parameters
+    ----------
+    situation : SituationInput
+        Situation data to be converted
 
     Returns
     -------
-        * situation: Converted situation data
+    situation : SituationInput
+        Converted situation data
     """
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
@@ -99,12 +107,15 @@ def convert_own_ship_initial_data(initial: Initial) -> Initial:
     """
     Convert own ship initial data which is given in maritime units to SI units.
 
-    Params:
-        * initial: Own ship initial data to be converted
+    Parameters
+    ----------
+    initial : Initial
+        Own ship initial data to be converted
 
     Returns
     -------
-        * initial: Converted own ship initial data
+    initial : Initial
+        Converted own ship initial data
     """
     initial.position.lon = deg_2_rad(initial.position.lon)
     initial.position.lat = deg_2_rad(initial.position.lat)
@@ -126,7 +137,7 @@ def convert_own_ship_waypoints(waypoints: list[Waypoint]) -> list[Waypoint]:
 
     Returns
     -------
-    list[Waypoint]
+    waypoints : list[Waypoint]
         Converted waypoint data
     """
     for waypoint in waypoints:
@@ -160,7 +171,7 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
 
     Returns
     -------
-    list[Encounter]
+    encounters : list[Encounter]
         Converted encounter data
     """
     assert encounters is not None
@@ -186,12 +197,15 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     """
     Read own ship static data from file.
 
-    Params:
-        * own_ship_file: Path to the own_ship_static_file file
+    Parameters
+    ----------
+    own_ship_file : Path
+        Path to the own_ship_static_file file
 
     Returns
     -------
-        * own_ship static information
+    own_ship : ShipStatic
+        Own_ship static information
     """
     with Path.open(own_ship_static_file, encoding="utf-8") as f:
         data = json.load(f)
@@ -211,12 +225,15 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     Read target ship static data files.
 
-    Params:
-        * target_ship_folder: Path to the folder where target ships are found
+    Parameters
+    ----------
+    target_ship_folder : Path
+        Path to the folder where target ships are found
 
     Returns
     -------
-        * target_ships_static: List of different target ships with static information
+    target_ships_static : list[ShipStatic]
+        List of different target ships with static information
     """
     target_ships_static: list[ShipStatic] = []
     i = 0
@@ -241,9 +258,15 @@ def convert_ship_data_from_maritime_to_si_units(ship: ShipStatic) -> ShipStatic:
     """
     Convert ship static data which is given in maritime units to SI units.
 
+    Parameters
+    ----------
+    ship : ShipStatic
+        Ship data to be converted
+
     Returns
     -------
-        * ShipStatic
+    ship : ShipStatic
+        Converted ship data
     """
     if ship.sog_max is not None:
         ship.sog_max = knot_2_m_pr_s(ship.sog_max)
@@ -257,16 +280,18 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     """
     Read encounter settings file.
 
-    Params:
-        * settings_file: Path to the encounter setting file
+    Parameters
+    ----------
+    settings_file : Path
+        Path to the encounter setting file
 
     Returns
     -------
-        * encounter_settings: Settings for the encounter
+    encounter_settings : EncounterSettings
+        Settings for the encounter
     """
     with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
-    data = check_input_units(data)
     encounter_settings: EncounterSettings = EncounterSettings(**data)
 
     encounter_settings = convert_settings_data_from_maritime_to_si_units(encounter_settings)
@@ -274,42 +299,37 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     return encounter_settings
 
 
-def convert_settings_data_from_maritime_to_si_units(settings: EncounterSettings) -> EncounterSettings:
+def convert_settings_data_from_maritime_to_si_units(encounter_settings: EncounterSettings) -> EncounterSettings:
     """
     Convert situation data which is given in maritime units to SI units.
 
-    Params:
-        * own_ship_file: Path to the own_ship_file file
+    Parameters
+    ----------
+    encounter_settings : EncounterSettings
+        Encounter settings data to be converted
 
     Returns
     -------
-        * own_ship information
+    encounter_settings : EncounterSettings
+        Converted encounter settings data
     """
-    assert settings.classification is not None
+    assert encounter_settings.classification is not None
 
-    settings.classification.theta13_criteria = deg_2_rad(settings.classification.theta13_criteria)
-    settings.classification.theta14_criteria = deg_2_rad(settings.classification.theta14_criteria)
-    settings.classification.theta15_criteria = deg_2_rad(settings.classification.theta15_criteria)
-    settings.classification.theta15[0] = deg_2_rad(settings.classification.theta15[0])
-    settings.classification.theta15[1] = deg_2_rad(settings.classification.theta15[1])
+    encounter_settings.classification.theta13_criteria = deg_2_rad(encounter_settings.classification.theta13_criteria)
+    encounter_settings.classification.theta14_criteria = deg_2_rad(encounter_settings.classification.theta14_criteria)
+    encounter_settings.classification.theta15_criteria = deg_2_rad(encounter_settings.classification.theta15_criteria)
+    encounter_settings.classification.theta15[0] = deg_2_rad(encounter_settings.classification.theta15[0])
+    encounter_settings.classification.theta15[1] = deg_2_rad(encounter_settings.classification.theta15[1])
 
-    settings.vector_range[0] = min_2_s(settings.vector_range[0])
-    settings.vector_range[1] = min_2_s(settings.vector_range[1])
+    encounter_settings.vector_range[0] = min_2_s(encounter_settings.vector_range[0])
+    encounter_settings.vector_range[1] = min_2_s(encounter_settings.vector_range[1])
 
-    settings.situation_length = min_2_s(settings.situation_length)
-    settings.max_meeting_distance = nm_2_m(settings.max_meeting_distance)
-    settings.evolve_time = min_2_s(settings.evolve_time)
-    settings.common_vector = min_2_s(settings.common_vector)
+    encounter_settings.situation_length = min_2_s(encounter_settings.situation_length)
+    encounter_settings.max_meeting_distance = nm_2_m(encounter_settings.max_meeting_distance)
+    encounter_settings.evolve_time = min_2_s(encounter_settings.evolve_time)
+    encounter_settings.common_vector = min_2_s(encounter_settings.common_vector)
 
-    return settings
-
-
-def check_input_units(data: dict[str, Any]) -> dict[str, Any]:
-    """Check if input unit is specified, if not specified it is set to SI."""
-    if "input_units" not in data:
-        data["input_units"] = "si"
-
-    return data
+    return encounter_settings
 
 
 def camel_to_snake(string: str) -> str:

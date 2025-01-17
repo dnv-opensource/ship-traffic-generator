@@ -36,22 +36,23 @@ def generate_traffic_situations(
     target_ship_folder: Path,
     settings_file: Path,
 ) -> list[TrafficSituation]:
-    """
-    Generate a set of traffic situations using input files.
+    """Generate traffic situations based on the provided input files.
 
-    This is the main function for generating a set of traffic situations using input files
-    specifying number and type of encounter, type of target ships etc.
-
-    Params:
-        * situation_folder: Path to situation folder, files describing the desired situations
-        * own_ship_file: Path to where own ships is found
-        * target_ship_folder: Path to where different type of target ships is found
-        * settings_file: Path to settings file
+    Parameters
+    ----------
+    situation_folder : Path
+        Path to the folder containing situation files.
+    own_ship_file : Path
+        Path to the file containing own ship static data.
+    target_ship_folder : Path
+        Path to the folder containing target ship static files.
+    settings_file : Path
+        Path to the file containing encounter settings.
 
     Returns
     -------
-        * traffic_situations: List of generated traffic situations.
-        * One situation may consist of one or more encounters.
+    list[TrafficSituation]
+        A list of generated traffic situations.
     """
     own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
     target_ships_static: list[ShipStatic] = read_target_ship_static_files(target_ship_folder)
