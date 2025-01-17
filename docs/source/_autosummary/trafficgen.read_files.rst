@@ -10,7 +10,6 @@
    .. autosummary::
    
       camel_to_snake
-      check_input_units
       convert_encounters
       convert_keys_to_snake_case
       convert_own_ship_initial_data

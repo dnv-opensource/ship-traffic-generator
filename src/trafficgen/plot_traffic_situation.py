@@ -336,7 +336,8 @@ def find_max_value_for_plot(
     """
     Find the maximum deviation from the Reference point in north and east direction.
 
-    Params:
+    Parameters
+    ----------
     ship : Ship
         Ship information
     max_value : float

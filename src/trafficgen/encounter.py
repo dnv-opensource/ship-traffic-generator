@@ -840,7 +840,8 @@ def assign_beta_from_list(beta_limit: list[float]) -> float:
     The beta between own ship and target ship depending is somewhere between
     the limits given by beta_limit.
 
-    Params:
+    Parameters
+    ----------
     beta_limit : list[float]
         Limits for beta {min, max} [rad]
 

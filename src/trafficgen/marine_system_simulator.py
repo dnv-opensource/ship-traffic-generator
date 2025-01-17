@@ -49,8 +49,8 @@ def flat2llh(
         Flat earth coordinate located at (lon_0, lat_0)
     z_n : float
         Ship position, down [m], default is 0.0
-        * h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
-          of the ellipsoid
+    h_ref : float
+        Flat earth coordinate with reference h_ref in meters above the surface of the ellipsoid, default is 0.0
 
     Returns
     -------
