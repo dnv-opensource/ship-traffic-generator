@@ -1,7 +1,8 @@
 """Functions to clean traffic situations data before writing it to a json file."""
 
+import json
 from pathlib import Path
-from typing import TypeVar
+from typing import Any, TypeVar
 
 from trafficgen.types import OwnShip, Ship, TargetShip, TrafficSituation
 from trafficgen.utils import m_2_nm, m_pr_s_2_knot, rad_2_deg
@@ -25,11 +26,22 @@ def write_traffic_situations_to_json_file(situations: list[TrafficSituation], wr
         file_number: int = i + 1
         output_file_path: Path = write_folder / f"traffic_situation_{file_number:02d}.json"
         situation = convert_situation_data_from_si_units_to__maritime(situation)  # noqa: PLW2901
-        data: str = situation.model_dump_json(
-            by_alias=True, indent=4, exclude_unset=True, exclude_defaults=False, exclude_none=True
+        data: dict[str, Any] = situation.model_dump(
+            by_alias=True, exclude_unset=True, exclude_defaults=False, exclude_none=True
         )
+
+        # Remove the 'sogMax' field from the 'static' dictionary in ownShip
+        if "static" in data.get("ownShip", {}):
+            data["ownShip"]["static"].pop("sogMax", None)
+
+        # Remove the 'sogMax' field from the 'static' dictionary in each targetShip
+        for target_ship in data.get("targetShips", []):
+            if "static" in target_ship:
+                target_ship["static"].pop("sogMax", None)
+
+        json_data: str = json.dumps(data, indent=4)
         with Path.open(output_file_path, "w", encoding="utf-8") as outfile:
-            _ = outfile.write(data)
+            _ = outfile.write(json_data)
 
 
 def convert_situation_data_from_si_units_to__maritime(situation: TrafficSituation) -> TrafficSituation:
