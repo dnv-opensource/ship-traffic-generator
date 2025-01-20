@@ -15,19 +15,18 @@ jobs:
       - name: Checkout active branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
           lfs: true
-      - name: Install Python
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip' # cache pip dependencies
-      - uses: actions/download-artifact@v4
-        with:
-          name: requirements-files
-      - name: Install dependencies
-        run: |
-          pip install -r requirements-docs.txt
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
       - name: Print debugging information
         run: |
           echo "github.ref:" ${{github.ref}}
@@ -39,17 +38,15 @@ jobs:
           git branch
           git branch -a
           git remote -v
-          python -V
-          pip list --not-required
-          pip list
+          uv run python -V
+          uv pip list
 
       # Build documentation
       - uses: sphinx-doc/github-problem-matcher@master
       - name: Build documentation
         run: |
           cd docs
-          sphinx-apidoc -f -e -M -o . ../src/trafficgen
-          make html
+          uv run make html
 
       - name: Clone and cleanup gh-pages branch
         run: |

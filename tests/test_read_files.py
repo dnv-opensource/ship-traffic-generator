@@ -1,12 +1,6 @@
 """Tests reading files."""
 
 from pathlib import Path
-from typing import List, Set
-
-from maritime_schema.types.caga import (
-    GeneralShipType,
-    ShipStatic,
-)
 
 from trafficgen.read_files import (
     read_encounter_settings_file,
@@ -14,7 +8,13 @@ from trafficgen.read_files import (
     read_situation_files,
     read_target_ship_static_files,
 )
-from trafficgen.types import EncounterSettings, EncounterType, SituationInput
+from trafficgen.types import (
+    AisShipType,
+    EncounterSettings,
+    EncounterType,
+    ShipStatic,
+    SituationInput,
+)
 
 
 def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
@@ -22,7 +22,7 @@ def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
     Test reading traffic situations with full specification,
     meaning all parameters are specified.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_01)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_01)
     assert len(desired_traffic_situations) == 5
 
     # sourcery skip: no-loop-in-tests
@@ -44,7 +44,7 @@ def test_read_situations_1_ts_partly_spec(situations_folder_test_02: Path):
     Test reading traffic situations using partly specification,
     meaning some of the parameters are specified.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_02)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_02)
     assert len(desired_traffic_situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -61,7 +61,7 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
     Test reading traffic situations using using minimum specification,
     meaning only type of situation is specified.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_03)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_03)
     assert len(desired_traffic_situations) == 2
 
     # sourcery skip: no-loop-in-tests
@@ -79,7 +79,7 @@ def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: 
     """
     Test reading a traffic situation file num_situations=5 and 2 encounter specifications.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_04)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_04)
     assert len(desired_traffic_situations) == 1
 
     # sourcery skip: no-loop-in-tests
@@ -99,11 +99,11 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path)
     """
     Test reading three traffic situation files 1, 2 and 3 encounter specifications.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_05)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_05)
     assert len(desired_traffic_situations) == 3
 
     # sourcery skip: no-loop-in-tests
-    num_situations_values_found: Set[int] = set()
+    num_situations_values_found: set[int] = set()
     for situation in desired_traffic_situations:
         assert situation.own_ship is not None
         assert situation.encounters is not None
@@ -122,11 +122,11 @@ def test_read_situations_with_different_encounter_types(situations_folder_test_0
     """
     Test reading 5 traffic situation files with different encounter types.
     """
-    desired_traffic_situations: List[SituationInput] = read_situation_files(situations_folder_test_07)
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_folder_test_07)
     assert len(desired_traffic_situations) == 5
 
     # sourcery skip: no-loop-in-tests
-    desired_encounter_types_found: Set[EncounterType] = set()
+    desired_encounter_types_found: set[EncounterType] = set()
     for situation in desired_traffic_situations:
         assert situation.own_ship is not None
         assert situation.encounters is not None
@@ -152,24 +152,26 @@ def test_read_own_ship(own_ship_file: Path):
     Test reading own ship file.
     """
     own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
-    assert own_ship_static.length is not None
-    assert own_ship_static.width is not None
-    assert own_ship_static.speed_max is not None
+    assert own_ship_static.dimensions is not None
+    assert own_ship_static.dimensions.length is not None
+    assert own_ship_static.dimensions.width is not None
+    assert own_ship_static.sog_max is not None
     assert own_ship_static.mmsi is not None
-    assert own_ship_static.ship_type is GeneralShipType.PASSENGER
+    assert own_ship_static.ship_type is AisShipType.PASSENGER
 
 
 def test_read_target_ships(target_ships_folder: Path):
     """
     Test reading target ship files.
     """
-    target_ships_static: List[ShipStatic] = read_target_ship_static_files(target_ships_folder)
+    target_ships_static: list[ShipStatic] = read_target_ship_static_files(target_ships_folder)
 
     # sourcery skip: no-loop-in-tests
     for target_ship_static in target_ships_static:
-        assert target_ship_static.length is not None
-        assert target_ship_static.width is not None
-        assert target_ship_static.speed_max is not None
+        assert target_ship_static.dimensions is not None
+        assert target_ship_static.dimensions.length is not None
+        assert target_ship_static.dimensions.width is not None
+        assert target_ship_static.sog_max is not None
 
 
 def test_read_encounter_settings_file(settings_file: Path):
