@@ -7,6 +7,16 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 -/-
 
+## [0.7.0] - 2025-01-22
+
+### Changed
+
+* The python package Maritime Schema is no longer open source, necessary types have been included here to remove the link
+* Project updated to use uv package installer
+* Documentation has been updated
+* Updating workflows
+* Removed maxSpeed from the output files generated using the tool
+
 
 ## [0.6.0] - 2024-11-11
 
