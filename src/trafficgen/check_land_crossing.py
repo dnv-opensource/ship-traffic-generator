@@ -1,45 +1,51 @@
 """Module with helper functions to determine if a generated path is crossing land."""
 
 from global_land_mask import globe
-from maritime_schema.types.caga import Position
 
+from trafficgen.types import GeoPosition
 from trafficgen.utils import calculate_position_at_certain_time, rad_2_deg
 
 
 def path_crosses_land(
-    position_1: Position,
+    position_1: GeoPosition,
     speed: float,
-    course: float,
-    lat_lon0: Position,
+    cog: float,
+    lat_lon0: GeoPosition,
     time_interval: float = 300.0,
 ) -> bool:
     """
     Find if path is crossing land.
 
-    Params:
-        position_1: Ship position in latitude/longitude [rad].
-        speed: Ship speed [m/s].
-        course: Ship course [rad].
-        lat_lon0: Reference point, latitudinal [rad] and longitudinal [rad].
-        time_interval: The time interval the vessel should travel without crossing land [sec]
+    Parameters
+    ----------
+    position_1 : GeoPosition
+        Ship position, latitudinal [rad] and longitudinal [rad].
+    speed : float
+        Ship speed [m/s].
+    cog : float
+        Ship course over ground [rad].
+    lat_lon0 : GeoPosition
+        Reference point, latitudinal [rad] and longitudinal [rad].
+    time_interval : float
+        The time interval the vessel should travel without crossing land [sec]. Default is 300.0.
 
     Returns
     -------
-        is_on_land: True if parts of the path crosses land.
+    is_on_land : bool
+        True if parts of the path crosses land.
     """
-
     num_checks = 10
     for i in range(int(time_interval / num_checks)):
         position_2 = calculate_position_at_certain_time(
-            Position(latitude=position_1.latitude, longitude=position_1.longitude),
+            GeoPosition(lat=position_1.lat, lon=position_1.lon),
             lat_lon0,
             speed,
-            course,
+            cog,
             i * time_interval / num_checks,
         )
 
-        lat = rad_2_deg(position_2.latitude)
-        lon = rad_2_deg(position_2.longitude)
-        if globe.is_land(lat, lon):  # type: ignore  (The package is unfortunately not typed.)
+        lat = rad_2_deg(position_2.lat)
+        lon = rad_2_deg(position_2.lon)
+        if globe.is_land(lat, lon):  # type: ignore  # noqa: PGH003
             return True
     return False

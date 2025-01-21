@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """Root level fixtures for `trafficgen`"""
+
 from pathlib import Path
 
 import pytest
-from pytest import TempPathFactory
 
 
 @pytest.fixture
@@ -12,7 +11,7 @@ def your_fixture():
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    return None
+    return
 
 
 @pytest.fixture(scope="session")
@@ -99,7 +98,7 @@ def own_ship_file(proj_data_folder: Path) -> Path:
     return Path(proj_data_folder) / "own_ship" / "own_ship.json"
 
 
-@pytest.fixture(scope="function")
-def output_folder(tmp_path_factory: TempPathFactory) -> Path:
+@pytest.fixture
+def output_folder(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """Path to temporary data folder used to write output files to in a test"""
     return tmp_path_factory.mktemp("output_", numbered=True)

@@ -11,8 +11,6 @@ Wiley. ISBN-13: 978-1119575054
 Parts of the library have been re-implemented in Python and are found below.
 """
 
-from typing import Tuple
-
 import numpy as np
 
 
@@ -23,37 +21,45 @@ def flat2llh(
     lon_0: float,
     z_n: float = 0.0,
     height_ref: float = 0.0,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
-    Compute longitude lon (rad), latitude lat (rad) and height h (m) for the
-    NED coordinates (xn,yn,zn).
+    Compute lon lon (rad), lat lat (rad) and height h (m) for the NED coordinates (xn,yn,zn).
 
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
 
-    The method computes longitude lon (rad), latitude lat (rad) and height h (m) for the
+    The method computes lon lon (rad), lat lat (rad) and height h (m) for the
     NED coordinates (xn,yn,zn) using a flat Earth coordinate system defined by the WGS-84
     ellipsoid. The flat Earth coordinate origin is located  at (lon_0, lat_0) with reference
     height h_ref in meters above the surface of the ellipsoid. Both height and h_ref
     are positive upwards, while zn is positive downwards (NED).
     Author:    Thor I. Fossen
     Date:      20 July 2018
-    Revisions: 2023-02-04 updates the formulas for latitude and longitude
+    Revisions: 2023-02-04 updates the formulas for lat and lon
 
-    Params:
-        * xn: Ship position, north [m]
-        * yn: Ship position, east [m]
-        * zn=0.0: Ship position, down [m]
-        * lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
-        * h_ref=0.0: Flat earth coordinate with reference h_ref in meters above the surface
-          of the ellipsoid
+    Parameters
+    ----------
+    x_n : float
+        Ship position, north [m]
+    y_n : float
+        Ship position, east [m]
+    lat_0 : float
+        Flat earth coordinate located at (lon_0, lat_0)
+    lon_0 : float
+        Flat earth coordinate located at (lon_0, lat_0)
+    z_n : float
+        Ship position, down [m], default is 0.0
+    h_ref : float
+        Flat earth coordinate with reference h_ref in meters above the surface of the ellipsoid, default is 0.0
 
     Returns
     -------
-        * lat: Latitude [rad]
-        * lon: Longitude [rad]
-        * h: Height [m]
-
+    lat : float
+        Ship position in lat [rad]
+    lon : float
+        Ship position in lon [rad]
+    h : float
+        Ship height in meters above the surface of the ellipsoid [m]
     """
     # WGS-84 parameters
     a_radius = 6378137  # Semi-major axis
@@ -63,8 +69,8 @@ def flat2llh(
     r_n = a_radius / np.sqrt(1 - e_eccentricity**2 * np.sin(lat_0) ** 2)
     r_m = r_n * ((1 - e_eccentricity**2) / (1 - e_eccentricity**2 * np.sin(lat_0) ** 2))
 
-    d_lat = x_n / (r_m + height_ref)  # delta latitude dmu = mu - mu0
-    d_lon = y_n / ((r_n + height_ref) * np.cos(lat_0))  # delta longitude dl = l - l0
+    d_lat = x_n / (r_m + height_ref)  # delta lat dmu = mu - mu0
+    d_lon = y_n / ((r_n + height_ref) * np.cos(lat_0))  # delta lon dl = l - l0
 
     lat = ssa(lat_0 + d_lat)
     lon = ssa(lon_0 + d_lon)
@@ -80,36 +86,44 @@ def llh2flat(
     lon_0: float,
     height: float = 0.0,
     height_ref: float = 0.0,
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """
-    Compute (north, east) for a flat Earth coordinate system from longitude
-    lon (rad) and latitude lat (rad).
+    Compute (north, east) for a flat Earth coordinate system from lon lon (rad) and lat lat (rad).
 
     Method taken from the MSS (Marine System Simulator) toolbox which is a Matlab/Simulink
     library for marine systems.
 
-    The method computes (north, east) for a flat Earth coordinate system from longitude
-    lon (rad) and latitude lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate
+    The method computes (north, east) for a flat Earth coordinate system from lon
+    lon (rad) and lat lat (rad) of the WGS-84 elipsoid. The flat Earth coordinate
     origin is located  at (lon_0, lat_0).
     Author:    Thor I. Fossen
     Date:      20 July 2018
-    Revisions: 2023-02-04 updates the formulas for latitude and longitude
+    Revisions: 2023-02-04 updates the formulas for lat and lon
 
-    Params:
-        * lat: Ship position in latitude [rad]
-        * lon: Ship position in longitude [rad]
-        * h=0.0: Ship height in meters above the surface of the ellipsoid
-        * lat_0, lon_0: Flat earth coordinate located at (lon_0, lat_0)
-        * h_ref=0.0: Flat earth coordinate with reference h_ref in meters above
-          the surface of the ellipsoid
+    Parameters
+    ----------
+    lat : float
+        Ship position in lat [rad]
+    lon : float
+        Ship position in lon [rad]
+    lat_0 : float
+        Flat earth coordinate located at (lon_0, lat_0)
+    lon_0 : float
+        Flat earth coordinate located at (lon_0, lat_0)
+    h : float
+        Ship height in meters above the surface of the ellipsoid, default is 0.0
+    h_ref : float
+        Flat earth coordinate with reference h_ref in meters above the surface of the ellipsoid
 
     Returns
     -------
-        * x_n: Ship position, north [m]
-        * y_n: Ship position, east [m]
-        * z_n: Ship position, down [m]
+    x_n : float
+        Ship position, north [m]
+    y_n : float
+        Ship position, east [m]
+    z_n : float
+        Ship position, down [m]
     """
-
     # WGS-84 parameters
     a_radius = 6378137  # Semi-major axis (equitorial radius)
     f_factor = 1 / 298.257223563  # Flattening
@@ -142,12 +156,14 @@ def ssa(angle: float) -> float:
     Author:     Thor I. Fossen
     Date:       2018-09-21
 
-    Param:
-        * angle: angle given in radius
+    Parameters
+    ----------
+    angle : float
+        Angle given in radius
 
     Returns
     -------
-        * smallest_angle: "smallest signed angle" or the smallest difference between two angles
+    smallest_angle : float
+        "smallest signed angle" or the smallest difference between two angles
     """
-
     return np.mod(angle + np.pi, 2 * np.pi) - np.pi

@@ -8,6 +8,7 @@ import contextlib
 import logging
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import click
 import click_log
@@ -15,8 +16,10 @@ import click_log
 from trafficgen.plot_traffic_situation import plot_specific_traffic_situation, plot_traffic_situations
 from trafficgen.read_files import read_encounter_settings_file
 from trafficgen.ship_traffic_generator import generate_traffic_situations
-from trafficgen.types import EncounterSettings
 from trafficgen.write_traffic_situation_to_file import write_traffic_situations_to_json_file
+
+if TYPE_CHECKING:
+    from trafficgen.types import EncounterSettings
 
 logger = logging.getLogger(__name__)
 _ = click_log.basic_config(logger)
@@ -34,7 +37,7 @@ output_folder: Path = default_data_path / "test_output"
 
 @click.group()
 @click_log.simple_verbosity_option(logger)
-def main(args=None):
+def main(args=None):  # noqa: ANN001, ANN201, ARG001
     """Entry point for console script as configured in pyproject.toml.
 
     Runs the command line interface and parses arguments and options entered on the console.
@@ -110,21 +113,21 @@ def main(args=None):
     help="Plot individual traffic situation, specify an INTEGER value larger than 0.",
 )
 def gen_situation(
-    situations,
-    own_ship,
-    targets,
-    settings,
-    visualize,
-    col,
-    row,
-    visualize_situation,
-    output,
-):
+    situations: str,
+    own_ship: str,
+    targets: str,
+    settings: str,
+    col: int,
+    row: int,
+    visualize_situation: int,
+    output: str,
+    visualize: bool,  # noqa: FBT001
+) -> None:
     r"""Console script for trafficgen.
     Example: \n
     trafficgen gen-situation -s ./data/example_situations_input
     -o ./data/test_output_1.
-    """
+    """  # noqa: D205
     click.echo("Generating traffic situations")
     generated_traffic_situations = generate_traffic_situations(
         situation_folder=Path(situations),
@@ -149,13 +152,9 @@ def gen_situation(
     with contextlib.suppress(TypeError):
         if visualize_situation > 0:
             click.echo("Plotting a specific traffic situation")
-            plot_specific_traffic_situation(
-                generated_traffic_situations, visualize_situation, encounter_settings
-            )
+            plot_specific_traffic_situation(generated_traffic_situations, visualize_situation, encounter_settings)
         else:
-            click.echo(
-                "Invalid traffic situation number specified, not creating map plot. See --help for more info."
-            )
+            click.echo("Invalid traffic situation number specified, not creating map plot. See --help for more info.")
     if output is not None:
         click.echo("Writing traffic situations to files")
         write_traffic_situations_to_json_file(generated_traffic_situations, write_folder=Path(output))

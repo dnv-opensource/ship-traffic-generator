@@ -1,11 +1,16 @@
 name: Build and publish documentation
 
-on: workflow_call
+on:
+  workflow_call:
+  workflow_dispatch:
+
 
 env:
   DEFAULT_BRANCH: 'release'
   #SPHINXOPTS: '-W --keep-going -T'
   # ^-- If these SPHINXOPTS are enabled, then be strict about the builds and fail on any warnings
+
+
 
 jobs:
   build-and-publish-docs:
@@ -15,19 +20,18 @@ jobs:
       - name: Checkout active branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
           lfs: true
-      - name: Install Python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
         with:
-          python-version: '3.11'
-          cache: 'pip' # cache pip dependencies
-      - uses: actions/download-artifact@v4
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: requirements-files
-      - name: Install dependencies
-        run: |
-          pip install -r requirements-docs.txt
+          python-version-file: "pyproject.toml"
+      - name: Install the project
+        run: uv sync --upgrade
       - name: Print debugging information
         run: |
           echo "github.ref:" ${{github.ref}}
@@ -39,17 +43,14 @@ jobs:
           git branch
           git branch -a
           git remote -v
-          python -V
-          pip list --not-required
-          pip list
+          uv run python -V
+          uv pip list
 
       # Build documentation
       - uses: sphinx-doc/github-problem-matcher@master
       - name: Build documentation
         run: |
-          cd docs
-          sphinx-apidoc -f -e -M -o . ../src/trafficgen
-          make html
+          uv run docs/make.bat html
 
       - name: Clone and cleanup gh-pages branch
         run: |
@@ -106,7 +107,7 @@ jobs:
 
       # Publish: Commit gh-pages branch and publish it to GitHub Pages
       - name: Publish documentation
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}

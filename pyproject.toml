@@ -1,135 +1,144 @@
-[tool.poetry]
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+    "src/my_package",
+    "tests",
+    ".coveragerc",
+    ".editorconfig",
+    ".pre-commit-config.yaml",
+    "manage.py",
+    "pyproject.toml",
+    "pytest.ini",
+    "ruff.toml",
+    "uv.lock",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/trafficgen",
+]
+
+[project]
 name = "trafficgen"
-version = "0.5.0"
+version = "0.7.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
-authors = ["Tom Arne Pedersen <Tom.Arne.Pedersen@dnv.com>"]
-license = "MIT License"
 readme = "README.md"
+requires-python = ">= 3.11"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Tom Arne Pedersen", email = "Tom.Arne.Pedersen@dnv.com" },
+    { name = "Claas Rostock", email = "Claas.Rostock@dnv.com" },
+    { name = "Minos Hemrich", email = "Minos.Hemrich@dnv.com" },
+]
+testers = [
+    { name = "Grunde Løvoll", email = "Grunde.Lovoll@dnv.com" },
+    { name = "Stephanie Kemna", email = "Stephanie.Kemna@dnv.com" },
+]
+keywords = [
+    "traffic generator",
+    "simulation",
+    "testing",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    # "Operating System :: MacOS",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "dictIO>=0.4.0",
+    "numpy>=1.25,<2.0",
+    "matplotlib>=3.7.2",
+    "basemap>=1.3.8",
+    "basemap-data-hires>=1.3.2",
+    "global-land-mask>=1.0.0",
+    "folium>=0.14.0",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.9, <3.13"
-click = "^8.1"
-click-log = "^0.4.0"
-numpy = "^1.25.2"
-matplotlib = "^3.7.2"
-basemap = "^1.3.8"
-basemap-data-hires = "^1.3.2"
-global-land-mask = "^1.0.0"
-folium = "^0.14.0"
-pydantic = "^2.5"
-maritime-schema = "^0.0.6"
+[project.optional-dependencies]
 
-[tool.poetry.group.dev]
-optional = true
 
-[tool.poetry.group.dev.dependencies]
-black = { version = "^23.12", extras = ["jupyter"] }
-ruff = "^0.1.8" # linter
-pyright = "^1.1.338"
-tox = "^4.11.1"
-pytest = "^7.4.1"
-pytest-cov = "^4.1"
-sourcery = "^1.14"
+[project.urls]
+Homepage = "https://github.com/dnv-opensource/ship-traffic-generator"
+# Documentation = "https://dnv-innersource.github.io/my-package/README.html"
+Repository = "https://github.com/dnv-opensource/ship-traffic-generator.git"
+Issues = "https://github.com/dnv-opensource/ship-traffic-generator/issues"
+Changelog = "https://github.com/dnv-innersource/ship-traffic-generator/blob/main/CHANGELOG.md"
 
-[tool.poetry.group.docs]
-optional = true
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.8.3",
+    "pyright>=1.1.390",
+    "mypy>=1.13",
+    "sourcery>=1.27",
+    "pre-commit>=4.0",
+    "Sphinx>=8.1",
+    "sphinx-argparse-cli>=1.19",
+    "sphinx-autodoc-typehints>=2.5",
+    "sphinxcontrib-mermaid>=1.0.0",
+    "sphinx-click>=6.0.0",
+    "myst-parser>=4.0",
+    "furo>=2024.8",
+    "jupyter>=1.1",
+    "pandas-stubs>=2.2",
+    "pydantic>=2.5",
+    "click>=8.1",
+    "click-log>=0.4.0",
+]
 
-[tool.poetry.group.docs.dependencies]
-sphinx = "^7.2.5"
-sphinx-rtd-theme = "^1.3.0"
-
-# Add command line interface here like:
-[tool.poetry.scripts]
+[project.scripts]
 trafficgen = "trafficgen.cli:main"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.pytest.ini_options]
-testpaths = "tests"
-addopts = "--strict-markers"
-xfail_strict = true
-
-[tool.black]
-line-length = 105
-target-version = ["py39", "py310", "py311", "py312"]
-
-[tool.ruff]
+[tool.mypy]
+plugins = [
+    "numpy.typing.mypy_plugin",
+]
+mypy_path = "stubs"
+files = [
+    "src",
+    "tests",
+]
 exclude = [
-    ".git",
-    ".venv",
-    ".tox",
-    "build",
-    "dist",
-    "__pycache__",
-    "./docs/conf.py",
+    "^src/folder_to_be_excluded/",
 ]
-src = ["src"]
-ignore = [
-    "E501",  # Line length too long
-    # "D100",  # Missing docstring in public module
-    # "D101",  # Missing docstring in public class
-    # "D102",  # Missing docstring in public method
-    # "D103",  # Missing docstring in public function
-    # "D104",  # Missing docstring in public package
-    "D105",  # Missing docstring in magic method
-    "D107",  # Missing docstring in __init__
-    "D202",  # No blank lines allowed after function docstring
-    "D203",  # 1 blank line required before class docstring
-    "D205",  # 1 blank line required between summary line and description
-    "D212",  # Multi-line docstring summary should start at the first line
-    "D213",  # Multi-line docstring summary should start at the second line
-    # "N802",  # Function name should be lowercase  (uncomment if you want to allow Uppercase function names)
-    # "N803",  # Argument name should be lowercase  (uncomment if you want to allow Uppercase argument names)
-    "N806",  # Variable in function should be lowercase  (uncomment if you want to allow Uppercase variable names in functions)
-    # "N815",  # Variable in class scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in class scope)
-    # "N816",  # Variable in global scope should not be mixedCase  (uncomment if you want to allow mixedCase variable names in global scope)
-    ]
-line-length = 105
-select = [
-    "E",
-    "D",
-    "F",
-    "N",
-    "W",
-    "I",
-    "B",
-]
-target-version = "py39"
-
-[tool.ruff.pep8-naming]
-ignore-names = [
-    "test_*",
-    "setUp",
-    "tearDown",
+check_untyped_defs = true
+disable_error_code = [
+    "misc",
+    "import-untyped",
 ]
 
-[tool.ruff.pydocstyle]
-convention = "numpy"
-
-[tool.ruff.per-file-ignores]
-"__init__.py" = ["I001"]
-"./tests/*" = ["D"]
 
 [tool.pyright]
-exclude = [
-    ".git",
-    ".venv",
-    ".tox",
-    "build",
-    "dist",
-    "**/__pycache__",
-    "./docs/conf.py",
-    "./venv",
+stubPath = "stubs"
+include = [
+    "src",
+    "tests",
+    "demos",
 ]
-extraPaths = ["./src"]
+exclude = [
+    "src/folder_to_be_excluded",
+]
+
 typeCheckingMode = "basic"
 useLibraryCodeForTypes = true
-# Activate the following rules step by step to (step by step..) improve code quality
 reportMissingParameterType = "error"
 reportUnknownParameterType = "warning"
-reportUnknownMemberType = "warning"
+reportUnknownMemberType = "warning"                # consider to set to `false` if you work a lot with matplotlib and pandas, which are both not properly typed and known to trigger this warning
 reportMissingTypeArgument = "error"
 reportPropertyTypeMismatch = "error"
 reportFunctionMemberAccess = "warning"
@@ -150,12 +159,13 @@ reportUnusedExpression = "warning"
 reportMatchNotExhaustive = "warning"
 reportShadowedImports = "warning"
 reportUntypedFunctionDecorator = "warning"
+reportUntypedClassDecorator = "warning"
 reportUntypedBaseClass = "error"
 reportUntypedNamedTuple = "warning"
-
+reportUnnecessaryTypeIgnoreComment = "information"
 # Activate the following rules only locally and temporary, i.e. for a QA session.
 # (For server side CI they are considered too strict.)
+# reportMissingTypeStubs = true
 # reportConstantRedefinition = "warning"
-# reportUnnecessaryTypeIgnoreComment = "information"
 # reportImportCycles = "warning"
 # reportImplicitStringConcatenation = "warning"

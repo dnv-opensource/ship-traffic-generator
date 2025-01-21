@@ -11,13 +11,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  requirements_files:
-    uses: ./.github/workflows/_requirements_files.yml
   code_quality:
-    needs: requirements_files
     uses: ./.github/workflows/_code_quality.yml
   test:
-    needs: requirements_files
     uses: ./.github/workflows/_test.yml
   build_package:
     needs:
@@ -25,5 +21,6 @@ jobs:
       - test
     uses: ./.github/workflows/_build_package.yml
   build_and_publish_documentation:
-    needs: build_package
+    needs:
+      - build_package
     uses: ./.github/workflows/_build_and_publish_documentation.yml

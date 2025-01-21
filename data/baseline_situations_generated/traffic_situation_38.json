@@ -1,21 +1,12 @@
 {
+    "version": "0.6.0",
     "title": "CR-GW, CR-GW, OT-GW",
     "description": "Two crossing give-waysituations and one overtaking give-way situation with three target ships.",
     "ownShip": {
-        "static": {
-            "id": "27b8e920-d131-49d1-be47-284c99a128d9",
-            "length": 122.0,
-            "width": 20.0,
-            "height": 8.0,
-            "speedMax": 17.0,
-            "mmsi": 257847600,
-            "name": "BASTO VI",
-            "shipType": "Passenger"
-        },
         "initial": {
             "position": {
-                "latitude": 58.763449,
-                "longitude": 10.490654
+                "lon": 10.490654,
+                "lat": 58.763449
             },
             "sog": 10.0,
             "cog": 0.0,
@@ -25,123 +16,153 @@
         "waypoints": [
             {
                 "position": {
-                    "latitude": 58.763449,
-                    "longitude": 10.490654
+                    "lon": 10.490654,
+                    "lat": 58.763449
                 }
             },
             {
                 "position": {
-                    "latitude": 58.7911568,
-                    "longitude": 10.490654
+                    "lon": 10.490654,
+                    "lat": 58.8465724
                 }
             }
-        ]
+        ],
+        "static": {
+            "id": 0,
+            "mmsi": 257847600,
+            "name": "BASTO VI",
+            "dimensions": {
+                "length": 122.0,
+                "width": 20.0,
+                "height": 8.0,
+                "a": 61.0,
+                "b": 61.0,
+                "c": 10.0,
+                "d": 10.0
+            },
+            "shipType": "Passenger"
+        }
     },
     "targetShips": [
         {
-            "static": {
-                "id": "0f1edcd0-c5a7-40b5-ac23-18036cd001d8",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "target_ship_1",
-                "shipType": "Passenger"
-            },
             "initial": {
                 "position": {
-                    "latitude": 58.85631106,
-                    "longitude": 10.5189593
+                    "lon": 10.52708109,
+                    "lat": 58.88292003
                 },
                 "sog": 12.1,
-                "cog": 192.74,
-                "heading": 192.74,
+                "cog": 196.47,
+                "heading": 196.47,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.85631106,
-                        "longitude": 10.5189593
+                        "lon": 10.52708109,
+                        "lat": 58.88292003
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.82373776,
-                        "longitude": 10.50477984
+                        "lon": 10.4724147,
+                        "lat": 58.78684191
                     }
                 }
-            ]
+            ],
+            "static": {
+                "id": 10,
+                "name": "target_ship_1",
+                "dimensions": {
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
+                },
+                "shipType": "Passenger"
+            }
         },
         {
-            "static": {
-                "id": "a16a6a0e-7afc-4d98-ba84-00778780a143",
-                "length": 122.0,
-                "width": 20.0,
-                "height": 8.0,
-                "speedMax": 17.0,
-                "name": "target_ship_2",
-                "shipType": "Passenger"
-            },
             "initial": {
                 "position": {
-                    "latitude": 58.82181995,
-                    "longitude": 10.60301119
+                    "lon": 10.61343127,
+                    "lat": 58.82723332
                 },
                 "sog": 14.0,
-                "cog": 242.3,
-                "heading": 242.3,
+                "cog": 255.37,
+                "heading": 255.37,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.82181995,
-                        "longitude": 10.60301119
+                        "lon": 10.61343127,
+                        "lat": 58.82723332
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.80379462,
-                        "longitude": 10.53691303
+                        "lon": 10.39674116,
+                        "lat": 58.79784155
                     }
                 }
-            ]
+            ],
+            "static": {
+                "id": 10,
+                "name": "target_ship_2",
+                "dimensions": {
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
+                },
+                "shipType": "Passenger"
+            }
         },
         {
-            "static": {
-                "id": "cf1ee3ce-adb2-4626-8a9c-998626f22f44",
-                "length": 50.0,
-                "width": 10.0,
-                "height": 8.0,
-                "speedMax": 15.0,
-                "name": "target_ship_3",
-                "shipType": "Cargo"
-            },
             "initial": {
                 "position": {
-                    "latitude": 58.77098103,
-                    "longitude": 10.49592452
+                    "lon": 10.51418991,
+                    "lat": 58.79704237
                 },
                 "sog": 4.1,
-                "cog": 352.25,
-                "heading": 352.25,
+                "cog": 323.09,
+                "heading": 323.09,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "latitude": 58.77098103,
-                        "longitude": 10.49592452
+                        "lon": 10.51418991,
+                        "lat": 58.79704237
                     }
                 },
                 {
                     "position": {
-                        "latitude": 58.78218933,
-                        "longitude": 10.49299005
+                        "lon": 10.47496221,
+                        "lat": 58.82417605
                     }
                 }
-            ]
+            ],
+            "static": {
+                "id": 10,
+                "name": "target_ship_3",
+                "dimensions": {
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
+                },
+                "shipType": "Passenger"
+            }
         }
     ]
 }
