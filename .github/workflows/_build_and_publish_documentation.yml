@@ -50,7 +50,8 @@ jobs:
       - uses: sphinx-doc/github-problem-matcher@master
       - name: Build documentation
         run: |
-          uv run docs/make.bat html
+          cd docs
+          uv run make html
 
       - name: Clone and cleanup gh-pages branch
         run: |
