@@ -45,8 +45,7 @@ jobs:
       - uses: sphinx-doc/github-problem-matcher@master
       - name: Build documentation
         run: |
-          cd docs
-          uv run make html
+          uv run docs/make.bat html
 
       - name: Clone and cleanup gh-pages branch
         run: |
