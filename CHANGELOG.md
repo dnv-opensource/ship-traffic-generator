@@ -7,6 +7,12 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 -/-
 
+## [0.7.1] - 2025-01-30
+
+### Changed
+
+* Made explicit that Python 3.13 is not yet supported in the pyproject.toml file
+
 ## [0.7.0] - 2025-01-22
 
 ### Changed
