@@ -28,7 +28,7 @@ name = "trafficgen"
 version = "0.7.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
-requires-python = ">= 3.11"
+requires-python = ">= 3.11, < 3.13"
 license = { file = "LICENSE" }
 authors = [
     { name = "Tom Arne Pedersen", email = "Tom.Arne.Pedersen@dnv.com" },
