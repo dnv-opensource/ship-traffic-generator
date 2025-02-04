@@ -3,7 +3,7 @@ The tool generates a structured set of encounters for verifying automatic collis
 Based on input parameters such as desired situation, relative speed, relative bearing etc,
 the tool will generate a set of traffic situations. The traffic situations may be written to files and/or inspected using plots.
 
-A paper is written describing the background for the tool and how it works <a href="./docs/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
+A paper is written describing the background for the tool and how it works <a href="./docs/source/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
 
 ## Installation
 To install Ship Traffic Generator, run this command in your terminal:
