@@ -152,8 +152,8 @@ def plot_specific_traffic_situation(
         # Configure logging
         logging.basicConfig(level=logging.INFO)
 
-        # Replace print with logging
-        logging.info(
+        logger = logging.getLogger(__name__)
+        logger.info(
             f"Situation_number specified higher than number of situations available, "
             f"plotting last situation: {num_situations}"
         )
