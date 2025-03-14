@@ -7,6 +7,14 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 -/-
 
+## [0.7.2] - 2025-03-14
+
+### Changed
+
+* Fixed ruff errors which appeared during last nightly build
+* Removed code quality from nightly build
+* Added -U to for the 'uv sync -U' in readme file
+
 ## [0.7.1] - 2025-01-30
 
 ### Changed

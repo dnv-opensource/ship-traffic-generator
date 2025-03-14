@@ -65,9 +65,9 @@ cd ship-traffic-generator
 ```
 
 ### Install dependencies
-Run `uv sync` to create a virtual environment and install all project dependencies into it:
+Run `uv sync -U` to create a virtual environment and install all project dependencies into it:
 ```sh
-uv sync
+uv sync -U
 ```
 > **Note**: Using `--no-dev` will omit installing development dependencies.
 
