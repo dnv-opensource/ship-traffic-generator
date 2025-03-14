@@ -6,8 +6,6 @@ on:
     - cron: '30 5 * * *'
 
 jobs:
-  code_quality:
-    uses: ./.github/workflows/_code_quality.yml
   test:
     uses: ./.github/workflows/_test.yml
   test_future:

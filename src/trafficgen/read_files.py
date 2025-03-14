@@ -1,7 +1,6 @@
 """Functions to read the files needed to build one or more traffic situations."""
 
 import json
-import os
 from pathlib import Path
 from typing import Any, cast
 
@@ -32,7 +31,7 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
         List of desired traffic situations
     """
     situations: list[SituationInput] = []
-    for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
+    for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
         file_path = situation_folder / file_name
         with Path.open(file_path, encoding="utf-8") as f:
             data = json.load(f)
@@ -64,7 +63,7 @@ def read_generated_situation_files(situation_folder: Path) -> list[TrafficSituat
         List of desired traffic situations
     """
     situations: list[TrafficSituation] = []
-    for file_name in sorted([file for file in os.listdir(situation_folder) if file.endswith(".json")]):
+    for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
         file_path = situation_folder / file_name
         with Path.open(file_path, encoding="utf-8") as f:
             data = json.load(f)
@@ -237,7 +236,7 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     target_ships_static: list[ShipStatic] = []
     i = 0
-    for file_name in sorted([file for file in os.listdir(target_ship_folder) if file.endswith(".json")]):
+    for file_name in sorted([file for file in Path.iterdir(target_ship_folder) if str(file).endswith(".json")]):
         i = i + 1
         file_path = target_ship_folder / file_name
         with Path.open(file_path, encoding="utf-8") as f:
@@ -339,7 +338,7 @@ def camel_to_snake(string: str) -> str:
 
 def convert_keys_to_snake_case(data: dict[str, Any]) -> dict[str, Any]:
     """Convert keys in a nested dictionary from camel case to snake case."""
-    return cast(dict[str, Any], _convert_keys_to_snake_case(data))
+    return cast("dict[str, Any]", _convert_keys_to_snake_case(data))
 
 
 def _convert_keys_to_snake_case(
