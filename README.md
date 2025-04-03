@@ -97,7 +97,10 @@ source .venv/bin/activate
 ```
 
 ### Documentation
-To generate documentation use:
+
+For pre-generated package documentation, see [https://dnv-opensource.github.io/ship-traffic-generator/](https://dnv-opensource.github.io/ship-traffic-generator/)
+
+To generate documentation from the source code, use:
 ```sh
 uv run docs/make.bat html
 ```
