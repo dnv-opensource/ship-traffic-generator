@@ -31,9 +31,9 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
         List of desired traffic situations
     """
     situations: list[SituationInput] = []
+    print(f"Reading traffic situation input files from: {situation_folder}")
     for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
-        file_path = situation_folder / file_name
-        with Path.open(file_path, encoding="utf-8") as f:
+        with Path.open(file_name, encoding="utf-8") as f:
             data = json.load(f)
 
         data = convert_keys_to_snake_case(data)
@@ -206,6 +206,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     own_ship : ShipStatic
         Own_ship static information
     """
+    print(f"Reading own ship static file from: {own_ship_static_file}")
     with Path.open(own_ship_static_file, encoding="utf-8") as f:
         data = json.load(f)
     data = convert_keys_to_snake_case(data)
@@ -236,10 +237,10 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     target_ships_static: list[ShipStatic] = []
     i = 0
+    print(f"Reading target ship static files from: {target_ship_folder}")
     for file_name in sorted([file for file in Path.iterdir(target_ship_folder) if str(file).endswith(".json")]):
         i = i + 1
-        file_path = target_ship_folder / file_name
-        with Path.open(file_path, encoding="utf-8") as f:
+        with Path.open(file_name, encoding="utf-8") as f:
             data = json.load(f)
         data = convert_keys_to_snake_case(data)
 
@@ -289,6 +290,7 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     encounter_settings : EncounterSettings
         Settings for the encounter
     """
+    print(f"Reading encounter settings file from: {settings_file}")
     with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
     encounter_settings: EncounterSettings = EncounterSettings(**data)

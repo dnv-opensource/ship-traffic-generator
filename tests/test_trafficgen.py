@@ -90,6 +90,35 @@ def test_gen_situations(
     )
     assert len(situations) == 55
 
+def test_gen_situations_cli_nondefault_folders(
+    situations_folder: Path,
+    own_ship_file: Path,
+    settings_file: Path,
+    output_folder: Path,
+):
+    """Test generating traffic situations using the cli, using a non-default target ship folder."""
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.main,
+        [
+            "gen-situation",
+            "-s",
+            "data/baseline_situations_input",
+            "-os",
+            str(own_ship_file),
+            "-t",
+            "data/target_ships",
+            "-c",
+            str(settings_file),
+            "-o",
+            str(output_folder),
+        ],
+    )
+    assert result.exit_code == 0
+    assert "Generating traffic situations" in result.output
+    assert "Plotting traffic situations" not in result.output
+    assert "Writing traffic situations to files" in result.output
+
 
 def test_gen_situations_1_ts_full_spec_cli(
     situations_folder_test_01: Path,

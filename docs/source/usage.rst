@@ -15,7 +15,7 @@ The command line tool takes different input options::
     -s, --situations PATH          Folders with situations (default=./baseline_situations_input/)
     -t, --targets PATH             Folder with target configurations (default=./target_ships/)
     -c, --settings PATH            Path to settings file (default=./settings/encounter_settings.json)
-    --visualize                    Plot visualization
+    -v, --visualize                Plot visualization
     --col INTEGER                  Number of columns for plot, may be used with visualize (default=10)
     --row INTEGER                  Number of rows for plot, may be used with visualize (default=6)
     --visualize-situation INTEGER  Plot individual traffic situation, specify INTEGER value
