@@ -90,6 +90,7 @@ def test_gen_situations(
     )
     assert len(situations) == 55
 
+
 def test_gen_situations_cli_nondefault_folders(
     situations_folder: Path,
     own_ship_file: Path,
