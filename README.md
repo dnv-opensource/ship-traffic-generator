@@ -115,6 +115,12 @@ source .venv/bin/activate
 uv pip install -e .
 ```
 
+### Test the install
+
+```sh
+pytest .
+```
+
 ### Documentation
 
 For pre-generated package documentation, see [https://dnv-opensource.github.io/ship-traffic-generator/](https://dnv-opensource.github.io/ship-traffic-generator/)
