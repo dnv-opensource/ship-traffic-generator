@@ -5,6 +5,8 @@ the tool will generate a set of traffic situations. The traffic situations may b
 
 A paper is written describing the background for the tool and how it works <a href="./docs/source/ICMASS23_verfying_caga_systems.pdf" target="_blank">[paper]</a>
 
+For package documentation, see [https://dnv-opensource.github.io/ship-traffic-generator/](https://dnv-opensource.github.io/ship-traffic-generator/)
+
 ## Installation
 To install Ship Traffic Generator, run this command in your terminal:
 ```sh
