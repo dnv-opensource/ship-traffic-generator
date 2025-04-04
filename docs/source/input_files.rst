@@ -37,7 +37,7 @@ Example 1: Complete specified situation::
         ]
     }
 
-The values are giben in maritime units. The `common_vector` is given in minutes. For radar plotting (plotting vessel positions and relative motions),
+The values are given in maritime units. The `common_vector` is given in minutes. For radar plotting (plotting vessel positions and relative motions),
 the `common_vector` and `vector_time` are used together with ship speed to display where the ship will be in e.g. 10 minutes
 (Common vector is the common time vector used on a radar plot, e.g 10, 15, 20 minutes. The length of the arrow in the plot
 will then be the speed times this time vector).
@@ -112,7 +112,7 @@ Example 3: Generate multiple situations using `numSituations`::
         ]
     }
 
-The next example show how it is possible to give a range for the relative bearing between own ship and target ship
+The next example shows how it is possible to give a range for the relative bearing between own ship and target ship.
 
 Example 4: Assign range for `beta`::
 
@@ -137,7 +137,7 @@ Example 4: Assign range for `beta`::
 
 Own ship file
 ~~~~~~~~~~~~~~~
-The own ship file specify the own ship which is the ship to be controlled by the control system under test.
+The own ship file specifies the own ship, which is the ship to be controlled by the control system under test.
 The file is written in JSON format and located in the `src/trafficgen/data/own_ship`::
 
     {
@@ -152,7 +152,7 @@ The file is written in JSON format and located in the `src/trafficgen/data/own_s
         "shipType": "Passenger"
     }
 
-The values are given in maritime units. sogMax is the maximum speed over ground in knots, and the dimensions are given in meters.
+The values are given in maritime units. `sogMax` is the maximum speed over ground in knots, and the dimensions are given in meters.
 
 Target ship files
 ~~~~~~~~~~~~~~~~~
@@ -171,8 +171,8 @@ The file is written in JSON format and is on the following structure::
 
 Encounter settings
 ~~~~~~~~~~~~~~~~~~
-The encounter setting file spesified parameters that are common from
-all encounters. The file is written in JSON format and located in the `src/trafficgen/settings/encounter_settings.json`::
+The encounter setting file specified parameters that are common for all encounters.
+The file is written in JSON format and located in the `src/trafficgen/settings/encounter_settings.json`::
 
     {
         "classification": {
@@ -226,3 +226,4 @@ The `max_meeting_distance` is the maximum meeting distance in nautical miles.
 The `common_vector` is the common time vector used on a radar plot.
 The `evolve_time` is the time in minutes for the situation to evolve.
 The `disable_land_check` is a boolean value that determines if the land check should be disabled or not.
+We refer to the paper for more information on these parameters.
