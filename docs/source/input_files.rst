@@ -42,8 +42,10 @@ the `common_vector` and `vector_time` are used together with ship speed to displ
 (Common vector is the common time vector used on a radar plot, e.g 10, 15, 20 minutes. The length of the arrow in the plot
 will then be the speed times this time vector).
 Speed and course of the own ship, which is the ship to be tested, are given in knots and degrees, respectively.
-The own ship position is given in latitudinal and longitudinal (degree).
-The reference point is the initial position of own ship.
+The own ship position is given in latitudinal and longitudinal (decimal degrees).
+The reference point, used for conversion to x/y, is the initial position of own ship.
+
+> **Note:** in order to change the location of the traffic situations you are generating, you should change the initial lat/lon position of the own ship, in the input file(s). This is used as the origin point or reference point for all generated traffic situations, i.e. the (0,0) location.
 
 An encounter may be fully described as shown above, but the user may also deside to input less data,
 as demonstrated in Example 2. Desired encounter type is mandatory,
