@@ -56,3 +56,15 @@ This will open a browser window/tab with an OpenStreetMap background and the tra
 radar plot as an overlay.
 Note that the integer needs to be within the range of the number of generated situations,
 for example 1 - 12 if you generated 12 situations.
+
+
+Scaling encounters
+~~~~~~~~~~~~~~~~~~
+As you may have understood from the documentation the input files, the scale of encounters
+(i.e. how many meters or nautical miles does the scenario play out over)
+is determined by time-based parameters.
+If you want to change the range that the scenario plays out over,
+you will need to change the following parameters:
+
+* in the input situation file: change `vectorTime`: the time at which the target vessel will be in the encounter circle with the ownship. (Note; the encounter circle radius is defined by the max_meeting_distance in `encounter_settings.json`.)
+* in `encounter_settings.json`: change `vector_range` (the range within which `vectorTime` is varied, min), `situation_length` (total duration of situation, min), and `evolve_time` (duration in which situation evolves, min).

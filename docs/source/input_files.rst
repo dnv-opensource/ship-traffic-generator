@@ -40,7 +40,7 @@ Example 1: Complete specified situation::
 The values are giben in maritime units. The `common_vector` is given in minutes. For radar plotting (plotting vessel positions and relative motions),
 the `common_vector` and `vector_time` are used together with ship speed to display where the ship will be in e.g. 10 minutes
 (Common vector is the common time vector used on a radar plot, e.g 10, 15, 20 minutes. The length of the arrow in the plot
-will then be the speed times this time vector).
+will then be the speed times this time vector, `common_vector`).
 Speed and course of the own ship, which is the ship to be tested, are given in knots and degrees, respectively.
 The own ship position is given in latitudinal and longitudinal (degree).
 The reference point is the initial position of own ship.
