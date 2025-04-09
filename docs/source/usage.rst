@@ -67,4 +67,13 @@ If you want to change the range that the scenario plays out over,
 you will need to change the following parameters:
 
 * in the input situation file: change `vectorTime`: the time at which the target vessel will be in the encounter circle with the ownship. (Note; the encounter circle radius is defined by the max_meeting_distance in `encounter_settings.json`.)
-* in `encounter_settings.json`: change `vector_range` (the range within which `vectorTime` is varied, min), `situation_length` (total duration of situation, min), and `evolve_time` (duration in which situation evolves, min).
+* in `encounter_settings.json`: change `vector_range` (the range within which `vectorTime` is varied, min), `situation_length` (total duration of situation, min).
+
+By default, the ownship will travel in a straight line from its start position, defined in the input file, to a position that is `situation_length` minutes into the future.
+
+For the target ship, the future position of 'meeting' is calculated based on the ownship initial position, the vector_time, and the maximum meeting distance.
+At time vector_time, the target ship should be within max_meeting_distance radius of the ownship position (at vector time).
+
+If vector_time is not set, but vector_range is, then the ship traffic generator will randomly sample a vector time within the range of vector_range.
+
+Note; the `evolve_time` parameter specifies the duration in which the situation should evolve, or rather; ship traffic generator checks that for the duration of (encounter time - evolve time), the vessels are in the same COLREG situation. This ensures that the COLREG encounter is the same type also for some time (evolve_time) before the actual encounter is started.
