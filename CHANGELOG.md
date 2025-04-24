@@ -6,6 +6,8 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ## [Unreleased]
 
 * Updated documentation; fix spelling errors, add link to github.io, explain Usage, add note on defining python version with uv sync, add note on activating venv.
+* Fix build issues; move click and click-log to non-dev dependencies.
+* Fix issue with file reading when using non-default paths, and add test for it.
 
 ## [0.7.2] - 2025-03-14
 
