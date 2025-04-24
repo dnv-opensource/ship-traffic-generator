@@ -37,13 +37,17 @@ Example 1: Complete specified situation::
         ]
     }
 
-The values are giben in maritime units. The `common_vector` is given in minutes. For radar plotting (plotting vessel positions and relative motions),
-the `common_vector` and `vectorTime` are used together with ship speed to display where the ship will be in e.g. 10 minutes
+
+The values are given in maritime units. The `common_vector` is given in minutes. For radar plotting (plotting vessel positions and relative motions),
+the `common_vector` and `vector_time` are used together with ship speed to display where the ship will be in e.g. 10 minutes
+
 (Common vector is the common time vector used on a radar plot, e.g 10, 15, 20 minutes. The length of the arrow in the plot
 will then be the speed times this time vector, `common_vector`).
 Speed and course of the own ship, which is the ship to be tested, are given in knots and degrees, respectively.
-The own ship position is given in latitudinal and longitudinal (degree).
-The reference point is the initial position of own ship.
+The own ship position is given in latitudinal and longitudinal (decimal degrees).
+The reference point, used for conversion to x/y, is the initial position of own ship.
+
+> **Note:** in order to change the location of the traffic situations you are generating, you should change the initial lat/lon position of the own ship, in the input file(s). This is used as the origin point or reference point for all generated traffic situations, i.e. the (0,0) location.
 
 An encounter may be fully described as shown above, but the user may also deside to input less data,
 as demonstrated in Example 2. Desired encounter type is mandatory,
@@ -113,7 +117,7 @@ Example 3: Generate multiple situations using `numSituations`::
         ]
     }
 
-The next example show how it is possible to give a range for the relative bearing between own ship and target ship
+The next example shows how it is possible to give a range for the relative bearing between own ship and target ship.
 
 Example 4: Assign range for `beta`::
 
@@ -138,7 +142,7 @@ Example 4: Assign range for `beta`::
 
 Own ship file
 ~~~~~~~~~~~~~~~
-The own ship file specify the own ship which is the ship to be controlled by the control system under test.
+The own ship file specifies the own ship, which is the ship to be controlled by the control system under test.
 The file is written in JSON format and located in the `src/trafficgen/data/own_ship`::
 
     {
@@ -172,7 +176,9 @@ The file is written in JSON format and is on the following structure::
 
 Encounter settings
 ~~~~~~~~~~~~~~~~~~
-The encounter settings file specifies parameters that are common for all encounters.
+
+The encounter setting file specified parameters that are common for all encounters.
+
 The file is written in JSON format and located in the `src/trafficgen/settings/encounter_settings.json`::
 
     {
@@ -227,3 +233,4 @@ The `max_meeting_distance` is the maximum meeting distance in nautical miles. Th
 The `common_vector` is the common time vector used on a radar plot.
 The `evolve_time` is the time in minutes for the situation to evolve (before the encounter), ensuring the same COLREG type.
 The `disable_land_check` is a boolean value that determines if the land check should be disabled or not.
+We refer to the paper for more information on these parameters.

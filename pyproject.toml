@@ -66,6 +66,8 @@ dependencies = [
     "basemap-data-hires>=1.3.2",
     "global-land-mask>=1.0.0",
     "folium>=0.14.0",
+    "click>=8.1",
+    "click-log>=0.4.0",
 ]
 
 [project.optional-dependencies]
@@ -97,8 +99,6 @@ dev = [
     "jupyter>=1.1",
     "pandas-stubs>=2.2",
     "pydantic>=2.5",
-    "click>=8.1",
-    "click-log>=0.4.0",
 ]
 
 [project.scripts]
