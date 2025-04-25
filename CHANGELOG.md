@@ -5,6 +5,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+* Removed Basemap-package and added pyproj package.
+* Small update of ruff.toml file to remove a few warnings.
+* Numpy cross product only allowed for 3D vectors from numpy 2; manually calculating the cross product for 2D vectors in method: calculate_min_vector_length_target_ship.
 * Updated documentation; fix spelling errors, add link to github.io, explain Usage, add note on defining python version with uv sync, add note on activating venv.
 * Fix build issues; move click and click-log to non-dev dependencies.
 * Fix issue with file reading when using non-default paths, and add test for it.
