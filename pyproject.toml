@@ -60,10 +60,9 @@ classifiers = [
 ]
 dependencies = [
     "dictIO>=0.4.0",
-    "numpy>=1.25,<2.0",
+    "numpy>=1.25",
+    "pyproj>=3.7.0",
     "matplotlib>=3.7.2",
-    "basemap>=1.3.8",
-    "basemap-data-hires>=1.3.2",
     "global-land-mask>=1.0.0",
     "folium>=0.14.0",
     "click>=8.1",

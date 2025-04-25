@@ -1,6 +1,7 @@
 """Functions to read the files needed to build one or more traffic situations."""
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, cast
 
@@ -14,6 +15,10 @@ from trafficgen.types import (
     Waypoint,
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def read_situation_files(situation_folder: Path) -> list[SituationInput]:
@@ -31,7 +36,7 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
         List of desired traffic situations
     """
     situations: list[SituationInput] = []
-    print(f"Reading traffic situation input files from: {situation_folder}")
+    logger.info(f"Reading traffic situation input files from: {situation_folder}")
     for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
         with Path.open(file_name, encoding="utf-8") as f:
             data = json.load(f)
@@ -206,7 +211,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     own_ship : ShipStatic
         Own_ship static information
     """
-    print(f"Reading own ship static file from: {own_ship_static_file}")
+    logger.info(f"Reading own ship static file from: {own_ship_static_file}")
     with Path.open(own_ship_static_file, encoding="utf-8") as f:
         data = json.load(f)
     data = convert_keys_to_snake_case(data)
@@ -237,7 +242,7 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     target_ships_static: list[ShipStatic] = []
     i = 0
-    print(f"Reading target ship static files from: {target_ship_folder}")
+    logger.info(f"Reading target ship static files from: {target_ship_folder}")
     for file_name in sorted([file for file in Path.iterdir(target_ship_folder) if str(file).endswith(".json")]):
         i = i + 1
         with Path.open(file_name, encoding="utf-8") as f:
@@ -290,7 +295,7 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     encounter_settings : EncounterSettings
         Settings for the encounter
     """
-    print(f"Reading encounter settings file from: {settings_file}")
+    logger.info(f"Reading encounter settings file from: {settings_file}")
     with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
     encounter_settings: EncounterSettings = EncounterSettings(**data)
