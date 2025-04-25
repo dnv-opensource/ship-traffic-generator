@@ -38,10 +38,11 @@ Example 1: Complete specified situation::
     }
 
 The numerical values are given in maritime units:
+
 * `title` and `description` are strings that describe the situation and used for documentation purposes.
-* `position` (initial) of own ship is given by
-    * `lat` is the latitude in decimal degrees.
-    * `lon` is the longitude in decimal degrees.
+* `position` (initial) of own ship is given by:
+   * `lat` as the latitude in decimal degrees
+   * `lon` as the longitude in decimal degrees.
 * `lon` is the longitude in decimal degrees.
 * `sog` is the speed over ground in knots.
 * `cog` is the course over ground in degrees.
@@ -233,4 +234,5 @@ The `maxMeetingDistance` is the maximum meeting distance in nautical miles.
 The `commonVector` is the common time vector used on a radar plot.
 The `evolveTime` is the time in minutes for the situation to evolve.
 The `disableLandCheck` is a boolean value that determines if the land check should be disabled or not.
+
 We refer to the paper for more information on these parameters.
