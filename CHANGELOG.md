@@ -5,6 +5,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+* Added missing info and spelling errors in data/example_situation_input.
 * Removed Basemap-package and added pyproj package.
 * Small update of ruff.toml file to remove a few warnings.
 * Numpy cross product only allowed for 3D vectors from numpy 2; manually calculating the cross product for 2D vectors in method: calculate_min_vector_length_target_ship.
