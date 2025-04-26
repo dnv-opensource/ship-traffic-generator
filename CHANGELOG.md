@@ -5,6 +5,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+* camelCasing used for encounter settings; was previously snake_case. Updated documentation.
 * Added missing info and spelling errors in data/example_situation_input.
 * Removed Basemap-package and added pyproj package.
 * Small update of ruff.toml file to remove a few warnings.

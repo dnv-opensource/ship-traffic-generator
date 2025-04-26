@@ -298,6 +298,9 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     logger.info(f"Reading encounter settings file from: {settings_file}")
     with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
+
+    data = convert_keys_to_snake_case(data)
+
     encounter_settings: EncounterSettings = EncounterSettings(**data)
 
     encounter_settings = convert_settings_data_from_maritime_to_si_units(encounter_settings)
