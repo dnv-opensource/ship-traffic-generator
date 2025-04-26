@@ -37,6 +37,7 @@ Example 1: Complete specified situation::
         ]
     }
 
+
 The numerical values are given in maritime units:
 
 * `title` and `description` are strings that describe the situation and used for documentation purposes.
@@ -64,6 +65,7 @@ An encounter is built using a maximum meeting distance [nm], see the paper linke
 At some time in the future, given by the `vectorTime`, the target ship will be located somewhere inside a circle
 with a radius given by `maxMeetingDistance` (see encounter settings below) and a center point given by the own ship position. This is not necessarily the
 closest point of approach. The `maxMeetingDistance` parameter is common for all encounters and is specified in `src/trafficgen/settings/encounter_settings.json`.
+
 
 Example 2: Minimum specified situation::
 
@@ -179,7 +181,9 @@ The file is written in JSON format and is on the following structure::
 
 Encounter settings
 ~~~~~~~~~~~~~~~~~~
+
 The encounter setting file specified parameters that are common for all encounters.
+
 The file is written in JSON format and located in the `src/trafficgen/settings/encounter_settings.json`::
 
     {
@@ -227,6 +231,7 @@ The file is written in JSON format and located in the `src/trafficgen/settings/e
 
 The values are given in maritime units. The `theta13Criteria`, `theta14Criteria` and `theta15Criteria` are the criteria for the classification of the encounters.
 The `theta15` is the range for the relative bearing between own ship and target ship.
+
 The `relativeSpeed` is the range for the relative speed between own ship and target ship.
 The `vectorRange` is the range for the vector time given in minutes.
 The `situationLength` is the length of the situation in minutes.
