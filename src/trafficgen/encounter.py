@@ -427,7 +427,12 @@ def calculate_min_vector_length_target_ship(
     p_2 = np.array([own_ship_position_north + np.cos(psi), own_ship_position_east + np.sin(psi)])
     p_3 = np.array([target_ship_position_future_north, target_ship_position_future_east])
 
-    min_vector_length: float = float(np.abs(np.cross(p_2 - p_1, p_3 - p_1) / np.linalg.norm(p_2 - p_1)))
+    vector1 = p_2 - p_1
+    vector2 = p_3 - p_1
+
+    min_vector_length: float = float(
+        np.abs((vector1[0] * vector2[1] - vector1[1] * vector2[0]) / np.linalg.norm(p_2 - p_1))
+    )
 
     return min_vector_length
 
