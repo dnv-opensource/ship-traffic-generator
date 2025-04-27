@@ -40,7 +40,7 @@ Example 1: Complete specified situation::
 
 The numerical values are given in maritime units:
 
-* `title` and `description` are strings that describe the situation and used for documentation purposes.
+* `title` and `description` are strings that describe the situation and are used for documentation purposes.
 * `position` (initial) of own ship is given by:
    * `lat` as the latitude in decimal degrees
    * `lon` as the longitude in decimal degrees.
@@ -52,11 +52,10 @@ The numerical values are given in maritime units:
 * `desiredEncounterType` is the desired encounter type, which can be one of the following: "head-on", "overtaking-give-way", "overtaking-stand-on", "crossing-give-way", "crossing-stand-on".
 * `beta` is the relative bearing between the own ship and the target ship as seen from the own ship, given in degrees.
 * `relativeSpeed` is the relative speed between the own ship and the target ship as seen from the own ship, such that a relative speed of 1.2 means that the target ship's speed is 20% higher than the speed of the own ship.
-* `vectorTime` is the time in minutes for the situation to evolve.
+* `vectorTime` is the time in minutes for the situation to evolve, that is the time from the start of the situation until the target ship is within a specific range of own ship given in minutes (see below).
 
-The reference point, used for conversion to x/y, is the initial position of own ship.
 
-> **Note:** in order to change the location of the traffic situations you are generating, you should change the initial lat/lon position of the own ship, in the input file(s). This is used as the origin point or reference point for all generated traffic situations, i.e. the (0,0) location.
+> **Note:** The reference point, used for conversion to x/y, is the initial position of own ship. So, in order to change the location of the traffic situations you are generating, you should change the initial lat/lon position of the own ship, in the input file(s). This is used as the origin point or reference point (0,0) for all generated traffic situations based on this specific input file.
 
 An encounter may be fully described as shown above, but the user may also deside to input less data,
 as demonstrated in Example 2. Desired encounter type is mandatory, while the `beta`, `relativeSpeed` and `vectorTime` parameters are optional:
@@ -145,6 +144,77 @@ Example 4: Assign range for `beta`::
         ]
     }
 
+It is also possible to specify waypoints for the own ship. Waypoint 0 should then be the same as the initial
+position of the own ship. If more than one waypoint is specified, the own ship will follow the
+waypoints in the order they are given.
+
+Example 5: Specifying `waypoints``::
+
+
+    {
+        "title": "CR-Waypoints",
+        "description": "Crossing situations, waypoints added for own ship.",
+        "ownShip": {
+            "initial": {
+                "position": {
+                    "lat": 58.763449,
+                    "lon": 10.490654
+                },
+                "sog": 4.5,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "lat": 58.763449,
+                        "lon": 10.490654
+                    },
+                    "data": {
+                        "sog": {
+                            "value": 4.5
+                        }
+                    }
+                },
+                {
+                    "position": {
+                        "lat": 58.680833,
+                        "lon": 10.355278
+                    },
+                    "data": {
+                        "sog": {
+                            "value": 4.5
+                        }
+                    }
+                },
+                {
+                    "position": {
+                        "lat": 58.571944,
+                        "lon": 10.137778
+                    },
+                    "data": {
+                        "sog": {
+                            "value": 4.4
+                        }
+                    }
+                }
+            ]
+        },
+        "encounters": [
+            {
+                "desiredEncounterType": "crossing-give-way",
+                "relativeSpeed": 1.2,
+                "vectorTime": 20.0,
+                "beta": [
+                    45.0,
+                    120.0
+                ]
+            }
+        ]
+    }
+
+
 Own ship file
 ~~~~~~~~~~~~~~~
 The own ship file specifies the own ship, which is the ship to be controlled by the control system under test.
@@ -230,7 +300,7 @@ The file is written in JSON format and located in the `src/trafficgen/settings/e
     }
 
 The values are given in maritime units. The `theta13Criteria`, `theta14Criteria` and `theta15Criteria` are the criteria for the classification of the encounters.
-The `theta15` is the range for the relative bearing between own ship and target ship.
+The `theta15` is the range for the relative bearing between own ship and target ship for crossing situations.
 
 The `relativeSpeed` is the range for the relative speed between own ship and target ship.
 The `vectorRange` is the range for the vector time given in minutes.

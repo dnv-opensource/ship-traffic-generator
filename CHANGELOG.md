@@ -5,10 +5,11 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
-* camelCasing used for encounter settings; was previously snake_case. Updated documentation.
-* Added missing info and spelling errors in data/example_situation_input.
 * Removed Basemap-package and added pyproj package.
 * Small update of ruff.toml file to remove a few warnings.
+* Documented the use of Waypoints for own ship.
+* camelCasing used for encounter settings; was previously snake_case.
+* Added missing info and spelling errors in data/example_situation_input.
 * Numpy cross product only allowed for 3D vectors from numpy 2; manually calculating the cross product for 2D vectors in method: calculate_min_vector_length_target_ship.
 * Updated documentation; fix spelling errors, add link to github.io, explain Usage, add note on defining python version with uv sync, add note on activating venv.
 * Fix build issues; move click and click-log to non-dev dependencies.

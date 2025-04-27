@@ -1,0 +1,62 @@
+{
+    "title": "CR-Waypoints",
+    "description": "Crossing situations, waypoints added for own ship.",
+    "ownShip": {
+        "initial": {
+            "position": {
+                "lat": 58.763449,
+                "lon": 10.490654
+            },
+            "sog": 4.5,
+            "cog": 0.0,
+            "heading": 0.0,
+            "navStatus": "Under way using engine"
+        },
+        "waypoints": [
+            {
+                "position": {
+                    "lat": 58.763449,
+                    "lon": 10.490654
+                },
+                "data": {
+                    "sog": {
+                        "value": 4.5
+                    }
+                }
+            },
+            {
+                "position": {
+                    "lat": 58.680833,
+                    "lon": 10.355278
+                },
+                "data": {
+                    "sog": {
+                        "value": 4.5
+                    }
+                }
+            },
+            {
+                "position": {
+                    "lat": 58.571944,
+                    "lon": 10.137778
+                },
+                "data": {
+                    "sog": {
+                        "value": 4.4
+                    }
+                }
+            }
+        ]
+    },
+    "encounters": [
+        {
+            "desiredEncounterType": "crossing-give-way",
+            "relativeSpeed": 1.2,
+            "vectorTime": 20.0,
+            "beta": [
+                45.0,
+                120.0
+            ]
+        }
+    ]
+}
