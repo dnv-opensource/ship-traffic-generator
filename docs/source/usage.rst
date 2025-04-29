@@ -66,8 +66,7 @@ is determined by time-based parameters.
 If you want to change the range that the scenario plays out over,
 you will need to change the following parameters:
 
-* in the input situation file: change `vectorTime`: the time at which the target vessel will be in the encounter circle of the ownship. (Note; the encounter circle radius is defined by the maxMeetingDistance in `encounter_settings.json`.) You can also decide to not specify `vectorTime` and only specify `vectorRange` (see next item).
-* in `encounter_settings.json`: change `vectorRange`: the range within which `vectorTime` is varied, in minutes, if `vectorTime` is not specified in the input file,
+* In the input situation file, modify the `vectorTime`` parameter to specify when the target vessel will enter the own ship's encounter circle. `vectorTime` can be a single float (exact time) or a list of two floats [from, to], in which case the time is randomly selected within that range.
 * in `encounter_settings.json`: change `situationLength`: the total duration of the situation, in minutes.
 
 By default, the ownship will travel in a straight line from its start position, defined in the input file, to a position that is `situationLength` minutes into the future.
@@ -75,11 +74,9 @@ It is possible to specify waypoints for the own ship in the input file, which wi
 If defining waypoints, the first waypoint shall be the same as the initial position of the ownship.
 The ownship will then travel to the first waypoint, and then to the second waypoint, and so on, in the order as listed in the input file.
 
-For the target ship, the future position of 'meeting' is calculated based on the ownship initial position, the `vectorTime` (as specified or sampled within `vectorRange`), and the maximum meeting distance.
+For the target ship, the future position of the 'meeting' is calculated based on the ownship initial position, the `vectorTime`, and the maximum meeting distance.
 At time `vectorTime`, the target ship will be within the `maxMeetingDistance` radius of the ownship position (at vector time).
 
-If `vectorTime` is not set, then the ship traffic generator will randomly sample a vector time within the range of vectorRange.
-
 > **Note:** When generating a specific traffic situation, e.g. crossing give-way, this specific situation should also have been a
-crossing give-way situation at some time in the past, e.g. 10 minutes ago. This is specified by the `evolveTime` parameter, in minutes.
-This ensures that the COLREG encounter is the same type also for some time (evolve_time) before the actual encounter is started.
+crossing give-way situation at some time in the past, e.g. 10 minutes ago. This is specified by the `situationDevelopTime` parameter, in minutes.
+This ensures that the COLREG encounter is the same type also for some time (situationDevelopTime) before the actual encounter is started.

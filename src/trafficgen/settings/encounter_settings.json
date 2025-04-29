@@ -37,6 +37,6 @@
     "situationLength": 30.0,
     "maxMeetingDistance": 0.0,
     "commonVector": 5.0,
-    "evolveTime": 120.0,
+    "situationDevelopTime": 120.0,
     "disableLandCheck": true
 }

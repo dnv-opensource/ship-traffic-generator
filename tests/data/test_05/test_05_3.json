@@ -15,13 +15,16 @@
     },
     "encounters": [
         {
-            "desiredEncounterType": "crossing-give-way"
+            "desiredEncounterType": "crossing-give-way",
+            "vectorTime": 20.0
         },
         {
-            "desiredEncounterType": "overtaking-give-way"
+            "desiredEncounterType": "overtaking-give-way",
+            "vectorTime": 25.0
         },
         {
-            "desiredEncounterType": "head-on"
+            "desiredEncounterType": "head-on",
+            "vectorTime": 28.0
         }
     ]
 }

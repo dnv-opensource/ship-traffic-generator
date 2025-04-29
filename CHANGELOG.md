@@ -5,6 +5,8 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+* vectorTime may now be a single float (exact time) or a list of two floats [from, to]. vectorRange is removed from settings file.
+* evolveTime is changed to situationDevelopTime.
 * Removed Basemap-package and added pyproj package.
 * Small update of ruff.toml file to remove a few warnings.
 * Documented the use of Waypoints for own ship.

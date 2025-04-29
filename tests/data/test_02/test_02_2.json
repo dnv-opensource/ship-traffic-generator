@@ -16,6 +16,7 @@
     "encounters": [
         {
             "desiredEncounterType": "overtaking-give-way",
+            "vectorTime": 20.0,
             "relativeSpeed": 0.6
         }
     ]
