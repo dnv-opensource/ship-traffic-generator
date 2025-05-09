@@ -5,6 +5,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.8.0] - 2025-05-09
+
+### Changed
 * vectorTime may now be a single float (exact time) or a list of two floats [from, to]. vectorRange is removed from settings file.
 * evolveTime is changed to situationDevelopTime.
 * Removed Basemap-package and added pyproj package.
