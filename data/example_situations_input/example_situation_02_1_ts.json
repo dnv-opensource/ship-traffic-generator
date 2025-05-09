@@ -9,12 +9,14 @@
             },
             "sog": 10.0,
             "cog": 0.0,
+            "heading": 0.0,
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
-            "desiredEncounterType": "crossing-give-way"
+            "desiredEncounterType": "crossing-give-way",
+            "vectorTime": 25.0
         }
     ]
 }

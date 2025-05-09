@@ -9,10 +9,11 @@
             },
             "sog": 10.0,
             "cog": 270.0,
+            "heading": 0.0,
             "navStatus": "Under way using engine"
         }
     },
-    "encounter": [
+    "encounters": [
         {
             "desiredEncounterType": "head-on",
             "relativeSpeed": 1.2,

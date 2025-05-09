@@ -1,42 +1,38 @@
 {
     "classification": {
-        "theta13_criteria": 67.5,
-        "theta14_criteria": 5.0,
-        "theta15_criteria": 5.0,
+        "theta13Criteria": 67.5,
+        "theta14Criteria": 5.0,
+        "theta15Criteria": 5.0,
         "theta15": [
             112.5,
             247.5
         ]
     },
-    "relative_speed": {
-        "overtaking_stand_on": [
+    "relativeSpeed": {
+        "overtakingStandOn": [
             1.5,
             2
         ],
-        "overtaking_give_way": [
+        "overtakingGiveWay": [
             0.25,
             0.75
         ],
-        "head_on": [
+        "headOn": [
             0.5,
             1.5
         ],
-        "crossing_give_way": [
+        "crossingGiveWay": [
             0.5,
             1.5
         ],
-        "crossing_stand_on": [
+        "crossingStandOn": [
             0.5,
             1.5
         ]
     },
-    "vector_range": [
-        10.0,
-        30.0
-    ],
-    "situation_length": 30.0,
-    "max_meeting_distance": 0.0,
-    "common_vector": 5.0,
-    "evolve_time": 120.0,
-    "disable_land_check": true
+    "situationLength": 30.0,
+    "maxMeetingDistance": 0.0,
+    "commonVector": 5.0,
+    "situationDevelopTime": 120.0,
+    "disableLandCheck": true
 }

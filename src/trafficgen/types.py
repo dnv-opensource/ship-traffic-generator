@@ -555,7 +555,7 @@ class Encounter(BaseModelConfig):
     desired_encounter_type: EncounterType
     beta: list[float] | float | None = None
     relative_speed: float | None = None
-    vector_time: float | None = None
+    vector_time: list[float] | float
 
     model_config = ConfigDict(extra="allow")
 
@@ -588,11 +588,10 @@ class EncounterSettings(BaseModelConfig):
 
     classification: EncounterClassification
     relative_speed: EncounterRelativeSpeed
-    vector_range: list[float]
     common_vector: float
     situation_length: float
     max_meeting_distance: float
-    evolve_time: float
+    situation_develop_time: float
     disable_land_check: bool
 
     model_config = ConfigDict(extra="allow")

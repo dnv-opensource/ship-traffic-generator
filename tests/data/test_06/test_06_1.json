@@ -18,7 +18,7 @@
         {
             "desiredEncounterType": "overtaking-give-way",
             "relativeSpeed": 1.1,
-            "vectorTime": 20.0
+            "vectorTime": [20.0, 25.0]
         },
         {
             "desiredEncounterType": "overtaking-give-way",

@@ -1,6 +1,7 @@
 """Functions to read the files needed to build one or more traffic situations."""
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, cast
 
@@ -14,6 +15,10 @@ from trafficgen.types import (
     Waypoint,
 )
 from trafficgen.utils import deg_2_rad, knot_2_m_pr_s, min_2_s, nm_2_m
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def read_situation_files(situation_folder: Path) -> list[SituationInput]:
@@ -31,9 +36,9 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
         List of desired traffic situations
     """
     situations: list[SituationInput] = []
+    logger.info(f"Reading traffic situation input files from: {situation_folder}")
     for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
-        file_path = situation_folder / file_name
-        with Path.open(file_path, encoding="utf-8") as f:
+        with Path.open(file_name, encoding="utf-8") as f:
             data = json.load(f)
 
         data = convert_keys_to_snake_case(data)
@@ -175,10 +180,11 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
     """
     assert encounters is not None
     beta_list_length = 2
+    vector_time_list_length = 2
 
     for encounter in encounters:
         beta: list[float] | float | None = encounter.beta
-        vector_time: float | None = encounter.vector_time
+        vector_time: list[float] | float | None = encounter.vector_time
         if beta is not None:
             if isinstance(beta, list):
                 assert len(beta) == beta_list_length
@@ -188,7 +194,12 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
             else:
                 encounter.beta = deg_2_rad(beta)
         if vector_time is not None:
-            encounter.vector_time = min_2_s(vector_time)
+            if isinstance(vector_time, list):
+                assert len(vector_time) == vector_time_list_length
+                for i in range(len(vector_time)):
+                    vector_time[i] = min_2_s(vector_time[i])
+            else:
+                encounter.vector_time = min_2_s(vector_time)
     return encounters
 
 
@@ -206,6 +217,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     own_ship : ShipStatic
         Own_ship static information
     """
+    logger.info(f"Reading own ship static file from: {own_ship_static_file}")
     with Path.open(own_ship_static_file, encoding="utf-8") as f:
         data = json.load(f)
     data = convert_keys_to_snake_case(data)
@@ -236,10 +248,10 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
     """
     target_ships_static: list[ShipStatic] = []
     i = 0
+    logger.info(f"Reading target ship static files from: {target_ship_folder}")
     for file_name in sorted([file for file in Path.iterdir(target_ship_folder) if str(file).endswith(".json")]):
         i = i + 1
-        file_path = target_ship_folder / file_name
-        with Path.open(file_path, encoding="utf-8") as f:
+        with Path.open(file_name, encoding="utf-8") as f:
             data = json.load(f)
         data = convert_keys_to_snake_case(data)
 
@@ -289,8 +301,12 @@ def read_encounter_settings_file(settings_file: Path) -> EncounterSettings:
     encounter_settings : EncounterSettings
         Settings for the encounter
     """
+    logger.info(f"Reading encounter settings file from: {settings_file}")
     with Path.open(settings_file, encoding="utf-8") as f:
         data = json.load(f)
+
+    data = convert_keys_to_snake_case(data)
+
     encounter_settings: EncounterSettings = EncounterSettings(**data)
 
     encounter_settings = convert_settings_data_from_maritime_to_si_units(encounter_settings)
@@ -320,12 +336,9 @@ def convert_settings_data_from_maritime_to_si_units(encounter_settings: Encounte
     encounter_settings.classification.theta15[0] = deg_2_rad(encounter_settings.classification.theta15[0])
     encounter_settings.classification.theta15[1] = deg_2_rad(encounter_settings.classification.theta15[1])
 
-    encounter_settings.vector_range[0] = min_2_s(encounter_settings.vector_range[0])
-    encounter_settings.vector_range[1] = min_2_s(encounter_settings.vector_range[1])
-
     encounter_settings.situation_length = min_2_s(encounter_settings.situation_length)
     encounter_settings.max_meeting_distance = nm_2_m(encounter_settings.max_meeting_distance)
-    encounter_settings.evolve_time = min_2_s(encounter_settings.evolve_time)
+    encounter_settings.situation_develop_time = min_2_s(encounter_settings.situation_develop_time)
     encounter_settings.common_vector = min_2_s(encounter_settings.common_vector)
 
     return encounter_settings

@@ -9,13 +9,15 @@
             },
             "sog": 7.0,
             "cog": 0.0,
+            "heading": 0.0,
             "navStatus": "Under way using engine"
         }
     },
     "numSituations": 5,
-    "encounter": [
+    "encounters": [
         {
-            "desiredEncounterType": "overtaking-give-ay"
+            "desiredEncounterType": "overtaking-give-way",
+            "vectorTime": 15.0
         }
     ]
 }

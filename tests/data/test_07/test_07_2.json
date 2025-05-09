@@ -16,6 +16,7 @@
     "encounters": [
         {
             "desiredEncounterType": "overtaking-give-way",
+            "vectorTime": 25.0,
             "beta": 90.0
         }
     ]
