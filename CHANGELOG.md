@@ -5,7 +5,20 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
--/-
+## [0.8.0] - 2025-05-09
+
+### Changed
+* vectorTime may now be a single float (exact time) or a list of two floats [from, to]. vectorRange is removed from settings file.
+* evolveTime is changed to situationDevelopTime.
+* Removed Basemap-package and added pyproj package.
+* Small update of ruff.toml file to remove a few warnings.
+* Documented the use of Waypoints for own ship.
+* camelCasing used for encounter settings; was previously snake_case.
+* Added missing info and spelling errors in data/example_situation_input.
+* Numpy cross product only allowed for 3D vectors from numpy 2; manually calculating the cross product for 2D vectors in method: calculate_min_vector_length_target_ship.
+* Updated documentation; fix spelling errors, add link to github.io, explain Usage, add note on defining python version with uv sync, add note on activating venv.
+* Fix build issues; move click and click-log to non-dev dependencies.
+* Fix issue with file reading when using non-default paths, and add test for it.
 
 ## [0.7.2] - 2025-03-14
 
@@ -31,13 +44,11 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 * Updating workflows
 * Removed maxSpeed from the output files generated using the tool
 
-
 ## [0.6.0] - 2024-11-11
 
 ### Changed
 
 * Updated to download-artifact@v4  (from download-artifact@v3)
-
 
 ## [0.5.0] - 2024-04-26
 
@@ -45,7 +56,6 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 * removed specific names for target ships. Files generated with target ship 1, 2 etc.
 * changed tests. Still need to figure out why some tests "fail" using CLI.
-
 
 ## [0.4.0] - 2024-04-19
 
@@ -57,7 +67,6 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
   is not just a number, but could also be a range
 * situation length is used when checking if target ship is passing land
 
-
 ## [0.3.0] - 2024-04-10
 
 ### Changed
@@ -65,7 +74,6 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 * using types from maritime schema
 * lat/lon used instead of north/east
 * the generated output files are using "maritime" units: knots and degrees
-
 
 ## [0.2.0] - 2024-01-11
 
@@ -81,11 +89,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 * removed cyclic import
 * length of encounter may be specified by user
 
-
 ## [0.1.0] - 2023-11-08
 
 * First release on PyPI.
-
 
 <!-- Markdown link & img dfn's -->
 [0.6.0]: https://github.com/dnv-opensource/ship-traffic-generator/releases/tag/v0.6.0
@@ -93,4 +99,3 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 [0.4.0]: https://github.com/dnv-opensource/ship-traffic-generator/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/dnv-opensource/ship-traffic-generator/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/dnv-opensource/ship-traffic-generator/releases/tag/v0.2.0
-[trafficgen]: https://github.com/dnv-opensource/ship-traffic-generator
