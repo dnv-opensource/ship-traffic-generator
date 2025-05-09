@@ -15,7 +15,8 @@
     },
     "encounters": [
         {
-            "desiredEncounterType": "crossing-give-way"
+            "desiredEncounterType": "crossing-give-way",
+            "vectorTime": 25.0
         }
     ]
 }

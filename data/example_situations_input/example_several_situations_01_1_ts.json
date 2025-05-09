@@ -16,7 +16,8 @@
     "numSituations": 5,
     "encounters": [
         {
-            "desiredEncounterType": "overtaking-give-way"
+            "desiredEncounterType": "overtaking-give-way",
+            "vectorTime": 15.0
         }
     ]
 }

@@ -75,7 +75,7 @@ def generate_traffic_situations(
                 desired_encounter_type = EncounterType(encounter.desired_encounter_type)
                 beta: list[float] | float | None = encounter.beta
                 relative_speed: float | None = encounter.relative_speed
-                vector_time: float | None = encounter.vector_time
+                vector_time: list[float] | float = encounter.vector_time
 
                 target_ship, encounter_found = generate_encounter(
                     desired_encounter_type,

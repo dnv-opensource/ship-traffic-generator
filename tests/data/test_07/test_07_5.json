@@ -16,6 +16,7 @@
     "encounters": [
         {
             "desiredEncounterType": "crossing-stand-on",
+            "vectorTime": 21.0,
             "beta": 15.0
         }
     ]

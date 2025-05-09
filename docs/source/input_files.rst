@@ -30,9 +30,9 @@ Example 1: Complete specified situation::
         "encounters": [
             {
                 "desiredEncounterType": "head-on",
+                "vectorTime": 15.0,
                 "beta": 2.0,
-                "relativeSpeed": 1.2,
-                "vectorTime": 15.0
+                "relativeSpeed": 1.2
             }
         ]
     }
@@ -49,15 +49,15 @@ The numerical values are given in maritime units:
 * `heading` is the heading in degrees.
 * `navStatus` is the navigation status of the own ship, which can be one of the following: "Under way using engine", "At anchor", "Not under command", "Restricted maneuverability", "Constrained by draft", "Moored", "Aground", "Engaged in fishing", "Under way sailing", "Reserved for future use".
 * `desiredEncounterType` is the desired encounter type, which can be one of the following: "head-on", "overtaking-give-way", "overtaking-stand-on", "crossing-give-way", "crossing-stand-on".
+* `vectorTime` is the time in minutes for the situation to evolve, that is the time from the start of the situation until the target ship is within a specific range of the own ship, given in minutes (see below).
 * `beta` is the relative bearing between the own ship and the target ship as seen from the own ship, given in degrees.
 * `relativeSpeed` is the relative speed between the own ship and the target ship as seen from the own ship, such that a relative speed of 1.2 means that the target ship's speed is 20% higher than the speed of the own ship.
-* `vectorTime` is the time in minutes for the situation to evolve, that is the time from the start of the situation until the target ship is within a specific range of the own ship, given in minutes (see below).
 
 
-> **Note:** The reference point, used for conversion to x/y, is the initial position of the own ship. So, in order to change the location of the traffic situations you are generating, you should change the initial lat/lon position of the own ship, in the input file(s). This is used as the origin point or reference point (0,0) for all generated traffic situations based on this specific input file.
+> **Note:** The initial position of the own ship serves as the reference point for converting to x/y coordinates. To change the location of the generated traffic situations, adjust the own ship's initial latitude and longitude in the input file. This position is treated as the origin (0,0) for all traffic scenarios derived from that file.
 
 An encounter may be fully described as shown above, but the user may also decide to input less data,
-as demonstrated in Example 2. The desired encounter type is mandatory, while the `beta`, `relativeSpeed` and `vectorTime` parameters are optional:
+as demonstrated in Example 2. The desired encounter type and vector time are mandatory, while the `beta` and `relativeSpeed` parameters are optional:
 
 An encounter is built using a maximum meeting distance [nm], see the paper linked in the introduction for more info.
 At some time in the future, given by the `vectorTime`, the target ship will be located somewhere inside a circle
@@ -86,6 +86,7 @@ Example 2: Minimum specified situation::
         "encounters": [
             {
                 "desiredEncounterType": "head-on",
+                "vectorTime": 15.0
             }
         ]
     }
@@ -115,16 +116,15 @@ Example 3: Generate multiple situations using `numSituations`::
         "encounters": [
             {
                 "desiredEncounterType": "head-on",
+                "vectorTime": 15.0
             }
         ]
     }
 
 In this case, the tool will generate 5 situations with the same parameters as specified in the input file.
-You may want to use this in combination with, for example, specifying the `vectorRange` parameter (rather than `vectorTime`), so that you get 5 situations with slightly different encounter times.
+You may want to use this in combination with, for example, specifying a range for the `vectorTime`, so that you get 5 situations with slightly different encounter times as shown in the next example.
 
-The next example shows how it is possible to give a range for the relative bearing between own ship and target ship.
-
-Example 4: Assign range for `beta`::
+Example 4: Assign range for `vectorTime`::
 
     {
         "title": "CR_GW",
@@ -143,6 +143,34 @@ Example 4: Assign range for `beta`::
         "encounter": [
             {
             "desiredEncounterType": "crossing-give-way",
+            "vectorTime": [15.0, 25.0]
+            }
+        ]
+    }
+
+
+The next example shows how it is possible to give a range for the relative bearing between own ship and target ship.
+
+Example 5: Assign range for `beta`::
+
+    {
+        "title": "CR_GW",
+        "ownShip": {
+            "initial": {
+                "position": {
+                    "lat": 58.763449,
+                    "lon": 10.490654
+                },
+                "sog": 10.0,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
+            }
+        },
+        "encounter": [
+            {
+            "desiredEncounterType": "crossing-give-way",
+            "vectorTime": 15.0,
             "beta": [45.0,120.0]
             }
         ]
@@ -208,8 +236,8 @@ Example 5: Specifying `waypoints``::
         "encounters": [
             {
                 "desiredEncounterType": "crossing-give-way",
-                "relativeSpeed": 1.2,
                 "vectorTime": 20.0,
+                "relativeSpeed": 1.2,
                 "beta": [
                     45.0,
                     120.0
@@ -301,7 +329,7 @@ The file is written in JSON format and located in the `src/trafficgen/settings/e
         "situationLength": 30.0,
         "maxMeetingDistance": 0.0,
         "commonVector": 5.0,
-        "evolveTime": 120.0,
+        "situationDevelopTime": 120.0,
         "disableLandCheck": true
     }
 
@@ -310,11 +338,10 @@ The `theta13Criteria`, `theta14Criteria` and `theta15Criteria` are the criteria 
 The `theta15` is the range for the relative bearing between the own ship and the target ship for crossing situations.
 
 The `relativeSpeed` is the range for the relative speed between the own ship and the target ship.
-The `vectorRange` is the range for the vector time, given in minutes.
 The `situationLength` is the length of the situation, given in minutes.
 The `maxMeetingDistance` is the maximum meeting distance, given in nautical miles.
 The `commonVector` is the common time vector used on a radar plot.
-The `evolveTime` is the time, before the encounter, for the situation to evolve and be of the same encounter type, given in minutes. See the Usage section.
+The `situationDevelopTime` specifies the number of minutes prior to the encounter that you would look back, ensuring the situation has had time to develop while still retaining the same encounter type. See the Usage section for more information.
 The `disableLandCheck` is a boolean value that determines if the land check should be disabled or not.
 
 We refer to the paper for more information on these parameters.

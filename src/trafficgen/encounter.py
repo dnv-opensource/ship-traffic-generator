@@ -41,7 +41,7 @@ def generate_encounter(
     encounter_number: int,
     beta_default: list[float] | float | None,
     relative_sog_default: float | None,
-    vector_time_default: float | None,
+    vector_time_default: list[float] | float,
     settings: EncounterSettings,
 ) -> tuple[TargetShip, bool]:
     """
@@ -101,10 +101,12 @@ def generate_encounter(
 
         # resetting vector_time, beta and relative_sog to default values before
         # new search for situation is done
-        vector_time: float | None = vector_time_default
+        vector_time: float = 0.0
 
-        if vector_time is None:
-            vector_time = random.uniform(settings.vector_range[0], settings.vector_range[1])
+        if isinstance(vector_time_default, list):
+            vector_time = random.uniform(vector_time_default[0], vector_time_default[1])
+        else:
+            vector_time = vector_time_default
 
         beta: float = 0.0
         if beta_default is None:
@@ -285,7 +287,7 @@ def check_encounter_evolvement(
     assert own_ship.initial is not None
 
     own_ship_sog: float = own_ship.initial.sog
-    evolve_time: float = encounter_settings.evolve_time
+    situation_develop_time: float = encounter_settings.situation_develop_time
 
     # Calculating position back in time to ensure that the encounter do not change from one type
     # to another before the encounter is started
@@ -294,14 +296,14 @@ def check_encounter_evolvement(
         lat_lon0,
         target_ship_sog,
         target_ship_cog,
-        -evolve_time,
+        -situation_develop_time,
     )
     encounter_preposition_own_ship = calculate_position_at_certain_time(
         own_ship_position_future,
         lat_lon0,
         own_ship_sog,
         own_ship_cog,
-        -evolve_time,
+        -situation_develop_time,
     )
     pre_beta, pre_alpha = calculate_relative_bearing(
         encounter_preposition_own_ship,

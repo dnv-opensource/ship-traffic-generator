@@ -72,7 +72,6 @@ def test_read_situations_1_ts_minimum_spec(situations_folder_test_03: Path):
         assert situation.encounters[0].desired_encounter_type is not None
         assert situation.encounters[0].beta is None
         assert situation.encounters[0].relative_speed is None
-        assert situation.encounters[0].vector_time is None
 
 
 def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: Path):
@@ -92,7 +91,6 @@ def test_read_situations_2_ts_one_to_many_situations(situations_folder_test_04: 
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is None
             assert encounter.relative_speed is None
-            assert encounter.vector_time is None
 
 
 def test_read_situations_one_to_many_situations(situations_folder_test_05: Path):
@@ -113,7 +111,6 @@ def test_read_situations_one_to_many_situations(situations_folder_test_05: Path)
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is None
             assert encounter.relative_speed is None
-            assert encounter.vector_time is None
 
     assert num_situations_values_found == {6, 3, 1}
 
@@ -136,7 +133,6 @@ def test_read_situations_with_different_encounter_types(situations_folder_test_0
             assert encounter.desired_encounter_type is not None
             assert encounter.beta is not None
             assert encounter.relative_speed is None
-            assert encounter.vector_time is None
 
     assert desired_encounter_types_found == {
         EncounterType.HEAD_ON,
@@ -181,6 +177,5 @@ def test_read_encounter_settings_file(settings_file: Path):
     settings: EncounterSettings = read_encounter_settings_file(settings_file)
     assert settings.classification is not None
     assert settings.relative_speed is not None
-    assert settings.vector_range is not None
     assert settings.max_meeting_distance == 0.0
-    assert settings.evolve_time == 120.0 * 60
+    assert settings.situation_develop_time == 120.0 * 60

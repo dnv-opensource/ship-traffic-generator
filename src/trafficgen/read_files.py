@@ -180,10 +180,11 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
     """
     assert encounters is not None
     beta_list_length = 2
+    vector_time_list_length = 2
 
     for encounter in encounters:
         beta: list[float] | float | None = encounter.beta
-        vector_time: float | None = encounter.vector_time
+        vector_time: list[float] | float | None = encounter.vector_time
         if beta is not None:
             if isinstance(beta, list):
                 assert len(beta) == beta_list_length
@@ -193,7 +194,12 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
             else:
                 encounter.beta = deg_2_rad(beta)
         if vector_time is not None:
-            encounter.vector_time = min_2_s(vector_time)
+            if isinstance(vector_time, list):
+                assert len(vector_time) == vector_time_list_length
+                for i in range(len(vector_time)):
+                    vector_time[i] = min_2_s(vector_time[i])
+            else:
+                encounter.vector_time = min_2_s(vector_time)
     return encounters
 
 
@@ -330,12 +336,9 @@ def convert_settings_data_from_maritime_to_si_units(encounter_settings: Encounte
     encounter_settings.classification.theta15[0] = deg_2_rad(encounter_settings.classification.theta15[0])
     encounter_settings.classification.theta15[1] = deg_2_rad(encounter_settings.classification.theta15[1])
 
-    encounter_settings.vector_range[0] = min_2_s(encounter_settings.vector_range[0])
-    encounter_settings.vector_range[1] = min_2_s(encounter_settings.vector_range[1])
-
     encounter_settings.situation_length = min_2_s(encounter_settings.situation_length)
     encounter_settings.max_meeting_distance = nm_2_m(encounter_settings.max_meeting_distance)
-    encounter_settings.evolve_time = min_2_s(encounter_settings.evolve_time)
+    encounter_settings.situation_develop_time = min_2_s(encounter_settings.situation_develop_time)
     encounter_settings.common_vector = min_2_s(encounter_settings.common_vector)
 
     return encounter_settings
