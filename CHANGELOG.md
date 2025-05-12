@@ -5,6 +5,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.8.1] - 2025-05-12
+*  Changed first assert in  test_basic_cli() from 0 to 2.
+
 ## [0.8.0] - 2025-05-09
 
 ### Changed
