@@ -25,7 +25,7 @@ packages = [
 
 [project]
 name = "trafficgen"
-version = "0.8.0"
+version = "0.8.1"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
 requires-python = ">= 3.11, < 3.13"
