@@ -46,7 +46,6 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
 
 
 @click.command()
-@click_log.simple_verbosity_option(logger)
 @click.option(
     "-s",
     "--situations",
@@ -120,7 +119,7 @@ def gen_situation(
     col: int,
     row: int,
     visualize_situation: int,
-    output: str,
+    output: str | None,
     visualize: bool,  # noqa: FBT001
 ) -> None:
     r"""Console script for trafficgen.
