@@ -74,7 +74,7 @@ def generate_encounter(
         True=encounter found, False=encounter not found
     """
     encounter_found: bool = False
-    target_ship_id: int = 10  # Id of first target ship
+    target_ship_id_base: int = 10  # Base id of target ship, added to encounter number.
     outer_counter: int = 0
 
     # Initiating some variables which later will be set if an encounter is found
@@ -204,8 +204,7 @@ def generate_encounter(
                     encounter_found = encounter_ok
 
     if encounter_found:
-        target_ship_static.id = target_ship_id
-        target_ship_id += 1
+        target_ship_static.id = target_ship_id_base + encounter_number
         target_ship_static.name = f"target_ship_{encounter_number}"
         target_ship_initial: Initial = Initial(
             position=target_ship_initial_position,

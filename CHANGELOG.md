@@ -5,6 +5,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.8.2] - 2025-09-22
+*  [bug] fixed bug that all target ships had id = 10.
+
 ## [0.8.1] - 2025-05-12
 *  Changed first assert in  test_basic_cli() from 0 to 2.
 
