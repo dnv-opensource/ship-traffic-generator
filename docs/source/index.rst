@@ -13,6 +13,7 @@ Ship Traffic Generator Documentation
    README
    usage
    input_files
+   output_files
    api
    CHANGELOG
    STYLEGUIDE

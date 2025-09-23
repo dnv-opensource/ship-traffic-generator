@@ -1,3 +1,4 @@
+.. _input_files:
 ===========
 Input files
 ===========
