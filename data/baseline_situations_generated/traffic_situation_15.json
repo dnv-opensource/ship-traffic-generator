@@ -1,5 +1,5 @@
 {
-    "version": "0.6.0",
+    "version": "0.8.2",
     "title": "CR-SO, CR-SO",
     "description": "Two crossing stand-on situations with two target ships.",
     "ownShip": {
@@ -28,7 +28,7 @@
             }
         ],
         "static": {
-            "id": 0,
+            "id": 1,
             "mmsi": 257847600,
             "name": "BASTO VI",
             "dimensions": {
@@ -70,7 +70,7 @@
                 }
             ],
             "static": {
-                "id": 10,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
                     "length": 50.0,
@@ -110,7 +110,7 @@
                 }
             ],
             "static": {
-                "id": 10,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
                     "length": 50.0,
