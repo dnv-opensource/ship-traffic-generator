@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "CR-SO, OT-SO",
     "description": "A crossing stand-on and overtaking stand-on situation with two target ships.",
     "ownShip": {
@@ -70,7 +70,7 @@
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
                     "length": 178.0,
@@ -110,7 +110,7 @@
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
                     "length": 178.0,

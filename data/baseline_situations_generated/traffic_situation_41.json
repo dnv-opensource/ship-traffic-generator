@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "CR-GW, CR-SO, OT-SO",
     "description": "Crossing give way, crossing stand-on and overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -47,41 +47,41 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.64237595,
-                    "lat": 58.78456381
+                    "lon": 10.66884952,
+                    "lat": 58.78825351
                 },
-                "sog": 15.0,
-                "cog": 295.19,
-                "heading": 295.19,
+                "sog": 16.9,
+                "cog": 289.8,
+                "heading": 289.8,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.64237595,
-                        "lat": 58.78456381
+                        "lon": 10.66884952,
+                        "lat": 58.78825351
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.42564247,
-                        "lat": 58.83751819
+                        "lon": 10.41424001,
+                        "lat": 58.83588001
                     }
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -110,7 +110,7 @@
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
                     "length": 50.0,
@@ -127,41 +127,41 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.46592574,
-                    "lat": 58.73589741
+                    "lon": 10.4727515,
+                    "lat": 58.74350125
                 },
-                "sog": 16.9,
-                "cog": 10.54,
-                "heading": 10.54,
+                "sog": 15.0,
+                "cog": 8.59,
+                "heading": 8.59,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.46592574,
-                        "lat": 58.73589741
+                        "lon": 10.4727515,
+                        "lat": 58.74350125
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.5154377,
-                        "lat": 58.87411012
+                        "lon": 10.50854289,
+                        "lat": 58.86653062
                     }
                 }
             ],
             "static": {
-                "id": 13,
+                "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
+                    "length": 50.0,
+                    "width": 10.0,
                     "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         }
     ]

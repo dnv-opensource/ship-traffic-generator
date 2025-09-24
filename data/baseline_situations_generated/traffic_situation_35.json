@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "HO, OT-SO, OT-SO",
     "description": "Head-on and two overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -70,16 +70,16 @@
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
@@ -87,41 +87,41 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.50974885,
-                    "lat": 58.74216362
+                    "lon": 10.5249556,
+                    "lat": 58.7252233
                 },
-                "sog": 15.0,
-                "cog": 351.4,
-                "heading": 351.4,
+                "sog": 19.1,
+                "cog": 347.84,
+                "heading": 347.84,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.50974885,
-                        "lat": 58.74216362
+                        "lon": 10.5249556,
+                        "lat": 58.7252233
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.47391357,
-                        "lat": 58.86518955
+                        "lon": 10.46076018,
+                        "lat": 58.8800328
                     }
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -150,18 +150,18 @@
                 }
             ],
             "static": {
-                "id": 13,
+                "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         }
     ]

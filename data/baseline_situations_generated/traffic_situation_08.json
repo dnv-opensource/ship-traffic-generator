@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "HO, CR-SO",
     "description": "A head-on and crossing stand-on situation with two target ships.",
     "ownShip": {
@@ -47,41 +47,41 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.50456473,
-                    "lat": 58.86680563
+                    "lon": 10.50565339,
+                    "lat": 58.87486732
                 },
-                "sog": 15.0,
-                "cog": 186.67,
-                "heading": 186.67,
+                "sog": 16.9,
+                "cog": 186.38,
+                "heading": 186.38,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.50456473,
-                        "lat": 58.86680563
+                        "lon": 10.50565339,
+                        "lat": 58.87486732
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.47674734,
-                        "lat": 58.74322116
+                        "lon": 10.47556765,
+                        "lat": 58.73515302
                     }
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -110,7 +110,7 @@
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
                     "length": 50.0,

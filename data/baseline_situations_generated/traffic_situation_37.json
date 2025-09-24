@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "CR-GW, CR-GW, CR-SO",
     "description": "Two crossing give-waysituations and one crossing give-way situation with three target ships.",
     "ownShip": {
@@ -47,41 +47,41 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.60385793,
-                    "lat": 58.76859304
+                    "lon": 10.59304039,
+                    "lat": 58.76809929
                 },
-                "sog": 15.9,
-                "cog": 303.67,
-                "heading": 303.67,
+                "sog": 15.0,
+                "cog": 306.7,
+                "heading": 306.7,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.60385793,
-                        "lat": 58.76859304
+                        "lon": 10.59304039,
+                        "lat": 58.76809929
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.39158082,
-                        "lat": 58.84205107
+                        "lon": 10.40102076,
+                        "lat": 58.84246722
                     }
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
+                    "length": 50.0,
+                    "width": 10.0,
                     "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {
@@ -110,18 +110,18 @@
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
+                    "length": 50.0,
+                    "width": 10.0,
                     "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {
@@ -150,7 +150,7 @@
                 }
             ],
             "static": {
-                "id": 13,
+                "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
                     "length": 178.0,

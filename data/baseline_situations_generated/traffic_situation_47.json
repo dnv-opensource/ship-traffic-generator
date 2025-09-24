@@ -1,5 +1,5 @@
 {
-    "version": "0.8.1",
+    "version": "0.8.2",
     "title": "CR-SO, CR-SO, OT-SO",
     "description": "Two crossing stand-on situations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
@@ -47,39 +47,39 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.4015044,
-                    "lat": 58.89068547
+                    "lon": 10.40540977,
+                    "lat": 58.88511949
                 },
-                "sog": 18.1,
-                "cog": 149.08,
-                "heading": 149.08,
+                "sog": 16.9,
+                "cog": 148.34,
+                "heading": 148.34,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.4015044,
-                        "lat": 58.89068547
+                        "lon": 10.40540977,
+                        "lat": 58.88511949
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.55012947,
-                        "lat": 58.76175633
+                        "lon": 10.5474524,
+                        "lat": 58.76545753
                     }
                 }
             ],
             "static": {
-                "id": 11,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
@@ -110,16 +110,16 @@
                 }
             ],
             "static": {
-                "id": 12,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
@@ -127,39 +127,39 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.46265975,
-                    "lat": 58.70918969
+                    "lon": 10.4692263,
+                    "lat": 58.72191064
                 },
-                "sog": 19.1,
-                "cog": 7.22,
-                "heading": 7.22,
+                "sog": 16.9,
+                "cog": 6.19,
+                "heading": 6.19,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.46265975,
-                        "lat": 58.70918969
+                        "lon": 10.4692263,
+                        "lat": 58.72191064
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.50096632,
-                        "lat": 58.86629534
+                        "lon": 10.49839552,
+                        "lat": 58.86167738
                     }
                 }
             ],
             "static": {
-                "id": 13,
+                "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
