@@ -160,8 +160,9 @@ def gen_situation(
     else:
         click.echo(
             "No output folder specified, not writing traffic situations to files.\n"
-            "You can use -v to visualize them or -o to specify the output folder."
+            "You can use -o to specify the output folder."
         )
+
 
 main.add_command(gen_situation)
 
