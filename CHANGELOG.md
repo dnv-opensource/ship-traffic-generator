@@ -5,11 +5,12 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
-## [0.8.2] - 2025-09-24
+## [0.8.2] - 2025-10-03
 * [bug] fixed bug that all target ships had id = 10.
 * [bug] fixed duplicate -v parameter warning.
 * If own ship ID is not given in own_ship.json file, then ID is set to 1. Target ship IDs will follow from own ship ID.
 * Better documentation of output files, added links to maritime schema, and improved navigation between related sections.
+* Updated documentaion of target ships in input_files.rst
 
 ## [0.8.1] - 2025-05-12
 * Changed first assert in  test_basic_cli() from 0 to 2.
