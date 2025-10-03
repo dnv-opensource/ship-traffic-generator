@@ -127,7 +127,6 @@ stubPath = "stubs"
 include = [
     "src",
     "tests",
-    "demos",
 ]
 exclude = [
     "src/folder_to_be_excluded",
