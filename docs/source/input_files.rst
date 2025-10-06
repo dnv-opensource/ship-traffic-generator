@@ -1,3 +1,4 @@
+.. _input_files:
 ===========
 Input files
 ===========
@@ -269,6 +270,9 @@ The values are given in maritime units. `sogMax` is the maximum speed over groun
 Target ship files
 ~~~~~~~~~~~~~~~~~
 The directory `src/trafficgen/data/target_ships` contains a set of target ships that can be used in the traffic generation.
+Id should not be assigned to the target ships used for generating encounters because the "same" target ship may be used several times
+in a situation consisting of several encounters. The target ships in the data/target_ships folder are randomly used in the generation of encounters.
+
 The file is written in JSON format and is on the following structure::
 
     {
