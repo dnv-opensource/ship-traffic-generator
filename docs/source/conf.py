@@ -25,7 +25,7 @@ copyright = "2025, DNV AS. All rights reserved."
 author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich"
 
 # The full version, including alpha/beta/rc tags
-release = "0.8.1"
+release = "0.8.2"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

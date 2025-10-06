@@ -223,7 +223,7 @@ def read_own_ship_static_file(own_ship_static_file: Path) -> ShipStatic:
     data = convert_keys_to_snake_case(data)
 
     if "id" not in data:
-        ship_id: int = 0
+        ship_id: int = 1
         data.update({"id": ship_id})
 
     ship_static: ShipStatic = ShipStatic(**data)
@@ -256,7 +256,7 @@ def read_target_ship_static_files(target_ship_folder: Path) -> list[ShipStatic]:
         data = convert_keys_to_snake_case(data)
 
         if "id" not in data:
-            ship_id: int = 10 + i
+            ship_id: int = 1 + i  # start IDs from 2, as own ship has ID 1
             data.update({"id": ship_id})
 
         target_ship_static: ShipStatic = ShipStatic(**data)

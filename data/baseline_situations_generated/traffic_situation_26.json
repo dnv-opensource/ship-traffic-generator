@@ -1,5 +1,5 @@
 {
-    "version": "0.6.0",
+    "version": "0.8.2",
     "title": "HO, CR-GW, CR-GW",
     "description": "Head-on situation and two grossing give-way situations with three target ships.",
     "ownShip": {
@@ -28,7 +28,7 @@
             }
         ],
         "static": {
-            "id": 0,
+            "id": 1,
             "mmsi": 257847600,
             "name": "BASTO VI",
             "dimensions": {
@@ -70,18 +70,18 @@
                 }
             ],
             "static": {
-                "id": 10,
+                "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -110,18 +110,18 @@
                 }
             ],
             "static": {
-                "id": 10,
+                "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -150,7 +150,7 @@
                 }
             ],
             "static": {
-                "id": 10,
+                "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
                     "length": 178.0,

@@ -46,7 +46,6 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
 
 
 @click.command()
-@click_log.simple_verbosity_option(logger)
 @click.option(
     "-s",
     "--situations",
@@ -120,7 +119,7 @@ def gen_situation(
     col: int,
     row: int,
     visualize_situation: int,
-    output: str,
+    output: str | None,
     visualize: bool,  # noqa: FBT001
 ) -> None:
     r"""Console script for trafficgen.
@@ -158,6 +157,11 @@ def gen_situation(
     if output is not None:
         click.echo("Writing traffic situations to files")
         write_traffic_situations_to_json_file(generated_traffic_situations, write_folder=Path(output))
+    else:
+        click.echo(
+            "No output folder specified, not writing traffic situations to files.\n"
+            "You can use -o to specify the output folder."
+        )
 
 
 main.add_command(gen_situation)

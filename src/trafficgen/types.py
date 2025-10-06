@@ -64,7 +64,7 @@ class StringIntEnumMixin(str, Enum):
         # Handle numeric values
         if isinstance(value, int):
             for member in cls:
-                if member.num_value == value:  # type: ignore[PGH003]
+                if member.num_value == value:
                     return member
         return None
 

@@ -1,5 +1,5 @@
 """
-The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems.
+The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems publicly available at https://github.com/cybergalactic/MSS.
 
 It includes models for ships, underwater vehicles, unmanned surface vehicles, and floating structures.
 The library also contains guidance, navigation, and control (GNC) blocks for real-time simulation.

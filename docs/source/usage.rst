@@ -26,17 +26,26 @@ Example::
 
     trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output
 
-Situations
+Input situations
 ~~~~~~~~~~
 When generating situations without specifying where the desired situations (``--situation``) are found, the
 default path, which is ``default=./baseline_situations_input/``, will be used.
+For more information on input files, see :ref:`input_files`.
 
 Baseline situations
 ~~~~~~~~~~~~~~~~~~~
 The baseline situations are a set of generic traffic situations covering head-on, overtaking stand-on/give-way
 and crossing stand-on/give-way encounters. To cover the combination of encounters for 1, 2 and 3 target ships,
-there are in total 55 baseline situations. The input files for generating these situations are found in
-``./baseline_situations_input/``
+there are in total 55 baseline situations.
+
+The input files for generating these situations are found in ``./baseline_situations_input/``
+
+The generated output files for these situations are found in ``./baseline_situations_generated/``
+
+Output situations
+~~~~~~~~~~~~~~~~~
+The generated traffic situations are saved in the specified output folder (``--output``).
+For more information on output files, see :ref:`output_files`.
 
 Plotting
 ~~~~~~~~
