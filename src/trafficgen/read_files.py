@@ -57,17 +57,17 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
 
 def read_situation_from_file(file_name: Path) -> SituationInput | None:
     """
-    Reads a situation configuration from a JSON file, converts keys to snake_case and
-    converts its data from maritime to SI units, before returning the situation input object.
+    Read a situation configuration from a JSON, run conversions, return the situation input object.
 
-    Args:
+    Parameters
+    ----------
         file_name (Path): The path to the JSON file containing the situation configuration.
 
-    Returns:
+    Returns
+    -------
         SituationInput | None: The initialized and converted SituationInput object if successful,
         or None if the file could not be read or parsed.
     """
-
     with Path.open(file_name, encoding="utf-8") as f:
         data = json.load(f)
     data = convert_keys_to_snake_case(data)
