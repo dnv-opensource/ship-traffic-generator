@@ -161,6 +161,38 @@ uv run docs/make.bat html
 
 The html documentation will then be available in `docs/build/html/index.html`
 
+### Contributing
+
+1. Any development should be associated to GitHub "issues" and done on new branches, which are tagged with the issue number. Branch off from `dev` (and also create PRs towards `dev`). The `main` branch is used for releases.
+
+    * Example branch names: `enh/1-improve-speed`, `bug/43-fix-cli-bug-about-something`, etc.
+
+1. Whenever you make changes to files, please keep formatting the same (e.g. whitespaces etc.), and follow the conventions used in the file (and this project). The Pull Request checks/actions on GitHub will run ruff format/check, pyright and mypy. To prepare, you may wanna run these before committing your changes, to ensure you are adhering to the formatting rules. E.g.:
+
+    ```sh
+    uv run ruff format
+    uv run ruff check
+    uv run pyright
+    uv run mypy
+    ```
+
+1. Run the pytest to ensure you did not break any functionality, and ensure you have added new tests for new features:
+
+    ```sh
+    uv run pytest .
+    ```
+
+1. When you create a Pull Request in GitHub:
+
+    * Make sure your PR is set to merge into the `dev` branch.
+    * Use [closing keywords](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword) in your PR description, and link the relevant issue.
+    * In the PR description, add a description of the changes, any tests you've done, and describe how reviewers can test your changes.
+    * Add your contributions to the `CHANGELOG.md`
+    * Resolve any issues that are found by the PR checks (ruff, pyright, mypy)
+    * Assign some folks as Reviewers
+    * Assign yourself as "Assignee", and follow up on reviews. You are responsible for resolving any issues that are found, and doing the final merge, after you get an approval from Reviewers.
+    * If you are still working on the branch, make it a "Draft" PR - you can add/reach out to Reviewers if you want early feedback, or wait until the PR is ready before assigning Reviewers.
+
 ### Testing PRs
 
 1. Check out the PR branch
