@@ -85,6 +85,7 @@ def situations_folder_test_08() -> Path:
     """Path to test 08 data folder"""
     return Path(__file__).parent / "data/test_08"
 
+
 @pytest.fixture(scope="session")
 def target_ships_folder(proj_data_folder: Path) -> Path:
     """Path to target ships folder"""
