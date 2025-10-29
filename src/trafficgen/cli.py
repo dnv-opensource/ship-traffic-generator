@@ -49,7 +49,7 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
 @click.option(
     "-s",
     "--situations",
-    help="Path to folder with situations (default=./baseline_situations_input/)",
+    help="Path to file (.json) or folder with situation input files (default=./baseline_situations_input/)",
     type=click.Path(exists=True),
     default=situation_folder,
     show_default=True,

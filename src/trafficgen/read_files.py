@@ -37,20 +37,36 @@ def read_situation_files(situation_folder: Path) -> list[SituationInput]:
     """
     situations: list[SituationInput] = []
     logger.info(f"Reading traffic situation input files from: {situation_folder}")
-    for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
-        with Path.open(file_name, encoding="utf-8") as f:
-            data = json.load(f)
 
-        data = convert_keys_to_snake_case(data)
+    # if situation_folder ends with .json, call read_situation_from_file directly
+    if str(situation_folder).endswith(".json"):
+        situation = read_situation_from_file(situation_folder)
+        if situation is not None:
+            situations.append(situation)
+    # else if situation_folder is a folder, read all json files in the folder
+    elif situation_folder.is_dir():
+        for file_name in sorted([file for file in Path.iterdir(situation_folder) if str(file).endswith(".json")]):
+            situation = read_situation_from_file(file_name)
+            if situation is not None:
+                situations.append(situation)
+    else:
+        logger.error(f"Situation folder {situation_folder} is neither a .json file nor a directory.")
 
-        if "num_situations" not in data:
-            data["num_situations"] = 1
-
-        situation: SituationInput = SituationInput(**data)
-        situation = convert_situation_data_from_maritime_to_si_units(situation)
-
-        situations.append(situation)
     return situations
+
+
+def read_situation_from_file(file_name: Path) -> SituationInput | None:
+    with Path.open(file_name, encoding="utf-8") as f:
+        data = json.load(f)
+    data = convert_keys_to_snake_case(data)
+
+    if "num_situations" not in data:
+        data["num_situations"] = 1
+
+    situation: SituationInput = SituationInput(**data)
+    situation = convert_situation_data_from_maritime_to_si_units(situation)
+
+    return situation
 
 
 def read_generated_situation_files(situation_folder: Path) -> list[TrafficSituation]:

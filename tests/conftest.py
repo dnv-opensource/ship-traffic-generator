@@ -28,8 +28,14 @@ def proj_data_folder() -> Path:
 
 @pytest.fixture(scope="session")
 def situations_folder(proj_data_folder: Path) -> Path:
-    """Path to test data folder"""
+    """Path to test baseline situations input data folder"""
     return Path(proj_data_folder) / "baseline_situations_input"
+
+
+@pytest.fixture(scope="session")
+def situations_file(proj_data_folder: Path) -> Path:
+    """Path to test baseline situations input data file"""
+    return Path(proj_data_folder) / "baseline_situations_input" / "baseline_situation_01_1_ts.json"
 
 
 @pytest.fixture(scope="session")
@@ -76,9 +82,8 @@ def situations_folder_test_07() -> Path:
 
 @pytest.fixture(scope="session")
 def situations_folder_test_08() -> Path:
-    """Path to test 06 data folder"""
+    """Path to test 08 data folder"""
     return Path(__file__).parent / "data/test_08"
-
 
 @pytest.fixture(scope="session")
 def target_ships_folder(proj_data_folder: Path) -> Path:

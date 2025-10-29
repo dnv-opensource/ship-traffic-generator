@@ -5,7 +5,14 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+### Changed
+
+* Added option to pass in a single input situation .json file, not only a folder.
+
 ## [0.8.2] - 2025-10-03
+
+### Changed
+
 * [bug] fixed bug that all target ships had id = 10.
 * [bug] fixed duplicate -v parameter warning.
 * If own ship ID is not given in own_ship.json file, then ID is set to 1. Target ship IDs will follow from own ship ID.
@@ -13,11 +20,15 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 * Updated documentaion of target ships in input_files.rst
 
 ## [0.8.1] - 2025-05-12
+
+### Changed
+
 * Changed first assert in  test_basic_cli() from 0 to 2.
 
 ## [0.8.0] - 2025-05-09
 
 ### Changed
+
 * vectorTime may now be a single float (exact time) or a list of two floats [from, to]. vectorRange is removed from settings file.
 * evolveTime is changed to situationDevelopTime.
 * Removed Basemap-package and added pyproj package.
