@@ -143,6 +143,8 @@ uv pip install -e .
 
 ### Test the install
 
+In your virtual environment, or prepend `uv run`:
+
 ```sh
 pytest .
 ```
@@ -170,10 +172,10 @@ The html documentation will then be available in `docs/build/html/index.html`
     uv self update
     uv sync -U
     uv pip install -e .
-    pytest .
+    uv run pytest .
     ```
 
-1. Run any additional tests you want / care about / related to PR topic, e.g.:
+1. Run any additional tests you want / care about / related to PR topic (in your virtual env or prepend `uv run`) e.g.:
 
     ```sh
     trafficgen gen-situation -o test_output
