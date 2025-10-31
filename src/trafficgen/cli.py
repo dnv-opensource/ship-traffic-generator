@@ -38,7 +38,7 @@ output_folder: Path = default_data_path / "test_output"
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
 @click_log.simple_verbosity_option(logger)
 def main(args=None):  # noqa: ANN001, ANN201, ARG001
-    """This is DNV's ship traffic generator tool.
+    """DNV's ship traffic generator tool.
 
     To run the traffic generator, you need to at least call `trafficgen gen-situation`.
     For more info, run `trafficgen gen-situation -h`.
@@ -110,14 +110,17 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
 @click.option(
     "--visualize-situation",
     type=int,
-    help="Plot one individual traffic situation, specify an INTEGER value larger than 0. [OPTIONAL, no default]",
+    help=("Plot one individual traffic situation, specify an INTEGER value larger than 0. [OPTIONAL, no default]"),
 )
 @click.option(
     "--ownship-coordinate",
-    help="Specify the ownship start coordinate as 'lat,lon' in decimal degrees. If specified, this takes priority over what is specified in the situation file as initial ownship position, and everything will be generated relative to this coordinate. [OPTIONAL, no default]",
+    help=(
+        "Specify the ownship start coordinate as 'lat,lon' in decimal degrees. "
+        "If specified, this takes priority over what is specified in the situation file as initial ownship position, "
+        "and everything will be generated relative to this coordinate. [OPTIONAL, no default]"
+    ),
     type=str,
 )
-
 def gen_situation(
     situations: str,
     own_ship: str,
@@ -133,11 +136,11 @@ def gen_situation(
     r"""Console script for trafficgen.
     Example usage:
 
-    trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1
+    `trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1`
 
     or with visualization:
-    trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1 -v
-    """  # noqa: D205
+    `trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1 -v`.
+    """  # noqa: D205, D400
     click.echo("Generating traffic situations")
     generated_traffic_situations = generate_traffic_situations(
         situation_folder=Path(situations),

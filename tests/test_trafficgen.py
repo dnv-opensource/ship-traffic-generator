@@ -507,8 +507,8 @@ def test_gen_situations_cli_ownship_coordinate(
 
         # check that the ownship initial position is as given from commandline
         assert situation.own_ship is not None
-        assert situation.own_ship.initial.position.lat == 60.391263
-        assert situation.own_ship.initial.position.lon == 5.322054
+        assert situation.own_ship.initial.position.lat == 60.391263  # type: ignore[reportOptionalMemberAccess, union-attr]
+        assert situation.own_ship.initial.position.lon == 5.322054  # type: ignore[reportOptionalMemberAccess, union-attr]
 
         # check that the initial waypoint is the same as the initial position
         assert situation.own_ship.waypoints is not None

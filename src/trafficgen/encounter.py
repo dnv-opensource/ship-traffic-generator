@@ -327,6 +327,7 @@ def define_own_ship(
     own_ship_static: ShipStatic,
     encounter_settings: EncounterSettings,
     lat_lon0: GeoPosition,
+    *,
     overwrite_ownship_initial_coord: bool = False,
 ) -> OwnShip:
     """
