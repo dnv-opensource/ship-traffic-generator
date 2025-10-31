@@ -461,3 +461,57 @@ def test_gen_situation_beta_limited_cli(
     for situation in situations:
         assert situation.target_ships is not None
         assert len(situation.target_ships) == 1
+
+
+def test_gen_situations_cli_ownship_coordinate(
+    situations_folder_test_01: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
+    output_folder: Path,
+):
+    """
+    Test generation of one traffic situation using full specification,
+    with the ownship initial coordinate being overwritten from commandline.
+    """
+    runner = CliRunner()
+    result = runner.invoke(
+        cli.main,
+        [
+            "gen-situation",
+            "-s",
+            str(situations_folder_test_01),
+            "-os",
+            str(own_ship_file),
+            "-t",
+            str(target_ships_folder),
+            "-c",
+            str(settings_file),
+            "-o",
+            str(output_folder),
+            "--ownship-coordinate",
+            "60.391263,5.322054",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert "Generating traffic situations" in result.output
+
+    situations: list[TrafficSituation] = read_generated_situation_files(output_folder)
+    assert len(situations) == 5
+
+    # sourcery skip: no-loop-in-tests
+    for situation in situations:
+        assert situation.target_ships is not None
+        assert len(situation.target_ships) in {0, 1}
+
+        # check that the ownship initial position is as given from commandline
+        assert situation.own_ship is not None
+        assert situation.own_ship.initial.position.lat == 60.391263
+        assert situation.own_ship.initial.position.lon == 5.322054
+
+        # check that the initial waypoint is the same as the initial position
+        assert situation.own_ship.waypoints is not None
+        assert len(situation.own_ship.waypoints) > 0
+        assert situation.own_ship.waypoints[0].position.lat == 60.391263
+        assert situation.own_ship.waypoints[0].position.lon == 5.322054
