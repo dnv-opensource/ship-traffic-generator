@@ -5,6 +5,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.8.3] - 2025-10-31
+* [bug] Fixed sourcery dependency constraint to avoid platform compatibility issues on Linux by constraining to <1.41.
+
 ## [0.8.2] - 2025-10-03
 * [bug] fixed bug that all target ships had id = 10.
 * [bug] fixed duplicate -v parameter warning.

@@ -25,7 +25,7 @@ packages = [
 
 [project]
 name = "trafficgen"
-version = "0.8.2"
+version = "0.8.3"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
 requires-python = ">= 3.11, < 3.13"
@@ -86,7 +86,7 @@ dev = [
     "ruff>=0.8.3",
     "pyright>=1.1.390",
     "mypy>=1.13",
-    "sourcery>=1.27",
+    "sourcery>=1.27,<1.41",
     "pre-commit>=4.0",
     "Sphinx>=8.1",
     "sphinx-argparse-cli>=1.19",
