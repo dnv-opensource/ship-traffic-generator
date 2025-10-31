@@ -2375,7 +2375,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-cov", specifier = ">=6.0" },
     { name = "ruff", specifier = ">=0.8.3" },
-    { name = "sourcery", specifier = ">=1.27" },
+    { name = "sourcery", specifier = ">=1.27,<1.41" },
     { name = "sphinx", specifier = ">=8.1" },
     { name = "sphinx-argparse-cli", specifier = ">=1.19" },
     { name = "sphinx-autodoc-typehints", specifier = ">=2.5" },
