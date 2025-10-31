@@ -9,6 +9,12 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 * Added option to pass in a single input situation .json file, not only a folder.
 
+## [0.8.3] - 2025-10-31
+
+### Changed
+
+* [bug] Fixed sourcery dependency constraint to avoid platform compatibility issues on Linux by constraining to <1.41.
+
 ## [0.8.2] - 2025-10-03
 
 ### Changed
