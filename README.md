@@ -192,6 +192,7 @@ The html documentation will then be available in `docs/build/html/index.html`
     * Assign some folks as Reviewers
     * Assign yourself as "Assignee", and follow up on reviews. You are responsible for resolving any issues that are found, and doing the final merge, after you get an approval from Reviewers.
     * If you are still working on the branch, make it a "Draft" PR - you can add/reach out to Reviewers if you want early feedback, or wait until the PR is ready before assigning Reviewers.
+    * If a new release should be created, notify Tom Arne Pedersen.
 
 ### Testing PRs
 
