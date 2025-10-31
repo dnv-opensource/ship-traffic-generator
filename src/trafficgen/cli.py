@@ -35,7 +35,7 @@ settings_file: Path = Path(__file__).parent / "settings" / "encounter_settings.j
 output_folder: Path = default_data_path / "test_output"
 
 
-@click.group()
+@click.group(context_settings={"help_option_names": ["-h", "--help"]})
 @click_log.simple_verbosity_option(logger)
 def main(args=None):  # noqa: ANN001, ANN201, ARG001
     """Entry point for console script as configured in pyproject.toml.
@@ -45,11 +45,11 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
     return 0
 
 
-@click.command()
+@click.command(context_settings={"help_option_names": ["-h", "--help"]})
 @click.option(
     "-s",
     "--situations",
-    help="Path to file (.json) or folder with situation input files (default=./baseline_situations_input/)",
+    help="Path to file (.json) or folder with situation input files",
     type=click.Path(exists=True),
     default=situation_folder,
     show_default=True,
@@ -109,8 +109,14 @@ def main(args=None):  # noqa: ANN001, ANN201, ARG001
 @click.option(
     "--visualize-situation",
     type=int,
-    help="Plot individual traffic situation, specify an INTEGER value larger than 0.",
+    help="Plot one individual traffic situation, specify an INTEGER value larger than 0. [OPTIONAL, no default]",
 )
+@click.option(
+    "--ownship-coordinate",
+    help="Specify the ownship start coordinate as 'lat,lon' in decimal degrees. If specified, this takes priority over what is specified in the situation file as initial ownship position, and everything will be generated relative to this coordinate. [OPTIONAL, no default]",
+    type=str,
+)
+
 def gen_situation(
     situations: str,
     own_ship: str,
@@ -121,9 +127,11 @@ def gen_situation(
     visualize_situation: int,
     output: str | None,
     visualize: bool,  # noqa: FBT001
+    ownship_coordinate: str | None,
 ) -> None:
     r"""Console script for trafficgen.
-    Example: \n
+    Example:
+
     trafficgen gen-situation -s ./data/example_situations_input
     -o ./data/test_output_1.
     """  # noqa: D205
@@ -133,11 +141,12 @@ def gen_situation(
         own_ship_file=Path(own_ship),
         target_ship_folder=Path(targets),
         settings_file=Path(settings),
+        ownship_coordinate=ownship_coordinate,
     )
 
     encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
     if visualize:
-        click.echo("Plotting traffic situations")
+        click.echo("Plotting traffic situations. Close the plot window to continue.")
         plot_traffic_situations(generated_traffic_situations, col, row, encounter_settings)
 
     # visualize_situation has no default, this is done on purpose,

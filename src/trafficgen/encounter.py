@@ -31,6 +31,7 @@ from trafficgen.utils import (
     calculate_position_at_certain_time,
     convert_angle_0_to_2_pi_to_minus_pi_to_pi,
     convert_angle_minus_pi_to_pi_to_0_to_2_pi,
+    deg_2_rad,
 )
 
 
@@ -326,6 +327,7 @@ def define_own_ship(
     own_ship_static: ShipStatic,
     encounter_settings: EncounterSettings,
     lat_lon0: GeoPosition,
+    overwrite_ownship_initial_coord: bool = False,
 ) -> OwnShip:
     """
     Define own ship based on information in desired traffic situation.
@@ -340,6 +342,8 @@ def define_own_ship(
         Necessary setting for the encounter
     lat_lon0 : GeoPosition
         Reference point, latitudinal [rad] and longitudinal [rad]
+    overwrite_ownship_initial_coord : bool
+        If True, the ownship initial coordinate from SituationInput is overwritten with the lat_lon0 value.
 
     Returns
     -------
@@ -347,6 +351,11 @@ def define_own_ship(
         Own ship including static, initial and waypoints.
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
+
+    if overwrite_ownship_initial_coord:
+        # assign lat_lon0, but convert them to radians first!
+        own_ship_initial.position = GeoPosition(lat=deg_2_rad(lat_lon0.lat), lon=deg_2_rad(lat_lon0.lon))
+
     own_ship_waypoints: list[Waypoint] = []
     if desired_traffic_situation.own_ship.waypoints is None:
         # If waypoints are not given, let initial position be the first waypoint,
