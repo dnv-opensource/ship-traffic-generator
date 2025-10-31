@@ -38,9 +38,10 @@ output_folder: Path = default_data_path / "test_output"
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
 @click_log.simple_verbosity_option(logger)
 def main(args=None):  # noqa: ANN001, ANN201, ARG001
-    """Entry point for console script as configured in pyproject.toml.
+    """This is DNV's ship traffic generator tool.
 
-    Runs the command line interface and parses arguments and options entered on the console.
+    To run the traffic generator, you need to at least call `trafficgen gen-situation`.
+    For more info, run `trafficgen gen-situation -h`.
     """
     return 0
 
@@ -130,10 +131,12 @@ def gen_situation(
     ownship_coordinate: str | None,
 ) -> None:
     r"""Console script for trafficgen.
-    Example:
+    Example usage:
 
-    trafficgen gen-situation -s ./data/example_situations_input
-    -o ./data/test_output_1.
+    trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1
+
+    or with visualization:
+    trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1 -v
     """  # noqa: D205
     click.echo("Generating traffic situations")
     generated_traffic_situations = generate_traffic_situations(
