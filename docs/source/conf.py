@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path("../../src").absolute()))
 
 project = "trafficgen"
 copyright = "2025, DNV AS. All rights reserved."
-author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich"
+author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich, Stephanie Kemna"
 
 # The full version, including alpha/beta/rc tags
 release = "0.8.3"
