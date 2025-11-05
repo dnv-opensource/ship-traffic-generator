@@ -231,7 +231,6 @@ class ShipStatic(BaseModelConfig):
         Annotated[
             PathType,
             Field(
-                default=PathType.RTZ,
                 description=(
                     "Specifies the control-point model (e.g., Bezier, RTZ) "
                     "used to define the path for the ship to follow."
@@ -239,7 +238,7 @@ class ShipStatic(BaseModelConfig):
             ),
         ]
         | None
-    ) = None
+    ) = PathType.RTZ
 
     sog_min: (
         Annotated[float, Field(ge=0, description="Minimum ship speed over ground in knots", examples=[5.0])] | None
