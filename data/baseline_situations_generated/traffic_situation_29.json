@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, CR-GW, OT-SO",
     "description": "Head-on, crossing give-way and overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.48747441,
                         "lat": 58.85789108
+                    },
+                    "leg": {
+                        "sog": 8.9
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49270898,
                         "lat": 58.7836081
+                    },
+                    "leg": {
+                        "sog": 8.9
                     }
                 }
             ],
@@ -73,15 +85,15 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.58189453,
                         "lat": 58.77180694
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 },
                 {
                     "position": {
                         "lon": 10.44501402,
                         "lat": 58.84238148
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 }
             ],
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.4606725,
                         "lat": 58.73646298
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
                         "lon": 10.52051986,
                         "lat": 58.87356769
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 }
             ],
@@ -153,13 +177,13 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }

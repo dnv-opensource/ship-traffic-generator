@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "CR-GW, CR-SO, OT-SO",
     "description": "Crossing give way, crossing stand-on and overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -47,25 +53,31 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.66884952,
-                    "lat": 58.78825351
+                    "lon": 10.68398716,
+                    "lat": 58.7903632
                 },
-                "sog": 16.9,
-                "cog": 289.8,
-                "heading": 289.8,
+                "sog": 18.1,
+                "cog": 287.28,
+                "heading": 287.28,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.66884952,
-                        "lat": 58.78825351
+                        "lon": 10.68398716,
+                        "lat": 58.7903632
+                    },
+                    "leg": {
+                        "sog": 18.1
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.41424001,
-                        "lat": 58.83588001
+                        "lon": 10.40777127,
+                        "lat": 58.83500563
+                    },
+                    "leg": {
+                        "sog": 18.1
                     }
                 }
             ],
@@ -73,13 +85,13 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.38164921,
                         "lat": 58.84431728
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.57405776,
                         "lat": 58.78477843
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 }
             ],
@@ -113,39 +131,45 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
             "initial": {
                 "position": {
-                    "lon": 10.4727515,
-                    "lat": 58.74350125
+                    "lon": 10.46592574,
+                    "lat": 58.73589741
                 },
-                "sog": 15.0,
-                "cog": 8.59,
-                "heading": 8.59,
+                "sog": 16.9,
+                "cog": 10.54,
+                "heading": 10.54,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.4727515,
-                        "lat": 58.74350125
+                        "lon": 10.46592574,
+                        "lat": 58.73589741
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.50854289,
-                        "lat": 58.86653062
+                        "lon": 10.5154377,
+                        "lat": 58.87411012
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 }
             ],
@@ -153,15 +177,15 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         }
     ]

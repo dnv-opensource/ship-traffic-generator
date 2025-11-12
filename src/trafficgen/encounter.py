@@ -19,6 +19,7 @@ from trafficgen.types import (
     EncounterType,
     GeoPosition,
     Initial,
+    Leg,
     OwnShip,
     ShipStatic,
     SituationInput,
@@ -214,8 +215,9 @@ def generate_encounter(
             heading=target_ship_cog,
             nav_status=AisNavStatus.UNDER_WAY_USING_ENGINE,
         )
+        leg: Leg = Leg(sog=target_ship_sog)
         target_ship_waypoint0 = Waypoint(
-            position=target_ship_initial_position.model_copy(deep=True), turn_radius=None, leg=None
+            position=target_ship_initial_position.model_copy(deep=True), turn_radius=None, leg=leg
         )
 
         future_position_target_ship = calculate_position_at_certain_time(
@@ -226,7 +228,9 @@ def generate_encounter(
             settings.situation_length,
         )
 
-        target_ship_waypoint1 = Waypoint(position=future_position_target_ship, turn_radius=None, leg=None)
+        target_ship_waypoint1 = Waypoint(
+            position=future_position_target_ship, turn_radius=None, leg=leg.model_copy(deep=True)
+        )
         waypoints = [target_ship_waypoint0, target_ship_waypoint1]
 
         target_ship = TargetShip(static=target_ship_static, initial=target_ship_initial, waypoints=waypoints)
@@ -361,8 +365,9 @@ def define_own_ship(
     if desired_traffic_situation.own_ship.waypoints is None:
         # If waypoints are not given, let initial position be the first waypoint,
         # then calculate second waypoint some time in the future
+        leg: Leg = Leg(sog=own_ship_initial.sog)
         own_ship_waypoint0 = Waypoint(
-            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=leg
         )
         ship_position_future = calculate_position_at_certain_time(
             own_ship_initial.position,
@@ -371,14 +376,15 @@ def define_own_ship(
             own_ship_initial.cog,
             encounter_settings.situation_length,
         )
-        own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, leg=None)
+        own_ship_waypoint1 = Waypoint(position=ship_position_future, turn_radius=None, leg=leg.model_copy(deep=True))
         own_ship_waypoints = [own_ship_waypoint0, own_ship_waypoint1]
     elif len(desired_traffic_situation.own_ship.waypoints) == 1:
         # If one waypoint is given, use initial position as first waypoint
+        leg: Leg = Leg(sog=own_ship_initial.sog)
         own_ship_waypoint0 = Waypoint(
-            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=None
+            position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=leg
         )
-        own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0]
+        own_ship_waypoint1 = desired_traffic_situation.own_ship.waypoints[0].model_copy(deep=True)
         own_ship_waypoints = [own_ship_waypoint0, own_ship_waypoint1]
     else:
         own_ship_waypoints = desired_traffic_situation.own_ship.waypoints

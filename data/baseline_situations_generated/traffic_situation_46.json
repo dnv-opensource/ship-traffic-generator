@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "CR-SO, CR-SO, CR-SO",
     "description": "Two crossing stand-on and one crossing stand-on situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.4617266,
                         "lat": 58.84868926
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.50510283,
                         "lat": 58.80395017
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.38228859,
                         "lat": 58.77853101
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.59900317,
                         "lat": 58.83150625
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],
@@ -113,15 +131,15 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
+                    "length": 50.0,
+                    "width": 10.0,
                     "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.3649045,
                         "lat": 58.87659098
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
                         "lon": 10.56342268,
                         "lat": 58.78105024
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 }
             ],

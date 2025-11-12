@@ -8,6 +8,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ### Changed
 
 * Added option to pass in a single input situation .json file, not only a folder.
+* Added sog to each waypoint leg. Updated documentation. Generated new baseline_situations_generated files. Updated types.
 
 ## [0.8.3] - 2025-10-31
 

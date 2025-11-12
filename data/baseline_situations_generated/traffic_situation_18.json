@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "OT-GW, OT-GW",
     "description": "A overtaking give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.49718599,
                         "lat": 58.77612507
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.48409394,
                         "lat": 58.83389954
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.51106216,
                         "lat": 58.78618871
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.47879805,
                         "lat": 58.83339505
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 }
             ],
@@ -113,13 +131,13 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
