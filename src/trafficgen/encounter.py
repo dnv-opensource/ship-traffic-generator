@@ -186,7 +186,7 @@ def generate_encounter(
                     lat_lon0,
                     target_ship_sog,
                     target_ship_cog,
-                    target_ship_position_future,
+                    target_ship_initial_position,
                     desired_encounter_type,
                     settings,
                 )

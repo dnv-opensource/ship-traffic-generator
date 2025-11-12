@@ -345,7 +345,7 @@ The `relativeSpeed` is the range for the relative speed between the own ship and
 The `situationLength` is the length of the situation, given in minutes.
 The `maxMeetingDistance` is the maximum meeting distance, given in nautical miles.
 The `commonVector` is the common time vector used on a radar plot.
-The `situationDevelopTime` specifies the number of minutes prior to the encounter that you would look back, ensuring the situation has had time to develop while still retaining the same encounter type. See the Usage section for more information.
+The `situationDevelopTime` specifies the number of minutes before t=0 (the start of the generated situation) during which the encounter type must already be established and remain consistent. For example, if set to 120 minutes, the encounter classification must be the same at t = -120 minutes as it is at t = 0. See the Usage section for more information.
 The `disableLandCheck` is a boolean value that determines if the land check should be disabled or not.
 
 We refer to the paper for more information on these parameters.

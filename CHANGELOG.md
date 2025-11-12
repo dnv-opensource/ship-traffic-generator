@@ -8,6 +8,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ### Changed
 
 * Added option to pass in a single input situation .json file, not only a folder.
+* Fixed bug where future position of target ship was used instead of initial position of target ship to check encounter evolvement. Updated documentation to make this functionality clearer.
 
 ## [0.8.3] - 2025-10-31
 
