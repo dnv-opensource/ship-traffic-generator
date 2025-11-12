@@ -362,10 +362,10 @@ def define_own_ship(
         own_ship_initial.position = GeoPosition(lat=deg_2_rad(lat_lon0.lat), lon=deg_2_rad(lat_lon0.lon))
 
     own_ship_waypoints: list[Waypoint] = []
+    leg: Leg = Leg(sog=own_ship_initial.sog)
     if desired_traffic_situation.own_ship.waypoints is None:
         # If waypoints are not given, let initial position be the first waypoint,
         # then calculate second waypoint some time in the future
-        leg: Leg = Leg(sog=own_ship_initial.sog)
         own_ship_waypoint0 = Waypoint(
             position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=leg
         )
@@ -380,7 +380,6 @@ def define_own_ship(
         own_ship_waypoints = [own_ship_waypoint0, own_ship_waypoint1]
     elif len(desired_traffic_situation.own_ship.waypoints) == 1:
         # If one waypoint is given, use initial position as first waypoint
-        leg: Leg = Leg(sog=own_ship_initial.sog)
         own_ship_waypoint0 = Waypoint(
             position=own_ship_initial.position.model_copy(deep=True), turn_radius=None, leg=leg
         )
