@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, HO, CR-GW",
     "description": "Two head-on situations and one grossing give-way situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.47793562,
                         "lat": 58.8894825
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49797343,
                         "lat": 58.77360223
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.49806729,
                         "lat": 58.87367333
+                    },
+                    "leg": {
+                        "sog": 9.9
                     }
                 },
                 {
                     "position": {
                         "lon": 10.48690751,
                         "lat": 58.79146512
+                    },
+                    "leg": {
+                        "sog": 9.9
                     }
                 }
             ],
@@ -113,13 +131,13 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.56715435,
                         "lat": 58.81431486
+                    },
+                    "leg": {
+                        "sog": 8.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.43966607,
                         "lat": 58.81263294
+                    },
+                    "leg": {
+                        "sog": 8.0
                     }
                 }
             ],
@@ -153,15 +177,15 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 50.0,
+                    "width": 10.0,
+                    "height": 8.0,
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         }
     ]

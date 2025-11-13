@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "CR-GW",
     "description": "A crossing situation with one target ship. Own ship is give-way.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.52697741,
                         "lat": 58.81530237
+                    },
+                    "leg": {
+                        "sog": 8.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.43617067,
                         "lat": 58.76878387
+                    },
+                    "leg": {
+                        "sog": 8.0
                     }
                 }
             ],

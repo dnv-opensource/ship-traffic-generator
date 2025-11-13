@@ -182,6 +182,8 @@ def convert_own_ship_waypoints(waypoints: list[Waypoint]) -> list[Waypoint]:
                 waypoint.leg.starboard_xtd = nm_2_m(waypoint.leg.starboard_xtd)
             if waypoint.leg.portside_xtd is not None:
                 waypoint.leg.portside_xtd = nm_2_m(waypoint.leg.portside_xtd)
+            if waypoint.leg.sog is not None:
+                waypoint.leg.sog = knot_2_m_pr_s(waypoint.leg.sog)
             if waypoint.leg.data is not None and waypoint.leg.data.sog is not None:
                 assert waypoint.leg.data.sog.value is not None
                 assert waypoint.leg.data.sog.interp_start is not None

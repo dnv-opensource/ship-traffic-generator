@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, OT-GW, OT-SO",
     "description": "Head-on, overtaking give-way and overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.47973278,
                         "lat": 58.87164444
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49900169,
                         "lat": 58.76384096
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.50359702,
                         "lat": 58.78192446
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.47935037,
                         "lat": 58.83040867
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 }
             ],
@@ -113,13 +131,13 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
@@ -127,25 +145,31 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.49452481,
-                    "lat": 58.74043996
+                    "lon": 10.49390272,
+                    "lat": 58.74420149
                 },
-                "sog": 15.9,
-                "cog": 358.16,
-                "heading": 358.16,
+                "sog": 15.0,
+                "cog": 358.33,
+                "heading": 358.33,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.49452481,
-                        "lat": 58.74043996
+                        "lon": 10.49390272,
+                        "lat": 58.74420149
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.48631708,
-                        "lat": 58.87287753
+                        "lon": 10.48691364,
+                        "lat": 58.86857505
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],
@@ -153,15 +177,15 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
+                    "length": 50.0,
+                    "width": 10.0,
                     "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         }
     ]

@@ -350,6 +350,7 @@ class Leg(BaseModelConfig):
 
     starboard_xtd: Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")] | None = None
     portside_xtd: Annotated[float, Field(description="Starboard XTD in NM as defined in RTZ.")] | None = None
+    sog: Annotated[float, Field(description="Speed reference for the waypoint leg in knots")] | None = None
     data: Annotated[RouteData, Field(description=data_description)] | None = None
 
 
