@@ -86,6 +86,7 @@ The ownship will then travel to the first waypoint, and then to the second waypo
 For the target ship, the future position of the 'meeting' is calculated based on the ownship initial position, the `vectorTime`, and the maximum meeting distance.
 At time `vectorTime`, the target ship will be within the `maxMeetingDistance` radius of the ownship position (at vector time).
 
-> **Note:** When generating a specific traffic situation, e.g. crossing give-way, this specific situation should also have been a
-crossing give-way situation at some time in the past, e.g. 10 minutes ago. This is specified by the `situationDevelopTime` parameter, in minutes.
-This ensures that the COLREG encounter is the same type also for some time (situationDevelopTime) before the actual encounter is started.
+> **Note:** When generating a specific traffic situation, e.g. crossing give-way, the `situationDevelopTime` parameter (in minutes)
+ensures that the same COLREG encounter type was already established at t = -`situationDevelopTime` (before the start of the generated scenario at t=0).
+For example, if `situationDevelopTime` is 10 minutes, the crossing give-way situation must have already been a crossing give-way
+encounter 10 minutes before t=0, ensuring consistency in the encounter classification throughout its development.
