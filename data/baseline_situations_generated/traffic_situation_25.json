@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, HO, OT-SO",
     "description": "Two head-on situations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.47489427,
                         "lat": 58.88058591
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.50275573,
                         "lat": 58.75700412
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.490654,
                         "lat": 58.85914792
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49056911,
                         "lat": 58.75088067
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 }
             ],
@@ -127,25 +145,31 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.50902307,
-                    "lat": 58.734075
+                    "lon": 10.50473753,
+                    "lat": 58.7409427
                 },
-                "sog": 19.1,
-                "cog": 351.34,
-                "heading": 351.34,
+                "sog": 16.9,
+                "cog": 352.54,
+                "heading": 352.54,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.50902307,
-                        "lat": 58.734075
+                        "lon": 10.50473753,
+                        "lat": 58.7409427
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.46311317,
-                        "lat": 58.89062967
+                        "lon": 10.46960737,
+                        "lat": 58.88033888
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 }
             ],
@@ -153,13 +177,13 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }

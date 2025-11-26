@@ -17,6 +17,25 @@ from trafficgen.types import (
 )
 
 
+def test_read_situations_file(situations_file: Path):
+    """
+    Test reading a single traffic situation file (.json).
+    """
+    desired_traffic_situations: list[SituationInput] = read_situation_files(situations_file)
+    assert len(desired_traffic_situations) == 1
+
+    situation: SituationInput = desired_traffic_situations[0]
+    assert situation.title is not None
+    assert situation.description is not None
+    assert situation.own_ship is not None
+    assert situation.encounters is not None
+    assert len(situation.encounters) == 1
+    assert situation.encounters[0].desired_encounter_type is not None
+    assert situation.encounters[0].beta is not None
+    assert situation.encounters[0].relative_speed is not None
+    assert situation.encounters[0].vector_time is not None
+
+
 def test_read_situations_1_ts_full_spec(situations_folder_test_01: Path):
     """
     Test reading traffic situations with full specification,

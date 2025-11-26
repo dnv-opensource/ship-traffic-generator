@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, HO, CR-SO",
     "description": "Two head-on situations and one grossing stand-on situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.50917859,
                         "lat": 58.87343991
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.4744752,
                         "lat": 58.75032644
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.49796361,
                         "lat": 58.87226388
+                    },
+                    "leg": {
+                        "sog": 18.1
                     }
                 },
                 {
                     "position": {
                         "lon": 10.48223275,
                         "lat": 58.72220484
+                    },
+                    "leg": {
+                        "sog": 18.1
                     }
                 }
             ],
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.42758053,
                         "lat": 58.80692647
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.53888327,
                         "lat": 58.81330088
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 }
             ],

@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "CR-GW, OT-SO",
     "description": "A crossing give-way and overtaking stand-on situation with two target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,58 +66,24 @@
                     "position": {
                         "lon": 10.54539832,
                         "lat": 58.76846736
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 },
                 {
                     "position": {
                         "lon": 10.40851781,
                         "lat": 58.83904189
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 }
             ],
             "static": {
                 "id": 2,
                 "name": "target_ship_1",
-                "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
-                },
-                "shipType": "Passenger"
-            }
-        },
-        {
-            "initial": {
-                "position": {
-                    "lon": 10.46886341,
-                    "lat": 58.74383342
-                },
-                "sog": 15.0,
-                "cog": 10.49,
-                "heading": 10.49,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "lon": 10.46886341,
-                        "lat": 58.74383342
-                    }
-                },
-                {
-                    "position": {
-                        "lon": 10.51244886,
-                        "lat": 58.86618231
-                    }
-                }
-            ],
-            "static": {
-                "id": 3,
-                "name": "target_ship_2",
                 "dimensions": {
                     "length": 50.0,
                     "width": 10.0,
@@ -122,6 +94,52 @@
                     "d": 5.0
                 },
                 "shipType": "Cargo"
+            }
+        },
+        {
+            "initial": {
+                "position": {
+                    "lon": 10.4606725,
+                    "lat": 58.73646298
+                },
+                "sog": 16.9,
+                "cog": 12.78,
+                "heading": 12.78,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "lon": 10.4606725,
+                        "lat": 58.73646298
+                    },
+                    "leg": {
+                        "sog": 16.9
+                    }
+                },
+                {
+                    "position": {
+                        "lon": 10.52051986,
+                        "lat": 58.87356769
+                    },
+                    "leg": {
+                        "sog": 16.9
+                    }
+                }
+            ],
+            "static": {
+                "id": 3,
+                "name": "target_ship_2",
+                "dimensions": {
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
+                },
+                "shipType": "Passenger"
             }
         }
     ]

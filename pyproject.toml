@@ -25,7 +25,7 @@ packages = [
 
 [project]
 name = "trafficgen"
-version = "0.8.3"
+version = "0.8.4"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
 requires-python = ">= 3.11, < 3.13"
@@ -34,10 +34,11 @@ authors = [
     { name = "Tom Arne Pedersen", email = "Tom.Arne.Pedersen@dnv.com" },
     { name = "Claas Rostock", email = "Claas.Rostock@dnv.com" },
     { name = "Minos Hemrich", email = "Minos.Hemrich@dnv.com" },
+    { name = "Stephanie Kemna"}
 ]
 testers = [
     { name = "Grunde Løvoll", email = "Grunde.Lovoll@dnv.com" },
-    { name = "Stephanie Kemna", email = "Stephanie.Kemna@dnv.com" },
+    { name = "Stephanie Kemna"},
 ]
 keywords = [
     "traffic generator",
