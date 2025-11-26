@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "OT-GW, OT-GW, OT-SO",
     "description": "Two overtaking give-way situations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.490654,
                         "lat": 58.77758838
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.490654,
                         "lat": 58.83576183
+                    },
+                    "leg": {
+                        "sog": 7.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.50774432,
                         "lat": 58.8138211
+                    },
+                    "leg": {
+                        "sog": 4.1
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49062474,
                         "lat": 58.8465694
+                    },
+                    "leg": {
+                        "sog": 4.1
                     }
                 }
             ],
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.48602285,
                         "lat": 58.73595127
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49296756,
                         "lat": 58.8603255
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],

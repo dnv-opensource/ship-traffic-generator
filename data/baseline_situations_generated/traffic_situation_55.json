@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "OT-SO, OT-SO, OT-SO",
     "description": "Three overtaking stand-on situation with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -47,71 +53,37 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.50416728,
-                    "lat": 58.72361635
+                    "lon": 10.50098768,
+                    "lat": 58.73299771
                 },
-                "sog": 19.1,
-                "cog": 355.23,
-                "heading": 355.23,
+                "sog": 16.9,
+                "cog": 355.92,
+                "heading": 355.92,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.50416728,
-                        "lat": 58.72361635
+                        "lon": 10.50098768,
+                        "lat": 58.73299771
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.47883944,
-                        "lat": 58.88142981
+                        "lon": 10.48174041,
+                        "lat": 58.8732275
+                    },
+                    "leg": {
+                        "sog": 16.9
                     }
                 }
             ],
             "static": {
                 "id": 2,
                 "name": "target_ship_1",
-                "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
-                },
-                "shipType": "Passenger"
-            }
-        },
-        {
-            "initial": {
-                "position": {
-                    "lon": 10.51868282,
-                    "lat": 58.73222566
-                },
-                "sog": 16.9,
-                "cog": 349.45,
-                "heading": 349.45,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "lon": 10.51868282,
-                        "lat": 58.73222566
-                    }
-                },
-                {
-                    "position": {
-                        "lon": 10.46912156,
-                        "lat": 58.8704336
-                    }
-                }
-            ],
-            "static": {
-                "id": 3,
-                "name": "target_ship_2",
                 "dimensions": {
                     "length": 122.0,
                     "width": 20.0,
@@ -127,31 +99,37 @@
         {
             "initial": {
                 "position": {
-                    "lon": 10.47176652,
-                    "lat": 58.73649889
+                    "lon": 10.51095847,
+                    "lat": 58.74083497
                 },
                 "sog": 15.0,
-                "cog": 6.82,
-                "heading": 6.82,
+                "cog": 351.4,
+                "heading": 351.4,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.47176652,
-                        "lat": 58.73649889
+                        "lon": 10.51095847,
+                        "lat": 58.74083497
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.50020056,
-                        "lat": 58.86004548
+                        "lon": 10.4751232,
+                        "lat": 58.86386089
+                    },
+                    "leg": {
+                        "sog": 15.0
                     }
                 }
             ],
             "static": {
-                "id": 4,
-                "name": "target_ship_3",
+                "id": 3,
+                "name": "target_ship_2",
                 "dimensions": {
                     "length": 50.0,
                     "width": 10.0,
@@ -162,6 +140,52 @@
                     "d": 5.0
                 },
                 "shipType": "Cargo"
+            }
+        },
+        {
+            "initial": {
+                "position": {
+                    "lon": 10.46450875,
+                    "lat": 58.72613001
+                },
+                "sog": 16.9,
+                "cog": 8.31,
+                "heading": 8.31,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "lon": 10.46450875,
+                        "lat": 58.72613001
+                    },
+                    "leg": {
+                        "sog": 16.9
+                    }
+                },
+                {
+                    "position": {
+                        "lon": 10.50361001,
+                        "lat": 58.86524053
+                    },
+                    "leg": {
+                        "sog": 16.9
+                    }
+                }
+            ],
+            "static": {
+                "id": 4,
+                "name": "target_ship_3",
+                "dimensions": {
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
+                },
+                "shipType": "Passenger"
             }
         }
     ]

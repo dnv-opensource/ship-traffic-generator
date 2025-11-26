@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "CR-SO, OT-SO",
     "description": "A crossing stand-on and overtaking stand-on situation with two target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.43997058,
                         "lat": 58.75639278
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.53509529,
                         "lat": 58.85272352
+                    },
+                    "leg": {
+                        "sog": 13.0
                     }
                 }
             ],
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.47809115,
                         "lat": 58.73908438
+                    },
+                    "leg": {
+                        "sog": 15.9
                     }
                 },
                 {
                     "position": {
                         "lon": 10.50330074,
                         "lat": 58.87094176
+                    },
+                    "leg": {
+                        "sog": 15.9
                     }
                 }
             ],
@@ -113,13 +131,13 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }

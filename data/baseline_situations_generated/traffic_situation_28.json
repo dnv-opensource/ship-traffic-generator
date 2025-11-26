@@ -1,5 +1,5 @@
 {
-    "version": "0.8.2",
+    "version": "0.8.3",
     "title": "HO, CR-GW, OT-GW",
     "description": "Head-on, crossing give-way and overtaking give-way situations with three target ships.",
     "ownShip": {
@@ -18,12 +18,18 @@
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.763449
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             },
             {
                 "position": {
                     "lon": 10.490654,
                     "lat": 58.8465724
+                },
+                "leg": {
+                    "sog": 10.0
                 }
             }
         ],
@@ -60,12 +66,18 @@
                     "position": {
                         "lon": 10.47835035,
                         "lat": 58.8853529
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 },
                 {
                     "position": {
                         "lon": 10.49675727,
                         "lat": 58.7856227
+                    },
+                    "leg": {
+                        "sog": 12.1
                     }
                 }
             ],
@@ -73,15 +85,15 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
-                    "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
@@ -100,12 +112,18 @@
                     "position": {
                         "lon": 10.61754401,
                         "lat": 58.80961071
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.39361388,
                         "lat": 58.8113106
+                    },
+                    "leg": {
+                        "sog": 14.0
                     }
                 }
             ],
@@ -140,12 +158,18 @@
                     "position": {
                         "lon": 10.51183978,
                         "lat": 58.78250799
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 },
                 {
                     "position": {
                         "lon": 10.46944872,
                         "lat": 58.82750122
+                    },
+                    "leg": {
+                        "sog": 6.0
                     }
                 }
             ],

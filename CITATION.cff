@@ -19,6 +19,9 @@ authors:
     family-names: Hemrich
     email: Minos.Hemrich@dnv.com
     affiliation: DNV
+  - given-names: Stephanie
+    family-names: Kemna
+    affiliation: DNV
 testers:
   - given-names: Melih
     family-names: Akdag
@@ -36,4 +39,4 @@ keywords:
   - Systematic assessment
 license: MIT
 url: 'https://github.com/dnv-opensource/ship-traffic-generator'
-version: 0.8.3
+version: 0.8.4
