@@ -7,6 +7,10 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ### Changed
 
+## [0.8.4] - 2025-11-26
+
+### Changed
+
 * Added sog to each waypoint leg. Updated documentation. Generated new baseline_situations_generated files. Updated types.
 * Fixed bug where future position of target ship was used instead of initial position of target ship to check encounter evolvement. Updated documentation to make this functionality clearer.
 * Added option to pass in a single input situation .json file, not only a folder.
