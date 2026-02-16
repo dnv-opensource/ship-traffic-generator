@@ -609,7 +609,7 @@ class SituationInput(BaseModelConfig):
 
     title: str
     description: str
-    num_situations: int
+    num_situations: int = 1
     own_ship: OwnShipInitial
     encounters: list[Encounter]
 

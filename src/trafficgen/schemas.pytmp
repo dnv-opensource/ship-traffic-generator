@@ -1,0 +1,82 @@
+from marshmallow import Schema, fields, validate
+
+
+class DimensionsSchema(Schema):
+    """Defines the schema for validating dimensions of a ship."""
+
+    length = fields.Integer(required=True)
+    width = fields.Integer(required=True)
+    height = fields.Integer(required=True)
+
+
+class OwnShipSchema(Schema):
+    """Defines the schema for validating the ownship data."""
+
+    dimensions = fields.Nested(DimensionsSchema, required=True)
+    sogMax = fields.Float(required=True)
+    mmsi = fields.Integer(required=True)
+    name = fields.String(required=True)
+    shipType = fields.String(required=True)
+
+
+class TargetShipSchema(Schema):
+    """Defines the schema for validating the target ship data."""
+
+    dimensions = fields.Nested(DimensionsSchema, required=True)
+    sogMax = fields.Float(required=True)
+    shipType = fields.String(required=True)
+
+
+class PositionSchema(Schema):
+    """Defines the schema for validating positions in the JSON input situation."""
+
+    lat = fields.Float(required=True)
+    lon = fields.Float(required=True)
+
+
+class InitialSchema(Schema):
+    """Defines the schema for validating initial ship data in the JSON input situation."""
+
+    position = fields.Nested(PositionSchema, required=True)
+    sog = fields.Float(required=True)
+    cog = fields.Float(required=True)
+    heading = fields.Float(required=True)
+    navStatus = fields.String(required=True)
+
+
+class InputOwnShipSchema(Schema):
+    """Defines the schema for validation ownships in the JSON input situation."""
+
+    initial = fields.Nested(InitialSchema, required=True)
+
+
+class EncounterSchema(Schema):
+    """Defines the schema for validating encounters in the JSON input situation."""
+
+    desiredEncounterType = fields.String(
+        required=True,
+        validate=validate.OneOf(
+            [
+                "head-on",
+                "overtaking",
+                "crossing",
+                "crossing-give-way",
+                "overtaking-give-way",
+                "crossing-stand-on",
+                "overtaking-stand-on",
+            ]
+        ),
+    )
+    vectorTime = fields.Float(required=True)
+    beta = fields.Float(required=True)
+    relativeSpeed = fields.Float(required=True)
+
+
+class InputSchema(Schema):
+    """Defines the schema for validating JSON input situation data to the ship traffic generator."""
+
+    title = fields.String(required=True)
+    description = fields.String(required=True)
+    ownShip = fields.Nested(InputOwnShipSchema, required=True)
+    numSituations = fields.Integer(required=False)
+    encounters = fields.List(fields.Nested(EncounterSchema), required=True, validate=validate.Length(min=1))
