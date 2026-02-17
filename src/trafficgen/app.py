@@ -1,6 +1,8 @@
 """Flask API endpoints for generating ship traffic situations."""
 
+import json
 import os
+from pathlib import Path
 
 from flask import Flask, jsonify, request
 from flask.typing import ResponseReturnValue
@@ -10,6 +12,7 @@ from trafficgen.ship_traffic_generator import generate_traffic_situations
 from trafficgen.types import SituationInputJson
 
 app = Flask(__name__)
+BASELINE_SITUATIONS_DIR = Path(__file__).resolve().parents[2] / "data" / "baseline_situations_input"
 
 
 @app.route("/api/generate", methods=["POST"])
@@ -35,6 +38,22 @@ def generate_situation() -> ResponseReturnValue:
 
     response_payload = [situation.model_dump(mode="json", by_alias=True) for situation in situations]
     return jsonify(response_payload), 200
+
+
+@app.route("/api/baseline/<int:situation_id>", methods=["GET"])
+def get_baseline_situation(situation_id: int) -> ResponseReturnValue:
+    """Return a baseline situation JSON by its integer id."""
+    if situation_id < 1:
+        return jsonify({"error": "situation_id must be >= 1"}), 400
+
+    baseline_path = next(BASELINE_SITUATIONS_DIR.glob(f"baseline_situation_{situation_id:02d}_*.json"), None)
+    if baseline_path is None:
+        return jsonify({"error": f"Baseline situation {situation_id} was not found"}), 404
+
+    with baseline_path.open(encoding="utf-8") as baseline_file:
+        baseline_situation = json.load(baseline_file)
+
+    return jsonify(baseline_situation), 200
 
 
 if __name__ == "__main__":
