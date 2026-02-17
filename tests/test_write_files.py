@@ -16,19 +16,19 @@ if TYPE_CHECKING:
 
 
 def test_write_situations_multiple(
-    situations_data: Path,
-    own_ship_data: Path,
-    target_ships_data: Path,
-    settings_data: Path,
+    situations_folder: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
     output_folder: Path,
 ):
     """Test writing multiple traffic situations in one call."""
 
     situations: list[TrafficSituation] = generate_traffic_situations(
-        situations_data=situations_data,
-        own_ship_data=own_ship_data,
-        target_ships_data=target_ships_data,
-        settings_data=settings_data,
+        situations_data=situations_folder,
+        own_ship_data=own_ship_file,
+        target_ships_data=target_ships_folder,
+        settings_data=settings_file,
     )
     write_traffic_situations_to_json_file(situations, output_folder)
     reread_situations: list[TrafficSituation] = read_generated_situation_files(output_folder)

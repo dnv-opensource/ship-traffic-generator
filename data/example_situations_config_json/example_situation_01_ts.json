@@ -37,6 +37,7 @@
         ]
     },
     "ownShipStatic": {
+        "id": 1,
         "dimensions": {
             "length": 122,
             "width": 20,

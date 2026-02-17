@@ -214,7 +214,7 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
 
     for encounter in encounters:
         beta: list[float] | float | None = encounter.beta
-        vector_time: list[float] | float | None = encounter.vector_time
+        vector_time: list[float] | float = encounter.vector_time
         if beta is not None:
             if isinstance(beta, list):
                 assert len(beta) == beta_list_length
@@ -223,13 +223,12 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
                 encounter.beta = beta
             else:
                 encounter.beta = deg_2_rad(beta)
-        if vector_time is not None:
-            if isinstance(vector_time, list):
-                assert len(vector_time) == vector_time_list_length
-                for i in range(len(vector_time)):
-                    vector_time[i] = min_2_s(vector_time[i])
-            else:
-                encounter.vector_time = min_2_s(vector_time)
+        if isinstance(vector_time, list):
+            assert len(vector_time) == vector_time_list_length
+            for i in range(len(vector_time)):
+                vector_time[i] = min_2_s(vector_time[i])
+        else:
+            encounter.vector_time = min_2_s(vector_time)
     return encounters
 
 

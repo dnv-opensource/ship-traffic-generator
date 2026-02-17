@@ -76,17 +76,17 @@ def test_gen_situations_cli(
 
 
 def test_gen_situations(
-    situations_data: Path,
-    own_ship_data: Path,
-    target_ships_data: Path,
-    settings_data: Path,
+    situations_folder: Path,
+    own_ship_file: Path,
+    target_ships_folder: Path,
+    settings_file: Path,
 ):
     """Test generating traffic situations."""
     situations: list[TrafficSituation] = generate_traffic_situations(
-        situations_data=situations_data,
-        own_ship_data=own_ship_data,
-        target_ships_data=target_ships_data,
-        settings_data=settings_data,
+        situations_data=situations_folder,
+        own_ship_data=own_ship_file,
+        target_ships_data=target_ships_folder,
+        settings_data=settings_file,
     )
     assert len(situations) == 55
 

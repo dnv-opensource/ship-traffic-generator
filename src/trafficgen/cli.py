@@ -142,11 +142,12 @@ def gen_situation(
     `trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output_1 -v`.
     """  # noqa: D205, D400
     click.echo("Generating traffic situations")
+    settings_file = Path(settings)
     generated_traffic_situations = generate_traffic_situations(
-        situation_folder=Path(situations),
-        own_ship_file=Path(own_ship),
-        target_ship_folder=Path(targets),
-        settings_file=Path(settings),
+        situations_data=Path(situations),
+        own_ship_data=Path(own_ship),
+        target_ships_data=Path(targets),
+        settings_data=settings_file,
         ownship_coordinate=ownship_coordinate,
     )
 
