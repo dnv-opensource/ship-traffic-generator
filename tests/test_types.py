@@ -1,6 +1,6 @@
 """Tests for types and schema parsing."""
 
-from trafficgen.types import SituationInputJson
+from trafficgen.types import ShipStatic, SituationInputJson
 
 
 def test_situation_input_json_accepts_camel_case_payload() -> None:
@@ -48,3 +48,9 @@ def test_situation_input_json_accepts_camel_case_payload() -> None:
     assert parsed.traffic_situations.title == "test"
     assert parsed.traffic_situations.own_ship.initial.position.lat == 10.0
     assert parsed.encounter_settings.disable_land_check is True
+
+
+def test_ship_static_id_is_coerced_to_int() -> None:
+    ship_static = ShipStatic(id="2")
+    assert ship_static.id == 2
+    assert isinstance(ship_static.id, int)

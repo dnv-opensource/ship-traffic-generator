@@ -7,7 +7,7 @@ from enum import Enum
 from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, Any, Self
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 from pydantic.fields import Field
 from pyproj import Geod
 
@@ -21,20 +21,6 @@ def to_camel(string: str) -> str:
     """Return a camel case formated string from snake case string."""
     words = string.split("_")
     return words[0] + "".join(word.capitalize() for word in words[1:])
-
-
-def camel_to_snake(string: str) -> str:
-    """Convert a camel case string to snake case."""
-    return "".join([f"_{c.lower()}" if c.isupper() else c for c in string]).lstrip("_")
-
-
-def to_snake(data: Any) -> Any:  # noqa: ANN401
-    """Recursively convert dictionary keys from camel case to snake case."""
-    if isinstance(data, dict):
-        return {camel_to_snake(key): to_snake(value) for key, value in data.items()}
-    if isinstance(data, list):
-        return [to_snake(item) for item in data]
-    return data
 
 
 class BaseModelConfig(BaseModel):
@@ -260,6 +246,14 @@ class ShipStatic(BaseModelConfig):
     sog_max: (
         Annotated[float, Field(ge=0, description="Maximum ship speed over ground in knots", examples=[15.0])] | None
     ) = None
+
+    @field_validator("id", mode="before")
+    @classmethod
+    def coerce_id_to_int(cls, value: Any) -> int:  # noqa: ANN401
+        """Ensure ship id is converted to int when imported from JSON."""
+        if isinstance(value, str):
+            return int(value.strip())
+        return int(value)
 
     model_config = ConfigDict(extra="allow")
 
@@ -637,11 +631,3 @@ class SituationInputJson(BaseModelConfig):
     own_ship_static: ShipStatic
     target_ships_static: list[ShipStatic]
     encounter_settings: EncounterSettings
-
-    @model_validator(mode="before")
-    @classmethod
-    def normalize_camel_case_input(cls, data: Any) -> Any:  # noqa: ANN401
-        """Support camelCase JSON payloads by normalizing keys before validation."""
-        if isinstance(data, dict):
-            return to_snake(data)
-        return data
