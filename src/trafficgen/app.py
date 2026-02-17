@@ -1,9 +1,7 @@
-import json
-
 from flask import Flask, jsonify, request
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
-from trafficgen.types import SituationInput
+from trafficgen.types import SituationInputJson
 
 app = Flask(__name__)
 
@@ -15,15 +13,19 @@ def hello_world():
 
 @app.route("/api/generate", methods=["POST"])
 def generate_situation():
-    input_data = request.get_json()
+    input_data = request.get_json(silent=True)
+    parsed_json = None
+
+    if input_data is None:
+        return jsonify({"error": "Invalid or missing JSON request body or content-type header."}), 400
 
     try:
-        input_schema = SituationInput(**input_data)
+        parsed_json = SituationInputJson(**input_data)
     except ValidationError as e:
-        return jsonify({"Error:", e}), 422
+        app.logger.exception(e.json(indent=2))
+        return jsonify({"errors": e.errors()}), 422
 
-    output_schema = {"name": "BASTØ"}
-    return jsonify(output_schema), 200
+    return jsonify(parsed_json.model_dump_json()), 200
 
 
 if __name__ == "__main__":

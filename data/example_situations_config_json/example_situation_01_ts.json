@@ -1,0 +1,126 @@
+{
+    "trafficSituations": {
+        "title": "HO, CR-GW, OT-GW",
+        "description": "Head-on, crossing give-way and overtaking give-way situations with three target ships.",
+        "ownShip": {
+            "id": 1,
+            "initial": {
+                "position": {
+                    "lat": 58.763449,
+                    "lon": 10.490654
+                },
+                "sog": 10.0,
+                "cog": 0.0,
+                "heading": 0.0,
+                "navStatus": "Under way using engine"
+            }
+        },
+        "encounters": [
+            {
+                "desiredEncounterType": "head-on",
+                "beta": -3.0,
+                "relativeSpeed": 1.2,
+                "vectorTime": 20.0
+            },
+            {
+                "desiredEncounterType": "crossing-give-way",
+                "beta": 55.0,
+                "relativeSpeed": 1.4,
+                "vectorTime": 17.0
+            },
+            {
+                "desiredEncounterType": "overtaking-give-way",
+                "beta": 30.0,
+                "relativeSpeed": 0.6,
+                "vectorTime": 15.0
+            }
+        ]
+    },
+    "ownShipStatic": {
+        "dimensions": {
+            "length": 122,
+            "width": 20,
+            "height": 8
+        },
+        "sogMax": 17,
+        "mmsi": 257847600,
+        "name": "BASTO VI",
+        "shipType": "Passenger"
+    },
+    "targetShipsStatic": [
+        {
+            "id": 2,
+            "dimensions": {
+                "length": 80,
+                "width": 15,
+                "height": 5
+            },
+            "sogMax": 12,
+            "mmsi": 257847601,
+            "name": "TARGET SHIP 1",
+            "shipType": "Cargo"
+        },
+        {
+            "id": 3,
+            "dimensions": {
+                "length": 60,
+                "width": 10,
+                "height": 4
+            },
+            "sogMax": 10,
+            "mmsi": 257847602,
+            "name": "TARGET SHIP 2",
+            "shipType": "Tanker"
+        },
+        {
+            "id": 4,
+            "dimensions": {
+                "length": 40,
+                "width": 8,
+                "height": 3
+            },
+            "sogMax": 8,
+            "mmsi": 257847603,
+            "name": "TARGET SHIP 3",
+            "shipType": "Fishing"
+        }
+    ],
+    "encounterSettings": {
+        "classification": {
+            "theta13Criteria": 67.5,
+            "theta14Criteria": 5.0,
+            "theta15Criteria": 5.0,
+            "theta15": [
+                112.5,
+                247.5
+            ]
+        },
+        "relativeSpeed": {
+            "overtakingStandOn": [
+                1.5,
+                2
+            ],
+            "overtakingGiveWay": [
+                0.25,
+                0.75
+            ],
+            "headOn": [
+                0.5,
+                1.5
+            ],
+            "crossingGiveWay": [
+                0.5,
+                1.5
+            ],
+            "crossingStandOn": [
+                0.5,
+                1.5
+            ]
+        },
+        "situationLength": 30.0,
+        "maxMeetingDistance": 0.0,
+        "commonVector": 5.0,
+        "situationDevelopTime": 120.0,
+        "disableLandCheck": true
+    }
+}
