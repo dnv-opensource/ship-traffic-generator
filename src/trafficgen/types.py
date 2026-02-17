@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import datetime
-from enum import Enum
+from enum import Enum, StrEnum
 from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, Any, Self
 
-from pydantic import BaseModel, ConfigDict, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 from pydantic.fields import Field
 from pyproj import Geod
 
@@ -29,7 +29,7 @@ class BaseModelConfig(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
 
-class StringIntEnumMixin(str, Enum):
+class StringIntEnumMixin(StrEnum):
     """
     A mixin class for Enums that allows both integers and strings to specify a type.
 
@@ -135,7 +135,7 @@ class AisNavStatus(StringIntEnumMixin):
     UNDEFINED = ("Undefined (default)", 15)
 
 
-class PathType(str, Enum):
+class PathType(StrEnum):
     """Specifies the control-point model used to define the path for the ship to follow."""
 
     RTZ = "rtz"
@@ -143,7 +143,7 @@ class PathType(str, Enum):
     LINEAR = "linear"
 
 
-class InterpolationMethod(str, Enum):
+class InterpolationMethod(StrEnum):
     """Specifies the interpolation method used to interpolate between two values."""
 
     LINEAR = "linear"
@@ -625,7 +625,11 @@ class SituationInput(BaseModelConfig):
 
 
 class SituationInputJson(BaseModelConfig):
-    """Data type with ship static data and encounter settings, used for generating traffic situations from JSON input."""
+    """Data type for generating traffic situations from JSON payloads.
+
+    Contains situation input together with own ship, target ship and
+    encounter settings data.
+    """
 
     traffic_situations: SituationInput | list[SituationInput]
     own_ship_static: ShipStatic

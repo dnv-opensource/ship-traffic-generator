@@ -2459,6 +2459,7 @@ dependencies = [
     { name = "global-land-mask" },
     { name = "matplotlib" },
     { name = "numpy" },
+    { name = "pydantic" },
     { name = "pyproj" },
 ]
 
@@ -2495,6 +2496,7 @@ requires-dist = [
     { name = "global-land-mask", specifier = ">=1.0.0" },
     { name = "matplotlib", specifier = ">=3.7.2" },
     { name = "numpy", specifier = ">=1.25" },
+    { name = "pydantic", specifier = ">=2.12.5" },
     { name = "pyproj", specifier = ">=3.7.0" },
 ]
 
