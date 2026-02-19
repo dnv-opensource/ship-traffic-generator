@@ -15,6 +15,7 @@ Ship Traffic Generator Documentation
    input_files
    output_files
    api
+   app
    CHANGELOG
    STYLEGUIDE
    LICENSE

@@ -2,6 +2,7 @@
 
 import json
 import os
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from flask import Flask, jsonify, request
@@ -13,6 +14,24 @@ from trafficgen.types import SituationInputJson
 
 app = Flask(__name__)
 BASELINE_SITUATIONS_DIR = Path(__file__).resolve().parents[2] / "data" / "baseline_situations_input"
+DEFAULT_SETTINGS_FILE = Path(__file__).resolve().parent / "settings" / "encounter_settings.json"
+
+
+@app.route("/api/health", methods=["GET"])
+def get_health() -> ResponseReturnValue:
+    """Return basic health status for the API service."""
+    return jsonify({"status": "ok"}), 200
+
+
+@app.route("/api/version", methods=["GET"])
+def get_version() -> ResponseReturnValue:
+    """Return the current package version."""
+    try:
+        package_version = version("trafficgen")
+    except PackageNotFoundError:
+        package_version = "unknown"
+
+    return jsonify({"version": package_version}), 200
 
 
 @app.route("/api/generate", methods=["POST"])
@@ -54,6 +73,18 @@ def get_baseline_situation(situation_id: int) -> ResponseReturnValue:
         baseline_situation = json.load(baseline_file)
 
     return jsonify(baseline_situation), 200
+
+
+@app.route("/api/settings/default", methods=["GET"])
+def get_default_settings() -> ResponseReturnValue:
+    """Return the default encounter settings JSON payload."""
+    if not DEFAULT_SETTINGS_FILE.exists():
+        return jsonify({"error": "Default settings file was not found"}), 404
+
+    with DEFAULT_SETTINGS_FILE.open(encoding="utf-8") as settings_file:
+        default_settings = json.load(settings_file)
+
+    return jsonify(default_settings), 200
 
 
 if __name__ == "__main__":
