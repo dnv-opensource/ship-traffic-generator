@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - "main"
+      - "rest-api-stc-integration"
 
 permissions:
   id-token: write
@@ -26,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Read package version and set image tags
+      - name: Read package version and create image tags
         id: meta
         run: |
           if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
