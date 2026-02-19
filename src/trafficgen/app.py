@@ -5,9 +5,10 @@ import os
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
 from flask.typing import ResponseReturnValue
 from pydantic import ValidationError
+from werkzeug.exceptions import RequestEntityTooLarge
 
 from trafficgen.ship_traffic_generator import generate_traffic_situations
 from trafficgen.types import SituationInputJson
@@ -15,6 +16,47 @@ from trafficgen.types import SituationInputJson
 app = Flask(__name__)
 BASELINE_SITUATIONS_DIR = Path(__file__).resolve().parents[2] / "data" / "baseline_situations_input"
 DEFAULT_SETTINGS_FILE = Path(__file__).resolve().parent / "settings" / "encounter_settings.json"
+MAX_JSON_BYTES = int(os.getenv("TRAFFICGEN_MAX_JSON_BYTES", str(1024 * 1024)))
+ENFORCE_HTTPS = os.getenv("TRAFFICGEN_ENFORCE_HTTPS", "1").lower() in {"1", "true"}
+app.config["MAX_CONTENT_LENGTH"] = MAX_JSON_BYTES
+
+
+def _is_https_request() -> bool:
+    forwarded_proto = request.headers.get("X-Forwarded-Proto", "").lower()
+    return request.is_secure or forwarded_proto == "https"
+
+
+@app.before_request
+def enforce_https() -> ResponseReturnValue | None:
+    """Reject non-HTTPS requests when HTTPS enforcement is enabled."""
+    if not ENFORCE_HTTPS:
+        return None
+
+    if _is_https_request():
+        return None
+
+    return jsonify({"error": "HTTPS is required for this API"}), 426
+
+
+@app.errorhandler(RequestEntityTooLarge)
+def handle_request_too_large(_: RequestEntityTooLarge) -> ResponseReturnValue:
+    """Return JSON error for oversized request payloads."""
+    return (
+        jsonify({"error": f"Request body exceeds maximum allowed size ({MAX_JSON_BYTES} bytes)."}),
+        413,
+    )
+
+
+@app.after_request
+def add_security_headers(response: Response) -> Response:
+    """Add minimal security headers for server-to-server API use."""
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["Pragma"] = "no-cache"
+
+    if _is_https_request():
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+
+    return response
 
 
 @app.route("/api/health", methods=["GET"])
@@ -88,4 +130,4 @@ def get_default_settings() -> ResponseReturnValue:
 
 
 if __name__ == "__main__":
-    app.run(debug=os.getenv("FLASK_DEBUG", "").lower() in {"1", "true", "yes"})
+    app.run(debug=os.getenv("FLASK_DEBUG", "").lower() in {"1", "true"})
