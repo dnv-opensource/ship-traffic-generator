@@ -5,7 +5,7 @@ import os
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
-from flask import Flask, Response, jsonify, request
+from flask import Flask, Response, jsonify, redirect, request
 from flask.typing import ResponseReturnValue
 from pydantic import ValidationError
 from werkzeug.exceptions import RequestEntityTooLarge
@@ -28,14 +28,15 @@ def _is_https_request() -> bool:
 
 @app.before_request
 def enforce_https() -> ResponseReturnValue | None:
-    """Reject non-HTTPS requests when HTTPS enforcement is enabled."""
+    """Redirect non-HTTPS requests to HTTPS when enforcement is enabled."""
     if not ENFORCE_HTTPS:
         return None
 
     if _is_https_request():
         return None
 
-    return jsonify({"error": "HTTPS is required for this API"}), 426
+    secure_url = request.url.replace("http://", "https://", 1)
+    return redirect(secure_url, code=308)
 
 
 @app.errorhandler(RequestEntityTooLarge)
