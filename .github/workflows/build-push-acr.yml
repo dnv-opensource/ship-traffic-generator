@@ -21,7 +21,7 @@ env:
   IMAGE_NAME: ship-traffic-generator
 
 jobs:
-  build-and-optional-push:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,7 +39,7 @@ jobs:
           echo "image=${{ secrets.ACR_LOGIN_SERVER }}/${IMAGE_NAME}:${IMAGE_TAG}" >> $GITHUB_OUTPUT
 
       - name: Build only (test mode)
-        if: ${{ github.ref != 'refs/heads/main' && !(github.event_name == 'workflow_dispatch' && inputs.push_image) }}
+        if: ${{inputs.push_image}}
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -48,7 +48,7 @@ jobs:
           tags: ${{ steps.meta.outputs.image }}
 
       - name: Azure login (OIDC)
-        if: ${{ github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && inputs.push_image) }}
+        if: ${{inputs.push_image}}
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -56,11 +56,11 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: ACR login
-        if: ${{ github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && inputs.push_image) }}
+        if: ${{inputs.push_image}}
         run: az acr login --name ${{ secrets.ACR_NAME }}
 
       - name: Build and push
-        if: ${{ github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && inputs.push_image) }}
+        if: ${{inputs.push_image}}
         uses: docker/build-push-action@v6
         with:
           context: .
