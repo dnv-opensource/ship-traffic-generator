@@ -2,12 +2,6 @@ name: Build and Push to ACR
 
 on:
   workflow_dispatch:
-    inputs:
-      push_image:
-        description: "Push image to ACR (false = build test only)"
-        required: true
-        default: true
-        type: boolean
   push:
     branches:
       - "main"
@@ -38,17 +32,7 @@ jobs:
           echo "image_tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
           echo "image=${{ secrets.ACR_LOGIN_SERVER }}/${IMAGE_NAME}:${IMAGE_TAG}" >> $GITHUB_OUTPUT
 
-      - name: Build only (test mode)
-        if: ${{inputs.push_image}}
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          tags: ${{ steps.meta.outputs.image }}
-
       - name: Azure login (OIDC)
-        if: ${{inputs.push_image}}
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -56,11 +40,9 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: ACR login
-        if: ${{inputs.push_image}}
         run: az acr login --name ${{ secrets.ACR_NAME }}
 
       - name: Build and push
-        if: ${{inputs.push_image}}
         uses: docker/build-push-action@v6
         with:
           context: .
