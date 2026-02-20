@@ -7,6 +7,12 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ### Changed
 
+## [0.8.5] - 2026-02-20
+
+### Changed
+
+* Add basic REST API and docker build for easier integration
+
 ## [0.8.4] - 2025-11-26
 
 ### Changed
