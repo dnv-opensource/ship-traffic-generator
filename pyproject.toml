@@ -108,9 +108,6 @@ dev = [
 trafficgen = "trafficgen.cli:main"
 
 [tool.mypy]
-plugins = [
-    "numpy.typing.mypy_plugin",
-]
 mypy_path = "stubs"
 files = [
     "src",
