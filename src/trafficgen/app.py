@@ -17,7 +17,9 @@ app = Flask(__name__)
 BASELINE_SITUATIONS_DIR = Path(__file__).resolve().parents[2] / "data" / "baseline_situations_input"
 DEFAULT_SETTINGS_FILE = Path(__file__).resolve().parent / "settings" / "encounter_settings.json"
 MAX_JSON_BYTES = int(os.getenv("TRAFFICGEN_MAX_JSON_BYTES", str(1024 * 1024)))
-ENFORCE_HTTPS = os.getenv("TRAFFICGEN_ENFORCE_HTTPS", "1").lower() in {"1", "true"}
+TLS_CERT_FILE = os.getenv("TRAFFICGEN_TLS_CERT_FILE", "")
+TLS_KEY_FILE = os.getenv("TRAFFICGEN_TLS_KEY_FILE", "")
+TLS_ENABLED = os.getenv("TRAFFICGEN_ENFORCE_HTTPS")
 app.config["MAX_CONTENT_LENGTH"] = MAX_JSON_BYTES
 
 
@@ -29,7 +31,7 @@ def _is_https_request() -> bool:
 @app.before_request
 def enforce_https() -> ResponseReturnValue | None:
     """Redirect non-HTTPS requests to HTTPS when enforcement is enabled."""
-    if not ENFORCE_HTTPS:
+    if not TLS_ENABLED:
         return None
 
     if _is_https_request():

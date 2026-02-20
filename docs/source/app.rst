@@ -32,12 +32,15 @@ Run the API with TLS:
 
 .. code-block:: sh
 
-   uv run flask --app src/trafficgen/app.py run --host 0.0.0.0 --port 5000 --cert cert.pem --key key.pem
+   uv run flask --app src/trafficgen/app.py run --host 0.0.0.0 --port 5000
 
+To add TLS to the API, set the following environment variables (e.g., in a .env file):
 
-If you use a self-signed certificate that is not trusted by your client,
-you may need to add your certificate to trust store (recommended) or use
-client-specific insecure flags for local testing only.
+.. code-block:: env
+
+   TRAFFICGEN_ENFORCE_HTTPS=true
+   TRAFFICGEN_TLS_CERT_FILE=cert.pem
+   TRAFFICGEN_TLS_KEY_FILE=key.pem
 
 OpenAPI specification
 ---------------------

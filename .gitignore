@@ -113,6 +113,7 @@ ENV/
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# Local certs
-cert.pem
-key.pem
+# Localhost certs
+*.pem
+*.crt
+*.key
