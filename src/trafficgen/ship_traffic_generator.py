@@ -9,6 +9,9 @@ from trafficgen.encounter import (
     generate_encounter,
 )
 from trafficgen.read_files import (
+    convert_settings_data_from_maritime_to_si_units,
+    convert_ship_data_from_maritime_to_si_units,
+    convert_situation_data_from_maritime_to_si_units,
     read_encounter_settings_file,
     read_own_ship_static_file,
     read_situation_files,
@@ -57,25 +60,58 @@ def _validate_ownship_coordinate(ownship_coordinate: str | None) -> tuple[str, s
     return lat_str, lon_str
 
 
+def _resolve_own_ship_static(own_ship_input: Path | ShipStatic) -> ShipStatic:
+    if isinstance(own_ship_input, Path):
+        return read_own_ship_static_file(own_ship_input)
+
+    return convert_ship_data_from_maritime_to_si_units(own_ship_input)
+
+
+def _resolve_target_ships_static(target_ships_input: Path | list[ShipStatic]) -> list[ShipStatic]:
+    if isinstance(target_ships_input, Path):
+        return read_target_ship_static_files(target_ships_input)
+
+    return [convert_ship_data_from_maritime_to_si_units(target_ship_data) for target_ship_data in target_ships_input]
+
+
+def _resolve_encounter_settings(settings_input: Path | EncounterSettings) -> EncounterSettings:
+    if isinstance(settings_input, Path):
+        return read_encounter_settings_file(settings_input)
+
+    return convert_settings_data_from_maritime_to_si_units(settings_input)
+
+
+def _resolve_situation_inputs(situations_input: Path | SituationInput | list[SituationInput]) -> list[SituationInput]:
+    if isinstance(situations_input, Path):
+        return read_situation_files(situations_input)
+
+    if isinstance(situations_input, list):
+        raw_situations: list[SituationInput] = situations_input
+    else:
+        raw_situations = [situations_input]
+
+    return [convert_situation_data_from_maritime_to_si_units(raw_situation) for raw_situation in raw_situations]
+
+
 def generate_traffic_situations(
-    situation_folder: Path,
-    own_ship_file: Path,
-    target_ship_folder: Path,
-    settings_file: Path,
+    situations_data: Path | SituationInput | list[SituationInput],
+    own_ship_data: Path | ShipStatic,
+    target_ships_data: Path | list[ShipStatic],
+    settings_data: Path | EncounterSettings,
     ownship_coordinate: str | None = None,
 ) -> list[TrafficSituation]:
     """Generate traffic situations based on the provided input files.
 
     Parameters
     ----------
-    situation_folder : Path
-        Path to the folder containing situation files.
-    own_ship_file : Path
-        Path to the file containing own ship static data.
-    target_ship_folder : Path
-        Path to the folder containing target ship static files.
-    settings_file : Path
-        Path to the file containing encounter settings.
+    situations_data : Path | SituationInput | list[SituationInput]
+        Path to situation file/folder, or one/many situation JSON payloads.
+    own_ship_data : Path | ShipStatic
+        Path to own ship static file, or own ship static JSON payload.
+    target_ships_data : Path | list[ShipStatic]
+        Path to target ship static folder, or list of target ship static JSON payloads.
+    settings_data : Path | EncounterSettings
+        Path to encounter settings file, or encounter settings JSON payload.
     ownship_coordinate : str | None
         The ownship start coordinate as 'lat,lon' in decimal degrees.
 
@@ -84,10 +120,10 @@ def generate_traffic_situations(
     list[TrafficSituation]
         A list of generated traffic situations.
     """
-    own_ship_static: ShipStatic = read_own_ship_static_file(own_ship_file)
-    target_ships_static: list[ShipStatic] = read_target_ship_static_files(target_ship_folder)
-    encounter_settings: EncounterSettings = read_encounter_settings_file(settings_file)
-    desired_traffic_situations: list[SituationInput] = read_situation_files(situation_folder)
+    own_ship_static: ShipStatic = _resolve_own_ship_static(own_ship_data)
+    target_ships_static: list[ShipStatic] = _resolve_target_ships_static(target_ships_data)
+    encounter_settings: EncounterSettings = _resolve_encounter_settings(settings_data)
+    desired_traffic_situations: list[SituationInput] = _resolve_situation_inputs(situations_data)
     traffic_situations: list[TrafficSituation] = []
 
     # if a (valid) ownship coordinate is provided on the commandline (lat,lon),

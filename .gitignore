@@ -88,6 +88,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+.env
 
 # Spyder project settings
 .spyderproject
@@ -107,8 +108,11 @@ ENV/
 
 # VS Code Settings
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+
+# Local certs
+cert.pem
+key.pem

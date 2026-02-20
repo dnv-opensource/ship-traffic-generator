@@ -21,5 +21,6 @@
       read_generated_situation_files
       read_own_ship_static_file
       read_situation_files
+      read_situation_from_file
       read_target_ship_static_files
    
