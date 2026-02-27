@@ -3,9 +3,6 @@ name: Build and Push to ACR
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "main"
-      - "rest-api-stc-integration"
 
 permissions:
   id-token: write
