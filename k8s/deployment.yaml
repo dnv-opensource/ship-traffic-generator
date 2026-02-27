@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trafficgen
+  labels:
+    app: trafficgen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trafficgen
+  template:
+    metadata:
+      labels:
+        app: trafficgen
+    spec:
+      containers:
+        - name: trafficgen
+          image: REPLACE_WITH_YOUR_IMAGE:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: TRAFFICGEN_MAX_JSON_BYTES
+              value: "1048576"
+            - name: TRAFFICGEN_ENFORCE_HTTPS
+              value: ""
+            - name: TRAFFICGEN_TLS_CERT_FILE
+              value: /tls/tls.crt
+            - name: TRAFFICGEN_TLS_KEY_FILE
+              value: /tls/tls.key
+          volumeMounts:
+            - name: tls-certs
+              mountPath: /tls
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: tls-certs
+          secret:
+            secretName: trafficgen-tls
+            optional: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trafficgen
+  labels:
+    app: trafficgen
+spec:
+  type: ClusterIP
+  selector:
+    app: trafficgen
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000
