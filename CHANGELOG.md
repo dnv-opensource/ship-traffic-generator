@@ -48,6 +48,33 @@ VS Code Settings: (Recommended extensions): Added 'ms-python.vscode-python-envs'
 * .sourcery.yaml: Updated the lowest Python version the project supports to '3.11'
 
 
+### Dependencies
+* .pre-commit-config.yaml: Updated rev of pre-commit-hooks to v6.0.0
+* .pre-commit-config.yaml: Updated rev of ruff-pre-commit to v0.15.1
+* Updated to click>=8.3
+* Updated to dictio>=0.4.3
+* Updated to folium>=0.20.0
+* Updated to furo>=2025.12
+* Updated to jupyter>=1.1.1
+* Updated to matplotlib>=3.10
+* Updated to mypy>=1.19.1
+* Updated to myst-parser>=5.0
+* Updated to numpy>=2.3
+* Updated to pandas-stubs>=3.0
+* Updated to pre-commit>=4.5
+* Updated to pydantic>=2.12
+* Updated to pyproj>=3.7
+* Updated to pyright>=1.1.408
+* Updated to pytest>=9.0
+* Updated to pytest-cov>=7.0
+* Updated to ruff>=0.15.1
+* Updated to sourcery>=1.43.0
+* Updated to sphinx>=9.0
+* Updated to sphinx-argparse-cli>=1.20.1
+* Updated to sphinx-autodoc-typehints>=3.6
+* Updated to sphinxcontrib-mermaid>=2.0
+
+
 ## [0.8.5] - 2026-02-20
 
 ### Changed
