@@ -73,6 +73,11 @@ VS Code Settings: (Recommended extensions): Added 'ms-python.vscode-python-envs'
 * Updated to sphinx-argparse-cli>=1.20.1
 * Updated to sphinx-autodoc-typehints>=3.6
 * Updated to sphinxcontrib-mermaid>=2.0
+* GitHub Workflows:
+  * Updated 'checkout' action to v5
+  * Updated 'download-artifact' action to v5
+  * Updated 'setup-uv' action to v7
+  * Updated 'upload-artifact' action to v5
 
 
 ## [0.8.5] - 2026-02-20
