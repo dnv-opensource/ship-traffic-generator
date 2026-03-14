@@ -26,7 +26,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -56,7 +56,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -88,7 +88,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -118,7 +118,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -135,7 +135,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -157,7 +157,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -187,7 +187,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -204,7 +204,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -229,7 +229,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -261,7 +261,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -291,7 +291,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -308,7 +308,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -330,7 +330,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -360,7 +360,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -377,7 +377,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -407,7 +407,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -437,7 +437,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -469,7 +469,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -499,7 +499,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -516,7 +516,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -538,7 +538,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -568,7 +568,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -585,7 +585,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -610,7 +610,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -642,7 +642,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -672,7 +672,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -689,7 +689,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -711,7 +711,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
  "{0}- name: Upload build artifacts`r`n{0}  uses: actions/upload-artifact@v" -f name: Build Package
 
@@ -741,7 +741,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
@@ -758,7 +758,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
       - name: Build source distribution and wheel
         run: uv build
-      - name: Run twine check
+      - name: Check build artifacts
         run: uvx twine check --strict dist/*
       - uses: actions/upload-artifact@v4
         with:
