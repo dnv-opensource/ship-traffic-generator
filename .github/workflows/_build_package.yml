@@ -58,7 +58,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
            "name: dist`r`n{0}" -f name: Build Package
 
@@ -120,7 +120,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -137,7 +137,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -189,7 +189,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -206,7 +206,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -231,7 +231,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
            "name: dist`r`n{0}" -f name: Build Package
 
@@ -293,7 +293,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -310,7 +310,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -362,7 +362,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -379,7 +379,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -439,7 +439,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
            "name: dist`r`n{0}" -f name: Build Package
 
@@ -501,7 +501,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -518,7 +518,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -570,7 +570,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -587,7 +587,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -612,7 +612,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
            "name: dist`r`n{0}" -f name: Build Package
 
@@ -674,7 +674,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -691,7 +691,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -743,7 +743,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
@@ -760,7 +760,7 @@ jobs:
         run: uv build
       - name: Check build artifacts
         run: uvx twine check --strict dist/*
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           path: |
             dist/*.tar.gz
