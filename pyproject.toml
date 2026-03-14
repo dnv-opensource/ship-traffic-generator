@@ -103,7 +103,7 @@ dev = [
     "myst-parser>=5.0",
     "furo>=2025.12",
     "jupyter>=1.1.1",
-    "pandas-stubs>=2.2",
+    "pandas-stubs>=3.0",
     "pydantic>=2.12",
 ]
 
