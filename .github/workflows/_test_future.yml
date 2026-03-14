@@ -5,7 +5,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -18,7 +18,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -37,7 +37,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -85,7 +85,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -98,7 +98,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
@@ -117,7 +117,7 @@ on: workflow_call
 
 jobs:
   test313:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }} (experimental)
+    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
