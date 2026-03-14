@@ -117,7 +117,7 @@ files = [
     "tests",
 ]
 exclude = [
-    "^src/folder_to_be_excluded/",
+    "src/folder_to_be_excluded/",
 ]
 check_untyped_defs = true
 disable_error_code = [
