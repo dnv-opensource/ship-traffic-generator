@@ -102,7 +102,7 @@ dev = [
     "sphinx-click>=6.0.0",
     "myst-parser>=4.0",
     "furo>=2024.8",
-    "jupyter>=1.1",
+    "jupyter>=1.1.1",
     "pandas-stubs>=2.2",
     "pydantic>=2.5",
 ]
