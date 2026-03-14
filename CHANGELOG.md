@@ -44,6 +44,8 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
   * VS Code Settings: (Recommended extensions): Removed 'njqdev.vscode-python-typehint' (Python Type Hint). Not maintained since 1 year, and the functionality is now covered by GitHub Copilot.
 VS Code Settings: (Recommended extensions): Added 'ms-python.debugpy' (Python Debugger).
 VS Code Settings: (Recommended extensions): Added 'ms-python.vscode-python-envs' (Python Environments).
+* .pre-commit-config.yaml: Updated id of ruff to ruff-check
+* .sourcery.yaml: Updated the lowest Python version the project supports to '3.11'
 
 
 ## [0.8.5] - 2026-02-20
