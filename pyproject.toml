@@ -89,7 +89,7 @@ Changelog = "https://github.com/dnv-innersource/ship-traffic-generator/blob/main
 [dependency-groups]
 dev = [
     "pytest>=8.3",
-    "pytest-cov>=6.0",
+    "pytest-cov>=7.0",
     "ruff>=0.15.1",
     "pyright>=1.1.390",
     "mypy>=1.13",
