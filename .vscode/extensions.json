@@ -5,7 +5,7 @@
     "recommendations": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "visualstudioexptteam.vscodeintellicode",
+        "github.copilot-chat",
         "njqdev.vscode-python-typehint",
         "charliermarsh.ruff",
         "sourcery.sourcery",
