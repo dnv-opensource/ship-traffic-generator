@@ -37,6 +37,8 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
     In the majority of cases, the newer Python version will anyhow be backward-compatible. And in the rare case where your package would really not work with a newer Python version,
     users can at least find a solution manually to resolve the conflict, e.g. by pinning your package to the last version compatible with the environment they install it in.
     That way, we ensure it remains _possible_ for users to find a solution, instead of rendering it impossible forever.
+* Sphinx Documentation:
+  * Sphinx conf.py: Updated year in copyright statement to 2026
 
 
 ## [0.8.5] - 2026-02-20
