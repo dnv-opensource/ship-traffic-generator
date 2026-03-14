@@ -27,7 +27,7 @@ jobs:
           - runner: ubuntu-latest
           - runner: windows-latest
         python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
@@ -46,7 +46,7 @@ jobs:
           - runner: ubuntu-latest
           - runner: windows-latest
         python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
       - uses: actions/checkout@v4
@@ -75,7 +75,7 @@ jobs:
           pytest --cov
 .Groups['os'].Captures.Value -join ', ') + "]`r`n"
             python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
@@ -107,7 +107,7 @@ jobs:
           - runner: ubuntu-latest
           - runner: windows-latest
         python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
@@ -126,7 +126,7 @@ jobs:
           - runner: ubuntu-latest
           - runner: windows-latest
         python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
       - uses: actions/checkout@v4
@@ -155,7 +155,7 @@ jobs:
           pytest --cov
 .Groups['os'].Captures.Value -join ', ') + "]`r`n"
             python:
-          - version: '3.13.0-alpha - 3.13.0'
+          - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.13'
     steps:
       - uses: actions/checkout@v4
