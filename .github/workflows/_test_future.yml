@@ -1,5 +1,5 @@
 name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -12,7 +12,7 @@ jobs:
       matrix:
         
         "os: [" + (name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -28,10 +28,10 @@ jobs:
           - runner: windows-latest
         python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -47,7 +47,7 @@ jobs:
           - runner: windows-latest
         python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -76,10 +76,10 @@ jobs:
 .Groups['os'].Captures.Value -join ', ') + "]`r`n"
             python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -92,7 +92,7 @@ jobs:
       matrix:
         
         "os: [" + (name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -108,10 +108,10 @@ jobs:
           - runner: windows-latest
         python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
  "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
-# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+# Test also with Python 3.15 (experimental; workflow will not fail on error.)
 
 on: workflow_call
 
@@ -127,7 +127,7 @@ jobs:
           - runner: windows-latest
         python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -156,7 +156,7 @@ jobs:
 .Groups['os'].Captures.Value -join ', ') + "]`r`n"
             python:
           - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.13'
+            uvpy: '3.15'
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
