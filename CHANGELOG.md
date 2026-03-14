@@ -39,6 +39,11 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
     That way, we ensure it remains _possible_ for users to find a solution, instead of rendering it impossible forever.
 * Sphinx Documentation:
   * Sphinx conf.py: Updated year in copyright statement to 2026
+* VS Code Settings:
+  * VS Code settings: (Recommended extensions): Removed deprecated IntelliCode extension and replaced it by GitHub Copilot Chat as recommended replacement.
+  * VS Code Settings: (Recommended extensions): Removed 'njqdev.vscode-python-typehint' (Python Type Hint). Not maintained since 1 year, and the functionality is now covered by GitHub Copilot.
+VS Code Settings: (Recommended extensions): Added 'ms-python.debugpy' (Python Debugger).
+VS Code Settings: (Recommended extensions): Added 'ms-python.vscode-python-envs' (Python Environments).
 
 
 ## [0.8.5] - 2026-02-20
