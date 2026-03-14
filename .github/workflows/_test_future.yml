@@ -10,6 +10,19 @@ jobs:
     runs-on: ${{ matrix.platform.runner }}
     strategy:
       matrix:
+        
+        "os: [" + (name: Unit Tests (py313)
+# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+
+on: workflow_call
+
+jobs:
+  test313:
+    name: Test on ${{matrix.python.version}}-${{matrix.platform.runner}} (experimental)
+    continue-on-error: true
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
         platform:
           - runner: ubuntu-latest
           - runner: windows-latest
@@ -33,6 +46,115 @@ jobs:
           - runner: ubuntu-latest
           - runner: windows-latest
         python:
+          - version: '3.13.0-alpha - 3.13.0'
+            uvpy: '3.13'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install the project
+        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
+      - name: Run pytest
+        run: >
+          uv run --with pytest --with pytest-cov
+          pytest --cov
+.Groups['indent'].Value 4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install the project
+        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
+      - name: Run pytest
+        run: >
+          uv run --with pytest --with pytest-cov
+          pytest --cov
+.Groups['os'].Captures.Value -join ', ') + "]`r`n"
+            python:
+          - version: '3.13.0-alpha - 3.13.0'
+            uvpy: '3.13'
+    steps:
+ "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
+# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+
+on: workflow_call
+
+jobs:
+  test313:
+    name: Test on ${{matrix.python.version}}-${{matrix.platform.runner}} (experimental)
+    continue-on-error: true
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        
+        "os: [" + (name: Unit Tests (py313)
+# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+
+on: workflow_call
+
+jobs:
+  test313:
+    name: Test on ${{matrix.python.version}}-${{matrix.platform.runner}} (experimental)
+    continue-on-error: true
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        platform:
+          - runner: ubuntu-latest
+          - runner: windows-latest
+        python:
+          - version: '3.13.0-alpha - 3.13.0'
+            uvpy: '3.13'
+    steps:
+ "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py313)
+# Test also with Python 3.13 (experimental; workflow will not fail on error.)
+
+on: workflow_call
+
+jobs:
+  test313:
+    name: Test on ${{matrix.python.version}}-${{matrix.platform.runner}} (experimental)
+    continue-on-error: true
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      matrix:
+        platform:
+          - runner: ubuntu-latest
+          - runner: windows-latest
+        python:
+          - version: '3.13.0-alpha - 3.13.0'
+            uvpy: '3.13'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install the project
+        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
+      - name: Run pytest
+        run: >
+          uv run --with pytest --with pytest-cov
+          pytest --cov
+.Groups['indent'].Value 4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Install the project
+        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
+      - name: Run pytest
+        run: >
+          uv run --with pytest --with pytest-cov
+          pytest --cov
+.Groups['os'].Captures.Value -join ', ') + "]`r`n"
+            python:
           - version: '3.13.0-alpha - 3.13.0'
             uvpy: '3.13'
     steps:
