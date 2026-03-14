@@ -18,7 +18,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync -U
       - name: Run ruff format
         run: uv run ruff format --diff
 
@@ -37,7 +37,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync -U
       - name: Run ruff check
         run: uv run ruff check --diff
 
@@ -56,7 +56,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync -U
       - name: Run pyright
         run: uv run pyright
 
@@ -75,6 +75,6 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync -U
       - name: Run mypy
         run: uv run mypy

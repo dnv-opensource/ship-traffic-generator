@@ -31,7 +31,7 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync -U
       - name: Print debugging information
         run: |
           echo "github.ref:" ${{github.ref}}
