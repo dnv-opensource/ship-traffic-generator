@@ -23,10 +23,6 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-      - name: Install Python ${{ matrix.python.version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python.version }}
       - name: Install the project
         run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
       - name: Run pytest

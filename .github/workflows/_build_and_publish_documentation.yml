@@ -26,10 +26,6 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
       - name: Install the project
         run: uv sync -U
       - name: Print debugging information
