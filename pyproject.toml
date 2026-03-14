@@ -63,7 +63,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "dictIO>=0.4.0",
+    "dictIO>=0.4.3",
     "numpy>=1.25",
     "pyproj>=3.7.0",
     "matplotlib>=3.10",
