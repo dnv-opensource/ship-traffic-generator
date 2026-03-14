@@ -71,7 +71,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -147,7 +147,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -176,7 +176,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -264,7 +264,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -340,7 +340,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -369,7 +369,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -395,7 +395,7 @@ jobs:
           pytest --cov
 .Groups['version'].Captures.Value -join ', ') + "]`r`n"
         steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -468,7 +468,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -544,7 +544,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -573,7 +573,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -672,7 +672,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -748,7 +748,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -777,7 +777,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -865,7 +865,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -941,7 +941,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -970,7 +970,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -996,7 +996,7 @@ jobs:
           pytest --cov
 .Groups['version'].Captures.Value -join ', ') + "]`r`n"
         steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -1069,7 +1069,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -1145,7 +1145,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -1174,7 +1174,7 @@ jobs:
           - version: '3.11'
           - version: '3.12'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
@@ -1200,7 +1200,7 @@ jobs:
           pytest --cov
 .Groups['version'].Captures.Value -join ', ') + "]`r`n"
         steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v2
         with:
