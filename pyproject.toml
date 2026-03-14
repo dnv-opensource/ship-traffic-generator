@@ -72,7 +72,7 @@ dependencies = [
     "click>=8.1",
     "click-log>=0.4.0",
     "flask>=3.1.2",
-    "pydantic>=2.12.5",
+    "pydantic>=2.12",
     "python-dotenv>=1.2.1",
 ]
 
@@ -104,7 +104,7 @@ dev = [
     "furo>=2024.8",
     "jupyter>=1.1.1",
     "pandas-stubs>=2.2",
-    "pydantic>=2.5",
+    "pydantic>=2.12",
 ]
 
 [project.scripts]
