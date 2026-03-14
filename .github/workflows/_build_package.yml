@@ -15,9 +15,6 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-      - uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
       - name: Build source distribution and wheel
         run: uv build
       - name: Run twine check
