@@ -6,6 +6,23 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ## [Unreleased]
 
 ### Changed
+* GitHub Workflows:
+  * _test_future.yml: Updated name of test_future job to 'test315'
+  * _test_future.yml: Updated Python specifier in comment to 3.15
+  * _test_future.yml: Updated Python specifier in workflow name to py315
+  * _test_future.yml: Updated Python version in test_future to 3.15.0-alpha - 3.15.0
+  * Added 'name: Checkout code' to uses of 'actions/checkout', for better readability and consistency across workflow files.
+  * Added 'name: Download build artifacts' to uses of 'actions/download-artifact', for better readability and consistency across workflow files.
+  * Added 'name: Publish to PyPI' to uses of 'pypa/gh-action-pypi-publish', for better readability and consistency across workflow files.
+  * Added 'name: Upload build artifacts' to uses of 'actions/upload-artifact', for better readability and consistency across workflow files.
+  * Changed 'uv sync --upgrade' to 'uv sync -U'
+  * Ensured that actions 'upload-artifact' and 'download-artifact' uniformly specify 'dist' as (file)name for the artifact uploaded (or downloaded, respectively), for consistency across workflow files.
+  * pull_request_to_main.yml and nightly_build.yml: Added 'workflow_dispatch:' in selected workflows to allow manual trigger of the workflow.
+  * Removed redundant 'Set up Python' steps (no longer needed, as 'uv sync' will automatically install Python if not present).
+  * Replaced 'Build source distribution and wheel' with 'Build source distribution and wheels' (plural) in workflow step names.
+  * Replaced 'Run twine check' with 'Check build artifacts' in workflow step names, to better reflect the purpose of the step.
+  * Updated the syntax used for the OS and Python matrix in test workflows.
+
 
 ## [0.8.5] - 2026-02-20
 
