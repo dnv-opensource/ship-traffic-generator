@@ -4,7 +4,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -15,7 +15,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -30,7 +30,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -41,7 +41,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -59,7 +59,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -78,7 +78,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -90,7 +90,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -106,7 +106,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -117,7 +117,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -135,7 +135,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -154,7 +154,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -166,7 +166,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -183,7 +183,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -195,7 +195,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -208,7 +208,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -223,7 +223,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -234,7 +234,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -252,7 +252,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -271,7 +271,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -283,7 +283,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -299,7 +299,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -310,7 +310,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -328,7 +328,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -347,7 +347,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -359,7 +359,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -376,7 +376,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -388,7 +388,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -402,7 +402,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -414,7 +414,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -427,7 +427,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -438,7 +438,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -456,7 +456,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -475,7 +475,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -487,7 +487,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -503,7 +503,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -514,7 +514,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -532,7 +532,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -551,7 +551,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -563,7 +563,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -580,7 +580,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -592,7 +592,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -605,7 +605,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -616,7 +616,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -631,7 +631,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -642,7 +642,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -660,7 +660,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -679,7 +679,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -691,7 +691,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -707,7 +707,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -718,7 +718,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -736,7 +736,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -755,7 +755,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -767,7 +767,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -784,7 +784,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -796,7 +796,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -809,7 +809,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -824,7 +824,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -835,7 +835,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -853,7 +853,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -872,7 +872,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -884,7 +884,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -900,7 +900,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -911,7 +911,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -929,7 +929,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -948,7 +948,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -960,7 +960,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -977,7 +977,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -989,7 +989,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1003,7 +1003,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1015,7 +1015,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1028,7 +1028,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1039,7 +1039,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1057,7 +1057,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1076,7 +1076,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1088,7 +1088,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1104,7 +1104,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1115,7 +1115,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1133,7 +1133,7 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{ matrix.os }}
+    name: Test on ${{ matrix.python }}-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -1152,7 +1152,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1164,7 +1164,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1181,7 +1181,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1193,7 +1193,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1207,7 +1207,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
@@ -1219,7 +1219,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
