@@ -9,173 +9,31 @@ jobs:
     continue-on-error: true
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
-        
-        "os: [" + (name: Unit Tests (py315)
-# Test also with Python 3.15 (experimental; workflow will not fail on error.)
-
-on: workflow_call
-
-jobs:
-  test315:
-    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-latest
-          - runner: windows-latest
+        os: [ubuntu-latest, windows-latest]
         python:
           - version: '3.15.0-alpha - 3.15.0'
             uvpy: '3.15'
     steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py315)
-# Test also with Python 3.15 (experimental; workflow will not fail on error.)
-
-on: workflow_call
-
-jobs:
-  test315:
-    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-latest
-          - runner: windows-latest
-        python:
-          - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.15'
-    steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
-      - name: Run pytest
-        run: >
-          uv run --with pytest --with pytest-cov
-          pytest --cov
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
-      - name: Run pytest
-        run: >
-          uv run --with pytest --with pytest-cov
-          pytest --cov
-.Groups['os'].Captures.Value -join ', ') + "]`r`n"
-            python:
-          - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.15'
-    steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py315)
-# Test also with Python 3.15 (experimental; workflow will not fail on error.)
-
-on: workflow_call
-
-jobs:
-  test315:
-    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        
-        "os: [" + (name: Unit Tests (py315)
-# Test also with Python 3.15 (experimental; workflow will not fail on error.)
-
-on: workflow_call
-
-jobs:
-  test315:
-    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-latest
-          - runner: windows-latest
-        python:
-          - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.15'
-    steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Unit Tests (py315)
-# Test also with Python 3.15 (experimental; workflow will not fail on error.)
-
-on: workflow_call
-
-jobs:
-  test315:
-    name: Test (Python ${{ matrix.python.version }}, ${{ matrix.os }}) (experimental)
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        platform:
-          - runner: ubuntu-latest
-          - runner: windows-latest
-        python:
-          - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.15'
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
-      - name: Run pytest
-        run: >
-          uv run --with pytest --with pytest-cov
-          pytest --cov
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
-      - name: Run pytest
-        run: >
-          uv run --with pytest --with pytest-cov
-          pytest --cov
-.Groups['os'].Captures.Value -join ', ') + "]`r`n"
-            python:
-          - version: '3.15.0-alpha - 3.15.0'
-            uvpy: '3.15'
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
-      - name: Run pytest
-        run: >
-          uv run --with pytest --with pytest-cov
-          pytest --cov
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
+      - name: Remove Python upper version constraint from pyproject.toml
+        shell: pwsh
+        run: |
+          $File = Get-Item pyproject.toml
+          $Content = Get-Content $File -Raw
+          [regex]$RequiresPythonPattern = '(?<!-)(\brequires-python = "\s?[>=]{1,2}\s?\d+\.\d+\.?\d*\.?[\d\w]*\s?)(,\s?[<=]{1,2}\s?\d+\.?\d*\.?\d*\.?[\d\w]*\s?)?(")'
+          if ($Content -match $RequiresPythonPattern) {
+              $RequiresPythonFound = $Matches[0]
+              $RequiresPythonReplacement = $Matches[1] + $Matches[3]
+              $Content -Replace $RequiresPythonFound, $RequiresPythonReplacement | Set-Content $File -NoNewline
+          }
       - name: Install the project
         run: uv sync -p ${{ matrix.python.uvpy }} -U --no-dev
       - name: Run pytest

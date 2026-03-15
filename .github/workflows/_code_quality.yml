@@ -7,21 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     name: ruff format
     steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Code Quality
-
-on: workflow_call
-
-jobs:
-  ruff_format:
-    runs-on: ubuntu-latest
-    name: ruff format
-    steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
         run: uv sync -U
       - name: Run ruff format
@@ -31,12 +23,13 @@ jobs:
     runs-on: ubuntu-latest
     name: ruff check
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
         run: uv sync -U
       - name: Run ruff check
@@ -46,12 +39,13 @@ jobs:
     runs-on: ubuntu-latest
     name: pyright
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
         run: uv sync -U
       - name: Run pyright
@@ -61,259 +55,13 @@ jobs:
     runs-on: ubuntu-latest
     name: mypy
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run mypy
-        run: uv run mypy
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff format
-        run: uv run ruff format --diff
-
-  ruff_check:
-    runs-on: ubuntu-latest
-    name: ruff check
-    steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Code Quality
-
-on: workflow_call
-
-jobs:
-  ruff_format:
-    runs-on: ubuntu-latest
-    name: ruff format
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff format
-        run: uv run ruff format --diff
-
-  ruff_check:
-    runs-on: ubuntu-latest
-    name: ruff check
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff check
-        run: uv run ruff check --diff
-
-  pyright:
-    runs-on: ubuntu-latest
-    name: pyright
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run pyright
-        run: uv run pyright
-
-  mypy:
-    runs-on: ubuntu-latest
-    name: mypy
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run mypy
-        run: uv run mypy
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff check
-        run: uv run ruff check --diff
-
-  pyright:
-    runs-on: ubuntu-latest
-    name: pyright
-    steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Code Quality
-
-on: workflow_call
-
-jobs:
-  ruff_format:
-    runs-on: ubuntu-latest
-    name: ruff format
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff format
-        run: uv run ruff format --diff
-
-  ruff_check:
-    runs-on: ubuntu-latest
-    name: ruff check
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff check
-        run: uv run ruff check --diff
-
-  pyright:
-    runs-on: ubuntu-latest
-    name: pyright
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run pyright
-        run: uv run pyright
-
-  mypy:
-    runs-on: ubuntu-latest
-    name: mypy
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run mypy
-        run: uv run mypy
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run pyright
-        run: uv run pyright
-
-  mypy:
-    runs-on: ubuntu-latest
-    name: mypy
-    steps:
- "{0}- name: Checkout code`r`n{0}  uses: actions/checkout@v" -f name: Code Quality
-
-on: workflow_call
-
-jobs:
-  ruff_format:
-    runs-on: ubuntu-latest
-    name: ruff format
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff format
-        run: uv run ruff format --diff
-
-  ruff_check:
-    runs-on: ubuntu-latest
-    name: ruff check
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run ruff check
-        run: uv run ruff check --diff
-
-  pyright:
-    runs-on: ubuntu-latest
-    name: pyright
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run pyright
-        run: uv run pyright
-
-  mypy:
-    runs-on: ubuntu-latest
-    name: mypy
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install the project
-        run: uv sync -U
-      - name: Run mypy
-        run: uv run mypy
-.Groups['indent'].Value 4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
         run: uv sync -U
       - name: Run mypy

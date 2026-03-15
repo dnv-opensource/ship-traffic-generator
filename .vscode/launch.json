@@ -6,22 +6,28 @@
     "configurations": [
         {
             "name": "Python: Debug Tests",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "purpose": [
                 "debug-test"
             ],
             "console": "integratedTerminal",
-            "env": {},
+            "env": {
+                "PYTEST_ADDOPTS": "--no-cov"
+            },
             "autoReload": {
                 "enable": true
             },
-            "justMyCode": false,
+            "subProcess": true,
+            "justMyCode": true,
+            "redirectOutput": true, // pipe stdout/stderr to Debug Console
+            "showReturnValue": true,
+            "logToFile": false, // set true temporarily when diagnosing debugger issues
         },
         {
-            "name": "Python: Current File, cwd = file dir, envFile",
-            "type": "python",
+            "name": "Python: Current File, cwd = file dir",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${fileDirname}", // working dir = dir where current file is
             "program": "${file}",
@@ -29,57 +35,48 @@
             "autoReload": {
                 "enable": true
             },
-            "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env", // specify where .env file is
+            "subProcess": true,
+            "justMyCode": true,
+            "redirectOutput": true,
+            "showReturnValue": true,
+            "logToFile": false,
         },
         {
-            "name": "Python: Current File, cwd = workspace root folder, envFile",
-            "type": "python",
+            "name": "Python: Current File, cwd = workspace root folder",
+            "type": "debugpy",
             "request": "launch",
-            "cwd": "${workspaceFolder}", // working dir = project root folder
+            "cwd": "${workspaceFolder}", // working dir = workspace root folder
             "program": "${file}",
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": true
             },
-            "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env", // specify where .env file is
+            "subProcess": true,
+            "justMyCode": true,
+            "redirectOutput": true,
+            "showReturnValue": true,
+            "logToFile": false,
         },
         {
-            "name": "trafficgen cli, cwd = tests, envFile",
-            "type": "python",
+            "name": "ship_traffic_generator test_cli",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceFolder}\\tests",
-            "program": "${workspaceFolder}\\src\\trafficgen\\cli.py",
-            // "args": [
-            //     "test_config_file",
-            //     "--run",
-            //     "-v",
-            // ],
+            "program": "${workspaceFolder}\\src\\ship_traffic_generator\\cli\\__main__.py",
+            "args": [
+                "test_config_file",
+                "--run",
+                "-v",
+            ],
             "console": "integratedTerminal",
             "autoReload": {
                 "enable": true
             },
-            "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env", // specify where .env file is
-        },
-        {
-            "name": "trafficgen cli, cwd = file dir, envFile",
-            "type": "python",
-            "request": "launch",
-            "cwd": "${fileDirname}", // working dir = dir where current file is
-            "program": "${workspaceFolder}\\src\\trafficgen\\cli.py",
-            // "args": [
-            //     "test_config_file",
-            //     "--run",
-            //     "-v",
-            // ],
-            "console": "integratedTerminal",
-            "autoReload": {
-                "enable": true
-            },
-            "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env", // specify where .env file is
+            "subProcess": true,
+            "justMyCode": true,
+            "redirectOutput": true,
+            "showReturnValue": true,
+            "logToFile": false,
         },
     ]
 }

@@ -6,12 +6,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.sdist]
 only-include = [
-    "src/my_package",
+    "src/trafficgen",
     "tests",
     ".coveragerc",
     ".editorconfig",
     ".pre-commit-config.yaml",
-    "manage.py",
     "pyproject.toml",
     "pytest.ini",
     "ruff.toml",
@@ -22,6 +21,9 @@ only-include = [
 packages = [
     "src/trafficgen",
 ]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [project]
 name = "trafficgen"

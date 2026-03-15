@@ -1,16 +1,11 @@
 name: Build and publish documentation
 
-on:
-  workflow_call:
-  workflow_dispatch:
-
+on: workflow_call
 
 env:
   DEFAULT_BRANCH: 'release'
   #SPHINXOPTS: '-W --keep-going -T'
   # ^-- If these SPHINXOPTS are enabled, then be strict about the builds and fail on any warnings
-
-
 
 jobs:
   build-and-publish-docs:
@@ -25,9 +20,9 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
-        run: uv sync -U
+        run: uv sync --frozen
       - name: Print debugging information
         run: |
           echo "github.ref:" ${{github.ref}}

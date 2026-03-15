@@ -6,29 +6,24 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ## [Unreleased]
 
 ### Changed
-* GitHub Workflows:
-  * _test_future.yml: Updated name of test_future job to 'test315'
-  * _test_future.yml: Updated Python specifier in comment to 3.15
-  * _test_future.yml: Updated Python specifier in workflow name to py315
-  * _test_future.yml: Updated Python version in test_future to 3.15.0-alpha - 3.15.0
-  * Added 'name: Checkout code' to uses of 'actions/checkout', for better readability and consistency across workflow files.
-  * Added 'name: Download build artifacts' to uses of 'actions/download-artifact', for better readability and consistency across workflow files.
-  * Added 'name: Publish to PyPI' to uses of 'pypa/gh-action-pypi-publish', for better readability and consistency across workflow files.
-  * Added 'name: Upload build artifacts' to uses of 'actions/upload-artifact', for better readability and consistency across workflow files.
-  * Changed 'uv sync --upgrade' to 'uv sync -U'
-  * Ensured that actions 'upload-artifact' and 'download-artifact' uniformly specify 'dist' as (file)name for the artifact uploaded (or downloaded, respectively), for consistency across workflow files.
-  * pull_request_to_main.yml and nightly_build.yml: Added 'workflow_dispatch:' in selected workflows to allow manual trigger of the workflow.
-  * Removed redundant 'Set up Python' steps (no longer needed, as 'uv sync' will automatically install Python if not present).
-  * Replaced 'Build source distribution and wheel' with 'Build source distribution and wheels' (plural) in workflow step names.
-  * Replaced 'Run twine check' with 'Check build artifacts' in workflow step names, to better reflect the purpose of the step.
-  * Updated the syntax used for the OS and Python matrix in test workflows.
-* pyproject.toml:
-  * pyproject.toml: Removed deprecated pyright setting 'reportShadowedImports'
-  * pyproject.toml: Removed leading carets and trailing slashes from 'exclude' paths
-  * pyproject.toml: Removed trailing slashes from 'exclude' paths
-  * pyproject.toml: Updated required Python version to ">= 3.11"
-  * pyproject.toml: Updated supported Python versions to 3.11, 3.12, 3.13, 3.14
-  * Removed upper version constraint from required Python version, i.e. changed the "requires-python" field from ">= 3.11, < 3.15" to ">= 3.11". <br>
+* GitHub workflows:
+  * _test_future.yml: Updated job name to 'test315', updated Python specifiers to 3.15/py315, and updated the tested Python version range to 3.15.0-alpha - 3.15.0.
+  * _test_future.yml: Improved the regex and PowerShell code that finds and removes the Python upper version constraint in pyproject.toml.
+  * _build_and_publish_documentation.yml: Changed 'uv sync --upgrade' to 'uv sync --frozen' to avoid unintentional package upgrades.
+  * _code_quality.yml and _build_package.yml: Replaced double quotes with single quotes (the default in .yml files).
+  * Added explicit step names for uses of 'actions/checkout', 'actions/download-artifact', 'actions/upload-artifact', and 'pypa/gh-action-pypi-publish' for readability and consistency.
+  * Standardized artifact naming by ensuring 'upload-artifact' and 'download-artifact' use 'dist' consistently.
+  * pull_request_to_main.yml and nightly_build.yml: Added 'workflow_dispatch:' to allow manual triggering.
+  * Changed 'uv sync --upgrade' to 'uv sync -U'.
+  * Removed redundant 'Set up Python' steps (no longer needed because 'uv sync' installs Python if required).
+  * Renamed workflow step text to be more precise: 'Build source distribution and wheels' and 'Check build artifacts'.
+  * Updated the syntax used for OS and Python matrix definitions in test workflows.
+
+* Project configuration:
+  * pyproject.toml: Removed deprecated pyright setting 'reportShadowedImports'.
+  * pyproject.toml: Removed leading carets and trailing slashes from 'exclude' paths.
+  * pyproject.toml: Updated required Python version to ">= 3.11" and supported versions to 3.11, 3.12, 3.13, 3.14.
+  * pyproject.toml: Removed upper Python version constraint in 'requires-python', changing from ">= 3.11, < 3.15" to ">= 3.11". <br>
     Detailed background and reasoning in this good yet long post by Henry Schreiner:
     https://iscinumpy.dev/post/bound-version-constraints/#pinning-the-python-version-is-special <br>
     TLDR: Placing an upper Python version constraint on a Python package causes more harm than it provides benefits.
@@ -37,15 +32,23 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
     In the majority of cases, the newer Python version will anyhow be backward-compatible. And in the rare case where your package would really not work with a newer Python version,
     users can at least find a solution manually to resolve the conflict, e.g. by pinning your package to the last version compatible with the environment they install it in.
     That way, we ensure it remains _possible_ for users to find a solution, instead of rendering it impossible forever.
-* Sphinx Documentation:
-  * Sphinx conf.py: Updated year in copyright statement to 2026
-* VS Code Settings:
-  * VS Code settings: (Recommended extensions): Removed deprecated IntelliCode extension and replaced it by GitHub Copilot Chat as recommended replacement.
-  * VS Code Settings: (Recommended extensions): Removed 'njqdev.vscode-python-typehint' (Python Type Hint). Not maintained since 1 year, and the functionality is now covered by GitHub Copilot.
-VS Code Settings: (Recommended extensions): Added 'ms-python.debugpy' (Python Debugger).
-VS Code Settings: (Recommended extensions): Added 'ms-python.vscode-python-envs' (Python Environments).
-* .pre-commit-config.yaml: Updated id of ruff to ruff-check
-* .sourcery.yaml: Updated the lowest Python version the project supports to '3.11'
+  * pyproject.toml: Removed "manage.py" from the default files to include in source distribution.
+  * ruff.toml: Added file-specific ignores for modules named "types.py".
+  * .pre-commit-config.yaml: Updated id of ruff to ruff-check.
+  * .sourcery.yaml: Updated the lowest supported Python version to '3.11'.
+
+* VS Code settings:
+  * Recommended extensions: Removed deprecated IntelliCode and replaced it with GitHub Copilot Chat.
+  * Recommended extensions: Removed 'njqdev.vscode-python-typehint' (no longer maintained and now covered by GitHub Copilot).
+  * Recommended extensions: Added 'ms-python.debugpy' and 'ms-python.vscode-python-envs'.
+  * launch.json: Cleaned up launch configurations and made them uniform.
+
+* Documentation:
+  * docs/source/conf.py: Updated copyright year to 2026.
+  * README.md: Updated minimum required Python version to 3.11.
+
+* Tests:
+  * tests/conftest.py: Slightly restructured to improve git diff view and ease manual inclusion/exclusion of torch-related code.
 
 
 ### Dependencies
