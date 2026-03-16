@@ -155,30 +155,32 @@ class InterpolationMethod(StrEnum):
 
 
 class Dimensions(BaseModelConfig):
-    """
-        Key Ship Dimensions.
+    r"""
+    Key Ship Dimensions.
 
-                  Bow
-                  (a)
-                   ^
-                  /┆\
-                 / ┆ \
-                /  ┆  \
-               /   ┆   \
-              /    ┆    \
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-    Port (c) │╌╌╌╌╌♦╌╌╌╌╌│ (d) Starboard
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-             └─────┴─────┘
-                  (b)
-                 Stern
+    ::
 
-              ♦ = CCRP
+                      Bow
+                      (a)
+                       ^
+                      /┆\
+                     / ┆ \
+                    /  ┆  \
+                   /   ┆   \
+                  /    ┆    \
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+        Port (c) │╌╌╌╌╌♦╌╌╌╌╌│ (d) Starboard
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+                 └─────┴─────┘
+                      (b)
+                     Stern
+
+                    ♦ = CCRP
 
     """
 
