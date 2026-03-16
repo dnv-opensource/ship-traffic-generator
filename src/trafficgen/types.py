@@ -184,7 +184,7 @@ class Dimensions(BaseModelConfig):
 
     """
 
-    length: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[130.0])] | None = None
+    length: Annotated[float, Field(gt=0, description="Length of the ship in meters", examples=[130.0])] | None = None
     width: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[30.0])] | None = None
     height: Annotated[float, Field(gt=0, description="Height of the ship in meters", examples=[15.0])] | None = None
     draught: Annotated[float, Field(gt=0, description="Draught of the ship in meters", examples=[15.0])] | None = None
