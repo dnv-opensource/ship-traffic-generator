@@ -1,7 +1,8 @@
 .. _output_files:
-===========
+
+============
 Output files
-===========
+============
 
 The Ship Traffic Generator creates output files according to
 the open-source `maritime schema`_ `Traffic Situation`_ format.

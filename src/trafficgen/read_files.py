@@ -61,11 +61,13 @@ def read_situation_from_file(file_name: Path) -> SituationInput | None:
 
     Parameters
     ----------
-        file_name (Path): The path to the JSON file containing the situation configuration.
+    file_name : Path
+        The path to the JSON file containing the situation configuration.
 
     Returns
     -------
-        SituationInput | None: The initialized and converted SituationInput object if successful,
+    situation : SituationInput | None
+        The initialized and converted SituationInput object if successful,
         or None if the file could not be read or parsed.
     """
     with Path.open(file_name, encoding="utf-8") as f:

@@ -74,12 +74,12 @@ def convert_ship_data_from_si_units_to_maritime(ship: T_ship) -> T_ship:
 
     Parameters
     ----------
-    ship : T_ship
+    ship : Ship
         Ship data
 
     Returns
     -------
-    ship : T_ship
+    ship : Ship
         Converted ship data
     """
     assert ship.initial is not None

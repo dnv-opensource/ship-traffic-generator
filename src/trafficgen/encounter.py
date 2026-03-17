@@ -57,7 +57,7 @@ def generate_encounter(
         Information about own ship that will encounter a target ship.
     target_ships_static : list[ShipStatic]
         List of target ships including static information that may be used in an encounter.
-    encounter_number : Int
+    encounter_number : int
         Integer identifying the encounter.
     beta_default : list[float] | float | None
         User defined beta. If not set, this is None [rad].
