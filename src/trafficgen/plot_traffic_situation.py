@@ -347,7 +347,8 @@ def find_max_value_for_plot(
 
     Returns
     -------
-        * max_value: updated maximum deviation in north, east direction [m]
+    max_value : float
+        Updated maximum deviation in north and east direction [m].
     """
     assert ship.initial is not None
 
@@ -387,6 +388,11 @@ def add_ship_to_plot(
         Instance of figure axis. If not set, instance is set to None
     color : str
         Color of the ship. If not set, color is 'black'
+
+    Returns
+    -------
+    axes : Axes
+        Updated instance of figure axis.
     """
     if axes is None:
         axes = plt.gca()

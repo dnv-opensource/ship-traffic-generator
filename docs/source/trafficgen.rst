@@ -16,4 +16,5 @@ Modules
    trafficgen.marine_system_simulator
    trafficgen.plot_traffic_situation
    trafficgen.write_traffic_situation_to_file
+   trafficgen.types
    trafficgen.utils
