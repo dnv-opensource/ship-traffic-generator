@@ -81,6 +81,7 @@ def generate_encounter(
 
     # Initiating some variables which later will be set if an encounter is found
     assert own_ship.initial is not None
+    assert own_ship.initial.position is not None
     target_ship_initial_position: GeoPosition = own_ship.initial.position
     target_ship_sog: float = 0
     target_ship_cog: float = 0
@@ -120,6 +121,7 @@ def generate_encounter(
 
         # Own ship
         assert own_ship.initial is not None
+        assert own_ship.initial.sog is not None
         assert own_ship.waypoints is not None
         # Assuming ship is pointing in the direction of wp1
         own_ship_cog = calculate_bearing_between_waypoints(
@@ -289,6 +291,7 @@ def check_encounter_evolvement(
     theta15: list[float] = encounter_settings.classification.theta15
 
     assert own_ship.initial is not None
+    assert own_ship.initial.sog is not None
 
     own_ship_sog: float = own_ship.initial.sog
     situation_develop_time: float = encounter_settings.situation_develop_time
@@ -356,6 +359,9 @@ def define_own_ship(
         Own ship including static, initial and waypoints.
     """
     own_ship_initial: Initial = desired_traffic_situation.own_ship.initial
+    assert own_ship_initial.position is not None
+    assert own_ship_initial.sog is not None
+    assert own_ship_initial.cog is not None
 
     if overwrite_ownship_initial_coord:
         # assign lat_lon0, but convert them to radians first!

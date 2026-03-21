@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "HO, OT-GW, OT-SO",
     "description": "Head-on, overtaking give-way and overtaking stand-on situations with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.47973278,
-                    "lat": 58.87164444
-                },
-                "sog": 13.0,
-                "cog": 174.69,
                 "heading": 174.69,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +86,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.50359702,
-                    "lat": 58.78192446
-                },
-                "sog": 6.0,
-                "cog": 345.44,
                 "heading": 345.44,
                 "navStatus": "Under way using engine"
             },
@@ -131,25 +113,19 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.49390272,
-                    "lat": 58.74420149
-                },
-                "sog": 15.0,
-                "cog": 358.33,
                 "heading": 358.33,
                 "navStatus": "Under way using engine"
             },

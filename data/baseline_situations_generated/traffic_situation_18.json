@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "OT-GW, OT-GW",
     "description": "A overtaking give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.49718599,
-                    "lat": 58.77612507
-                },
-                "sog": 7.0,
-                "cog": 353.29,
                 "heading": 353.29,
                 "navStatus": "Under way using engine"
             },
@@ -85,25 +73,19 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 50.0,
+                    "width": 10.0,
+                    "height": 8.0,
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.51106216,
-                    "lat": 58.78618871
-                },
-                "sog": 6.0,
-                "cog": 340.45,
                 "heading": 340.45,
                 "navStatus": "Under way using engine"
             },

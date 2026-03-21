@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "CR-SO, CR-SO",
     "description": "Two crossing stand-on situations with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.38187386,
-                    "lat": 58.76839554
-                },
-                "sog": 15.0,
-                "cog": 53.29,
                 "heading": 53.29,
                 "navStatus": "Under way using engine"
             },
@@ -98,32 +86,26 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.40558257,
-                    "lat": 58.75565663
-                },
-                "sog": 15.9,
-                "cog": 41.83,
-                "heading": 41.83,
+                "heading": 38.85,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.40558257,
-                        "lat": 58.75565663
+                        "lon": 10.4155188,
+                        "lat": 58.75656335
                     },
                     "leg": {
-                        "sog": 15.9
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.57567351,
-                        "lat": 58.85439685
+                        "lon": 10.56574599,
+                        "lat": 58.85347032
                     },
                     "leg": {
-                        "sog": 15.9
+                        "sog": 15.0
                     }
                 }
             ],
@@ -131,15 +113,15 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 50.0,
+                    "width": 10.0,
+                    "height": 8.0,
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         }
     ]

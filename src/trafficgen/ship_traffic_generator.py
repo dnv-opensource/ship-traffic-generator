@@ -1,7 +1,6 @@
 """Functions to generate traffic situations."""
 
 import logging
-from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 from trafficgen.encounter import (
@@ -18,6 +17,7 @@ from trafficgen.read_files import (
     read_target_ship_static_files,
 )
 from trafficgen.types import (
+    MARITIME_SCHEMA_VERSION,
     EncounterSettings,
     EncounterType,
     GeoPosition,
@@ -27,12 +27,6 @@ from trafficgen.types import (
     TargetShip,
     TrafficSituation,
 )
-
-try:
-    project_version = version("trafficgen")
-except PackageNotFoundError:
-    project_version = "Not found"
-
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -142,6 +136,7 @@ def generate_traffic_situations(
         if overwrite_ownship_initial_coord:
             lat_lon0 = GeoPosition(lat=float(lat_str), lon=float(lon_str))
         else:
+            assert desired_traffic_situation.own_ship.initial.position is not None
             lat_lon0 = desired_traffic_situation.own_ship.initial.position
 
         own_ship: OwnShip = define_own_ship(
@@ -173,7 +168,7 @@ def generate_traffic_situations(
                     target_ships.append(target_ship.model_copy(deep=True))
 
             traffic_situation: TrafficSituation = TrafficSituation(
-                version=project_version,
+                version=MARITIME_SCHEMA_VERSION,
                 title=desired_traffic_situation.title,
                 description=desired_traffic_situation.description,
                 own_ship=own_ship.model_copy(deep=True),

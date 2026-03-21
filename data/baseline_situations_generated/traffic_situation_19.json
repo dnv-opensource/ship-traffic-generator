@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "OT-GW, OT-SO",
     "description": "A overtaking give-way and overtaking stand-on situation with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.50682846,
-                    "lat": 58.78654781
-                },
-                "sog": 6.0,
-                "cog": 345.44,
                 "heading": 345.44,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +86,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.49452481,
-                    "lat": 58.74043996
-                },
-                "sog": 15.9,
-                "cog": 358.16,
                 "heading": 358.16,
                 "navStatus": "Under way using engine"
             },

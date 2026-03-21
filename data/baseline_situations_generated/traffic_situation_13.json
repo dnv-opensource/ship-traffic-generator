@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "CR-GW, OT-GW",
     "description": "A crossing give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.63373574,
-                    "lat": 58.8063609
-                },
-                "sog": 15.0,
-                "cog": 275.36,
                 "heading": 275.36,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +86,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.50983525,
-                    "lat": 58.77768713
-                },
-                "sog": 7.0,
-                "cog": 339.94,
                 "heading": 339.94,
                 "navStatus": "Under way using engine"
             },
@@ -131,13 +113,13 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }

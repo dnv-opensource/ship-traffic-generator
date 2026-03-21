@@ -17,6 +17,7 @@ def test_situation_input_json_accepts_camel_case_payload() -> None:
 
     assert not isinstance(parsed.traffic_situations, list)
     assert parsed.traffic_situations.title == "HO, CR-GW, OT-GW"
+    assert parsed.traffic_situations.own_ship.initial.position is not None
     assert parsed.traffic_situations.own_ship.initial.position.lat == 58.763449
     assert parsed.encounter_settings.disable_land_check is True
 

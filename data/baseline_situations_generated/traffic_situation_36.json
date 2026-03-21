@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "CR-GW, CR-GW, CR-GW",
     "description": "Three crossing give-way situations with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.53781222,
-                    "lat": 58.85488366
-                },
-                "sog": 15.0,
-                "cog": 204.95,
                 "heading": 204.95,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +86,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.59965879,
-                    "lat": 58.84431728
-                },
-                "sog": 14.0,
-                "cog": 239.21,
                 "heading": 239.21,
                 "navStatus": "Under way using engine"
             },
@@ -144,12 +126,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.52172417,
-                    "lat": 58.76001964
-                },
-                "sog": 12.1,
-                "cog": 336.27,
                 "heading": 336.27,
                 "navStatus": "Under way using engine"
             },
@@ -177,15 +153,15 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         }
     ]

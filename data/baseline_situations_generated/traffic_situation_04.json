@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "OT-GW",
     "description": "A overting situation with one target ship. Own ship is give-way.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.50093584,
-                    "lat": 58.78336982
-                },
-                "sog": 5.1,
-                "cog": 344.18,
                 "heading": 344.18,
                 "navStatus": "Under way using engine"
             },

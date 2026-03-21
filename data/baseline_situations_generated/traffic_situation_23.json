@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "HO, HO, CR-SO",
     "description": "Two head-on situations and one grossing stand-on situation with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.50917859,
-                    "lat": 58.87343991
-                },
-                "sog": 15.0,
-                "cog": 188.33,
                 "heading": 188.33,
                 "navStatus": "Under way using engine"
             },
@@ -85,25 +73,19 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.49796361,
-                    "lat": 58.87226388
-                },
-                "sog": 18.1,
-                "cog": 183.12,
                 "heading": 183.12,
                 "navStatus": "Under way using engine"
             },
@@ -144,12 +126,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.42758053,
-                    "lat": 58.80692647
-                },
-                "sog": 7.0,
-                "cog": 83.71,
                 "heading": 83.71,
                 "navStatus": "Under way using engine"
             },

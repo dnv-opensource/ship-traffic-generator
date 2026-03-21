@@ -1,15 +1,9 @@
 {
-    "version": "0.8.3",
+    "version": "0.2.0",
     "title": "HO, HO, HO",
     "description": "Three head-on situations with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +46,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.48286054,
-                    "lat": 58.87941885
-                },
-                "sog": 12.1,
-                "cog": 176.36,
                 "heading": 176.36,
                 "navStatus": "Under way using engine"
             },
@@ -85,25 +73,19 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.490654,
-                    "lat": 58.8517326
-                },
-                "sog": 9.9,
-                "cog": 180.02,
                 "heading": 180.02,
                 "navStatus": "Under way using engine"
             },
@@ -144,12 +126,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.50363158,
-                    "lat": 58.85991099
-                },
-                "sog": 15.0,
-                "cog": 186.67,
                 "heading": 186.67,
                 "navStatus": "Under way using engine"
             },
@@ -177,13 +153,13 @@
                 "id": 4,
                 "name": "target_ship_3",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
                 "shipType": "Passenger"
             }
