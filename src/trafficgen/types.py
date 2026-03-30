@@ -4,11 +4,17 @@ from __future__ import annotations
 
 import datetime
 from enum import Enum, StrEnum
+from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, Any, Self
 
 from pydantic import BaseModel, ConfigDict, field_validator
 from pydantic.fields import Field
 from pyproj import Geod
+
+try:
+    project_version = version("trafficgen")
+except PackageNotFoundError:
+    project_version = "-.-"
 
 MARITIME_SCHEMA_VERSION = "0.2.0"
 
@@ -525,7 +531,10 @@ def create_target_example() -> TargetShip:
 class TrafficSituation(BaseModelConfig):
     """Data type for a traffic situation."""
 
-    version: Annotated[str, Field(description="Maritime-schema version number", examples=["0.2.0"])]
+    trafficgen_version: Annotated[
+        str, Field(description="Ship traffic generator version number", examples=[project_version])
+    ]
+    schema_version: Annotated[str, Field(description="Maritime-schema version number", examples=["0.2.0"])]
     title: (
         Annotated[str, Field(description="The title of the traffic situation", examples=["overtaking_18"])] | None
     ) = None

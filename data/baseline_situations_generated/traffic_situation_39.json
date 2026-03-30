@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "CR-GW, CR-GW, OT-SO",
     "description": "Two crossing give-waysituations and one overtaking stand-on situation with three target ships.",
     "ownShip": {
@@ -46,26 +47,26 @@
     "targetShips": [
         {
             "initial": {
-                "heading": 196.64,
+                "heading": 195.89,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.53185048,
-                        "lat": 58.88484119
+                        "lon": 10.53511648,
+                        "lat": 58.89444699
                     },
                     "leg": {
-                        "sog": 15.0
+                        "sog": 16.9
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.46326961,
-                        "lat": 58.76562472
+                        "lon": 10.46100609,
+                        "lat": 58.75923593
                     },
                     "leg": {
-                        "sog": 15.0
+                        "sog": 16.9
                     }
                 }
             ],
@@ -73,15 +74,15 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         },
         {

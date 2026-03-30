@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "OT-GW, OT-SO, OT-SO",
     "description": "One overtaking give-way situation and two overtaking stand-on situations with three target ships.",
     "ownShip": {

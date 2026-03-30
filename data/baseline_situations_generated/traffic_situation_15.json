@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "CR-SO, CR-SO",
     "description": "Two crossing stand-on situations with two target ships.",
     "ownShip": {
@@ -86,26 +87,26 @@
         },
         {
             "initial": {
-                "heading": 38.85,
+                "heading": 41.83,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.4155188,
-                        "lat": 58.75656335
+                        "lon": 10.40558257,
+                        "lat": 58.75565663
                     },
                     "leg": {
-                        "sog": 15.0
+                        "sog": 15.9
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.56574599,
-                        "lat": 58.85347032
+                        "lon": 10.57567351,
+                        "lat": 58.85439685
                     },
                     "leg": {
-                        "sog": 15.0
+                        "sog": 15.9
                     }
                 }
             ],
@@ -113,15 +114,15 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 50.0,
-                    "width": 10.0,
+                    "length": 122.0,
+                    "width": 20.0,
                     "height": 8.0,
-                    "a": 25.0,
-                    "b": 25.0,
-                    "c": 5.0,
-                    "d": 5.0
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
                 },
-                "shipType": "Cargo"
+                "shipType": "Passenger"
             }
         }
     ]

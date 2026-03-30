@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "HO, HO, CR-SO",
     "description": "Two head-on situations and one grossing stand-on situation with three target ships.",
     "ownShip": {
@@ -86,26 +87,26 @@
         },
         {
             "initial": {
-                "heading": 183.12,
+                "heading": 183.35,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.49796361,
-                        "lat": 58.87226388
+                        "lon": 10.49715143,
+                        "lat": 58.86020725
                     },
                     "leg": {
-                        "sog": 18.1
+                        "sog": 15.0
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.48223275,
-                        "lat": 58.72220484
+                        "lon": 10.48317045,
+                        "lat": 58.73599288
                     },
                     "leg": {
-                        "sog": 18.1
+                        "sog": 15.0
                     }
                 }
             ],
@@ -113,15 +114,15 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 50.0,
+                    "width": 10.0,
+                    "height": 8.0,
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {

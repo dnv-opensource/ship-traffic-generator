@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "HO, OT-GW, OT-SO",
     "description": "Head-on, overtaking give-way and overtaking stand-on situations with three target ships.",
     "ownShip": {
@@ -113,46 +114,6 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
-                },
-                "shipType": "Passenger"
-            }
-        },
-        {
-            "initial": {
-                "heading": 358.33,
-                "navStatus": "Under way using engine"
-            },
-            "waypoints": [
-                {
-                    "position": {
-                        "lon": 10.49390272,
-                        "lat": 58.74420149
-                    },
-                    "leg": {
-                        "sog": 15.0
-                    }
-                },
-                {
-                    "position": {
-                        "lon": 10.48691364,
-                        "lat": 58.86857505
-                    },
-                    "leg": {
-                        "sog": 15.0
-                    }
-                }
-            ],
-            "static": {
-                "id": 4,
-                "name": "target_ship_3",
-                "dimensions": {
                     "length": 50.0,
                     "width": 10.0,
                     "height": 8.0,
@@ -162,6 +123,46 @@
                     "d": 5.0
                 },
                 "shipType": "Cargo"
+            }
+        },
+        {
+            "initial": {
+                "heading": 358.16,
+                "navStatus": "Under way using engine"
+            },
+            "waypoints": [
+                {
+                    "position": {
+                        "lon": 10.49452481,
+                        "lat": 58.74043996
+                    },
+                    "leg": {
+                        "sog": 15.9
+                    }
+                },
+                {
+                    "position": {
+                        "lon": 10.48631708,
+                        "lat": 58.87287753
+                    },
+                    "leg": {
+                        "sog": 15.9
+                    }
+                }
+            ],
+            "static": {
+                "id": 4,
+                "name": "target_ship_3",
+                "dimensions": {
+                    "length": 122.0,
+                    "width": 20.0,
+                    "height": 8.0,
+                    "a": 61.0,
+                    "b": 61.0,
+                    "c": 10.0,
+                    "d": 10.0
+                },
+                "shipType": "Passenger"
             }
         }
     ]

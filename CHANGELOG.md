@@ -24,6 +24,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
   * Renamed workflow step text to be more precise: 'Build source distribution and wheels' and 'Check build artifacts'.
   * Updated the syntax used for OS and Python matrix definitions in test workflows.
 
+Output files structure:
+  * Renamed `version` to `trafficgenVersion` and added `schemaVersion` field to distinguish trafficgen version from maritime-schema version
+
 * Project configuration:
   * pyproject.toml: Removed deprecated pyright setting 'reportShadowedImports'.
   * pyproject.toml: Removed leading carets and trailing slashes from 'exclude' paths.

@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "CR-GW, OT-SO",
     "description": "A crossing give-way and overtaking stand-on situation with two target ships.",
     "ownShip": {

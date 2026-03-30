@@ -1,5 +1,6 @@
 {
-    "version": "0.2.0",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "OT-SO",
     "description": "A overtaking situation with one target ship. Own ship is stand-on.",
     "ownShip": {
