@@ -29,13 +29,22 @@ def write_traffic_situations_to_json_file(situations: list[TrafficSituation], wr
         data: dict[str, Any] = situation.model_dump(
             by_alias=True, exclude_unset=True, exclude_defaults=False, exclude_none=True
         )
-
+        # Removing duplicate fields from 'initial' as these are already given in waypoints
+        if "initial" in data.get("ownShip", {}):
+            data["ownShip"]["initial"].pop("position", None)
+            data["ownShip"]["initial"].pop("sog", None)
+            data["ownShip"]["initial"].pop("cog", None)
         # Remove the 'sogMax' field from the 'static' dictionary in ownShip
         if "static" in data.get("ownShip", {}):
             data["ownShip"]["static"].pop("sogMax", None)
 
-        # Remove the 'sogMax' field from the 'static' dictionary in each targetShip
         for target_ship in data.get("targetShips", []):
+            # Removing duplicate fields from 'initial' as these are already given in waypoints
+            if "initial" in target_ship:
+                target_ship["initial"].pop("position", None)
+                target_ship["initial"].pop("sog", None)
+                target_ship["initial"].pop("cog", None)
+            # Remove the 'sogMax' field from the 'static' dictionary in each targetShip
             if "static" in target_ship:
                 target_ship["static"].pop("sogMax", None)
 
@@ -84,6 +93,9 @@ def convert_ship_data_from_si_units_to_maritime(ship: T_ship) -> T_ship:
     """
     assert ship.initial is not None
     assert ship.initial.heading is not None
+    assert ship.initial.position is not None
+    assert ship.initial.sog is not None
+    assert ship.initial.cog is not None
     ship.initial.position.lon = round(rad_2_deg(ship.initial.position.lon), 8)
     ship.initial.position.lat = round(rad_2_deg(ship.initial.position.lat), 8)
     ship.initial.cog = round(rad_2_deg(ship.initial.cog), 2)

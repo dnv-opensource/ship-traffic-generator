@@ -1,15 +1,10 @@
 {
-    "version": "0.8.3",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "OT-GW, OT-SO, OT-SO",
     "description": "One overtaking give-way situation and two overtaking stand-on situations with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +47,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.47057417,
-                    "lat": 58.7815115
-                },
-                "sog": 7.0,
-                "cog": 15.58,
                 "heading": 15.58,
                 "navStatus": "Under way using engine"
             },
@@ -85,45 +74,39 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.5170239,
-                    "lat": 58.73406602
-                },
-                "sog": 16.9,
-                "cog": 349.45,
-                "heading": 349.45,
+                "heading": 348.53,
                 "navStatus": "Under way using engine"
             },
             "waypoints": [
                 {
                     "position": {
-                        "lon": 10.5170239,
-                        "lat": 58.73406602
+                        "lon": 10.52136128,
+                        "lat": 58.72923619
                     },
                     "leg": {
-                        "sog": 16.9
+                        "sog": 18.1
                     }
                 },
                 {
                     "position": {
-                        "lon": 10.46746264,
-                        "lat": 58.87227396
+                        "lon": 10.46383888,
+                        "lat": 58.87651644
                     },
                     "leg": {
-                        "sog": 16.9
+                        "sog": 18.1
                     }
                 }
             ],
@@ -131,25 +114,19 @@
                 "id": 3,
                 "name": "target_ship_2",
                 "dimensions": {
-                    "length": 122.0,
-                    "width": 20.0,
-                    "height": 8.0,
-                    "a": 61.0,
-                    "b": 61.0,
-                    "c": 10.0,
-                    "d": 10.0
+                    "length": 178.0,
+                    "width": 30.0,
+                    "height": 30.0,
+                    "a": 89.0,
+                    "b": 89.0,
+                    "c": 15.0,
+                    "d": 15.0
                 },
                 "shipType": "Passenger"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.46711809,
-                    "lat": 58.72986461
-                },
-                "sog": 16.9,
-                "cog": 8.31,
                 "heading": 8.31,
                 "navStatus": "Under way using engine"
             },

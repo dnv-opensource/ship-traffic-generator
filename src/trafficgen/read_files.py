@@ -151,6 +151,10 @@ def convert_own_ship_initial_data(initial: Initial) -> Initial:
     initial : Initial
         Converted own ship initial data
     """
+    assert initial.position is not None
+    assert initial.sog is not None
+    assert initial.cog is not None
+
     initial.position.lon = deg_2_rad(initial.position.lon)
     initial.position.lat = deg_2_rad(initial.position.lat)
     initial.cog = deg_2_rad(initial.cog)

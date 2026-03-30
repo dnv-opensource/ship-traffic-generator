@@ -16,6 +16,8 @@ try:
 except PackageNotFoundError:
     project_version = "-.-"
 
+MARITIME_SCHEMA_VERSION = "0.2.0"
+
 
 def to_camel(string: str) -> str:
     """Return a camel case formated string from snake case string."""
@@ -283,18 +285,26 @@ def create_position_example() -> GeoPosition:
 class Initial(BaseModelConfig):
     """Data type for initial data for a ship ."""
 
-    position: Annotated[
-        GeoPosition,
-        Field(
-            description="Initial lon and lat of the ship.",
-            examples=[create_position_example()],
-        ),
-    ]
-    sog: Annotated[float, Field(ge=0, description="Initial ship  (SOG) ground in knots", examples=[10.0])]
-    cog: Annotated[
-        float,
-        Field(ge=0, le=360, description="Initial ship course over ground (COG) in degrees", examples=[45.0]),
-    ]
+    position: (
+        (
+            Annotated[
+                GeoPosition,
+                Field(
+                    description="Initial lon and lat of the ship.",
+                    examples=[create_position_example()],
+                ),
+            ]
+        )
+        | None
+    ) = None
+    sog: Annotated[float, Field(ge=0, description="Initial ship  (SOG) ground in knots", examples=[10.0])] | None = None
+    cog: (
+        Annotated[
+            float,
+            Field(ge=0, le=360, description="Initial ship course over ground (COG) in degrees", examples=[45.0]),
+        ]
+        | None
+    ) = None
     heading: (
         Annotated[float, Field(ge=0, le=360, description="Initial ship heading in degrees", examples=[45.2])] | None
     ) = None
@@ -387,7 +397,7 @@ def create_ship_static_example() -> ShipStatic:
         dimensions=Dimensions(a=50, b=50, c=10, d=10),
         sog_max=20.0,
         mmsi=123456789,
-        name="RMS Titanic",
+        name="RMS Example",
         ship_type=AisShipType.FISHING,
         imo=1000001,
     )
@@ -450,6 +460,10 @@ class Ship(BaseModelConfig):
         waypoints = []
 
         if self.initial:
+            assert self.initial.position is not None
+            assert self.initial.sog is not None
+            assert self.initial.cog is not None
+
             # Create waypoints from initial position
             g = Geod(ellps="WGS84")
             lon, lat, _ = g.fwd(
@@ -517,7 +531,10 @@ def create_target_example() -> TargetShip:
 class TrafficSituation(BaseModelConfig):
     """Data type for a traffic situation."""
 
-    version: Annotated[str, Field(description="Ship traffic generator version number", examples=[project_version])]
+    trafficgen_version: Annotated[
+        str, Field(description="Ship traffic generator version number", examples=[project_version])
+    ]
+    schema_version: Annotated[str, Field(description="Maritime-schema version number", examples=["0.2.0"])]
     title: (
         Annotated[str, Field(description="The title of the traffic situation", examples=["overtaking_18"])] | None
     ) = None
