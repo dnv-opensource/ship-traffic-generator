@@ -6,6 +6,11 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ## [Unreleased]
 
 ### Changed
+* martime-schema 0.2.0 necessary updates:
+  * top level version number now referencing which version of the maritime-schema is used as basis for the traffic situation files
+  * initial position, sog, cog now removed from initial struct since the ships are initially placed in the first waypoint.
+  * added assert as initial position, sog  and cog were made optional
+  * `docs/source/output_files.rst`: Clarified that the top-level `version` field reflects the maritime-schema version; updated description to explain that `position`, `sog`, and `cog` are omitted from the `initial` struct because ships are initially placed at the first waypoint.
 * GitHub workflows:
   * _test_future.yml: Updated job name to 'test315', updated Python specifiers to 3.15/py315, and updated the tested Python version range to 3.15.0-alpha - 3.15.0.
   * _test_future.yml: Improved the regex and PowerShell code that finds and removes the Python upper version constraint in pyproject.toml.
@@ -18,6 +23,9 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
   * Removed redundant 'Set up Python' steps (no longer needed because 'uv sync' installs Python if required).
   * Renamed workflow step text to be more precise: 'Build source distribution and wheels' and 'Check build artifacts'.
   * Updated the syntax used for OS and Python matrix definitions in test workflows.
+
+Output files structure:
+  * Renamed `version` to `trafficgenVersion` and added `schemaVersion` field to distinguish trafficgen version from maritime-schema version
 
 * Project configuration:
   * pyproject.toml: Removed deprecated pyright setting 'reportShadowedImports'.

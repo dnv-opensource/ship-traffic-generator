@@ -1,15 +1,10 @@
 {
-    "version": "0.8.3",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "OT-GW, OT-GW, OT-GW",
     "description": "Three overtaking give-way situations with three target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +47,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.4828087,
-                    "lat": 58.77865669
-                },
-                "sog": 7.0,
-                "cog": 6.7,
                 "heading": 6.7,
                 "navStatus": "Under way using engine"
             },
@@ -85,25 +74,19 @@
                 "id": 2,
                 "name": "target_ship_1",
                 "dimensions": {
-                    "length": 178.0,
-                    "width": 30.0,
-                    "height": 30.0,
-                    "a": 89.0,
-                    "b": 89.0,
-                    "c": 15.0,
-                    "d": 15.0
+                    "length": 50.0,
+                    "width": 10.0,
+                    "height": 8.0,
+                    "a": 25.0,
+                    "b": 25.0,
+                    "c": 5.0,
+                    "d": 5.0
                 },
-                "shipType": "Passenger"
+                "shipType": "Cargo"
             }
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.50230099,
-                    "lat": 58.78601814
-                },
-                "sog": 6.0,
-                "cog": 349.56,
                 "heading": 349.56,
                 "navStatus": "Under way using engine"
             },
@@ -144,12 +127,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.45804588,
-                    "lat": 58.79978047
-                },
-                "sog": 5.1,
-                "cog": 31.74,
                 "heading": 31.74,
                 "navStatus": "Under way using engine"
             },
