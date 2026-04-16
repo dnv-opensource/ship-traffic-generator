@@ -11,6 +11,7 @@ on:
       - converted_to_draft
     branches:
       - main
+  workflow_dispatch: # Allow manual trigger
 
 concurrency:
   group: pr-${{ github.ref }}-1

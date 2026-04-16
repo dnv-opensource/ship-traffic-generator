@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import datetime
-from enum import Enum
+from enum import Enum, StrEnum
 from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, Any, Self
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, field_validator
 from pydantic.fields import Field
 from pyproj import Geod
 
@@ -15,6 +15,8 @@ try:
     project_version = version("trafficgen")
 except PackageNotFoundError:
     project_version = "-.-"
+
+MARITIME_SCHEMA_VERSION = "0.2.0"
 
 
 def to_camel(string: str) -> str:
@@ -29,7 +31,7 @@ class BaseModelConfig(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
 
-class StringIntEnumMixin(str, Enum):
+class StringIntEnumMixin(StrEnum):
     """
     A mixin class for Enums that allows both integers and strings to specify a type.
 
@@ -135,7 +137,7 @@ class AisNavStatus(StringIntEnumMixin):
     UNDEFINED = ("Undefined (default)", 15)
 
 
-class PathType(str, Enum):
+class PathType(StrEnum):
     """Specifies the control-point model used to define the path for the ship to follow."""
 
     RTZ = "rtz"
@@ -143,7 +145,7 @@ class PathType(str, Enum):
     LINEAR = "linear"
 
 
-class InterpolationMethod(str, Enum):
+class InterpolationMethod(StrEnum):
     """Specifies the interpolation method used to interpolate between two values."""
 
     LINEAR = "linear"
@@ -155,34 +157,36 @@ class InterpolationMethod(str, Enum):
 
 
 class Dimensions(BaseModelConfig):
+    r"""
+    Key Ship Dimensions.
+
+    ::
+
+                      Bow
+                      (a)
+                       ^
+                      /┆\
+                     / ┆ \
+                    /  ┆  \
+                   /   ┆   \
+                  /    ┆    \
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+        Port (c) │╌╌╌╌╌♦╌╌╌╌╌│ (d) Starboard
+                 │     ┆     │
+                 │     ┆     │
+                 │     ┆     │
+                 └─────┴─────┘
+                      (b)
+                     Stern
+
+                    ♦ = CCRP
+
     """
-        Key Ship Dimensions.
 
-                  Bow
-                  (a)
-                   ^
-                  /┆\
-                 / ┆ \
-                /  ┆  \
-               /   ┆   \
-              /    ┆    \
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-    Port (c) │╌╌╌╌╌♦╌╌╌╌╌│ (d) Starboard
-             │     ┆     │
-             │     ┆     │
-             │     ┆     │
-             └─────┴─────┘
-                  (b)
-                 Stern
-
-              ♦ = CCRP
-
-    """
-
-    length: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[130.0])] | None = None
+    length: Annotated[float, Field(gt=0, description="Length of the ship in meters", examples=[130.0])] | None = None
     width: Annotated[float, Field(gt=0, description="Width of the ship in meters", examples=[30.0])] | None = None
     height: Annotated[float, Field(gt=0, description="Height of the ship in meters", examples=[15.0])] | None = None
     draught: Annotated[float, Field(gt=0, description="Draught of the ship in meters", examples=[15.0])] | None = None
@@ -247,6 +251,14 @@ class ShipStatic(BaseModelConfig):
         Annotated[float, Field(ge=0, description="Maximum ship speed over ground in knots", examples=[15.0])] | None
     ) = None
 
+    @field_validator("id", mode="before")
+    @classmethod
+    def coerce_id_to_int(cls, value: Any) -> int:  # noqa: ANN401
+        """Ensure ship id is converted to int when imported from JSON."""
+        if isinstance(value, str):
+            return int(value.strip())
+        return int(value)
+
     model_config = ConfigDict(extra="allow")
 
 
@@ -273,18 +285,26 @@ def create_position_example() -> GeoPosition:
 class Initial(BaseModelConfig):
     """Data type for initial data for a ship ."""
 
-    position: Annotated[
-        GeoPosition,
-        Field(
-            description="Initial lon and lat of the ship.",
-            examples=[create_position_example()],
-        ),
-    ]
-    sog: Annotated[float, Field(ge=0, description="Initial ship  (SOG) ground in knots", examples=[10.0])]
-    cog: Annotated[
-        float,
-        Field(ge=0, le=360, description="Initial ship course over ground (COG) in degrees", examples=[45.0]),
-    ]
+    position: (
+        (
+            Annotated[
+                GeoPosition,
+                Field(
+                    description="Initial lon and lat of the ship.",
+                    examples=[create_position_example()],
+                ),
+            ]
+        )
+        | None
+    ) = None
+    sog: Annotated[float, Field(ge=0, description="Initial ship  (SOG) ground in knots", examples=[10.0])] | None = None
+    cog: (
+        Annotated[
+            float,
+            Field(ge=0, le=360, description="Initial ship course over ground (COG) in degrees", examples=[45.0]),
+        ]
+        | None
+    ) = None
     heading: (
         Annotated[float, Field(ge=0, le=360, description="Initial ship heading in degrees", examples=[45.2])] | None
     ) = None
@@ -377,7 +397,7 @@ def create_ship_static_example() -> ShipStatic:
         dimensions=Dimensions(a=50, b=50, c=10, d=10),
         sog_max=20.0,
         mmsi=123456789,
-        name="RMS Titanic",
+        name="RMS Example",
         ship_type=AisShipType.FISHING,
         imo=1000001,
     )
@@ -440,6 +460,10 @@ class Ship(BaseModelConfig):
         waypoints = []
 
         if self.initial:
+            assert self.initial.position is not None
+            assert self.initial.sog is not None
+            assert self.initial.cog is not None
+
             # Create waypoints from initial position
             g = Geod(ellps="WGS84")
             lon, lat, _ = g.fwd(
@@ -507,7 +531,10 @@ def create_target_example() -> TargetShip:
 class TrafficSituation(BaseModelConfig):
     """Data type for a traffic situation."""
 
-    version: Annotated[str, Field(description="Ship traffic generator version number", examples=[project_version])]
+    trafficgen_version: Annotated[
+        str, Field(description="Ship traffic generator version number", examples=[project_version])
+    ]
+    schema_version: Annotated[str, Field(description="Maritime-schema version number", examples=["0.2.0"])]
     title: (
         Annotated[str, Field(description="The title of the traffic situation", examples=["overtaking_18"])] | None
     ) = None
@@ -609,8 +636,21 @@ class SituationInput(BaseModelConfig):
 
     title: str
     description: str
-    num_situations: int
+    num_situations: int = 1
     own_ship: OwnShipInitial
     encounters: list[Encounter]
 
     model_config = ConfigDict(extra="allow")
+
+
+class SituationInputJson(BaseModelConfig):
+    """Data type for generating traffic situations from JSON payloads.
+
+    Contains situation input together with own ship, target ship and
+    encounter settings data.
+    """
+
+    traffic_situations: SituationInput | list[SituationInput]
+    own_ship_static: ShipStatic
+    target_ships_static: list[ShipStatic]
+    encounter_settings: EncounterSettings

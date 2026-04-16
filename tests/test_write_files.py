@@ -25,10 +25,10 @@ def test_write_situations_multiple(
     """Test writing multiple traffic situations in one call."""
 
     situations: list[TrafficSituation] = generate_traffic_situations(
-        situation_folder=situations_folder,
-        own_ship_file=own_ship_file,
-        target_ship_folder=target_ships_folder,
-        settings_file=settings_file,
+        situations_data=situations_folder,
+        own_ship_data=own_ship_file,
+        target_ships_data=target_ships_folder,
+        settings_data=settings_file,
     )
     write_traffic_situations_to_json_file(situations, output_folder)
     reread_situations: list[TrafficSituation] = read_generated_situation_files(output_folder)

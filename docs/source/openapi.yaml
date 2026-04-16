@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: Ship Traffic Generator API
+  version: 0.1.0
+  description: REST API for generating ship traffic situations and serving baseline/configuration payloads.
+servers:
+  - url: /
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /api/version:
+    get:
+      summary: Package version
+      operationId: getVersion
+      responses:
+        '200':
+          description: Current package version.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [version]
+                properties:
+                  version:
+                    type: string
+                    example: 0.8.4
+  /api/settings/default:
+    get:
+      summary: Default encounter settings
+      operationId: getDefaultSettings
+      responses:
+        '200':
+          description: Default settings payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeFormObject'
+        '404':
+          description: Default settings file not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/baseline/{situation_id}:
+    get:
+      summary: Get baseline situation by id
+      operationId: getBaselineSituation
+      parameters:
+        - name: situation_id
+          in: path
+          required: true
+          description: Baseline situation id.
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+      responses:
+        '200':
+          description: Baseline situation JSON.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FreeFormObject'
+        '400':
+          description: Invalid situation id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Baseline situation not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/generate:
+    post:
+      summary: Generate traffic situations
+      operationId: generateSituation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SituationInputJsonRequest'
+      responses:
+        '200':
+          description: Generated traffic situations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FreeFormObject'
+        '400':
+          description: Invalid or missing JSON request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Request body failed schema validation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [errors]
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FreeFormObject'
+components:
+  schemas:
+    FreeFormObject:
+      type: object
+      additionalProperties: true
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+    SituationInputJsonRequest:
+      type: object
+      required:
+        - trafficSituations
+        - ownShipStatic
+        - targetShipsStatic
+        - encounterSettings
+      properties:
+        trafficSituations:
+          oneOf:
+            - $ref: '#/components/schemas/FreeFormObject'
+            - type: array
+              items:
+                $ref: '#/components/schemas/FreeFormObject'
+        ownShipStatic:
+          $ref: '#/components/schemas/FreeFormObject'
+        targetShipsStatic:
+          type: array
+          items:
+            $ref: '#/components/schemas/FreeFormObject'
+        encounterSettings:
+          $ref: '#/components/schemas/FreeFormObject'

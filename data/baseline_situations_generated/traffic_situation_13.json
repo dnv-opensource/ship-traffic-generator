@@ -1,15 +1,10 @@
 {
-    "version": "0.8.3",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "CR-GW, OT-GW",
     "description": "A crossing give-way and overtaking give-way situation with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +47,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.63373574,
-                    "lat": 58.8063609
-                },
-                "sog": 15.0,
-                "cog": 275.36,
                 "heading": 275.36,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +87,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.50983525,
-                    "lat": 58.77768713
-                },
-                "sog": 7.0,
-                "cog": 339.94,
                 "heading": 339.94,
                 "navStatus": "Under way using engine"
             },

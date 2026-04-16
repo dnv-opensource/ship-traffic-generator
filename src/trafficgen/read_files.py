@@ -61,11 +61,13 @@ def read_situation_from_file(file_name: Path) -> SituationInput | None:
 
     Parameters
     ----------
-        file_name (Path): The path to the JSON file containing the situation configuration.
+    file_name : Path
+        The path to the JSON file containing the situation configuration.
 
     Returns
     -------
-        SituationInput | None: The initialized and converted SituationInput object if successful,
+    situation : SituationInput | None
+        The initialized and converted SituationInput object if successful,
         or None if the file could not be read or parsed.
     """
     with Path.open(file_name, encoding="utf-8") as f:
@@ -149,6 +151,10 @@ def convert_own_ship_initial_data(initial: Initial) -> Initial:
     initial : Initial
         Converted own ship initial data
     """
+    assert initial.position is not None
+    assert initial.sog is not None
+    assert initial.cog is not None
+
     initial.position.lon = deg_2_rad(initial.position.lon)
     initial.position.lat = deg_2_rad(initial.position.lat)
     initial.cog = deg_2_rad(initial.cog)
@@ -214,7 +220,7 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
 
     for encounter in encounters:
         beta: list[float] | float | None = encounter.beta
-        vector_time: list[float] | float | None = encounter.vector_time
+        vector_time: list[float] | float = encounter.vector_time
         if beta is not None:
             if isinstance(beta, list):
                 assert len(beta) == beta_list_length
@@ -223,13 +229,12 @@ def convert_encounters(encounters: list[Encounter]) -> list[Encounter]:
                 encounter.beta = beta
             else:
                 encounter.beta = deg_2_rad(beta)
-        if vector_time is not None:
-            if isinstance(vector_time, list):
-                assert len(vector_time) == vector_time_list_length
-                for i in range(len(vector_time)):
-                    vector_time[i] = min_2_s(vector_time[i])
-            else:
-                encounter.vector_time = min_2_s(vector_time)
+        if isinstance(vector_time, list):
+            assert len(vector_time) == vector_time_list_length
+            for i in range(len(vector_time)):
+                vector_time[i] = min_2_s(vector_time[i])
+        else:
+            encounter.vector_time = min_2_s(vector_time)
     return encounters
 
 

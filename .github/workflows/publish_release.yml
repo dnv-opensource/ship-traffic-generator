@@ -18,11 +18,13 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v5
         with:
-          name: artifact
+          name: dist
           path: dist
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         # with:                                             # Uncomment this line to publish to testpypi
         #   repository-url: https://test.pypi.org/legacy/   # Uncomment this line to publish to testpypi
   merge_into_release:

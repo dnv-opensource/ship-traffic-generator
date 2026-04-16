@@ -21,11 +21,11 @@ sys.path.insert(0, str(Path("../../src").absolute()))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "trafficgen"
-copyright = "2025, DNV AS. All rights reserved."
-author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich, Stephanie Kemna"
+copyright = "2026, DNV AS. All rights reserved."
+author = "Tom Arne Pedersen, Claas Rostock, Minos Hemrich, Roger Stenbro, Stephanie Kemna"
 
 # The full version, including alpha/beta/rc tags
-release = "0.8.4"
+release = "0.9.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

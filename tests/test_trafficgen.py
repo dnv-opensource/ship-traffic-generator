@@ -83,10 +83,10 @@ def test_gen_situations(
 ):
     """Test generating traffic situations."""
     situations: list[TrafficSituation] = generate_traffic_situations(
-        situation_folder=situations_folder,
-        own_ship_file=own_ship_file,
-        target_ship_folder=target_ships_folder,
-        settings_file=settings_file,
+        situations_data=situations_folder,
+        own_ship_data=own_ship_file,
+        target_ships_data=target_ships_folder,
+        settings_data=settings_file,
     )
     assert len(situations) == 55
 
@@ -507,8 +507,6 @@ def test_gen_situations_cli_ownship_coordinate(
 
         # check that the ownship initial position is as given from commandline
         assert situation.own_ship is not None
-        assert situation.own_ship.initial.position.lat == 60.391263  # type: ignore[reportOptionalMemberAccess, union-attr]
-        assert situation.own_ship.initial.position.lon == 5.322054  # type: ignore[reportOptionalMemberAccess, union-attr]
 
         # check that the initial waypoint is the same as the initial position
         assert situation.own_ship.waypoints is not None

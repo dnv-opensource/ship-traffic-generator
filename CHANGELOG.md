@@ -7,6 +7,102 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ### Changed
 
+
+
+## [0.9.0] - 2026-04-16
+
+### Changed
+* martime-schema 0.2.0 necessary updates:
+  * top level version number now referencing which version of the maritime-schema is used as basis for the traffic situation files
+  * initial position, sog, cog now removed from initial struct since the ships are initially placed in the first waypoint.
+  * added assert as initial position, sog  and cog were made optional
+  * `docs/source/output_files.rst`: Clarified that the top-level `version` field reflects the maritime-schema version; updated description to explain that `position`, `sog`, and `cog` are omitted from the `initial` struct because ships are initially placed at the first waypoint.
+* GitHub workflows:
+  * _test_future.yml: Updated job name to 'test315', updated Python specifiers to 3.15/py315, and updated the tested Python version range to 3.15.0-alpha - 3.15.0.
+  * _test_future.yml: Improved the regex and PowerShell code that finds and removes the Python upper version constraint in pyproject.toml.
+  * _build_and_publish_documentation.yml: Changed 'uv sync --upgrade' to 'uv sync --frozen' to avoid unintentional package upgrades.
+  * _code_quality.yml and _build_package.yml: Replaced double quotes with single quotes (the default in .yml files).
+  * Added explicit step names for uses of 'actions/checkout', 'actions/download-artifact', 'actions/upload-artifact', and 'pypa/gh-action-pypi-publish' for readability and consistency.
+  * Standardized artifact naming by ensuring 'upload-artifact' and 'download-artifact' use 'dist' consistently.
+  * pull_request_to_main.yml and nightly_build.yml: Added 'workflow_dispatch:' to allow manual triggering.
+  * Changed 'uv sync --upgrade' to 'uv sync -U'.
+  * Removed redundant 'Set up Python' steps (no longer needed because 'uv sync' installs Python if required).
+  * Renamed workflow step text to be more precise: 'Build source distribution and wheels' and 'Check build artifacts'.
+  * Updated the syntax used for OS and Python matrix definitions in test workflows.
+
+Output files structure:
+  * Renamed `version` to `trafficgenVersion` and added `schemaVersion` field to distinguish trafficgen version from maritime-schema version
+
+* Project configuration:
+  * pyproject.toml: Removed deprecated pyright setting 'reportShadowedImports'.
+  * pyproject.toml: Removed leading carets and trailing slashes from 'exclude' paths.
+  * pyproject.toml: Updated required Python version to ">= 3.11" and supported versions to 3.11, 3.12, 3.13, 3.14.
+  * pyproject.toml: Removed upper Python version constraint in 'requires-python', changing from ">= 3.11, < 3.15" to ">= 3.11". <br>
+    Detailed background and reasoning in this good yet long post by Henry Schreiner:
+    https://iscinumpy.dev/post/bound-version-constraints/#pinning-the-python-version-is-special <br>
+    TLDR: Placing an upper Python version constraint on a Python package causes more harm than it provides benefits.
+    The upper version constraint unnecessarily manifests incompatibility with future Python releases.
+    Removing the upper version constraint ensures the package remains installable as Python evolves.
+    In the majority of cases, the newer Python version will anyhow be backward-compatible. And in the rare case where your package would really not work with a newer Python version,
+    users can at least find a solution manually to resolve the conflict, e.g. by pinning your package to the last version compatible with the environment they install it in.
+    That way, we ensure it remains _possible_ for users to find a solution, instead of rendering it impossible forever.
+  * pyproject.toml: Removed "manage.py" from the default files to include in source distribution.
+  * ruff.toml: Added file-specific ignores for modules named "types.py".
+  * .pre-commit-config.yaml: Updated id of ruff to ruff-check.
+  * .sourcery.yaml: Updated the lowest supported Python version to '3.11'.
+
+* VS Code settings:
+  * Recommended extensions: Removed deprecated IntelliCode and replaced it with GitHub Copilot Chat.
+  * Recommended extensions: Removed 'njqdev.vscode-python-typehint' (no longer maintained and now covered by GitHub Copilot).
+  * Recommended extensions: Added 'ms-python.debugpy' and 'ms-python.vscode-python-envs'.
+  * launch.json: Cleaned up launch configurations and made them uniform.
+
+* Documentation:
+  * docs/source/conf.py: Updated copyright year to 2026.
+  * README.md: Updated minimum required Python version to 3.11.
+
+* Tests:
+  * tests/conftest.py: Slightly restructured to improve git diff view and ease manual inclusion/exclusion of torch-related code.
+
+
+### Dependencies
+* .pre-commit-config.yaml: Updated rev of pre-commit-hooks to v6.0.0
+* .pre-commit-config.yaml: Updated rev of ruff-pre-commit to v0.15.1
+* Updated to click>=8.3
+* Updated to dictio>=0.4.3
+* Updated to folium>=0.20.0
+* Updated to furo>=2025.12
+* Updated to jupyter>=1.1.1
+* Updated to matplotlib>=3.10
+* Updated to mypy>=1.19.1
+* Updated to myst-parser>=5.0
+* Updated to numpy>=2.3
+* Updated to pandas-stubs>=3.0
+* Updated to pre-commit>=4.5
+* Updated to pydantic>=2.12
+* Updated to pyproj>=3.7
+* Updated to pyright>=1.1.408
+* Updated to pytest>=9.0
+* Updated to pytest-cov>=7.0
+* Updated to ruff>=0.15.1
+* Updated to sourcery>=1.43.0
+* Updated to sphinx>=9.0
+* Updated to sphinx-argparse-cli>=1.20.1
+* Updated to sphinx-autodoc-typehints>=3.6
+* Updated to sphinxcontrib-mermaid>=2.0
+* GitHub Workflows:
+  * Updated 'checkout' action to v5
+  * Updated 'download-artifact' action to v5
+  * Updated 'setup-uv' action to v7
+  * Updated 'upload-artifact' action to v5
+
+
+## [0.8.5] - 2026-02-20
+
+### Changed
+
+* Add basic REST API and docker build for easier integration
+
 ## [0.8.4] - 2025-11-26
 
 ### Changed

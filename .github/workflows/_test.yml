@@ -4,30 +4,23 @@ on: workflow_call
 
 jobs:
   test:
-    name: Test on ${{matrix.python.version}}-${{matrix.platform.runner}}
-    runs-on: ${{ matrix.platform.runner }}
+    name: Test (Python ${{ matrix.python }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
-        platform:
-          - runner: ubuntu-latest
-          - runner: windows-latest
-          # - runner: macos-latest
-        python:
-          - version: '3.11'
-          - version: '3.12'
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.12', '3.13', '3.14']
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v5
       - name: Install uv
-        uses: astral-sh/setup-uv@v2
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Install Python ${{ matrix.python.version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python.version }}
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
-        run: uv sync -p ${{ matrix.python.version }} -U --no-dev
+        run: uv sync -p ${{ matrix.python }} -U --no-dev
       - name: Run pytest
         run: >
           uv run --with pytest --with pytest-cov
