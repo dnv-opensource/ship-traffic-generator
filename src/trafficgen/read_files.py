@@ -61,11 +61,13 @@ def read_situation_from_file(file_name: Path) -> SituationInput | None:
 
     Parameters
     ----------
-        file_name (Path): The path to the JSON file containing the situation configuration.
+    file_name : Path
+        The path to the JSON file containing the situation configuration.
 
     Returns
     -------
-        SituationInput | None: The initialized and converted SituationInput object if successful,
+    situation : SituationInput | None
+        The initialized and converted SituationInput object if successful,
         or None if the file could not be read or parsed.
     """
     with Path.open(file_name, encoding="utf-8") as f:
@@ -149,6 +151,10 @@ def convert_own_ship_initial_data(initial: Initial) -> Initial:
     initial : Initial
         Converted own ship initial data
     """
+    assert initial.position is not None
+    assert initial.sog is not None
+    assert initial.cog is not None
+
     initial.position.lon = deg_2_rad(initial.position.lon)
     initial.position.lat = deg_2_rad(initial.position.lat)
     initial.cog = deg_2_rad(initial.cog)

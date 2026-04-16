@@ -1,16 +1,11 @@
 name: Build and publish documentation
 
-on:
-  workflow_call:
-  workflow_dispatch:
-
+on: workflow_call
 
 env:
   DEFAULT_BRANCH: 'release'
   #SPHINXOPTS: '-W --keep-going -T'
   # ^-- If these SPHINXOPTS are enabled, then be strict about the builds and fail on any warnings
-
-
 
 jobs:
   build-and-publish-docs:
@@ -18,20 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout active branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           lfs: true
       - name: Install uv
-        uses: astral-sh/setup-uv@v2
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "uv.lock"
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version-file: "pyproject.toml"
+          cache-dependency-glob: 'uv.lock'
       - name: Install the project
-        run: uv sync --upgrade
+        run: uv sync --frozen
       - name: Print debugging information
         run: |
           echo "github.ref:" ${{github.ref}}

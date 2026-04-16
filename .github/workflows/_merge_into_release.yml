@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v5
         with:
           # Fetch the whole history to prevent unrelated history errors
           fetch-depth: 0

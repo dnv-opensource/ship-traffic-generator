@@ -162,6 +162,9 @@ def plot_specific_traffic_situation(
     situation: TrafficSituation = traffic_situations[situation_number - 1]
     assert situation.own_ship is not None
     assert situation.own_ship.initial is not None
+    assert situation.own_ship.initial.position is not None
+    assert situation.own_ship.initial.sog is not None
+    assert situation.own_ship.initial.cog is not None
     assert encounter_settings.common_vector is not None
 
     lat_lon0 = situation.own_ship.initial.position
@@ -220,6 +223,9 @@ def add_ship_to_map(
         map_plot = Map(location=(rad_2_deg(lat_lon0.lat), rad_2_deg(lat_lon0.lon)), zoom_start=10)
 
     assert ship.initial is not None
+    assert ship.initial.position is not None
+    assert ship.initial.sog is not None
+    assert ship.initial.cog is not None
     vector_length = vector_time * ship.initial.sog
     _ = map_plot.add_child(
         Polygon(
@@ -278,6 +284,8 @@ def plot_traffic_situations(
     for situation in traffic_situations:
         assert situation.own_ship is not None
         assert situation.own_ship.initial is not None
+        assert situation.own_ship.initial.position is not None
+
         lat_lon0 = situation.own_ship.initial.position
         max_value = find_max_value_for_plot(situation.own_ship, max_value, lat_lon0)
         assert situation.target_ships is not None
@@ -302,6 +310,8 @@ def plot_traffic_situations(
         assert situation.own_ship is not None
         assert situation.own_ship.initial
         assert encounter_settings.common_vector is not None
+        assert situation.own_ship.initial.position is not None
+
         lat_lon0 = situation.own_ship.initial.position
         axes = add_ship_to_plot(
             situation.own_ship,
@@ -347,9 +357,11 @@ def find_max_value_for_plot(
 
     Returns
     -------
-        * max_value: updated maximum deviation in north, east direction [m]
+    max_value : float
+        Updated maximum deviation in north and east direction [m].
     """
     assert ship.initial is not None
+    assert ship.initial.position is not None
 
     north, east, _ = llh2flat(
         ship.initial.position.lat,
@@ -387,12 +399,21 @@ def add_ship_to_plot(
         Instance of figure axis. If not set, instance is set to None
     color : str
         Color of the ship. If not set, color is 'black'
+
+    Returns
+    -------
+    axes : Axes
+        Updated instance of figure axis.
     """
     if axes is None:
         axes = plt.gca()
     assert isinstance(axes, Axes)
 
     assert ship.initial is not None
+    assert ship.initial.position is not None
+    assert ship.initial.sog is not None
+    assert ship.initial.cog is not None
+
     pos_0_north, pos_0_east, _ = llh2flat(
         ship.initial.position.lat,
         ship.initial.position.lon,

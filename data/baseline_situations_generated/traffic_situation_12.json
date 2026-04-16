@@ -1,15 +1,10 @@
 {
-    "version": "0.8.3",
+    "trafficgenVersion": "0.8.5",
+    "schemaVersion": "0.2.0",
     "title": "CR-GW, CR-SO",
     "description": "A crossing give-way and crossing stand-on situation with two target ships.",
     "ownShip": {
         "initial": {
-            "position": {
-                "lon": 10.490654,
-                "lat": 58.763449
-            },
-            "sog": 10.0,
-            "cog": 0.0,
             "heading": 0.0,
             "navStatus": "Under way using engine"
         },
@@ -52,12 +47,6 @@
     "targetShips": [
         {
             "initial": {
-                "position": {
-                    "lon": 10.61125394,
-                    "lat": 58.82610217
-                },
-                "sog": 12.1,
-                "cog": 260.92,
                 "heading": 260.92,
                 "navStatus": "Under way using engine"
             },
@@ -98,12 +87,6 @@
         },
         {
             "initial": {
-                "position": {
-                    "lon": 10.4322808,
-                    "lat": 58.7586461
-                },
-                "sog": 13.0,
-                "cog": 31.68,
                 "heading": 31.68,
                 "navStatus": "Under way using engine"
             },

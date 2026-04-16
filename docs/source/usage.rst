@@ -27,7 +27,7 @@ Example::
     trafficgen gen-situation -s ./data/example_situations_input -o ./data/test_output
 
 Input situations
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 When generating situations without specifying where the desired situations (``--situation``) are found, the
 default path, which is ``default=./baseline_situations_input/``, will be used.
 For more information on input files, see :ref:`input_files`.
