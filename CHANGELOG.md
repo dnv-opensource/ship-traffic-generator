@@ -6,6 +6,12 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 ## [Unreleased]
 
 ### Changed
+
+
+
+## [0.9.0] - 2026-04-16
+
+### Changed
 * martime-schema 0.2.0 necessary updates:
   * top level version number now referencing which version of the maritime-schema is used as basis for the traffic situation files
   * initial position, sog, cog now removed from initial struct since the ships are initially placed in the first waypoint.

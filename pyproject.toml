@@ -27,7 +27,7 @@ allow-direct-references = true
 
 [project]
 name = "trafficgen"
-version = "0.8.5"
+version = "0.9.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
 requires-python = ">= 3.11"
