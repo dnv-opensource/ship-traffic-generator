@@ -1,0 +1,66 @@
+ShipStatic
+==========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: ShipStatic
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~ShipStatic.__init__
+      ~ShipStatic.coerce_id_to_int
+      ~ShipStatic.construct
+      ~ShipStatic.copy
+      ~ShipStatic.dict
+      ~ShipStatic.from_orm
+      ~ShipStatic.json
+      ~ShipStatic.model_construct
+      ~ShipStatic.model_copy
+      ~ShipStatic.model_dump
+      ~ShipStatic.model_dump_json
+      ~ShipStatic.model_json_schema
+      ~ShipStatic.model_parametrized_name
+      ~ShipStatic.model_post_init
+      ~ShipStatic.model_rebuild
+      ~ShipStatic.model_validate
+      ~ShipStatic.model_validate_json
+      ~ShipStatic.model_validate_strings
+      ~ShipStatic.parse_file
+      ~ShipStatic.parse_obj
+      ~ShipStatic.parse_raw
+      ~ShipStatic.schema
+      ~ShipStatic.schema_json
+      ~ShipStatic.update_forward_refs
+      ~ShipStatic.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~ShipStatic.model_computed_fields
+      ~ShipStatic.model_config
+      ~ShipStatic.model_extra
+      ~ShipStatic.model_fields
+      ~ShipStatic.model_fields_set
+      ~ShipStatic.id
+      ~ShipStatic.mmsi
+      ~ShipStatic.imo
+      ~ShipStatic.name
+      ~ShipStatic.dimensions
+      ~ShipStatic.ship_type
+      ~ShipStatic.path_type
+      ~ShipStatic.sog_min
+      ~ShipStatic.sog_max
+   
+   

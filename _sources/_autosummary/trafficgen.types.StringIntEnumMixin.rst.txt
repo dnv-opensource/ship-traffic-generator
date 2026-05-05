@@ -1,0 +1,71 @@
+StringIntEnumMixin
+==================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: StringIntEnumMixin
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~StringIntEnumMixin.encode
+      ~StringIntEnumMixin.replace
+      ~StringIntEnumMixin.split
+      ~StringIntEnumMixin.rsplit
+      ~StringIntEnumMixin.join
+      ~StringIntEnumMixin.capitalize
+      ~StringIntEnumMixin.casefold
+      ~StringIntEnumMixin.title
+      ~StringIntEnumMixin.center
+      ~StringIntEnumMixin.count
+      ~StringIntEnumMixin.expandtabs
+      ~StringIntEnumMixin.find
+      ~StringIntEnumMixin.partition
+      ~StringIntEnumMixin.index
+      ~StringIntEnumMixin.ljust
+      ~StringIntEnumMixin.lower
+      ~StringIntEnumMixin.lstrip
+      ~StringIntEnumMixin.rfind
+      ~StringIntEnumMixin.rindex
+      ~StringIntEnumMixin.rjust
+      ~StringIntEnumMixin.rstrip
+      ~StringIntEnumMixin.rpartition
+      ~StringIntEnumMixin.splitlines
+      ~StringIntEnumMixin.strip
+      ~StringIntEnumMixin.swapcase
+      ~StringIntEnumMixin.translate
+      ~StringIntEnumMixin.upper
+      ~StringIntEnumMixin.startswith
+      ~StringIntEnumMixin.endswith
+      ~StringIntEnumMixin.removeprefix
+      ~StringIntEnumMixin.removesuffix
+      ~StringIntEnumMixin.isascii
+      ~StringIntEnumMixin.islower
+      ~StringIntEnumMixin.isupper
+      ~StringIntEnumMixin.istitle
+      ~StringIntEnumMixin.isspace
+      ~StringIntEnumMixin.isdecimal
+      ~StringIntEnumMixin.isdigit
+      ~StringIntEnumMixin.isnumeric
+      ~StringIntEnumMixin.isalpha
+      ~StringIntEnumMixin.isalnum
+      ~StringIntEnumMixin.isidentifier
+      ~StringIntEnumMixin.isprintable
+      ~StringIntEnumMixin.zfill
+      ~StringIntEnumMixin.format
+      ~StringIntEnumMixin.format_map
+      ~StringIntEnumMixin.maketrans
+      ~StringIntEnumMixin.__init__
+   
+   
+
+
+   
+   
+   
