@@ -1,0 +1,64 @@
+Dimensions
+==========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Dimensions
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Dimensions.__init__
+      ~Dimensions.construct
+      ~Dimensions.copy
+      ~Dimensions.dict
+      ~Dimensions.from_orm
+      ~Dimensions.json
+      ~Dimensions.model_construct
+      ~Dimensions.model_copy
+      ~Dimensions.model_dump
+      ~Dimensions.model_dump_json
+      ~Dimensions.model_json_schema
+      ~Dimensions.model_parametrized_name
+      ~Dimensions.model_post_init
+      ~Dimensions.model_rebuild
+      ~Dimensions.model_validate
+      ~Dimensions.model_validate_json
+      ~Dimensions.model_validate_strings
+      ~Dimensions.parse_file
+      ~Dimensions.parse_obj
+      ~Dimensions.parse_raw
+      ~Dimensions.schema
+      ~Dimensions.schema_json
+      ~Dimensions.update_forward_refs
+      ~Dimensions.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Dimensions.model_computed_fields
+      ~Dimensions.model_config
+      ~Dimensions.model_extra
+      ~Dimensions.model_fields
+      ~Dimensions.model_fields_set
+      ~Dimensions.length
+      ~Dimensions.width
+      ~Dimensions.height
+      ~Dimensions.draught
+      ~Dimensions.a
+      ~Dimensions.b
+      ~Dimensions.c
+      ~Dimensions.d
+   
+   

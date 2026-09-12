@@ -1,0 +1,60 @@
+Leg
+===
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Leg
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Leg.__init__
+      ~Leg.construct
+      ~Leg.copy
+      ~Leg.dict
+      ~Leg.from_orm
+      ~Leg.json
+      ~Leg.model_construct
+      ~Leg.model_copy
+      ~Leg.model_dump
+      ~Leg.model_dump_json
+      ~Leg.model_json_schema
+      ~Leg.model_parametrized_name
+      ~Leg.model_post_init
+      ~Leg.model_rebuild
+      ~Leg.model_validate
+      ~Leg.model_validate_json
+      ~Leg.model_validate_strings
+      ~Leg.parse_file
+      ~Leg.parse_obj
+      ~Leg.parse_raw
+      ~Leg.schema
+      ~Leg.schema_json
+      ~Leg.update_forward_refs
+      ~Leg.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Leg.model_computed_fields
+      ~Leg.model_config
+      ~Leg.model_extra
+      ~Leg.model_fields
+      ~Leg.model_fields_set
+      ~Leg.starboard_xtd
+      ~Leg.portside_xtd
+      ~Leg.sog
+      ~Leg.data
+   
+   

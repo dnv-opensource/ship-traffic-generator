@@ -1,0 +1,58 @@
+Position
+========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Position
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Position.__init__
+      ~Position.construct
+      ~Position.copy
+      ~Position.dict
+      ~Position.from_orm
+      ~Position.json
+      ~Position.model_construct
+      ~Position.model_copy
+      ~Position.model_dump
+      ~Position.model_dump_json
+      ~Position.model_json_schema
+      ~Position.model_parametrized_name
+      ~Position.model_post_init
+      ~Position.model_rebuild
+      ~Position.model_validate
+      ~Position.model_validate_json
+      ~Position.model_validate_strings
+      ~Position.parse_file
+      ~Position.parse_obj
+      ~Position.parse_raw
+      ~Position.schema
+      ~Position.schema_json
+      ~Position.update_forward_refs
+      ~Position.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Position.model_computed_fields
+      ~Position.model_config
+      ~Position.model_extra
+      ~Position.model_fields
+      ~Position.model_fields_set
+      ~Position.x
+      ~Position.y
+   
+   

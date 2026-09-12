@@ -1,0 +1,60 @@
+DataPoint
+=========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: DataPoint
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~DataPoint.__init__
+      ~DataPoint.construct
+      ~DataPoint.copy
+      ~DataPoint.dict
+      ~DataPoint.from_orm
+      ~DataPoint.json
+      ~DataPoint.model_construct
+      ~DataPoint.model_copy
+      ~DataPoint.model_dump
+      ~DataPoint.model_dump_json
+      ~DataPoint.model_json_schema
+      ~DataPoint.model_parametrized_name
+      ~DataPoint.model_post_init
+      ~DataPoint.model_rebuild
+      ~DataPoint.model_validate
+      ~DataPoint.model_validate_json
+      ~DataPoint.model_validate_strings
+      ~DataPoint.parse_file
+      ~DataPoint.parse_obj
+      ~DataPoint.parse_raw
+      ~DataPoint.schema
+      ~DataPoint.schema_json
+      ~DataPoint.update_forward_refs
+      ~DataPoint.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~DataPoint.model_computed_fields
+      ~DataPoint.model_config
+      ~DataPoint.model_extra
+      ~DataPoint.model_fields
+      ~DataPoint.model_fields_set
+      ~DataPoint.value
+      ~DataPoint.interp_start
+      ~DataPoint.interp_end
+      ~DataPoint.interp_method
+   
+   
