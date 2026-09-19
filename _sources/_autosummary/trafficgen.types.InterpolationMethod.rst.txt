@@ -1,0 +1,81 @@
+InterpolationMethod
+===================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: InterpolationMethod
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~InterpolationMethod.encode
+      ~InterpolationMethod.replace
+      ~InterpolationMethod.split
+      ~InterpolationMethod.rsplit
+      ~InterpolationMethod.join
+      ~InterpolationMethod.capitalize
+      ~InterpolationMethod.casefold
+      ~InterpolationMethod.title
+      ~InterpolationMethod.center
+      ~InterpolationMethod.count
+      ~InterpolationMethod.expandtabs
+      ~InterpolationMethod.find
+      ~InterpolationMethod.partition
+      ~InterpolationMethod.index
+      ~InterpolationMethod.ljust
+      ~InterpolationMethod.lower
+      ~InterpolationMethod.lstrip
+      ~InterpolationMethod.rfind
+      ~InterpolationMethod.rindex
+      ~InterpolationMethod.rjust
+      ~InterpolationMethod.rstrip
+      ~InterpolationMethod.rpartition
+      ~InterpolationMethod.splitlines
+      ~InterpolationMethod.strip
+      ~InterpolationMethod.swapcase
+      ~InterpolationMethod.translate
+      ~InterpolationMethod.upper
+      ~InterpolationMethod.startswith
+      ~InterpolationMethod.endswith
+      ~InterpolationMethod.removeprefix
+      ~InterpolationMethod.removesuffix
+      ~InterpolationMethod.isascii
+      ~InterpolationMethod.islower
+      ~InterpolationMethod.isupper
+      ~InterpolationMethod.istitle
+      ~InterpolationMethod.isspace
+      ~InterpolationMethod.isdecimal
+      ~InterpolationMethod.isdigit
+      ~InterpolationMethod.isnumeric
+      ~InterpolationMethod.isalpha
+      ~InterpolationMethod.isalnum
+      ~InterpolationMethod.isidentifier
+      ~InterpolationMethod.isprintable
+      ~InterpolationMethod.zfill
+      ~InterpolationMethod.format
+      ~InterpolationMethod.format_map
+      ~InterpolationMethod.maketrans
+      ~InterpolationMethod.__init__
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~InterpolationMethod.LINEAR
+      ~InterpolationMethod.COSINE
+      ~InterpolationMethod.SMOOTHSTEP
+      ~InterpolationMethod.ACCELERATE
+      ~InterpolationMethod.DECELERATE
+      ~InterpolationMethod.ORDINAL
+   
+   
