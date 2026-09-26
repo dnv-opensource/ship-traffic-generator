@@ -1,0 +1,58 @@
+OwnShipInitial
+==============
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: OwnShipInitial
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~OwnShipInitial.__init__
+      ~OwnShipInitial.construct
+      ~OwnShipInitial.copy
+      ~OwnShipInitial.dict
+      ~OwnShipInitial.from_orm
+      ~OwnShipInitial.json
+      ~OwnShipInitial.model_construct
+      ~OwnShipInitial.model_copy
+      ~OwnShipInitial.model_dump
+      ~OwnShipInitial.model_dump_json
+      ~OwnShipInitial.model_json_schema
+      ~OwnShipInitial.model_parametrized_name
+      ~OwnShipInitial.model_post_init
+      ~OwnShipInitial.model_rebuild
+      ~OwnShipInitial.model_validate
+      ~OwnShipInitial.model_validate_json
+      ~OwnShipInitial.model_validate_strings
+      ~OwnShipInitial.parse_file
+      ~OwnShipInitial.parse_obj
+      ~OwnShipInitial.parse_raw
+      ~OwnShipInitial.schema
+      ~OwnShipInitial.schema_json
+      ~OwnShipInitial.update_forward_refs
+      ~OwnShipInitial.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~OwnShipInitial.model_computed_fields
+      ~OwnShipInitial.model_config
+      ~OwnShipInitial.model_extra
+      ~OwnShipInitial.model_fields
+      ~OwnShipInitial.model_fields_set
+      ~OwnShipInitial.initial
+      ~OwnShipInitial.waypoints
+   
+   
