@@ -1,0 +1,58 @@
+GeoPosition
+===========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: GeoPosition
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~GeoPosition.__init__
+      ~GeoPosition.construct
+      ~GeoPosition.copy
+      ~GeoPosition.dict
+      ~GeoPosition.from_orm
+      ~GeoPosition.json
+      ~GeoPosition.model_construct
+      ~GeoPosition.model_copy
+      ~GeoPosition.model_dump
+      ~GeoPosition.model_dump_json
+      ~GeoPosition.model_json_schema
+      ~GeoPosition.model_parametrized_name
+      ~GeoPosition.model_post_init
+      ~GeoPosition.model_rebuild
+      ~GeoPosition.model_validate
+      ~GeoPosition.model_validate_json
+      ~GeoPosition.model_validate_strings
+      ~GeoPosition.parse_file
+      ~GeoPosition.parse_obj
+      ~GeoPosition.parse_raw
+      ~GeoPosition.schema
+      ~GeoPosition.schema_json
+      ~GeoPosition.update_forward_refs
+      ~GeoPosition.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~GeoPosition.model_computed_fields
+      ~GeoPosition.model_config
+      ~GeoPosition.model_extra
+      ~GeoPosition.model_fields
+      ~GeoPosition.model_fields_set
+      ~GeoPosition.lon
+      ~GeoPosition.lat
+   
+   

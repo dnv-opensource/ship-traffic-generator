@@ -1,0 +1,78 @@
+PathType
+========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: PathType
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~PathType.encode
+      ~PathType.replace
+      ~PathType.split
+      ~PathType.rsplit
+      ~PathType.join
+      ~PathType.capitalize
+      ~PathType.casefold
+      ~PathType.title
+      ~PathType.center
+      ~PathType.count
+      ~PathType.expandtabs
+      ~PathType.find
+      ~PathType.partition
+      ~PathType.index
+      ~PathType.ljust
+      ~PathType.lower
+      ~PathType.lstrip
+      ~PathType.rfind
+      ~PathType.rindex
+      ~PathType.rjust
+      ~PathType.rstrip
+      ~PathType.rpartition
+      ~PathType.splitlines
+      ~PathType.strip
+      ~PathType.swapcase
+      ~PathType.translate
+      ~PathType.upper
+      ~PathType.startswith
+      ~PathType.endswith
+      ~PathType.removeprefix
+      ~PathType.removesuffix
+      ~PathType.isascii
+      ~PathType.islower
+      ~PathType.isupper
+      ~PathType.istitle
+      ~PathType.isspace
+      ~PathType.isdecimal
+      ~PathType.isdigit
+      ~PathType.isnumeric
+      ~PathType.isalpha
+      ~PathType.isalnum
+      ~PathType.isidentifier
+      ~PathType.isprintable
+      ~PathType.zfill
+      ~PathType.format
+      ~PathType.format_map
+      ~PathType.maketrans
+      ~PathType.__init__
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~PathType.RTZ
+      ~PathType.BEZIER
+      ~PathType.LINEAR
+   
+   

@@ -1,0 +1,60 @@
+Encounter
+=========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Encounter
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Encounter.__init__
+      ~Encounter.construct
+      ~Encounter.copy
+      ~Encounter.dict
+      ~Encounter.from_orm
+      ~Encounter.json
+      ~Encounter.model_construct
+      ~Encounter.model_copy
+      ~Encounter.model_dump
+      ~Encounter.model_dump_json
+      ~Encounter.model_json_schema
+      ~Encounter.model_parametrized_name
+      ~Encounter.model_post_init
+      ~Encounter.model_rebuild
+      ~Encounter.model_validate
+      ~Encounter.model_validate_json
+      ~Encounter.model_validate_strings
+      ~Encounter.parse_file
+      ~Encounter.parse_obj
+      ~Encounter.parse_raw
+      ~Encounter.schema
+      ~Encounter.schema_json
+      ~Encounter.update_forward_refs
+      ~Encounter.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Encounter.model_computed_fields
+      ~Encounter.model_config
+      ~Encounter.model_extra
+      ~Encounter.model_fields
+      ~Encounter.model_fields_set
+      ~Encounter.desired_encounter_type
+      ~Encounter.beta
+      ~Encounter.relative_speed
+      ~Encounter.vector_time
+   
+   

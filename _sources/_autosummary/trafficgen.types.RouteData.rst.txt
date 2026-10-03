@@ -1,0 +1,57 @@
+RouteData
+=========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: RouteData
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~RouteData.__init__
+      ~RouteData.construct
+      ~RouteData.copy
+      ~RouteData.dict
+      ~RouteData.from_orm
+      ~RouteData.json
+      ~RouteData.model_construct
+      ~RouteData.model_copy
+      ~RouteData.model_dump
+      ~RouteData.model_dump_json
+      ~RouteData.model_json_schema
+      ~RouteData.model_parametrized_name
+      ~RouteData.model_post_init
+      ~RouteData.model_rebuild
+      ~RouteData.model_validate
+      ~RouteData.model_validate_json
+      ~RouteData.model_validate_strings
+      ~RouteData.parse_file
+      ~RouteData.parse_obj
+      ~RouteData.parse_raw
+      ~RouteData.schema
+      ~RouteData.schema_json
+      ~RouteData.update_forward_refs
+      ~RouteData.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~RouteData.model_computed_fields
+      ~RouteData.model_config
+      ~RouteData.model_extra
+      ~RouteData.model_fields
+      ~RouteData.model_fields_set
+      ~RouteData.sog
+   
+   
