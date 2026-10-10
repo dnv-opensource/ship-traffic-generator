@@ -1,0 +1,29 @@
+EncounterType
+=============
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: EncounterType
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~EncounterType.OVERTAKING_STAND_ON
+      ~EncounterType.OVERTAKING_GIVE_WAY
+      ~EncounterType.HEAD_ON
+      ~EncounterType.CROSSING_GIVE_WAY
+      ~EncounterType.CROSSING_STAND_ON
+      ~EncounterType.NO_RISK_COLLISION
+   
+   

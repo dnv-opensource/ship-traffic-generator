@@ -1,0 +1,59 @@
+Waypoint
+========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Waypoint
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Waypoint.__init__
+      ~Waypoint.construct
+      ~Waypoint.copy
+      ~Waypoint.dict
+      ~Waypoint.from_orm
+      ~Waypoint.json
+      ~Waypoint.model_construct
+      ~Waypoint.model_copy
+      ~Waypoint.model_dump
+      ~Waypoint.model_dump_json
+      ~Waypoint.model_json_schema
+      ~Waypoint.model_parametrized_name
+      ~Waypoint.model_post_init
+      ~Waypoint.model_rebuild
+      ~Waypoint.model_validate
+      ~Waypoint.model_validate_json
+      ~Waypoint.model_validate_strings
+      ~Waypoint.parse_file
+      ~Waypoint.parse_obj
+      ~Waypoint.parse_raw
+      ~Waypoint.schema
+      ~Waypoint.schema_json
+      ~Waypoint.update_forward_refs
+      ~Waypoint.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Waypoint.model_computed_fields
+      ~Waypoint.model_config
+      ~Waypoint.model_extra
+      ~Waypoint.model_fields
+      ~Waypoint.model_fields_set
+      ~Waypoint.position
+      ~Waypoint.turn_radius
+      ~Waypoint.leg
+   
+   
