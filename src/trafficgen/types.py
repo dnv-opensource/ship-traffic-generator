@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 from enum import Enum, StrEnum
 from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, Any, Self
@@ -550,10 +550,10 @@ class TrafficSituation(BaseModelConfig):
     ) = None
     start_time: (
         Annotated[
-            datetime.datetime,
+            dt.datetime,
             Field(
                 description="Starting time of the situation in `ISO 8601` format `YYYY-MM-DDThh:mm:ssZ`",
-                examples=[datetime.datetime(2025, 1, 1, 0, 0, 0, tzinfo=datetime.UTC)],
+                examples=[dt.datetime(2025, 1, 1, 0, 0, 0, tzinfo=dt.UTC)],
             ),
         ]
         | None
