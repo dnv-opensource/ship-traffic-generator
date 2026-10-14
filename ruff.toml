@@ -5,6 +5,7 @@ exclude = [
     "*cache",
     "**/__pycache__",
     "src/folder_to_be_excluded",
+    "STYLEGUIDE.md",
 ]
 src = [
     "src",
