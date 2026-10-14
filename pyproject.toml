@@ -30,7 +30,7 @@ name = "trafficgen"
 version = "0.9.0"
 description = "Automatic generation of ship traffic situations from a set of predefined situations"
 readme = "README.md"
-requires-python = ">= 3.12"
+requires-python = ">= 3.11"
 license = { file = "LICENSE" }
 authors = [
     { name = "Tom Arne Pedersen", email = "Tom.Arne.Pedersen@dnv.com" },
@@ -66,8 +66,8 @@ classifiers = [
 ]
 dependencies = [
     "dictIO>=0.4.4",
-    "numpy>=2.5.4",
-    "pyproj>=3.8.0",
+    "numpy>=2.4.6",
+    "pyproj>=3.7.2",
     "matplotlib>=3.11.2",
     "global-land-mask>=1.0.0",
     "folium>=0.20.0",
@@ -97,9 +97,9 @@ dev = [
     "mypy>=2.4.0",
     "sourcery>=1.46.0",
     "pre-commit>=4.7.0",
-    "Sphinx>=9.1.0",
+    "Sphinx>=9.0.4",
     "sphinx-argparse-cli>=1.24.0",
-    "sphinx-autodoc-typehints>=3.13.9",
+    "sphinx-autodoc-typehints>=3.6.1",
     "sphinxcontrib-mermaid>=2.1.1",
     "sphinx-click>=6.2.0",
     "myst-parser>=5.1.0",
