@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Root level fixtures for `trafficgen`"""
 
 from pathlib import Path

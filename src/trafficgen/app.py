@@ -1,3 +1,5 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
 """Flask API endpoints for generating ship traffic situations."""
 
 import json

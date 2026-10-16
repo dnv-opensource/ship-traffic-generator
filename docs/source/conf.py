@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 # mypy: ignore-errors
 
 # Configuration file for the Sphinx documentation builder.

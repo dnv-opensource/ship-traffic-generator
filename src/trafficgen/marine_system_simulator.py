@@ -1,3 +1,6 @@
+# Copyright (c) 2021 T. I. Fossen
+# SPDX-License-Identifier: MIT
+
 """
 The Marine Systems Simulator (MSS) is a Matlab and Simulink library for marine systems publicly available at https://github.com/cybergalactic/MSS.
 
