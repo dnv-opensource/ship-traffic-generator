@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 # pyright: reportMissingParameterType=false
 # pyright: reportUnknownParameterType=false
 # The click package is unfortunately not typed. Hence the following pyright exemption.

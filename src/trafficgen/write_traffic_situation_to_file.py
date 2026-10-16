@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Functions to clean traffic situations data before writing it to a json file."""
 
 import json
