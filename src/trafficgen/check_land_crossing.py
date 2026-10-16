@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Module with helper functions to determine if a generated path is crossing land."""
 
 from global_land_mask import globe

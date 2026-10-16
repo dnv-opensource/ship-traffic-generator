@@ -25,44 +25,50 @@ References, details as well as examples of bad/good styles and their respective 
 * No whitespace adjacent to parentheses, brackets, or braces
 
 ```py
-    # Bad
-    spam( items[ 1 ], { key1 : arg1, key2 : arg2 }, )
+# Bad
+spam(
+    items[1],
+    {key1: arg1, key2: arg2},
+)
 
-    # Good
-    spam(items[1], {key1: arg1, key2: arg2}, [])
+# Good
+spam(items[1], {key1: arg1, key2: arg2}, [])
 ```
 
 * Surround operators with single whitespace on either side.
 
 ```py
-    # Bad
-    x<1
+# Bad
+x < 1
 
-    # Good
-    x == 1
+# Good
+x == 1
 ```
 
 * Never end your lines with a semicolon, and do not use a semicolon to put two statements on the same line
 * When branching, always start a new block on a new line
 
 ```py
-    # Bad
-    if flag: return None
+# Bad
+if flag:
+    return None
 
-    # Good
-    if flag:
-        return None
+# Good
+if flag:
+    return None
 ```
 
 * Similarly to branching, do not write methods on one line in any case:
 
 ```py
-    # Bad
-    def do_something(self): print("Something")
+# Bad
+def do_something(self):
+    print("Something")
 
-    # Good
-    def do_something(self):
-        print("Something")
+
+# Good
+def do_something(self):
+    print("Something")
 ```
 
 * Place a class's `__init__` function (the constructor) always at the beginning of the class
@@ -72,67 +78,47 @@ References, details as well as examples of bad/good styles and their respective 
 * If function arguments do not fit into the specified line length, move them to a new line with indentation
 
 ```py
-    # Bad
-    def long_function_name(var_one, var_two, var_three,
-        var_four):
-        print(var_one)
+# Bad
+def long_function_name(var_one, var_two, var_three, var_four):
+    print(var_one)
 
-    # Bad
-    def long_function_name(var_one, var_two, var_three,
-            var_four):
-        print(var_one)
 
-    # Better (but not preferred)
-    def long_function_name(var_one,
-                           var_two,
-                           var_three,
-                           var_four):
-        print(var_one)
+# Bad
+def long_function_name(var_one, var_two, var_three, var_four):
+    print(var_one)
 
-    # Good (and preferred)
-    def long_function_name(
-        var_one,
-        var_two,
-        var_three,
-        var_four,
-    ):
-        print(var_one)
+
+# Better (but not preferred)
+def long_function_name(var_one, var_two, var_three, var_four):
+    print(var_one)
+
+
+# Good (and preferred)
+def long_function_name(
+    var_one,
+    var_two,
+    var_three,
+    var_four,
+):
+    print(var_one)
 ```
 
 * Move concatenated logical conditions to new lines if the line does not fit the maximum line size. This will help you understand the condition by looking from top to bottom. Poor formatting makes it difficult to read and understand complex predicates.
 
 ```py
-    # Good
-    if (
-        this_is_one_thing
-        and that_is_another_thing
-        or that_is_third_thing
-        or that_is_yet_another_thing
-        and one_more_thing
-    ):
-        do_something()
+# Good
+if this_is_one_thing and that_is_another_thing or that_is_third_thing or that_is_yet_another_thing and one_more_thing:
+    do_something()
 ```
 
 * Where binary operations stretch multiple lines, break lines before the binary operators, not thereafter
 
 ```py
-    # Bad
-    GDP = (
-        private_consumption +
-        gross_investment +
-        government_investment +
-        government_spending +
-        (exports - imports)
-    )
+# Bad
+GDP = private_consumption + gross_investment + government_investment + government_spending + (exports - imports)
 
-    # Good
-    GDP = (
-        private_consumption
-        + gross_investment
-        + government_investment
-        + government_spending
-        + (exports - imports)
-    )
+# Good
+GDP = private_consumption + gross_investment + government_investment + government_spending + (exports - imports)
 ```
 
 * Chaining methods should be broken up on multiple lines for better readability
@@ -195,10 +181,7 @@ References, details as well as examples of bad/good styles and their respective 
 * Use multiline strings,  not \ , since it gets much more readable.
 
 ```py
-    raise AttributeError(
-        "Here is a multiline error message with a very long first line "
-        "and a shorter second line."
-    )
+raise AttributeError("Here is a multiline error message with a very long first line and a shorter second line.")
 ```
 
 ## Naming Conventions
@@ -231,36 +214,39 @@ Long module names can have words separated by underscores (`really_long_module_n
 If you are interested in the long story including the why‘s, read these discussions on [Reddit](https://old.reddit.com/r/Python/comments/opb7hm/do_not_use_mutable_objects_as_default_arguments/) and [Twitter](https://twitter.com/willmcgugan/status/1419616480971399171).
 
 ```py
-    # Bad
-    class Foo:
-        items = []
-
-    # Good
-    class Foo:
-        items = None
-        def __init__(self):
-            self.items = []
+# Bad
+class Foo:
+    items = []
 
 
-    # Bad
-    class Foo:
-        def __init__(self, items=[]):
-            self.items = items
+# Good
+class Foo:
+    items = None
 
-    # Good
-    class Foo:
-        def __init__(self, items=None):
-            self.items = items or []
+    def __init__(self):
+        self.items = []
 
 
-    # Bad
-    def some_function(x, y, items=[]):
-        ...
+# Bad
+class Foo:
+    def __init__(self, items=[]):
+        self.items = items
 
-    # Good
-    def some_function(x, y, items=None):
-        items = items or []
-        ...
+
+# Good
+class Foo:
+    def __init__(self, items=None):
+        self.items = items or []
+
+
+# Bad
+def some_function(x, y, items=[]): ...
+
+
+# Good
+def some_function(x, y, items=None):
+    items = items or []
+    ...
 ```
 
 ## Commenting
@@ -270,8 +256,8 @@ If you are interested in the long story including the why‘s, read these discus
 * Separate `#` and the comment with one whitespace
 
 ```py
-    #bad comment
-    # good comment
+# bad comment
+# good comment
 ```
 
 * Use inline comments sparsely
@@ -380,11 +366,11 @@ If you are interested in the long story including the why‘s, read these discus
 * Even if a Python file is intended to be used as executable / script file only, it shall still be importable as a module, and its import should not have any side effects. Its main functionality shall hence be in a `main()` function, so that the code can be imported as a module for testing or being reused in the future:
 
 ```py
-    def main():
-        ...
+def main(): ...
 
-    if __name__ == "__main__":
-        main()
+
+if __name__ == "__main__":
+    main()
 ```
 
 ## Unit-tests
@@ -394,23 +380,25 @@ If you are interested in the long story including the why‘s, read these discus
 * Each test should preferably check only one specific aspect.
 
 ```py
-    # Bad
-    def test_smth():
-        result = f()
-        assert isinstance(result, list)
-        assert result[0] == 1
-        assert result[1] == 2
-        assert result[2] == 3
-        assert result[3] == 4
+# Bad
+def test_smth():
+    result = f()
+    assert isinstance(result, list)
+    assert result[0] == 1
+    assert result[1] == 2
+    assert result[2] == 3
+    assert result[3] == 4
 
-    # Good
-    def test_smth_type():
-        result = f()
-        assert isinstance(result, list), "Result should be list"
 
-    def test_smth_values():
-        result = f()
-        assert set(result) == set(expected), f"Result should be {set(expected)}"
+# Good
+def test_smth_type():
+    result = f()
+    assert isinstance(result, list), "Result should be list"
+
+
+def test_smth_values():
+    result = f()
+    assert set(result) == set(expected), f"Result should be {set(expected)}"
 ```
 
 ## And finally: It is a bad idea to use

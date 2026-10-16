@@ -5,8 +5,21 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
-### Changed
+## [0.9.1] - 2026-10-16
 
+### Changed
+* Added copyright info to all py-files.
+* Import datetime as dt instead of only import datetime in types.py
+
+### Dependencies
+* .pre-commit-config.yaml: Updated rev of ruff-pre-commit to v0.15.9
+* Updated to dictIO>=0.4.4
+* Updated to flask>=3.1
+* Updated to numpy>=2.4
+* Updated to pytest-cov>=7.1
+* Updated to python-dotenv>=1.2.2
+* Updated to ruff>=0.15.9
+* Updated to sphinx-argparse-cli>=1.21.3
 
 
 ## [0.9.0] - 2026-04-16
