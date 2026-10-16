@@ -1,3 +1,7 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
+
 """Tests reading files."""
 
 from pathlib import Path

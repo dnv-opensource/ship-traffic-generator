@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 # The matplotlib package is unfortunately not fully typed. Hence the following pyright exemption.
 # pyright: reportUnknownMemberType=false
 """Functions to prepare and plot traffic situations."""
