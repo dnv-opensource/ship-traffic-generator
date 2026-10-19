@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Domain specific data types used in trafficgen."""
 
 from __future__ import annotations

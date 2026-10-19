@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Functions to read the files needed to build one or more traffic situations."""
 
 import json

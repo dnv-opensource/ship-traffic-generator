@@ -1,3 +1,6 @@
+# Copyright (c) 2025-2026 DNV
+# SPDX-License-Identifier: MIT
+
 """Tests for types and schema parsing."""
 
 import json

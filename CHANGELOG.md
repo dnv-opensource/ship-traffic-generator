@@ -5,9 +5,11 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.9.1] - 2026-10-16
+
 ### Changed
-
-
+* Added copyright info to all py-files.
+* Import datetime as dt instead of only import datetime in types.py
 
 ### Dependencies
 * .pre-commit-config.yaml: Updated rev of ruff-pre-commit to v0.15.9
