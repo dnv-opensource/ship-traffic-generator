@@ -7,6 +7,7 @@ exclude = [
     "src/folder_to_be_excluded",
     "STYLEGUIDE.md",
 ]
+force-exclude = true
 src = [
     "src",
 ]
