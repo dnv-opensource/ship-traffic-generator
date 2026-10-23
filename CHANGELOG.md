@@ -5,9 +5,40 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
+## [0.9.2] - 2026-10-19
+
 ### Changed
+* Added STYLEGUIDE.md to excluded section in ruff.toml
+* Removed pydantic from dependency-groups as it was already declared in dependencies
 
+### Dependencies
+* Updated to numpy>=2.4.6
+* Updated to pyproj>=3.7.2
+* Updated to matplotlib>=3.11.2
+* Updated to click>=8.5.0
+* Updated to flask>=3.1.3
+* Updated to pydantic>=2.14.1
+* Updated to python-dotenv>=1.2.4
+* Updated to pytest>=9.1.1
+* Updated to ruff>=0.17.0
+* Updated to pyright>=1.1.414
+* Updated to mypy>=2.4.0
+* Updated to sourcery>=1.46.0
+* Updated to pre-commit>=4.7.0
+* Updated to Sphinx>=9.0.4
+* Updated to sphinx-argparse-cli>=1.24.0
+* Updated to sphinx-autodoc-typehints>=3.6.1
+* Updated to sphinxcontrib-mermaid>=2.1.1
+* Updated to sphinx-click>=6.2.0
+* Updated to myst-parser>=5.1.0
+* Updated to furo>=2025.12.19
+* Updated to pandas-stubs>=3.0.5.260914
 
+## [0.9.1] - 2026-10-16
+
+### Changed
+* Added copyright info to all py-files.
+* Import datetime as dt instead of only import datetime in types.py
 
 ### Dependencies
 * .pre-commit-config.yaml: Updated rev of ruff-pre-commit to v0.15.9
