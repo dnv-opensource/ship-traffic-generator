@@ -1,0 +1,61 @@
+SituationInput
+==============
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: SituationInput
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~SituationInput.__init__
+      ~SituationInput.construct
+      ~SituationInput.copy
+      ~SituationInput.dict
+      ~SituationInput.from_orm
+      ~SituationInput.json
+      ~SituationInput.model_construct
+      ~SituationInput.model_copy
+      ~SituationInput.model_dump
+      ~SituationInput.model_dump_json
+      ~SituationInput.model_json_schema
+      ~SituationInput.model_parametrized_name
+      ~SituationInput.model_post_init
+      ~SituationInput.model_rebuild
+      ~SituationInput.model_validate
+      ~SituationInput.model_validate_json
+      ~SituationInput.model_validate_strings
+      ~SituationInput.parse_file
+      ~SituationInput.parse_obj
+      ~SituationInput.parse_raw
+      ~SituationInput.schema
+      ~SituationInput.schema_json
+      ~SituationInput.update_forward_refs
+      ~SituationInput.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~SituationInput.model_computed_fields
+      ~SituationInput.model_config
+      ~SituationInput.model_extra
+      ~SituationInput.model_fields
+      ~SituationInput.model_fields_set
+      ~SituationInput.title
+      ~SituationInput.description
+      ~SituationInput.num_situations
+      ~SituationInput.own_ship
+      ~SituationInput.encounters
+   
+   

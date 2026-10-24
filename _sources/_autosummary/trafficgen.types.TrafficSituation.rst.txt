@@ -1,0 +1,63 @@
+TrafficSituation
+================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: TrafficSituation
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~TrafficSituation.__init__
+      ~TrafficSituation.construct
+      ~TrafficSituation.copy
+      ~TrafficSituation.dict
+      ~TrafficSituation.from_orm
+      ~TrafficSituation.json
+      ~TrafficSituation.model_construct
+      ~TrafficSituation.model_copy
+      ~TrafficSituation.model_dump
+      ~TrafficSituation.model_dump_json
+      ~TrafficSituation.model_json_schema
+      ~TrafficSituation.model_parametrized_name
+      ~TrafficSituation.model_post_init
+      ~TrafficSituation.model_rebuild
+      ~TrafficSituation.model_validate
+      ~TrafficSituation.model_validate_json
+      ~TrafficSituation.model_validate_strings
+      ~TrafficSituation.parse_file
+      ~TrafficSituation.parse_obj
+      ~TrafficSituation.parse_raw
+      ~TrafficSituation.schema
+      ~TrafficSituation.schema_json
+      ~TrafficSituation.update_forward_refs
+      ~TrafficSituation.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~TrafficSituation.model_computed_fields
+      ~TrafficSituation.model_config
+      ~TrafficSituation.model_extra
+      ~TrafficSituation.model_fields
+      ~TrafficSituation.model_fields_set
+      ~TrafficSituation.trafficgen_version
+      ~TrafficSituation.schema_version
+      ~TrafficSituation.title
+      ~TrafficSituation.description
+      ~TrafficSituation.start_time
+      ~TrafficSituation.own_ship
+      ~TrafficSituation.target_ships
+   
+   

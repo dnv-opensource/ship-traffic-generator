@@ -1,0 +1,61 @@
+Initial
+=======
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Initial
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Initial.__init__
+      ~Initial.construct
+      ~Initial.copy
+      ~Initial.dict
+      ~Initial.from_orm
+      ~Initial.json
+      ~Initial.model_construct
+      ~Initial.model_copy
+      ~Initial.model_dump
+      ~Initial.model_dump_json
+      ~Initial.model_json_schema
+      ~Initial.model_parametrized_name
+      ~Initial.model_post_init
+      ~Initial.model_rebuild
+      ~Initial.model_validate
+      ~Initial.model_validate_json
+      ~Initial.model_validate_strings
+      ~Initial.parse_file
+      ~Initial.parse_obj
+      ~Initial.parse_raw
+      ~Initial.schema
+      ~Initial.schema_json
+      ~Initial.update_forward_refs
+      ~Initial.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Initial.model_computed_fields
+      ~Initial.model_config
+      ~Initial.model_extra
+      ~Initial.model_fields
+      ~Initial.model_fields_set
+      ~Initial.position
+      ~Initial.sog
+      ~Initial.cog
+      ~Initial.heading
+      ~Initial.nav_status
+   
+   
