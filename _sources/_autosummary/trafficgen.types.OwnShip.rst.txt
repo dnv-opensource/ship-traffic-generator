@@ -1,0 +1,59 @@
+OwnShip
+=======
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: OwnShip
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~OwnShip.__init__
+      ~OwnShip.construct
+      ~OwnShip.copy
+      ~OwnShip.dict
+      ~OwnShip.from_orm
+      ~OwnShip.json
+      ~OwnShip.model_construct
+      ~OwnShip.model_copy
+      ~OwnShip.model_dump
+      ~OwnShip.model_dump_json
+      ~OwnShip.model_json_schema
+      ~OwnShip.model_parametrized_name
+      ~OwnShip.model_post_init
+      ~OwnShip.model_rebuild
+      ~OwnShip.model_validate
+      ~OwnShip.model_validate_json
+      ~OwnShip.model_validate_strings
+      ~OwnShip.parse_file
+      ~OwnShip.parse_obj
+      ~OwnShip.parse_raw
+      ~OwnShip.schema
+      ~OwnShip.schema_json
+      ~OwnShip.update_forward_refs
+      ~OwnShip.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~OwnShip.model_computed_fields
+      ~OwnShip.model_config
+      ~OwnShip.model_extra
+      ~OwnShip.model_fields
+      ~OwnShip.model_fields_set
+      ~OwnShip.static
+      ~OwnShip.initial
+      ~OwnShip.waypoints
+   
+   
