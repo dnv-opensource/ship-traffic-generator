@@ -5,7 +5,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 ## [Unreleased]
 
-## [0.9.2] - 2026-10-19
+## [0.9.2] - 2026-11-04
 
 ### Changed
 * Added STYLEGUIDE.md to excluded section in ruff.toml
