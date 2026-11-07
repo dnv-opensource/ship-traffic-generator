@@ -1,0 +1,60 @@
+EncounterClassification
+=======================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: EncounterClassification
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~EncounterClassification.__init__
+      ~EncounterClassification.construct
+      ~EncounterClassification.copy
+      ~EncounterClassification.dict
+      ~EncounterClassification.from_orm
+      ~EncounterClassification.json
+      ~EncounterClassification.model_construct
+      ~EncounterClassification.model_copy
+      ~EncounterClassification.model_dump
+      ~EncounterClassification.model_dump_json
+      ~EncounterClassification.model_json_schema
+      ~EncounterClassification.model_parametrized_name
+      ~EncounterClassification.model_post_init
+      ~EncounterClassification.model_rebuild
+      ~EncounterClassification.model_validate
+      ~EncounterClassification.model_validate_json
+      ~EncounterClassification.model_validate_strings
+      ~EncounterClassification.parse_file
+      ~EncounterClassification.parse_obj
+      ~EncounterClassification.parse_raw
+      ~EncounterClassification.schema
+      ~EncounterClassification.schema_json
+      ~EncounterClassification.update_forward_refs
+      ~EncounterClassification.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~EncounterClassification.model_computed_fields
+      ~EncounterClassification.model_config
+      ~EncounterClassification.model_extra
+      ~EncounterClassification.model_fields
+      ~EncounterClassification.model_fields_set
+      ~EncounterClassification.theta13_criteria
+      ~EncounterClassification.theta14_criteria
+      ~EncounterClassification.theta15_criteria
+      ~EncounterClassification.theta15
+   
+   

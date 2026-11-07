@@ -1,0 +1,58 @@
+Ship
+====
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: Ship
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~Ship.__init__
+      ~Ship.construct
+      ~Ship.copy
+      ~Ship.dict
+      ~Ship.from_orm
+      ~Ship.json
+      ~Ship.model_construct
+      ~Ship.model_copy
+      ~Ship.model_dump
+      ~Ship.model_dump_json
+      ~Ship.model_json_schema
+      ~Ship.model_parametrized_name
+      ~Ship.model_post_init
+      ~Ship.model_rebuild
+      ~Ship.model_validate
+      ~Ship.model_validate_json
+      ~Ship.model_validate_strings
+      ~Ship.parse_file
+      ~Ship.parse_obj
+      ~Ship.parse_raw
+      ~Ship.schema
+      ~Ship.schema_json
+      ~Ship.update_forward_refs
+      ~Ship.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~Ship.model_computed_fields
+      ~Ship.model_config
+      ~Ship.model_extra
+      ~Ship.model_fields
+      ~Ship.model_fields_set
+      ~Ship.initial
+      ~Ship.waypoints
+   
+   

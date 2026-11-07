@@ -1,0 +1,98 @@
+AisShipType
+===========
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: AisShipType
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~AisShipType.__init__
+      ~AisShipType.encode
+      ~AisShipType.replace
+      ~AisShipType.split
+      ~AisShipType.rsplit
+      ~AisShipType.join
+      ~AisShipType.capitalize
+      ~AisShipType.casefold
+      ~AisShipType.title
+      ~AisShipType.center
+      ~AisShipType.count
+      ~AisShipType.expandtabs
+      ~AisShipType.find
+      ~AisShipType.partition
+      ~AisShipType.index
+      ~AisShipType.ljust
+      ~AisShipType.lower
+      ~AisShipType.lstrip
+      ~AisShipType.rfind
+      ~AisShipType.rindex
+      ~AisShipType.rjust
+      ~AisShipType.rstrip
+      ~AisShipType.rpartition
+      ~AisShipType.splitlines
+      ~AisShipType.strip
+      ~AisShipType.swapcase
+      ~AisShipType.translate
+      ~AisShipType.upper
+      ~AisShipType.startswith
+      ~AisShipType.endswith
+      ~AisShipType.removeprefix
+      ~AisShipType.removesuffix
+      ~AisShipType.isascii
+      ~AisShipType.islower
+      ~AisShipType.isupper
+      ~AisShipType.istitle
+      ~AisShipType.isspace
+      ~AisShipType.isdecimal
+      ~AisShipType.isdigit
+      ~AisShipType.isnumeric
+      ~AisShipType.isalpha
+      ~AisShipType.isalnum
+      ~AisShipType.isidentifier
+      ~AisShipType.isprintable
+      ~AisShipType.zfill
+      ~AisShipType.format
+      ~AisShipType.format_map
+      ~AisShipType.maketrans
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~AisShipType.NOT_AVAILABLE
+      ~AisShipType.WING_IN_GROUND
+      ~AisShipType.FISHING
+      ~AisShipType.TOWING
+      ~AisShipType.TOWING_LARGE
+      ~AisShipType.DREDGING_OR_UNDERWATER_OPS
+      ~AisShipType.DIVING_OPS
+      ~AisShipType.MILITARY_OPS
+      ~AisShipType.SAILING
+      ~AisShipType.PLEASURE_CRAFT
+      ~AisShipType.HIGH_SPEED_CRAFT
+      ~AisShipType.PILOT_VESSEL
+      ~AisShipType.SEARCH_AND_RESCUE_VESSEL
+      ~AisShipType.TUG
+      ~AisShipType.PORT_TENDER
+      ~AisShipType.ANTI_POLLUTION_EQUIPMENT
+      ~AisShipType.LAW_ENFORCEMENT
+      ~AisShipType.MEDICAL_TRANSPORT
+      ~AisShipType.NONCOMBATANT
+      ~AisShipType.PASSENGER
+      ~AisShipType.CARGO
+      ~AisShipType.TANKER
+      ~AisShipType.OTHER
+   
+   

@@ -1,0 +1,91 @@
+AisNavStatus
+============
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: AisNavStatus
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~AisNavStatus.__init__
+      ~AisNavStatus.encode
+      ~AisNavStatus.replace
+      ~AisNavStatus.split
+      ~AisNavStatus.rsplit
+      ~AisNavStatus.join
+      ~AisNavStatus.capitalize
+      ~AisNavStatus.casefold
+      ~AisNavStatus.title
+      ~AisNavStatus.center
+      ~AisNavStatus.count
+      ~AisNavStatus.expandtabs
+      ~AisNavStatus.find
+      ~AisNavStatus.partition
+      ~AisNavStatus.index
+      ~AisNavStatus.ljust
+      ~AisNavStatus.lower
+      ~AisNavStatus.lstrip
+      ~AisNavStatus.rfind
+      ~AisNavStatus.rindex
+      ~AisNavStatus.rjust
+      ~AisNavStatus.rstrip
+      ~AisNavStatus.rpartition
+      ~AisNavStatus.splitlines
+      ~AisNavStatus.strip
+      ~AisNavStatus.swapcase
+      ~AisNavStatus.translate
+      ~AisNavStatus.upper
+      ~AisNavStatus.startswith
+      ~AisNavStatus.endswith
+      ~AisNavStatus.removeprefix
+      ~AisNavStatus.removesuffix
+      ~AisNavStatus.isascii
+      ~AisNavStatus.islower
+      ~AisNavStatus.isupper
+      ~AisNavStatus.istitle
+      ~AisNavStatus.isspace
+      ~AisNavStatus.isdecimal
+      ~AisNavStatus.isdigit
+      ~AisNavStatus.isnumeric
+      ~AisNavStatus.isalpha
+      ~AisNavStatus.isalnum
+      ~AisNavStatus.isidentifier
+      ~AisNavStatus.isprintable
+      ~AisNavStatus.zfill
+      ~AisNavStatus.format
+      ~AisNavStatus.format_map
+      ~AisNavStatus.maketrans
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~AisNavStatus.UNDER_WAY_USING_ENGINE
+      ~AisNavStatus.AT_ANCHOR
+      ~AisNavStatus.NOT_UNDER_COMMAND
+      ~AisNavStatus.RESTRICTED_MANEUVERABILITY
+      ~AisNavStatus.CONSTRAINED_BY_HER_DRAUGHT
+      ~AisNavStatus.MOORED
+      ~AisNavStatus.AGROUND
+      ~AisNavStatus.ENGAGED_IN_FISHING
+      ~AisNavStatus.UNDER_WAY_SAILING
+      ~AisNavStatus.RESERVED_FOR_FUTURE_AMENDMENT_DG_HS_MP_C_HSC
+      ~AisNavStatus.RESERVED_FOR_FUTURE_AMENDMENT_DG_HS_MP_A_WIG
+      ~AisNavStatus.POWER_DRIVEN_VESSEL_TOWING_ASTERN
+      ~AisNavStatus.POWER_DRIVEN_VESSEL_PUSHING_AHEAD_OR_TOWING_ALONGSIDE
+      ~AisNavStatus.RESERVED_FOR_FUTURE_USE
+      ~AisNavStatus.AIS_SART_ACTIVE
+      ~AisNavStatus.UNDEFINED
+   
+   

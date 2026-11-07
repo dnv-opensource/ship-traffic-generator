@@ -1,0 +1,61 @@
+EncounterRelativeSpeed
+======================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: EncounterRelativeSpeed
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~EncounterRelativeSpeed.__init__
+      ~EncounterRelativeSpeed.construct
+      ~EncounterRelativeSpeed.copy
+      ~EncounterRelativeSpeed.dict
+      ~EncounterRelativeSpeed.from_orm
+      ~EncounterRelativeSpeed.json
+      ~EncounterRelativeSpeed.model_construct
+      ~EncounterRelativeSpeed.model_copy
+      ~EncounterRelativeSpeed.model_dump
+      ~EncounterRelativeSpeed.model_dump_json
+      ~EncounterRelativeSpeed.model_json_schema
+      ~EncounterRelativeSpeed.model_parametrized_name
+      ~EncounterRelativeSpeed.model_post_init
+      ~EncounterRelativeSpeed.model_rebuild
+      ~EncounterRelativeSpeed.model_validate
+      ~EncounterRelativeSpeed.model_validate_json
+      ~EncounterRelativeSpeed.model_validate_strings
+      ~EncounterRelativeSpeed.parse_file
+      ~EncounterRelativeSpeed.parse_obj
+      ~EncounterRelativeSpeed.parse_raw
+      ~EncounterRelativeSpeed.schema
+      ~EncounterRelativeSpeed.schema_json
+      ~EncounterRelativeSpeed.update_forward_refs
+      ~EncounterRelativeSpeed.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~EncounterRelativeSpeed.model_computed_fields
+      ~EncounterRelativeSpeed.model_config
+      ~EncounterRelativeSpeed.model_extra
+      ~EncounterRelativeSpeed.model_fields
+      ~EncounterRelativeSpeed.model_fields_set
+      ~EncounterRelativeSpeed.overtaking_stand_on
+      ~EncounterRelativeSpeed.overtaking_give_way
+      ~EncounterRelativeSpeed.head_on
+      ~EncounterRelativeSpeed.crossing_give_way
+      ~EncounterRelativeSpeed.crossing_stand_on
+   
+   
