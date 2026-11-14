@@ -1,0 +1,63 @@
+EncounterSettings
+=================
+
+.. currentmodule:: trafficgen.types
+
+.. autoclass:: EncounterSettings
+   :members:
+   :show-inheritance:
+
+
+   
+   .. automethod:: __init__
+   
+   .. rubric:: Methods
+   .. autosummary::
+   
+      ~EncounterSettings.__init__
+      ~EncounterSettings.construct
+      ~EncounterSettings.copy
+      ~EncounterSettings.dict
+      ~EncounterSettings.from_orm
+      ~EncounterSettings.json
+      ~EncounterSettings.model_construct
+      ~EncounterSettings.model_copy
+      ~EncounterSettings.model_dump
+      ~EncounterSettings.model_dump_json
+      ~EncounterSettings.model_json_schema
+      ~EncounterSettings.model_parametrized_name
+      ~EncounterSettings.model_post_init
+      ~EncounterSettings.model_rebuild
+      ~EncounterSettings.model_validate
+      ~EncounterSettings.model_validate_json
+      ~EncounterSettings.model_validate_strings
+      ~EncounterSettings.parse_file
+      ~EncounterSettings.parse_obj
+      ~EncounterSettings.parse_raw
+      ~EncounterSettings.schema
+      ~EncounterSettings.schema_json
+      ~EncounterSettings.update_forward_refs
+      ~EncounterSettings.validate
+   
+   
+
+
+   
+   
+   .. rubric:: Attributes
+   .. autosummary::
+   
+      ~EncounterSettings.model_computed_fields
+      ~EncounterSettings.model_config
+      ~EncounterSettings.model_extra
+      ~EncounterSettings.model_fields
+      ~EncounterSettings.model_fields_set
+      ~EncounterSettings.classification
+      ~EncounterSettings.relative_speed
+      ~EncounterSettings.common_vector
+      ~EncounterSettings.situation_length
+      ~EncounterSettings.max_meeting_distance
+      ~EncounterSettings.situation_develop_time
+      ~EncounterSettings.disable_land_check
+   
+   
