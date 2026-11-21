@@ -1,0 +1,56 @@
+﻿trafficgen.types
+================
+
+.. automodule:: trafficgen.types
+   :members:
+   :exclude-members: AisNavStatus,AisShipType,BaseModelConfig,DataPoint,Dimensions,Encounter,EncounterClassification,EncounterRelativeSpeed,EncounterSettings,EncounterType,GeoPosition,Initial,InterpolationMethod,Leg,OwnShip,OwnShipInitial,PathType,Position,RouteData,Ship,ShipStatic,SituationInput,SituationInputJson,StringIntEnumMixin,TargetShip,TrafficSituation,Waypoint,
+   
+
+
+   
+   .. rubric:: Functions
+   .. autosummary::
+   
+      create_data_point_example
+      create_initial_example
+      create_own_ship_example
+      create_position_example
+      create_ship_example
+      create_ship_static_example
+      create_target_example
+      create_waypoint_example
+      to_camel
+   
+   .. rubric:: Classes
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      AisNavStatus
+      AisShipType
+      BaseModelConfig
+      DataPoint
+      Dimensions
+      Encounter
+      EncounterClassification
+      EncounterRelativeSpeed
+      EncounterSettings
+      EncounterType
+      GeoPosition
+      Initial
+      InterpolationMethod
+      Leg
+      OwnShip
+      OwnShipInitial
+      PathType
+      Position
+      RouteData
+      Ship
+      ShipStatic
+      SituationInput
+      SituationInputJson
+      StringIntEnumMixin
+      TargetShip
+      TrafficSituation
+      Waypoint
+   
